@@ -1,0 +1,23 @@
+{
+  "name": "sagui",
+  "version": "0.0.0",
+  "authors": [
+    "Paulo Ragonha <paulo@ragonha.me>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "spec"
+  ],
+  "devDependencies": {
+    "jasmine-sinon": "~0.3.1",
+    "jasmine-jquery": "~1.5.93"
+  },
+  "dependencies": {
+    "jquery": "~2.0.3",
+    "requirejs": "~2.1.9"
+  }
+}
