@@ -1,3 +1,5 @@
+var _ = require('underscore');
+
 /* jshint node: true */
 module.exports = function(grunt) {
   grunt.initConfig({
@@ -30,6 +32,15 @@ module.exports = function(grunt) {
           grunt: true
         },
         tasks: ['watch:livereload', 'connect']
+      }
+    },
+
+    requirejs: {
+      compile: {
+        options: _.extend(require('./config/require_config'), {
+          name: "boot",
+          out: "build/app/boot.js"
+        })
       }
     },
 
@@ -68,6 +79,7 @@ module.exports = function(grunt) {
   });
 
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-contrib-requirejs');
   grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-parallel');
   grunt.loadNpmTasks('grunt-contrib-jshint');
@@ -76,9 +88,10 @@ module.exports = function(grunt) {
   // It is advisable to use only registered tasks and not their
   // plugin implementations.
 
+  grunt.registerTask('build', 'requirejs');
   grunt.registerTask('dev', 'parallel:dev');
   grunt.registerTask('spec', ['jshint', 'karma:build']);
   grunt.registerTask('watch_spec', 'karma:watch');
 
-  grunt.registerTask('default', 'spec');
+  grunt.registerTask('default', ['spec', 'build']);
 };
