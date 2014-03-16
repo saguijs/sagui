@@ -1,4 +1,36 @@
-var _ = require('underscore');
+var _ = require('underscore'),
+    fs = require('fs'),
+    path = require('path'),
+    configPath = path.join(__dirname, '/config/scss_config.json'),
+    config = JSON.parse(fs.readFileSync(configPath)),
+    includePaths = config.includePaths.map(function (scssPath) { return path.join(__dirname, scssPath); });
+
+
+/**
+  Connect middleware to compile and serve sass files
+ */
+function sassMiddleware (connect, options) {
+  var sass = require('node-sass'),
+      middlewares = [],
+      sassDest = path.join(__dirname, '/.compiled_sass'),
+      directory = options.directory || options.base[options.base.length - 1];
+
+  middlewares.push(sass.middleware({
+    src: __dirname,
+    includePaths: includePaths,
+    dest: sassDest,
+    force: true
+  }));
+
+  if (!Array.isArray(options.base)) { options.base = [options.base]; }
+
+  options.base.forEach(function(base) { middlewares.push(connect.static(base)); });
+  middlewares.push(connect.static(sassDest));
+  middlewares.push(connect.directory(directory));
+
+  return middlewares;
+}
+
 
 /* jshint node: true */
 module.exports = function(grunt) {
@@ -9,7 +41,10 @@ module.exports = function(grunt) {
           port: 8000,
           hostname: '*',
           keepalive: true,
-          base: __dirname + '/'
+          base: [
+            __dirname
+          ],
+          middleware: sassMiddleware
         }
       }
     },
@@ -17,7 +52,9 @@ module.exports = function(grunt) {
     watch: {
       livereload: {
         files: [
-          'app/**/*'
+          '*.hmtl',
+          '*.scss',
+          '*.js'
         ],
         options: {
           livereload: true
@@ -41,6 +78,17 @@ module.exports = function(grunt) {
           name: "boot",
           out: "build/app/boot.js"
         })
+      }
+    },
+
+    sass: {
+      options: {
+        includePaths: includePaths
+      },
+      all: {
+        files: {
+          'build/index.css': 'index.scss'
+        }
       }
     },
 
@@ -79,6 +127,7 @@ module.exports = function(grunt) {
   });
 
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-sass');
   grunt.loadNpmTasks('grunt-contrib-requirejs');
   grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-parallel');
@@ -88,7 +137,7 @@ module.exports = function(grunt) {
   // It is advisable to use only registered tasks and not their
   // plugin implementations.
 
-  grunt.registerTask('build', 'requirejs');
+  grunt.registerTask('build', ['sass', 'requirejs']);
   grunt.registerTask('dev', 'parallel:dev');
   grunt.registerTask('spec', ['jshint', 'karma:build']);
   grunt.registerTask('watch_spec', 'karma:watch');
