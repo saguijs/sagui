@@ -79,8 +79,8 @@ module.exports = function(grunt) {
     requirejs: {
       compile: {
         options: _.extend(require('./config/require_config'), {
-          name: "boot",
-          out: "build/app/boot.js"
+          name: "index",
+          out: "build/index.js"
         })
       }
     },

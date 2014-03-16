@@ -50,9 +50,9 @@ To add the new jQuery dependency, simply add a new path entry, pointing to the l
   You need only to perform changes here.
  */
 var config = {
-  baseUrl: 'app',
+  baseUrl: '',
   paths: {
-    'jquery': '../bower_components/jquery/jquery'
+    'jquery': 'bower_components/jquery/jquery'
   }
 };
 ```
@@ -67,12 +67,12 @@ If jquery didn't come with AMD support, we would also need to add the shim entry
   You need only to perform changes here.
  */
 var config = {
-  baseUrl: 'app',
+  baseUrl: '',
   paths: {
-    'jquery': '../bower_components/jquery/jquery'
+    'jquery': 'bower_components/jquery/jquery'
   },
   shims: {
-  	exports: 'jquery'
+    exports: 'jquery'
   }
 };
 ```

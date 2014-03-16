@@ -15,7 +15,7 @@
     You need only to perform changes here.
    */
   var config = {
-    baseUrl: 'app',
+    baseUrl: '',
     paths: {
     }
   };
@@ -24,7 +24,7 @@
     Karma doesn't load the application at the root folder
     but instead at the '/base'.
    */
-  if (isKarmaRunner()) { config.baseUrl = '/base/app';}
+  if (isKarmaRunner()) { config.baseUrl = '/base';}
 
   /**
     If in NodeJS, exports the config as a module.

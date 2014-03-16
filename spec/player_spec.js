@@ -1,6 +1,6 @@
 define([
-  'player',
-  'song'
+  'app/player',
+  'app/song'
 ],
 function (Player, Song) {
   describe("Player", function() {
