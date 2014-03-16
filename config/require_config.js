@@ -17,7 +17,6 @@
   var config = {
     baseUrl: 'app',
     paths: {
-      'jquery': '../bower_components/jquery/jquery'
     }
   };
 
