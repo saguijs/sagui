@@ -59,6 +59,10 @@ module.exports = function(grunt) {
         options: {
           livereload: true
         },
+      },
+      bowerDependencies: {
+        files: ['bower_components/**/*.css'],
+        tasks: ['copy:bowerDependenciesAsSCSS']
       }
     },
 
@@ -68,7 +72,7 @@ module.exports = function(grunt) {
           stream: true,
           grunt: true
         },
-        tasks: ['watch:livereload', 'connect']
+        tasks: ['watch:livereload', 'watch:bowerDependencies', 'connect']
       }
     },
 
@@ -89,6 +93,20 @@ module.exports = function(grunt) {
         files: {
           'build/index.css': 'index.scss'
         }
+      }
+    },
+
+    copy: {
+      bowerDependenciesAsSCSS: {
+        files: [
+          {
+            expand: true,
+            cwd: 'bower_components',
+            src: ['**/*.css', '!**/*.min.css'],
+            dest: 'bower_components',
+            ext: ".scss"
+          }
+        ]
       }
     },
 
@@ -128,6 +146,7 @@ module.exports = function(grunt) {
 
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-sass');
+  grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-requirejs');
   grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-parallel');
@@ -137,8 +156,8 @@ module.exports = function(grunt) {
   // It is advisable to use only registered tasks and not their
   // plugin implementations.
 
-  grunt.registerTask('build', ['sass', 'requirejs']);
-  grunt.registerTask('dev', 'parallel:dev');
+  grunt.registerTask('build', ['copy:bowerDependenciesAsSCSS', 'sass', 'requirejs']);
+  grunt.registerTask('dev', ['copy:bowerDependenciesAsSCSS', 'parallel:dev']);
   grunt.registerTask('spec', ['jshint', 'karma:build']);
   grunt.registerTask('watch_spec', 'karma:watch');
 
