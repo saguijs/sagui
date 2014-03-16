@@ -95,7 +95,7 @@ It will start up a server with live-reload at [http://0.0.0.0:8000/](http://0.0.
 Build will run the [RequireJS optimiser](http://requirejs.org/docs/optimization.html) and compile all the SCSS files. Execute it by:
 
 ```shell
-grunt build
+grunt
 ```
 
 ## SCSS Bower dependencies support
@@ -103,6 +103,20 @@ grunt build
 Although SCSS does not support importing regular CSS files at the time, the support of loading Bower components CSS dependencies was implemented via a custom grunt task that copies all CSS files under the `bower_components` directory to SCSS extension.
 
 It works transparently during build and dev tasks. For more information on the actual implementation, take a look at the commit 6f7a352836f06c64d2973e8e10807a08ac368eaf.
+
+## Testing
+
+Testing is very important in today's application development, so it must be easy and integrated in the development workflow to not be left behind.
+
+The default task, which performs the build also executes the tests. But during development you can have the tests executing on any file change by using the **watch_spec** task.
+
+```shell
+grunt watch_spec
+```
+
+This will start the Karma runner and run all the specs located at the **spec** folder.
+
+The tests are to be written using [Jasmine](http://jasmine.github.io/1.3/introduction.html).
 
 ## Author
 
