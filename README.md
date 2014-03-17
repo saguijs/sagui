@@ -2,11 +2,29 @@
 
 Sagui is my attempt in gathering the best practices I've been applying in developing Single Page Applications. It provides a foundation of base build support to create complex web applications.
 
-It comes loaded with **RequireJS**, **Jasmine**, **Bower** and **SCSS** (libsass).
+It is completely framework agnostic, so you could use it to build Angular, Backbone, React or (name your framework of choice) applications. 
 
-It does make the assumption that you are building a Single Page Application, so you will only find single `index.html` and `index.scss` files.
+The only assumptions it makes are:
+
+ * You are building a Single Page Application;
+ * That you will be using [RequireJS](http://requirejs.org) to build modular JavaScript code;
+ * Write tests with [Jasmine](http://jasmine.github.io/1.3/introduction.html);
+ * Manage your dependencies with [Bower](http://bower.io);
+ * And write your stylesheets using [SCSS](http://sass-lang.com).
 
 It expects that Node, Grunt and Bower are installed in the machine.
+
+## Project organisation
+
+The idea of this project is that you already have a separate project for the backend. 
+
+It could therefore be used to create a rich client to be served by a Web Server or even a Cordova/PhoneGap application.
+
+As it makes the assumption that you are building a Single Page Application, you will find single `index.html`, `index.scss` and `index.js` files.
+
+Every application asset (stylesheet, code, images) must be placed inside the `app` folder.
+
+The specs (and their helpers) are to be placed inside the `spec` folder.
 
 ## Managing front-end dependencies
 
@@ -38,7 +56,7 @@ bower install --save query
 
 And latter, as we are using [RequireJS](http://requirejs.org), we must tell the application how to load jQuery.
 
-Under the `config` folder there is another file called `require_config.js`. It is used to define [RequireJS configuration parameters](http://requirejs.org/docs/api.html#config). 
+Under the `config` folder there is another file called `require_config.js`. It is used to define [RequireJS configuration parameters](http://requirejs.org/docs/api.html#config).
 
 Although it is a little different from a vanilla RequireJS configuration file, its complexity is to allow its load in the most diverse scenarios: like during a test execution by the [Karma Runner](http://karma-runner.github.io), during build time and during application execution in the browser.
 
@@ -97,6 +115,8 @@ Build will run the [RequireJS optimiser](http://requirejs.org/docs/optimization.
 ```shell
 grunt
 ```
+
+The build will process the application code and assets and compile them under the `build` folder.
 
 ## SCSS Bower dependencies support
 
