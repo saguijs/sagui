@@ -28,6 +28,8 @@ Every application asset (stylesheet, code, images) must be placed inside the `ap
 
 The specs (and their helpers) are to be placed inside the `spec` folder.
 
+*The code examples are from the Jasmine Standalone distribution.*
+
 ## Managing front-end dependencies
 
 The front-end dependencies are managed via [Bower](http://bower.io), making it really easy to install and track the project's dependencies.
