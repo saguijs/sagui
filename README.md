@@ -1,8 +1,8 @@
 # Sagui
 
-Sagui is my attempt in gathering the best practices I've been applying in developing Single Page Applications. It provides a foundation of base build support to create complex web applications.
+Sagui is my attempt in gathering the **best practices** I've been applying in developing **Single Page Applications**. It provides a foundation of base build support to create complex web applications.
 
-It is completely framework agnostic, so you could use it to build Angular, Backbone, React or (name your framework of choice) applications. 
+It is completely **framework agnostic**, so you could use it to build Angular, Backbone, React or (name your framework of choice) applications. 
 
 The only assumptions it makes are:
 
