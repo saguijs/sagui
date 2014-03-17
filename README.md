@@ -14,6 +14,8 @@ The only assumptions it makes are:
 
 It expects that Node, Grunt and Bower are installed in the machine.
 
+It also comes with [EditorConfig](http://editorconfig.org) support to ensure everyone working in the project have a common shared settings.
+
 ## Project organisation
 
 The idea of this project is that you already have a separate project for the backend. 
