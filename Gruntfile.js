@@ -107,6 +107,14 @@ module.exports = function(grunt) {
             ext: ".scss"
           }
         ]
+      },
+
+      build: {
+        files: [
+          { src: 'index.html', dest: 'build/index.html' },
+          { expand: true, src: 'bower_components/requirejs/require.js', dest: 'build' },
+          { expand: true, src: 'config/require_config.js', dest: 'build' }
+        ]
       }
     },
 
@@ -156,7 +164,7 @@ module.exports = function(grunt) {
   // It is advisable to use only registered tasks and not their
   // plugin implementations.
 
-  grunt.registerTask('build', ['copy:bowerDependenciesAsSCSS', 'sass', 'requirejs']);
+  grunt.registerTask('build', ['copy:bowerDependenciesAsSCSS', 'copy:build', 'sass', 'requirejs']);
   grunt.registerTask('dev', ['copy:bowerDependenciesAsSCSS', 'parallel:dev']);
   grunt.registerTask('spec', ['jshint', 'karma:build']);
   grunt.registerTask('watch_spec', 'karma:watch');
