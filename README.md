@@ -122,6 +122,8 @@ grunt
 
 The build will process the application code and assets and compile them under the `build` folder.
 
+Once built, you should be able to distribute your app by the contents of the `build` folder.
+
 ## SCSS Bower dependencies support
 
 Although SCSS does not support importing regular CSS files at the time, the support of loading Bower components CSS dependencies was implemented via a custom grunt task that copies all CSS files under the `bower_components` directory to SCSS extension.
