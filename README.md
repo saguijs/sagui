@@ -128,7 +128,7 @@ Once built, you should be able to distribute your app by the contents of the `bu
 
 Although SCSS does not support importing regular CSS files at the time, the support of loading Bower components CSS dependencies was implemented via a custom grunt task that copies all CSS files under the `bower_components` directory to SCSS extension.
 
-It works transparently during build and dev tasks. For more information on the actual implementation, take a look at the commit 6f7a352836f06c64d2973e8e10807a08ac368eaf.
+The copy task gets executer as a bower `postinstall` script.
 
 ## Testing
 

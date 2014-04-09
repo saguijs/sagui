@@ -59,10 +59,6 @@ module.exports = function(grunt) {
         options: {
           livereload: true
         },
-      },
-      bowerDependencies: {
-        files: ['bower_components/**/*.css'],
-        tasks: ['copy:bowerDependenciesAsSCSS']
       }
     },
 
@@ -72,7 +68,7 @@ module.exports = function(grunt) {
           stream: true,
           grunt: true
         },
-        tasks: ['watch:livereload', 'watch:bowerDependencies', 'connect']
+        tasks: ['watch:livereload', 'connect']
       }
     },
 
@@ -164,8 +160,8 @@ module.exports = function(grunt) {
   // It is advisable to use only registered tasks and not their
   // plugin implementations.
 
-  grunt.registerTask('build', ['copy:bowerDependenciesAsSCSS', 'copy:build', 'sass', 'requirejs']);
-  grunt.registerTask('dev', ['copy:bowerDependenciesAsSCSS', 'parallel:dev']);
+  grunt.registerTask('build', ['copy:build', 'sass', 'requirejs']);
+  grunt.registerTask('dev', ['parallel:dev']);
   grunt.registerTask('spec', ['jshint', 'karma:build']);
   grunt.registerTask('watch_spec', 'karma:watch');
 
