@@ -1,145 +1,48 @@
 # Sagui
 
-Sagui is my attempt in gathering the **best practices** I've been applying in developing **Single Page Applications**. It provides a foundation of build support to create complex web applications.
+Do you want to code your next awesome Single Page Application and not care about build, testing and all that boring stuff? This is a good place to start.
 
-It is completely **framework agnostic**, so you could use it to build Angular, Backbone, React or (name your framework of choice) applications.
+## Getting started
 
-The only assumptions it makes are:
+* Make sure you have [Node.js](http://nodejs.org/), [Grunt](https://github.com/sindresorhus/grunt-sass/archive/master.zip) and [Bower](http://bower.io/) installed
+* [Download](https://github.com/sindresorhus/grunt-sass/archive/master.zip) this boilerplate
+* Install the dependencies `npm install`
+* Start the development server `npm start`
+* Open the browser [http://0.0.0.0:8000/](http://0.0.0.0:8000/)
+* Code like there is no tomorrow inside the `app` folder.
 
- * You are building a Single Page Application;
- * That you will be using [RequireJS](http://requirejs.org) to build modular JavaScript code;
- * Write tests with [Jasmine](http://jasmine.github.io/1.3/introduction.html);
- * Manage your dependencies with [Bower](http://bower.io);
- * And write your stylesheets using [SCSS](http://sass-lang.com).
+## Managing dependencies
 
-It expects that Node, Grunt and Bower are installed in the machine.
+Frontend dependencies could be managed with [Bower](http://bower.io):
 
-It also comes with [EditorConfig](http://editorconfig.org) support to ensure everyone working in the project have a common shared settings.
+* Install new dependencies with `bower install --save`
+* Setup [RequireJS](http://requirejs.org) dependencies by changing the `app/config/require_config.js`
 
-## Project organisation
+## Automated testing
 
-All your code should be written inside the `app` folder. There you will find four different folders:
+Don't forget to code your specs with [Jasmine](http://jasmine.github.io/1.3/introduction.html):
 
-* `src` to save all your application code;
-* `spec` for the Jasmine written application specs;
-* `config` for the configuration files (like RequireJS);
-* `vendor` a place to put third-party libraries (that is where the bower packages will be installed).
-
-As it makes the assumption that you are building a Single Page Application, you will find single `index.html`, `index.scss` and `index.js` files.
-
-It could therefore be used to create a rich client to be served by a Web Server or even a Cordova/PhoneGap application.
-
-This project's main goal is to do all the laborous serving/building/testing taks automated for you. But if in the future you find a better solution, you can just grab the `app` folder and you are good to leave.
-
-*The code examples are from the Jasmine Standalone distribution.*
-
-## Managing front-end dependencies
-
-The front-end dependencies can be installed via [Bower](http://bower.io).
-
-To install [Bourbon](http://bourbon.io) for example, which is a great SCSS mixing library, you can do:
-
-```shell
-bower install --save bourbon
-```
-
-Then you can import it in your application's scss (`index.scss` for example):
-
-```scss
-@import 'vendor/bower_components/bourbon/app/assets/stylesheets/bourbon';
-```
-
-For JavaScript libraries, like [jQuery](http://jquery.com), you can start with the same bower command:
-
-```shell
-bower install --save query
-```
-
-And latter, as we are using [RequireJS](http://requirejs.org), we must tell the application how to load jQuery.
-
-Under the `app/config` folder there is a file called `require_config.js`. It is used to define [RequireJS configuration parameters](http://requirejs.org/docs/api.html#config).
-
-Although it is a little different from a vanilla RequireJS configuration file, its complexity is to allow its load in the most diverse scenarios: like during a test execution by the [Karma Runner](http://karma-runner.github.io), during build time and during application execution in the browser.
-
-To add the new jQuery dependency, simply add a new path entry, pointing to the locating of the `jquery.js` file.
-
-```js
-/**
-  Actual RequireJS config.
-  You need only to perform changes here.
- */
-var config = {
-  baseUrl: '',
-  paths: {
-    'jquery': 'vendor/bower_components/jquery/jquery'
-  }
-};
-```
-
-Since jquery is an AMD module, there is nothing left to configure, but if you are loading another library which doesn't have AMD support you will also need to add a [shim configuration](http://requirejs.org/docs/api.html#config-shim).
-
-If jquery didn't come with AMD support, we would also need to add the shim entry for it:
-
-```js
-/**
-  Actual RequireJS config.
-  You need only to perform changes here.
- */
-var config = {
-  baseUrl: '',
-  paths: {
-    'jquery': 'vendor/bower_components/jquery/jquery'
-  },
-  shims: {
-    exports: 'jquery'
-  }
-};
-```
-
-For more information on loading non-AMD modules, take a look at the [RequireJS documentation](http://requirejs.org/docs/api.html#config-shim).
-
-## Development task
-
-To start development in your shiny new application start up the grunt **dev** task.
-
-```shell
-grunt dev
-```
-
-It will start up a server with live-reload at [http://0.0.0.0:8000/](http://0.0.0.0:8000/). So once the [live-reload pluggin](https://chrome.google.com/webstore/detail/livereload/jnihajbhpnppcggbcgedagnkighmdlei) is installed, any change in the code base will be automatically reflected in the browser.
-
+* Have your tests run on any file change `grunt watch_spec`
 
 ## Build
 
-Build will run the [RequireJS optimiser](http://requirejs.org/docs/optimization.html) and compile all the SCSS files. Execute it by:
+Once you are ready, hit the build button!
 
-```shell
-grunt
-```
+* `grunt build`
 
-The build will process the application code and assets and compile them under the `build` folder.
+Your application will then be ready to be distributed at a `build` folder.
 
-Once built, you should be able to distribute your app by the contents of the `build` folder.
+This project's main goal is to do all the laborious serving/building/testing tasks automated for you.
 
-## SCSS Bower dependencies support
+*The code examples are from the Jasmine Standalone distribution.*
 
-Although SCSS does not support importing regular CSS files at the time, the support of loading Bower components CSS dependencies was implemented via a custom grunt task that copies all CSS files under the `bower_components` directory to SCSS extension.
+## Found a better build system ?
 
-The copy task gets executer as a bower `postinstall` script.
+Just take your `app` folder with you. No strings attached.
 
-## Testing
+## More information
 
-Testing is very important in today's application development, so it must be easy and integrated in the development workflow to not be left behind.
-
-The default task, which performs the build also executes the tests. But during development you can have the tests executing on any file change by using the **watch_spec** task.
-
-```shell
-grunt watch_spec
-```
-
-This will start the Karma runner and run all the specs located at the **spec** folder.
-
-The tests are to be written using [Jasmine](http://jasmine.github.io/1.3/introduction.html).
+For more information, check the CONTRIBUTING file.
 
 ## Author
 
