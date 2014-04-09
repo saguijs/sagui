@@ -13,8 +13,7 @@
     "spec"
   ],
   "devDependencies": {
-    "jasmine-sinon": "~0.3.1",
-    "jasmine-jquery": "~1.5.93"
+    "jasmine-sinon": "~0.3.1"
   },
   "dependencies": {
     "requirejs": "~2.1.9",

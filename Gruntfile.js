@@ -119,9 +119,7 @@ module.exports = function(grunt) {
         basePath: '',
         frameworks: ['jasmine', 'requirejs'],
         files: [
-          'bower_components/jquery/jquery.js',
           'bower_components/sinonjs/sinon.js',
-          'bower_components/jasmine-jquery/lib/jasmine-jquery.js',
           'bower_components/jasmine-sinon/lib/jasmine-sinon.js',
           'config/require_config.js',
           'spec/spec_runner.js',
