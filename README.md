@@ -5,7 +5,7 @@ Do you want to code your next awesome Single Page Application and not care about
 ## Getting started
 
 * Make sure you have [Node.js](http://nodejs.org/), [Grunt](https://github.com/sindresorhus/grunt-sass/archive/master.zip) and [Bower](http://bower.io/) installed
-* [Download](https://github.com/sindresorhus/grunt-sass/archive/master.zip) this boilerplate
+* [Download](https://github.com/pirelenito/sagui/archive/master.zip) this boilerplate
 * Install the dependencies `npm install`
 * Start the development server `npm start`
 * Open the browser [http://0.0.0.0:8000/](http://0.0.0.0:8000/)
