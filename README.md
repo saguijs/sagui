@@ -32,7 +32,7 @@ The specs (and their helpers) are to be placed inside the `spec` folder.
 
 ## Managing front-end dependencies
 
-The front-end dependencies are managed via [Bower](http://bower.io), making it really easy to install and track the project's dependencies.
+The front-end dependencies can be installed via [Bower](http://bower.io).
 
 To install [Bourbon](http://bourbon.io) for example, which is a great SCSS mixing library, you can do:
 
@@ -40,16 +40,10 @@ To install [Bourbon](http://bourbon.io) for example, which is a great SCSS mixin
 bower install --save bourbon
 ```
 
-But to begin using bourbon in the application, you must first tell the application how to find it.
+Then you can import it in your application's scss (`index.scss` for example):
 
-Open up the `config/scss_config.json` file and add the root path of where the dependencies stylesheets are located. In the Bourbon example it would be:
-
-```json
-{
-  "includePaths": [
-    "bower_components/bourbon/app/assets/stylesheets"
-  ]
-}
+```scss
+@import 'bower_components/bourbon/app/assets/stylesheets/bourbon';
 ```
 
 For JavaScript libraries, like [jQuery](http://jquery.com), you can start with the same bower command:

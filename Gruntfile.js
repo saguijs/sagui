@@ -1,9 +1,5 @@
 var _ = require('underscore'),
-    fs = require('fs'),
-    path = require('path'),
-    configPath = path.join(__dirname, '/config/scss_config.json'),
-    config = JSON.parse(fs.readFileSync(configPath)),
-    includePaths = config.includePaths.map(function (scssPath) { return path.join(__dirname, scssPath); });
+    path = require('path');
 
 
 /**
@@ -17,7 +13,7 @@ function sassMiddleware (connect, options) {
 
   middlewares.push(sass.middleware({
     src: __dirname,
-    includePaths: includePaths,
+    includePaths: __dirname,
     dest: sassDest,
     force: true
   }));
@@ -83,7 +79,7 @@ module.exports = function(grunt) {
 
     sass: {
       options: {
-        includePaths: includePaths
+        includePaths: [__dirname]
       },
       all: {
         files: {
