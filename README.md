@@ -6,6 +6,7 @@ It is completely **framework agnostic**, so you could use it to build Angular, B
 
 The only assumptions it makes are:
 
+ * You are building a Single Page Application;
  * That you will be using [RequireJS](http://requirejs.org) to build modular JavaScript code;
  * Write tests with [Jasmine](http://jasmine.github.io/1.3/introduction.html);
  * Manage your dependencies with [Bower](http://bower.io);
@@ -23,6 +24,8 @@ All your code should be written inside the `app` folder. There you will find fou
 * `spec` for the Jasmine written application specs;
 * `config` for the configuration files (like RequireJS);
 * `vendor` a place to put third-party libraries (that is where the bower packages will be installed).
+
+As it makes the assumption that you are building a Single Page Application, you will find single `index.html`, `index.scss` and `index.js` files.
 
 It could therefore be used to create a rich client to be served by a Web Server or even a Cordova/PhoneGap application.
 
