@@ -1,4 +1,4 @@
 node_modules
-bower_components
+app/vendor/bower_components
 build
 .compiled_sass

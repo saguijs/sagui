@@ -1,12 +1,11 @@
 # Sagui
 
-Sagui is my attempt in gathering the **best practices** I've been applying in developing **Single Page Applications**. It provides a foundation of base build support to create complex web applications.
+Sagui is my attempt in gathering the **best practices** I've been applying in developing **Single Page Applications**. It provides a foundation of build support to create complex web applications.
 
-It is completely **framework agnostic**, so you could use it to build Angular, Backbone, React or (name your framework of choice) applications. 
+It is completely **framework agnostic**, so you could use it to build Angular, Backbone, React or (name your framework of choice) applications.
 
 The only assumptions it makes are:
 
- * You are building a Single Page Application;
  * That you will be using [RequireJS](http://requirejs.org) to build modular JavaScript code;
  * Write tests with [Jasmine](http://jasmine.github.io/1.3/introduction.html);
  * Manage your dependencies with [Bower](http://bower.io);
@@ -18,15 +17,16 @@ It also comes with [EditorConfig](http://editorconfig.org) support to ensure eve
 
 ## Project organisation
 
-The idea of this project is that you already have a separate project for the backend. 
+All your code should be written inside the `app` folder. There you will find four different folders:
+
+* `src` to save all your application code;
+* `spec` for the Jasmine written application specs;
+* `config` for the configuration files (like RequireJS);
+* `vendor` a place to put third-party libraries (that is where the bower packages will be installed).
 
 It could therefore be used to create a rich client to be served by a Web Server or even a Cordova/PhoneGap application.
 
-As it makes the assumption that you are building a Single Page Application, you will find single `index.html`, `index.scss` and `index.js` files.
-
-Every application asset (stylesheet, code, images) must be placed inside the `app` folder.
-
-The specs (and their helpers) are to be placed inside the `spec` folder.
+This project's main goal is to do all the laborous serving/building/testing taks automated for you. But if in the future you find a better solution, you can just grab the `app` folder and you are good to leave.
 
 *The code examples are from the Jasmine Standalone distribution.*
 
@@ -43,7 +43,7 @@ bower install --save bourbon
 Then you can import it in your application's scss (`index.scss` for example):
 
 ```scss
-@import 'bower_components/bourbon/app/assets/stylesheets/bourbon';
+@import 'vendor/bower_components/bourbon/app/assets/stylesheets/bourbon';
 ```
 
 For JavaScript libraries, like [jQuery](http://jquery.com), you can start with the same bower command:
@@ -54,7 +54,7 @@ bower install --save query
 
 And latter, as we are using [RequireJS](http://requirejs.org), we must tell the application how to load jQuery.
 
-Under the `config` folder there is another file called `require_config.js`. It is used to define [RequireJS configuration parameters](http://requirejs.org/docs/api.html#config).
+Under the `app/config` folder there is a file called `require_config.js`. It is used to define [RequireJS configuration parameters](http://requirejs.org/docs/api.html#config).
 
 Although it is a little different from a vanilla RequireJS configuration file, its complexity is to allow its load in the most diverse scenarios: like during a test execution by the [Karma Runner](http://karma-runner.github.io), during build time and during application execution in the browser.
 
@@ -68,7 +68,7 @@ To add the new jQuery dependency, simply add a new path entry, pointing to the l
 var config = {
   baseUrl: '',
   paths: {
-    'jquery': 'bower_components/jquery/jquery'
+    'jquery': 'vendor/bower_components/jquery/jquery'
   }
 };
 ```
@@ -85,7 +85,7 @@ If jquery didn't come with AMD support, we would also need to add the shim entry
 var config = {
   baseUrl: '',
   paths: {
-    'jquery': 'bower_components/jquery/jquery'
+    'jquery': 'vendor/bower_components/jquery/jquery'
   },
   shims: {
     exports: 'jquery'

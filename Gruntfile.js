@@ -1,5 +1,6 @@
 var _ = require('underscore'),
-    path = require('path');
+    path = require('path'),
+    appRoot = path.join(__dirname, 'app');
 
 
 /**
@@ -12,8 +13,8 @@ function sassMiddleware (connect, options) {
       directory = options.directory || options.base[options.base.length - 1];
 
   middlewares.push(sass.middleware({
-    src: __dirname,
-    includePaths: __dirname,
+    src: appRoot,
+    includePaths: appRoot,
     dest: sassDest,
     force: true
   }));
@@ -38,7 +39,7 @@ module.exports = function(grunt) {
           hostname: '*',
           keepalive: true,
           base: [
-            __dirname
+            appRoot
           ],
           middleware: sassMiddleware
         }
@@ -48,9 +49,9 @@ module.exports = function(grunt) {
     watch: {
       livereload: {
         files: [
-          '*.hmtl',
-          '*.scss',
-          '*.js'
+          'app/*.hmtl',
+          'app/*.scss',
+          'app/*.js'
         ],
         options: {
           livereload: true
@@ -70,8 +71,9 @@ module.exports = function(grunt) {
 
     requirejs: {
       compile: {
-        options: _.extend(require('./config/require_config'), {
+        options: _.extend(require('./app/config/require_config'), {
           name: "index",
+          baseUrl: 'app',
           out: "build/index.js"
         })
       }
@@ -79,11 +81,11 @@ module.exports = function(grunt) {
 
     sass: {
       options: {
-        includePaths: [__dirname]
+        includePaths: [appRoot]
       },
       all: {
         files: {
-          'build/index.css': 'index.scss'
+          'build/index.css': 'app/index.scss'
         }
       }
     },
@@ -93,9 +95,9 @@ module.exports = function(grunt) {
         files: [
           {
             expand: true,
-            cwd: 'bower_components',
+            cwd: 'app/vendor/bower_components',
             src: ['**/*.css', '!**/*.min.css'],
-            dest: 'bower_components',
+            dest: 'app/vendor/bower_components',
             ext: ".scss"
           }
         ]
@@ -104,19 +106,19 @@ module.exports = function(grunt) {
       build: {
         files: [
           { src: 'index.html', dest: 'build/index.html' },
-          { expand: true, src: 'bower_components/requirejs/require.js', dest: 'build' },
-          { expand: true, src: 'config/require_config.js', dest: 'build' }
+          { expand: true, src: 'app/vendor/bower_components/requirejs/require.js', dest: 'build' },
+          { expand: true, src: 'app/config/require_config.js', dest: 'build' }
         ]
       }
     },
 
     karma: {
       options: {
-        basePath: '',
+        basePath: 'app',
         frameworks: ['jasmine', 'requirejs'],
         files: [
-          'bower_components/sinonjs/sinon.js',
-          'bower_components/jasmine-sinon/lib/jasmine-sinon.js',
+          'vendor/bower_components/sinonjs/sinon.js',
+          'vendor/bower_components/jasmine-sinon/lib/jasmine-sinon.js',
           'config/require_config.js',
           'spec/spec_runner.js',
           { pattern: './**/*.js', included: false }
@@ -138,7 +140,7 @@ module.exports = function(grunt) {
       options: {
         jshintrc: true
       },
-      all: ['app/**/*.js', 'spec/**/*.js', 'config/**/*.js']
+      all: ['app/src/**/*.js', 'app/spec/**/*.js', 'app/config/**/*.js']
     },
   });
 

@@ -1,6 +1,6 @@
 define([
-  'app/player',
-  'app/song'
+  'src/player',
+  'src/song'
 ],
 function (Player, Song) {
   var song = new Song();
