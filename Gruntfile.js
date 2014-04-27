@@ -105,9 +105,9 @@ module.exports = function(grunt) {
 
       build: {
         files: [
-          { src: 'index.html', dest: 'build/index.html' },
-          { expand: true, src: 'app/vendor/bower_components/requirejs/require.js', dest: 'build' },
-          { expand: true, src: 'app/config/require_config.js', dest: 'build' }
+          { src: 'app/index.html', dest: 'build/index.html' },
+          { expand: true, cwd: 'app', src: 'vendor/bower_components/requirejs/require.js', dest: 'build' },
+          { expand: true, cwd: 'app', src: 'config/require_config.js', dest: 'build' }
         ]
       }
     },
