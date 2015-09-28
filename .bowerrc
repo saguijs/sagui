@@ -1,6 +1,0 @@
-{
-  "directory": "app/vendor/bower_components",
-  "scripts": {
-    "postinstall": "grunt copy:bowerDependenciesAsSCSS"
-  }
-}
