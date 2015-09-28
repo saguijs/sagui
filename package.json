@@ -1,0 +1,29 @@
+{
+  "name": "sagui",
+  "version": "2.0.0",
+  "description": "Your last devDependency",
+  "preferGlobal": false,
+  "bin": {
+    "sagui": "./bin/sagui"
+  },
+  "scripts": {
+    "test": "mocha --compilers js:babel/register --recursive --reporter spec ./src/*.spec.js",
+    "postinstall": "sagui scaffold"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pirelenito/sagui.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pirelenito/sagui/issues"
+  },
+  "homepage": "https://github.com/pirelenito/sagui#readme",
+  "dependencies": {
+    "babel": "^5.8.23",
+    "chai": "^3.3.0",
+    "chalk": "^1.1.1",
+    "mocha": "^2.3.3"
+  }
+}
