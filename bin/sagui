@@ -1,4 +1,17 @@
 #!/usr/bin/env node
 
 require('babel/register');
-require('../commands/base');
+
+
+var base = require('../commands/base');
+var develop = require('../commands/develop');
+
+
+base.run();
+
+
+switch (process.argv[2]) {
+  case 'develop':
+    develop.run();
+    break;
+}

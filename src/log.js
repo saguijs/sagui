@@ -6,10 +6,20 @@ const warningStyle = chalk.yellow;
 
 
 export function logError (entry) {
-  console.log(errorStyle(entry));
+  console.log(sagui(), errorStyle(entry));
 }
 
 
 export function logWarning (entry) {
-  console.log(warningStyle(entry));
+  console.log(sagui(), warningStyle(entry));
+}
+
+
+export function log (entry) {
+  console.log(sagui(), entry);
+}
+
+
+function sagui () {
+  return chalk.black.bgCyan('[sagui]');
 }
