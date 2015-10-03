@@ -24,6 +24,7 @@
     "babel": "^5.8.23",
     "babel-loader": "^5.1.2",
     "babel-plugin-react-transform": "^1.1.1",
+    "babel-runtime": "^5.8.25",
     "chai": "^3.3.0",
     "chalk": "^1.1.1",
     "express": "^4.13.3",
