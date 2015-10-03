@@ -12,6 +12,7 @@ export function run () {
 
   const karmaConfig = buildKarmaConfig({
     webpackConfig,
+    saguiPath: saguiPath(),
     projectPath: projectPath()
   });
 

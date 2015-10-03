@@ -27,6 +27,7 @@
     "babel-runtime": "^5.8.25",
     "chai": "^3.3.0",
     "chalk": "^1.1.1",
+    "es5-shim": "^4.1.14",
     "express": "^4.13.3",
     "html-webpack-plugin": "^1.6.1",
     "jasmine-core": "^2.3.4",
