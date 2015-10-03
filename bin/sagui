@@ -5,6 +5,7 @@ require('babel/register');
 
 var base = require('../commands/base');
 var develop = require('../commands/develop');
+var test = require('../commands/test');
 
 
 base.run();
@@ -13,5 +14,8 @@ base.run();
 switch (process.argv[2]) {
   case 'develop':
     develop.run();
+    break;
+  case 'test':
+    test.run();
     break;
 }
