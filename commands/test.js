@@ -4,7 +4,7 @@ import { projectPath, saguiPath } from '../src/env';
 import KarmaServer from 'karma/lib/server';
 
 
-export function run () {
+export function run (parameters) {
   const webpackConfig = buildWebpackConfig({
     saguiPath: saguiPath(),
     projectPath: projectPath()
@@ -13,7 +13,8 @@ export function run () {
   const karmaConfig = buildKarmaConfig({
     webpackConfig,
     saguiPath: saguiPath(),
-    projectPath: projectPath()
+    projectPath: projectPath(),
+    watch: parameters.includes('--watch')
   });
 
   new KarmaServer(karmaConfig).start();

@@ -29,6 +29,7 @@ function write (packageJSONPath, packageJSON) {
 
 const defaultScripts = {
   'sagui:test': 'sagui test',
+  'sagui:test-watch': 'sagui test --watch',
   'sagui:develop': 'sagui develop',
   'sagui:build': 'sagui build',
   'sagui:dist': 'sagui dist'

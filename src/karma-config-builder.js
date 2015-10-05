@@ -1,7 +1,7 @@
 import path from 'path';
 
 
-export function buildConfig ({ projectPath, saguiPath, webpackConfig }) {
+export function buildConfig ({ projectPath, saguiPath, webpackConfig, watch }) {
   return {
     basePath: projectPath,
 
@@ -28,6 +28,8 @@ export function buildConfig ({ projectPath, saguiPath, webpackConfig }) {
       noInfo: true
     },
 
-    singleRun: true
+    singleRun: !watch,
+
+    autoWatch: watch
   };
 };

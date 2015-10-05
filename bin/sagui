@@ -8,14 +8,18 @@ var develop = require('../commands/develop');
 var test = require('../commands/test');
 
 
-base.run();
+var command = process.argv[2];
+var parameters = process.argv.slice(3);
 
 
-switch (process.argv[2]) {
+base.run(parameters);
+
+
+switch (command) {
   case 'develop':
-    develop.run();
+    develop.run(parameters);
     break;
   case 'test':
-    test.run();
+    test.run(parameters);
     break;
 }
