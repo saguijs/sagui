@@ -26,6 +26,7 @@ export function buildConfig ({ projectPath, saguiPath, watch }) {
 
     resolveLoader: {
       modulesDirectories: [
+        path.join(projectPath, '/node_modules'),
         path.join(saguiPath, '/node_modules')
       ]
     },
