@@ -5,6 +5,7 @@ require('babel/register')({
 })
 
 
+var scaffold = require('../commands/scaffold')
 var base = require('../commands/base')
 var develop = require('../commands/develop')
 var test = require('../commands/test')
@@ -18,6 +19,9 @@ base.run(parameters)
 
 
 switch (command) {
+  case 'scaffold':
+    scaffold.run(parameters)
+    break
   case 'develop':
     develop.run(parameters)
     break
