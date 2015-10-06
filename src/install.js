@@ -3,8 +3,7 @@ import { readFileSync, writeFileSync } from 'fs'
 
 export function isInstalled (packageJSONPath) {
   const packageJSON = read(packageJSONPath)
-  return !!Object.keys(packageJSON.devDependencies || {})
-                 .find(key => key === 'sagui')
+  return packageJSON.name !== 'sagui'
 }
 
 
