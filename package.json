@@ -1,6 +1,6 @@
 {
   "name": "sagui",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "Your last devDependency",
   "preferGlobal": false,
   "bin": {
