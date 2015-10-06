@@ -8,7 +8,7 @@
   },
   "scripts": {
     "test": "npm run test:lint && npm run test:unit",
-    "test:lint": "eslint src/",
+    "test:lint": "eslint src/ commands/ bin/",
     "test:unit": "mocha --compilers js:babel/register --recursive --reporter spec ./src/*.spec.js",
     "postinstall": "./bin/sagui scaffold"
   },
