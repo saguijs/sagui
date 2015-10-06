@@ -1,29 +1,28 @@
-import path from 'path';
-import express from 'express';
-import webpack from 'webpack';
-import { logError, log } from './log';
+import express from 'express'
+import webpack from 'webpack'
+import { logError, log } from './log'
 
 
 export function startServer (webpackConfig) {
-  const app = express();
-  const compiler = webpack(webpackConfig);
+  const app = express()
+  const compiler = webpack(webpackConfig)
 
   app.use(require('webpack-dev-middleware')(compiler, {
     noInfo: true,
     publicPath: webpackConfig.output.publicPath
-  }));
+  }))
 
-  app.use(require('webpack-hot-middleware')(compiler));
+  app.use(require('webpack-hot-middleware')(compiler))
 
-  app.listen(3000, 'localhost', onServerStarted);
+  app.listen(3000, 'localhost', onServerStarted)
 }
 
 
 function onServerStarted (err) {
   if (err) {
-    logError(err);
-    return;
+    logError(err)
+    return
   }
 
-  log('Listening at http://localhost:3000');
+  log('Listening at http://localhost:3000')
 }

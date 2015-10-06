@@ -7,7 +7,9 @@
     "sagui": "./bin/sagui"
   },
   "scripts": {
-    "test": "mocha --compilers js:babel/register --recursive --reporter spec ./src/*.spec.js",
+    "test": "npm run test:lint && npm run test:unit",
+    "test:lint": "eslint src/",
+    "test:unit": "mocha --compilers js:babel/register --recursive --reporter spec ./src/*.spec.js",
     "postinstall": "./bin/sagui scaffold"
   },
   "repository": {

@@ -1,25 +1,25 @@
-import chalk from 'chalk';
+import chalk from 'chalk'
 
 
-const errorStyle = chalk.bold.red;
-const warningStyle = chalk.yellow;
+const errorStyle = chalk.bold.red
+const warningStyle = chalk.yellow
 
 
 export function logError (entry) {
-  console.log(sagui(), errorStyle(entry));
+  console.log(sagui(), errorStyle(entry))
 }
 
 
 export function logWarning (entry) {
-  console.log(sagui(), warningStyle(entry));
+  console.log(sagui(), warningStyle(entry))
 }
 
 
 export function log (entry) {
-  console.log(sagui(), entry);
+  console.log(sagui(), entry)
 }
 
 
 function sagui () {
-  return chalk.black.bgCyan('[sagui]');
+  return chalk.black.bgCyan('[sagui]')
 }

@@ -1,4 +1,4 @@
-import path from 'path';
+import path from 'path'
 
 
 export function buildConfig ({ projectPath, saguiPath, webpackConfig, watch }) {
@@ -31,5 +31,5 @@ export function buildConfig ({ projectPath, saguiPath, webpackConfig, watch }) {
     singleRun: !watch,
 
     autoWatch: watch
-  };
-};
+  }
+}

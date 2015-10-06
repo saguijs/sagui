@@ -1,6 +1,6 @@
-import path from 'path';
-import { HotModuleReplacementPlugin } from 'webpack';
-import HtmlWebpackPlugin from 'html-webpack-plugin';
+import path from 'path'
+import { HotModuleReplacementPlugin } from 'webpack'
+import HtmlWebpackPlugin from 'html-webpack-plugin'
 
 
 export function buildConfig ({ projectPath, saguiPath, watch }) {
@@ -21,7 +21,7 @@ export function buildConfig ({ projectPath, saguiPath, watch }) {
       root: [
         path.join(projectPath, '/node_modules'),
         path.join(saguiPath, '/node_modules')
-      ],
+      ]
     },
 
     resolveLoader: {
@@ -62,4 +62,4 @@ export function buildConfig ({ projectPath, saguiPath, watch }) {
       ]
     }
   }
-};
+}
