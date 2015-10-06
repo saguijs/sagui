@@ -1,7 +1,7 @@
 {
   "extends": [
-    "./node_modules/eslint-config-standard/eslintrc.json",
-    "./node_modules/eslint-config-standard-react/eslintrc.json",
+    "eslint-config-standard",
+    "eslint-config-standard-react",
   ],
 
   "env": {
