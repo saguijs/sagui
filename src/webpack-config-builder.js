@@ -1,11 +1,16 @@
 import path from 'path';
-import { HotModuleReplacementPlugin, NoErrorsPlugin } from 'webpack';
+import { HotModuleReplacementPlugin } from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 
 
-export function buildConfig ({ projectPath, saguiPath }) {
+export function buildConfig ({ projectPath, saguiPath, watch }) {
   return {
     context: projectPath,
+
+    eslint: {
+      configFile: path.join(saguiPath, '.eslintrc'),
+      failOnError: !watch
+    },
 
     entry: [
       'webpack-hot-middleware/client',
@@ -32,11 +37,18 @@ export function buildConfig ({ projectPath, saguiPath }) {
 
     plugins: [
       new HtmlWebpackPlugin({ template: 'src/index.html' }),
-      new HotModuleReplacementPlugin(),
-      new NoErrorsPlugin()
+      new HotModuleReplacementPlugin()
     ],
 
     module: {
+      preLoaders: [
+        {
+          test: /(\.js)|(\.jsx)$/,
+          loader: 'eslint',
+          exclude: /node_modules/
+        }
+      ],
+
       loaders: [
         {
           test: /(\.js)|(\.jsx)$/,

@@ -1,0 +1,14 @@
+{
+  "extends": [
+    "./node_modules/eslint-config-standard/eslintrc.json",
+    "./node_modules/eslint-config-standard-react/eslintrc.json",
+  ],
+
+  "env": {
+    "jasmine": true
+  },
+
+  "rules": {
+    "no-multiple-empty-lines": 0
+  }
+}

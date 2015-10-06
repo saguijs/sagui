@@ -5,16 +5,19 @@ import KarmaServer from 'karma/lib/server';
 
 
 export function run (parameters) {
+  const watch = parameters.includes('--watch');
+
   const webpackConfig = buildWebpackConfig({
     saguiPath: saguiPath(),
-    projectPath: projectPath()
+    projectPath: projectPath(),
+    watch: watch
   });
 
   const karmaConfig = buildKarmaConfig({
     webpackConfig,
     saguiPath: saguiPath(),
     projectPath: projectPath(),
-    watch: parameters.includes('--watch')
+    watch: watch
   });
 
   new KarmaServer(karmaConfig).start();
