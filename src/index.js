@@ -3,7 +3,7 @@ import buildKarmaConfig from './config/build-karma-config'
 import startDevelop from './action/start-develop'
 import runTest from './action/run-test'
 import install from './action/install'
-import json from './json'
+import json from './util/json'
 
 
 export default {

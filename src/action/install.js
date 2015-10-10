@@ -1,4 +1,4 @@
-import json from '../json'
+import json from '../util/json'
 
 
 export default function install ({ packagePath }) {

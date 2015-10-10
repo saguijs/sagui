@@ -2,7 +2,7 @@ import program from 'commander'
 import { join } from 'path'
 import sagui from './index'
 import { InvalidUsage } from './index'
-import { logError } from './log'
+import { logError } from './util/log'
 
 
 const env = {

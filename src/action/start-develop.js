@@ -1,6 +1,6 @@
 import express from 'express'
 import webpack from 'webpack'
-import { logError, log } from '../log'
+import { logError, log } from '../util/log'
 
 
 export default function startDevelop (webpackConfig) {
