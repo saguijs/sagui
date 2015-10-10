@@ -1,9 +1,9 @@
 import express from 'express'
 import webpack from 'webpack'
-import { logError, log } from './log'
+import { logError, log } from '../log'
 
 
-export function startServer (webpackConfig) {
+export default function startDevelop (webpackConfig) {
   const app = express()
   const compiler = webpack(webpackConfig)
 

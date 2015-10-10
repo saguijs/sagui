@@ -3,7 +3,7 @@ import { HotModuleReplacementPlugin } from 'webpack'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 
 
-export function buildConfig ({ projectPath, saguiPath, watch }) {
+export default function buildWebpackConfig ({ projectPath, saguiPath }, { watch }) {
   return {
     context: projectPath,
 

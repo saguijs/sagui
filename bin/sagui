@@ -1,31 +1,9 @@
 #!/usr/bin/env node
 
+
 require('babel/register')({
-  only: /(sagui\/commands)|(sagui\/src)/
+  only: /(sagui\/src)/
 })
 
 
-var scaffold = require('../commands/scaffold')
-var base = require('../commands/base')
-var develop = require('../commands/develop')
-var test = require('../commands/test')
-
-
-var command = process.argv[2]
-var parameters = process.argv.slice(3)
-
-
-base.run(parameters)
-
-
-switch (command) {
-  case 'scaffold':
-    scaffold.run(parameters)
-    break
-  case 'develop':
-    develop.run(parameters)
-    break
-  case 'test':
-    test.run(parameters)
-    break
-}
+require('../src/cli')(process.argv)

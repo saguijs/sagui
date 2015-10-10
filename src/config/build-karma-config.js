@@ -2,7 +2,7 @@ import path from 'path'
 import fs from 'fs'
 
 
-export function buildConfig ({ projectPath, saguiPath, webpackConfig, watch }) {
+export default function buildKarmaConfig ({ projectPath, saguiPath }, { watch }, webpackConfig) {
   return {
     basePath: projectPath,
 

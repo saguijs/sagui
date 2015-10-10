@@ -8,7 +8,7 @@
   },
   "scripts": {
     "test": "npm run test:lint && npm run test:unit",
-    "test:lint": "eslint src/ commands/ bin/",
+    "test:lint": "eslint src/ bin/",
     "test:unit": "mocha --compilers js:babel/register --recursive --reporter spec ./src/*.spec.js",
     "postinstall": "./bin/sagui scaffold"
   },
@@ -30,6 +30,7 @@
     "babel-runtime": "^5.8.25",
     "chai": "^3.3.0",
     "chalk": "^1.1.1",
+    "commander": "^2.8.1",
     "es5-shim": "^4.1.14",
     "eslint": "^1.6.0",
     "eslint-config-standard": "^4.4.0",
