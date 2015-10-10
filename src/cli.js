@@ -1,6 +1,8 @@
 import program from 'commander'
 import { join } from 'path'
 import sagui from './index'
+import { InvalidUsage } from './index'
+import { logError } from './log'
 
 
 const env = {
@@ -33,6 +35,12 @@ program.command('install')
 
 
 export default function cli (argv) {
-  program.parse(argv)
+  try {
+    program.parse(argv)
+  } catch (e) {
+    if (e instanceof InvalidUsage) {
+      logError('Must be executed in target project\'s package.json path')
+    }
+  }
   if (!argv.slice(2).length) program.outputHelp()
 }

@@ -1,22 +1,10 @@
-import { readFileSync, writeFileSync } from 'fs'
+import json from '../json'
 
 
 export default function install ({ packagePath }) {
-  const content = read(packagePath)
+  const content = json.read(packagePath)
   Object.assign(content.scripts, defaultScripts)
-  write(packagePath, content)
-}
-
-
-function read (packagePath) {
-  const blob = readFileSync(packagePath)
-  return JSON.parse(blob)
-}
-
-
-function write (packagePath, content) {
-  writeFileSync(packagePath,
-                JSON.stringify(content, null, 2))
+  json.write(packagePath, content)
 }
 
 
