@@ -1,5 +1,5 @@
 import { join } from 'path'
-import json from '../util/json'
+import json from '../../util/json'
 
 
 export default function install (projectPath) {
