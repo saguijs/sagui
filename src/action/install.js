@@ -1,7 +1,9 @@
+import { join } from 'path'
 import json from '../util/json'
 
 
-export default function install ({ packagePath }) {
+export default function install (projectPath) {
+  const packagePath = join(projectPath, 'package.json')
   const content = json.read(packagePath)
   Object.assign(content.scripts, defaultScripts)
   json.write(packagePath, content)

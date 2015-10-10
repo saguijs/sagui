@@ -1,3 +1,4 @@
+import { join } from 'path'
 import buildWebpackConfig from './config/build-webpack-config'
 import buildKarmaConfig from './config/build-karma-config'
 import startDevelop from './action/start-develop'
@@ -25,13 +26,14 @@ export default {
   install (env, options) {
     check(env)
 
-    install(env)
+    install(env.projectPath)
   }
 }
 
 
-function check (env) {
-  const packageJSON = json.read(env.packagePath)
+function check ({ projectPath }) {
+  const packagePath = join(projectPath, 'package.json')
+  const packageJSON = json.read(packagePath)
   if (packageJSON.name === 'sagui') throw new InvalidUsage()
 }
 

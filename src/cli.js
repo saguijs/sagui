@@ -7,7 +7,6 @@ import { logError } from './util/log'
 
 const env = {
   projectPath: process.cwd(),
-  packagePath: join(process.cwd(), 'package.json'),
   saguiPath: join(process.cwd(), 'node_modules/sagui')
 }
 
