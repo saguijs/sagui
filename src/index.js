@@ -1,4 +1,5 @@
 import { join } from 'path'
+import { statSync } from 'fs'
 import buildWebpackConfig from './config/build-webpack-config'
 import buildKarmaConfig from './config/build-karma-config'
 import startDevelop from './action/start-develop'
@@ -33,8 +34,20 @@ export default {
 
 function check ({ projectPath }) {
   const packagePath = join(projectPath, 'package.json')
+  if (!fileExists(packagePath)) throw new InvalidUsage()
+
   const packageJSON = json.read(packagePath)
   if (packageJSON.name === 'sagui') throw new InvalidUsage()
+}
+
+
+function fileExists (file) {
+  try {
+    statSync(file)
+    return true
+  } catch (e) {
+    return false
+  }
 }
 
 
