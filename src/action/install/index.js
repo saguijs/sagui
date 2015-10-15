@@ -33,6 +33,17 @@ function copyTemplates (projectPath) {
 function updatePackageJSON (projectPath) {
   const packagePath = join(projectPath, 'package.json')
   const content = json.read(packagePath)
-  Object.assign(content.scripts, defaultScripts)
+  const scripts = content.scripts
+
+  Object.assign(scripts, defaultScripts)
+
+  if (!scripts.start) {
+    scripts.start = 'npm run sagui:develop'
+  }
+
+  if (!scripts.test || scripts.test === 'echo \"Error: no test specified\" && exit 1') {
+    scripts.test = 'npm run sagui:test'
+  }
+
   json.write(packagePath, content)
 }
