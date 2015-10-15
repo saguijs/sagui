@@ -4,14 +4,14 @@
 [![npm version](https://badge.fury.io/js/sagui.svg)](https://badge.fury.io/js/sagui)
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](https://github.com/feross/standard)
 
-Sagui is a modern approach on build infrastructure to front-end projects. It follows an opinionated **convention over configuration** approach, providing a solid foundation so that you can focus on write your code.
+Sagui is a modern approach on build infrastructure to front-end projects. It follows an opinionated **convention over configuration** approach, providing a solid foundation so that you can focus on writing your code.
 
 - No more generators;
 - No more boiletplate projects;
 - No more starter kits;
 - NPM and Node should be your only global dependencies.
 
-Out of the bat you get:
+Right off of the bat you get:
 
 - JavaScript 2015 support through [Babel](http://babeljs.io/);
 - Automated testing through [Karma](http://karma-runner.github.io/) and [Jasmine](http://jasmine.github.io/);
@@ -35,9 +35,9 @@ Install **sagui** in the project:
 npm install --save-dev sagui
 ```
 
-After the install is completed, Sagui **bootstraps** a its basic infrastructure:
+After the install is completed, Sagui **bootstraps** its basic infrastructure:
 
-```
+```bash
 $ tree
 .
 ├── node_modules
