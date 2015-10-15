@@ -3,7 +3,7 @@ import json from '../../util/json'
 import template from 'template-directory'
 
 
-const templatePath = join(__dirname, 'template')
+const templatePath = join(__dirname, '../../../template')
 
 
 const defaultScripts = {
