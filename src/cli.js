@@ -2,7 +2,7 @@ import program from 'commander'
 import { join } from 'path'
 import sagui from './index'
 import { InvalidUsage } from './index'
-import { logError } from './util/log'
+import { logError, log } from './util/log'
 
 
 const env = {
@@ -30,6 +30,7 @@ program.command('install')
   .description('Install or update sagui in the current project')
   .action(function (options) {
     sagui.install(env, options)
+    log('installed in the project')
   })
 
 
