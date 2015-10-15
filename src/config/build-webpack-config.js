@@ -52,6 +52,12 @@ export default function buildWebpackConfig ({ projectPath, saguiPath }, { watch 
 
       loaders: [
         {
+          test: /\.scss$/,
+          // Query parameters are passed to node-sass
+          loader: 'style!css!sass?outputStyle=expanded&' +
+            'includePaths[]=' + (path.resolve(projectPath, './node_modules'))
+        },
+        {
           test: /(\.js)|(\.jsx)$/,
           exclude: /node_modules/,
           loader: 'babel',
