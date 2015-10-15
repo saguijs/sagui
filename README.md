@@ -21,6 +21,8 @@ Right off of the bat you get:
 
 In simpler terms, it is your last `devDependency`.
 
+**Note**: Still early in development, and might miss something that you want.
+
 ## Getting started
 
 Create a new NPM project:
@@ -72,13 +74,13 @@ Then you can start writing your code inside the `src/` folder.
 
 ## Background
 
-It is an idea I had in mind for a while, and after seeing a similar approach internally at [Klarna](https://github.com/klarna) (in the form of a global tool), I've decided to build a simpler (and locally installed) version of my own.
+It is an idea I had in mind for a while, and after seeing a similar approach internally at [Klarna](https://github.com/klarna) (in the form of a global tool), I've got inspired to build a simpler (and locally installed) version of my own.
 
 The internals were based on:
 
-- https://github.com/gaearon/react-transform-boilerplate
-- https://github.com/pirelenito/generator-react-webpack-component
+- [gaearon/react-transform-boilerplate](https://github.com/gaearon/react-transform-boilerplate)
+- [pirelenito/generator-react-webpack-component](https://github.com/pirelenito/generator-react-webpack-component)
 
-## 1.x.x
+## Version 1.x.x
 
 The first version of this project was supposed to be a project bootstrap, you can still check its original implementation at the [1.x.x branch](https://github.com/pirelenito/sagui/tree/1.x.x).
