@@ -1,4 +1,4 @@
 describe('sagui', function () {
   // TODO: add testing
-  it('should be tested');
-});
+  it('should be tested')
+})
