@@ -8,6 +8,10 @@
     "jasmine": true
   },
 
+  "globals": {
+    "sinon": false
+  },
+
   "rules": {
     "no-multiple-empty-lines": 0
   }

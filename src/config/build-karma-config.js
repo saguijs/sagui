@@ -2,7 +2,7 @@ export default function buildKarmaConfig ({ projectPath, saguiPath }, { watch },
   return {
     basePath: projectPath,
 
-    frameworks: ['jasmine', 'phantomjs-shim'],
+    frameworks: ['jasmine', 'phantomjs-shim', 'sinon'],
     browsers: ['PhantomJS'],
 
     files: [
