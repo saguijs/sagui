@@ -1,5 +1,8 @@
 # Sagui
 
+[![npm version](https://badge.fury.io/js/sagui.svg)](https://badge.fury.io/js/sagui)
+[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](https://github.com/feross/standard)
+
 Your last `devDependency`.
 
 The idea behing it is pretty simple:
