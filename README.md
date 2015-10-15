@@ -1,6 +1,5 @@
 # Sagui
 
-
 Your last `devDependency`.
 
 The idea behing it is pretty simple:
@@ -28,10 +27,16 @@ npm install --save-dev sagui
 Start developing!
 
 ```bash
-npm run sagui:develop
+npm start
 ```
 
-Sagui manages the [package.json](https://docs.npmjs.com/files/package.json) scripts for you:
+Run the tests!
+
+```bash
+num test
+```
+
+Sagui manages the [package.json](https://docs.npmjs.com/files/package.json) scripts for you, creating additional tasks such as:
 
 - `npm run sagui:test`
 - `npm run sagui:test-watch`
