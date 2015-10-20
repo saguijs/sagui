@@ -1,6 +1,7 @@
 import path from 'path'
 import { HotModuleReplacementPlugin } from 'webpack'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
+import reactTransform from 'babel-plugin-react-transform'
 
 
 export default function buildWebpackConfig ({ projectPath, saguiPath }, { watch }) {
@@ -41,6 +42,28 @@ export default function buildWebpackConfig ({ projectPath, saguiPath }, { watch 
       new HotModuleReplacementPlugin()
     ],
 
+    babel: {
+      optional: ['runtime'],
+      stage: 0,
+      env: {
+        development: {
+          plugins: [reactTransform],
+          extra: {
+            'react-transform': {
+              transforms: [{
+                transform: 'react-transform-hmr',
+                imports: ['react'],
+                locals: ['module']
+              }, {
+                transform: 'react-transform-catch-errors',
+                imports: ['react', 'redbox-react']
+              }]
+            }
+          }
+        }
+      }
+    },
+
     module: {
       preLoaders: [
         {
@@ -68,11 +91,7 @@ export default function buildWebpackConfig ({ projectPath, saguiPath }, { watch 
         {
           test: /(\.js)|(\.jsx)$/,
           exclude: /node_modules/,
-          loader: 'babel',
-          query: {
-            optional: ['runtime'],
-            stage: 0
-          }
+          loader: 'babel'
         }
       ]
     }
