@@ -11,6 +11,7 @@
     "test:lint": "eslint .",
     "test:unit": "mocha --compilers js:babel/register --recursive --reporter spec ./src/**/*.spec.js",
     "test:unit-watch": "npm run test:unit -- --watch",
+    "prepublish": "npm prune && npm test",
     "postinstall": "./bin/sagui install"
   },
   "repository": {
