@@ -62,6 +62,10 @@ export default function buildWebpackConfig ({ projectPath, saguiPath }, { watch 
             'includePaths[]=' + (path.resolve(projectPath, './node_modules'))
         },
         {
+          test: /\.(ttf|eot|woff|svg)$/,
+          loader: 'file?name=[name]-[hash].[ext]'
+        },
+        {
           test: /(\.js)|(\.jsx)$/,
           exclude: /node_modules/,
           loader: 'babel',
