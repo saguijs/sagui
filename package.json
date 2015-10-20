@@ -55,6 +55,7 @@
     "react-transform-catch-errors": "^1.0.0",
     "react-transform-hmr": "^1.0.0",
     "redbox-react": "^1.0.1",
+    "resolve-url-loader": "^1.3.0",
     "rimraf": "^2.4.3",
     "sass-loader": "^3.0.0",
     "sinon": "^1.17.1",
