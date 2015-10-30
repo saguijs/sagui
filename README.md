@@ -7,20 +7,20 @@
 
 Sagui is a modern approach on build infrastructure to front-end projects. It follows an opinionated **convention over configuration** approach, providing a solid foundation so that you can focus on writing your code.
 
+Right off of the bat you get:
+
+- JavaScript 2015 language support;
+- Automated testing;
+- Linting via [JavaScript Standard Style](http://standardjs.com/);
+- Build and development infrastructure;
+- Live-reload via "hot module replacement".
+
+In simpler terms, it is **your last devDependency**!
+
 - No more generators;
 - No more boiletplate projects;
 - No more starter kits;
-- NPM and Node should be your only global dependencies.
-
-Right off of the bat you get:
-
-- JavaScript 2015 support through [Babel](http://babeljs.io/);
-- Automated testing through [Karma](http://karma-runner.github.io/) and [Jasmine](http://jasmine.github.io/);
-- Linting via [ESlint](http://eslint.org/) and [JavaScript Standard Style](http://standardjs.com/);
-- Build and development environment provided by [webpack](http://webpack.github.io/);
-- Hot module replacement with [React transform](https://github.com/gaearon/react-transform)
-
-In simpler terms, it is your last `devDependency`.
+- No more strange global dependencies. Just `node` and `npm`.
 
 **Note**: Still early in development, and might miss something that you want.
 
@@ -72,6 +72,20 @@ Sagui manages the [package.json](https://docs.npmjs.com/files/package.json) scri
 - `npm run sagui:develop`
 
 Then you can start writing your code inside the `src/` folder.
+
+## Under the hood
+
+Sagui is made possible by a bunch of pretty awesome projects:
+
+- [Babel](http://babeljs.io/);
+- [Karma](http://karma-runner.github.io/);
+- [Jasmine](http://jasmine.github.io/);
+- [ESlint](http://eslint.org/);
+- [JavaScript Standard Style](http://standardjs.com/);
+- [webpack](http://webpack.github.io/);
+- [React transform](https://github.com/gaearon/react-transform).
+
+But the idea is that you shouldn't worry about that.
 
 ## Background
 
