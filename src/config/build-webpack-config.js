@@ -1,10 +1,21 @@
 import path from 'path'
-import { HotModuleReplacementPlugin } from 'webpack'
+import { HotModuleReplacementPlugin, optimize } from 'webpack'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import reactTransform from 'babel-plugin-react-transform'
 
 
-export default function buildWebpackConfig ({ projectPath, saguiPath }, { watch }) {
+const defaultPages = ['index']
+
+
+export default function buildWebpackConfig ({ projectPath, saguiPath, pages = defaultPages }, { watch }) {
+  const modulesDirectories = [
+    path.join(projectPath, '/node_modules'),
+    path.join(saguiPath, '/node_modules')
+  ]
+
+  const entry = buildEntryConfig(pages)
+  const plugins = buildPluginsConfig(pages)
+
   return {
     context: projectPath,
 
@@ -13,34 +24,17 @@ export default function buildWebpackConfig ({ projectPath, saguiPath }, { watch 
       failOnError: !watch
     },
 
-    entry: [
-      'webpack-hot-middleware/client',
-      './src/index'
-    ],
+    entry,
+    plugins,
 
-    resolve: {
-      root: [
-        path.join(projectPath, '/node_modules'),
-        path.join(saguiPath, '/node_modules')
-      ]
-    },
-
-    resolveLoader: {
-      modulesDirectories: [
-        path.join(projectPath, '/node_modules'),
-        path.join(saguiPath, '/node_modules')
-      ]
-    },
+    resolve: { root: modulesDirectories },
+    resolveLoader: { modulesDirectories },
 
     output: {
       path: path.join(projectPath, 'dist'),
-      filename: 'index.js'
+      filename: '[name]-[hash].js',
+      chunkFilename: '[id].bundle.js'
     },
-
-    plugins: [
-      new HtmlWebpackPlugin({ template: 'src/index.html' }),
-      new HotModuleReplacementPlugin()
-    ],
 
     babel: {
       optional: ['runtime'],
@@ -96,4 +90,35 @@ export default function buildWebpackConfig ({ projectPath, saguiPath }, { watch 
       ]
     }
   }
+}
+
+
+function buildEntryConfig (pages) {
+  const hotMiddleware = 'webpack-hot-middleware/client'
+
+  let entry = {}
+  pages.forEach(page => {
+    entry[page] = [`./src/${page}`, hotMiddleware]
+  })
+
+  return entry
+}
+
+
+function buildPluginsConfig (pages) {
+  let plugins = [
+    new HotModuleReplacementPlugin(),
+    new optimize.CommonsChunkPlugin({ name: 'common' })
+  ]
+
+  pages.forEach(page => {
+    plugins.push(new HtmlWebpackPlugin({
+      template: `src/${page}.html`,
+      filename: `${page}.html`,
+      chunks: ['common', page],
+      inject: true
+    }))
+  })
+
+  return plugins
 }
