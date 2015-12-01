@@ -73,6 +73,22 @@ Sagui manages the [package.json](https://docs.npmjs.com/files/package.json) scri
 
 Then you can start writing your code inside the `src/` folder.
 
+## Pages
+
+By default, sagui will build and serve a single page for your entire application. This is your `src/index.js` and `src/index.html` files.
+
+To change it and add more pages, you can add a custom configuration in the `package.json` file:
+
+```json
+{
+  "sagui": {
+    "pages": ["index", "demo"]
+  }
+}
+```
+
+And add aditional `src/demo.js` and `src/demo.html` files.
+
 ## Under the hood
 
 Sagui is made possible by a bunch of pretty awesome projects:

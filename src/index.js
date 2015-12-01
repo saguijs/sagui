@@ -10,34 +10,35 @@ import json from './util/json'
 
 export default {
   develop (env, options) {
-    check(env)
+    const envWithConfig = loadProjectConfig(env)
 
-    const webpackConfig = buildWebpackConfig(env, options)
+    const webpackConfig = buildWebpackConfig(envWithConfig, options)
     startDevelop(webpackConfig)
   },
 
   test (env, options) {
-    check(env)
+    const envWithConfig = loadProjectConfig(env)
 
-    const webpackConfig = buildWebpackConfig(env, options)
-    const karmaConfig = buildKarmaConfig(env, options, webpackConfig)
+    const webpackConfig = buildWebpackConfig(envWithConfig, options)
+    const karmaConfig = buildKarmaConfig(envWithConfig, options, webpackConfig)
     runTest(karmaConfig)
   },
 
   install (env, options) {
-    check(env)
+    const envWithConfig = loadProjectConfig(env)
 
-    install(env.projectPath)
+    install(envWithConfig.projectPath)
   }
 }
 
 
-function check ({ projectPath }) {
-  const packagePath = join(projectPath, 'package.json')
+function loadProjectConfig (env) {
+  const packagePath = join(env.projectPath, 'package.json')
   if (!fileExists(packagePath)) throw new InvalidUsage()
 
   const packageJSON = json.read(packagePath)
   if (packageJSON.name === 'sagui') throw new InvalidUsage()
+  return Object.assign({}, env, packageJSON.sagui || {})
 }
 
 
