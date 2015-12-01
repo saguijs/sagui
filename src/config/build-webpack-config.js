@@ -5,6 +5,11 @@ import reactTransform from 'babel-plugin-react-transform'
 
 
 export default function buildWebpackConfig ({ projectPath, saguiPath }, { watch }) {
+  const modulesDirectories = [
+    path.join(projectPath, '/node_modules'),
+    path.join(saguiPath, '/node_modules')
+  ]
+
   return {
     context: projectPath,
 
@@ -18,19 +23,8 @@ export default function buildWebpackConfig ({ projectPath, saguiPath }, { watch 
       './src/index'
     ],
 
-    resolve: {
-      root: [
-        path.join(projectPath, '/node_modules'),
-        path.join(saguiPath, '/node_modules')
-      ]
-    },
-
-    resolveLoader: {
-      modulesDirectories: [
-        path.join(projectPath, '/node_modules'),
-        path.join(saguiPath, '/node_modules')
-      ]
-    },
+    resolve: { root: modulesDirectories },
+    resolveLoader: { modulesDirectories },
 
     output: {
       path: path.join(projectPath, 'dist'),
