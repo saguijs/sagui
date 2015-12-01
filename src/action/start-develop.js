@@ -14,7 +14,7 @@ export default function startDevelop (webpackConfig) {
 
   app.use(require('webpack-hot-middleware')(compiler))
 
-  app.listen(3000, 'localhost', onServerStarted)
+  app.listen(3000, '0.0.0.0', onServerStarted)
 }
 
 
