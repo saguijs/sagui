@@ -8,6 +8,17 @@ const saguiPath = ''
 describe('build webpack config', function () {
   let config
 
+  describe('loaders', function () {
+    beforeEach(function () {
+      config = buildWebpackConfig({ projectPath, saguiPath }, {})
+    })
+
+    it('should have a JSON loader', function () {
+      const loader = config.module.loaders.find(loader => loader.loader === 'json-loader')
+      expect(loader.test).eql(/\.(json)$/)
+    })
+  })
+
   describe('pages', function () {
     describe('default', function () {
       beforeEach(function () {

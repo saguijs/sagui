@@ -69,6 +69,10 @@ export default function buildWebpackConfig ({ projectPath, saguiPath, pages = de
 
       loaders: [
         {
+          test: /\.(json)$/,
+          loader: 'json-loader'
+        },
+        {
           test: /\.(png|jpg|gif)$/,
           loader: 'url-loader?limit=8192&name=[name]-[hash].[ext]'
         },
