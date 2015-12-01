@@ -38,7 +38,7 @@ export default function buildWebpackConfig ({ projectPath, saguiPath }, { watch 
     },
 
     plugins: [
-      new HtmlWebpackPlugin({ template: 'src/index.html' }),
+      new HtmlWebpackPlugin({ template: 'src/index.html', inject: true }),
       new HotModuleReplacementPlugin()
     ],
 
