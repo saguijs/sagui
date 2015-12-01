@@ -5,7 +5,10 @@ import { InvalidUsage } from './index'
 import { logError, log } from './util/log'
 
 
-const env = {
+const env = process.env.SAGUI_LINK ? {
+  projectPath: process.cwd(),
+  saguiPath: join(process.cwd(), 'node_modules/sagui')
+} : {
   projectPath: join(__dirname, '../../../'),
   saguiPath: join(__dirname, '../')
 }

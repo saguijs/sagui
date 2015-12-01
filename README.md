@@ -87,6 +87,30 @@ Sagui is made possible by a bunch of pretty awesome projects:
 
 But the idea is that you shouldn't worry about that.
 
+## Development
+
+To develop the tool locally, we will need to resort to a combination of a global [npm link](https://docs.npmjs.com/cli/link) and local links in projects.
+
+You can start by linking Sagui globally. While at its folder:
+
+```bash
+SAGUI_LINK=true npm link
+```
+
+The environment variable is to inform Sagui that it is working in a "linked environment".
+
+Then, **at the project you intend to use Sagui**, link it locally:
+
+```bash
+npm link sagui
+```
+
+Now, the project is set to use your development copy of Sagui. Unfortunately, you will need to run any command in the project providing the environment variable `SAGUI_LINK`:
+
+```bash
+SAGUI_LINK=true npm start
+```
+
 ## Background
 
 It is an idea I had in mind for a while, and after seeing a similar approach internally at [Klarna](https://github.com/klarna) (in the form of a global tool), I've got inspired to build a simpler (and locally installed) version of my own.
