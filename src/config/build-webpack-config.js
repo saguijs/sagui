@@ -1,5 +1,5 @@
 import path from 'path'
-import { HotModuleReplacementPlugin } from 'webpack'
+import { HotModuleReplacementPlugin, optimize } from 'webpack'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import reactTransform from 'babel-plugin-react-transform'
 
@@ -34,12 +34,14 @@ export default function buildWebpackConfig ({ projectPath, saguiPath }, { watch 
 
     output: {
       path: path.join(projectPath, 'dist'),
-      filename: 'index.js'
+      filename: '[name]-[hash].js',
+      chunkFilename: '[id].bundle.js'
     },
 
     plugins: [
       new HtmlWebpackPlugin({ template: 'src/index.html', inject: true }),
-      new HotModuleReplacementPlugin()
+      new HotModuleReplacementPlugin(),
+      new optimize.CommonsChunkPlugin({ name: 'common' })
     ],
 
     babel: {
