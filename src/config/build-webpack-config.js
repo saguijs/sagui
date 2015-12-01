@@ -61,7 +61,7 @@ export default function buildWebpackConfig ({ projectPath, saguiPath, pages = de
     module: {
       preLoaders: [
         {
-          test: /(\.js)|(\.jsx)$/,
+          test: /\.jsx?$/,
           loader: 'eslint',
           exclude: /node_modules/
         }
@@ -87,7 +87,7 @@ export default function buildWebpackConfig ({ projectPath, saguiPath, pages = de
           loader: 'file?name=[name]-[hash].[ext]'
         },
         {
-          test: /(\.js)|(\.jsx)$/,
+          test: /\.jsx?$/,
           exclude: /node_modules/,
           loader: 'babel'
         }
