@@ -1,4 +1,9 @@
 language: node_js
 node_js:
   - "5.1"
-sudo: false
+sudo: required
+services:
+  - docker
+script:
+  - npm test
+  - npm test:integration
