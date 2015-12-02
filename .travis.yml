@@ -6,4 +6,4 @@ services:
   - docker
 script:
   - npm test
-  - npm test:integration
+  - npm run test:integration
