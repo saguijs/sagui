@@ -27,7 +27,7 @@ describe('build webpack config', function () {
 
       const commons = config.plugins.filter(plugin => plugin instanceof optimize.CommonsChunkPlugin)
       expect(commons.length).equal(0)
-    });
+    })
   })
 
   describe('pages', function () {
