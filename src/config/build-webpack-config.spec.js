@@ -1,5 +1,6 @@
 import { expect } from 'chai'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
+import { optimize } from 'webpack'
 import buildWebpackConfig from './build-webpack-config'
 
 const projectPath = ''
@@ -16,6 +17,16 @@ describe('build webpack config', function () {
     it('should have a JSON loader', function () {
       const loader = config.module.loaders.find(loader => loader.loader === 'json-loader')
       expect(loader.test).eql(/\.(json)$/)
+    })
+  })
+
+  describe('targets', function () {
+    // see: https://github.com/webpack/karma-webpack/issues/24
+    it('should not have the CommonsChunkPlugin enabled while testing', function () {
+      config = buildWebpackConfig({ projectPath, saguiPath, buildTarget: 'test' }, {})
+
+      const commons = config.plugins.filter(plugin => plugin instanceof optimize.CommonsChunkPlugin)
+      expect(commons.length).equal(0)
     })
   })
 

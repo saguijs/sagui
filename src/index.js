@@ -11,6 +11,7 @@ import json from './util/json'
 export default {
   develop (env, options) {
     const envWithConfig = loadProjectConfig(env)
+    envWithConfig.buildTarget = 'develop'
 
     const webpackConfig = buildWebpackConfig(envWithConfig, options)
     startDevelop(webpackConfig)
@@ -18,6 +19,7 @@ export default {
 
   test (env, options) {
     const envWithConfig = loadProjectConfig(env)
+    envWithConfig.buildTarget = 'test'
 
     const webpackConfig = buildWebpackConfig(envWithConfig, options)
     const karmaConfig = buildKarmaConfig(envWithConfig, options, webpackConfig)

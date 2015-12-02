@@ -7,14 +7,14 @@ import reactTransform from 'babel-plugin-react-transform'
 const defaultPages = ['index']
 
 
-export default function buildWebpackConfig ({ projectPath, saguiPath, pages = defaultPages }, { watch }) {
+export default function buildWebpackConfig ({ projectPath, saguiPath, pages = defaultPages, buildTarget }, { watch }) {
   const modulesDirectories = [
     path.join(projectPath, '/node_modules'),
     path.join(saguiPath, '/node_modules')
   ]
 
   const entry = buildEntryConfig(pages)
-  const plugins = buildPluginsConfig(pages)
+  const plugins = buildPluginsConfig(pages, buildTarget)
 
   return {
     context: projectPath,
@@ -109,11 +109,14 @@ function buildEntryConfig (pages) {
 }
 
 
-function buildPluginsConfig (pages) {
+function buildPluginsConfig (pages, buildTarget) {
   let plugins = [
-    new HotModuleReplacementPlugin(),
-    new optimize.CommonsChunkPlugin({ name: 'common' })
+    new HotModuleReplacementPlugin()
   ]
+
+  if (buildTarget !== 'test') {
+    plugins.push(new optimize.CommonsChunkPlugin({ name: 'common' }))
+  }
 
   pages.forEach(page => {
     plugins.push(new HtmlWebpackPlugin({
