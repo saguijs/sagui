@@ -1,5 +1,5 @@
 describe('<%= projectName %>', function () {
-  xit('should work', function () {
+  it('should work', function () {
 
   })
 })
