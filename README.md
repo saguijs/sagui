@@ -70,6 +70,8 @@ Sagui manages the [package.json](https://docs.npmjs.com/files/package.json) scri
 - `npm run sagui:test`
 - `npm run sagui:test-watch`
 - `npm run sagui:develop`
+- `npm run sagui:build`
+- `npm run sagui:dist`
 
 Then you can start writing your code inside the `src/` folder.
 
