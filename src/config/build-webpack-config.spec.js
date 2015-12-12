@@ -1,6 +1,6 @@
 import { expect } from 'chai'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
-import { optimize } from 'webpack'
+import { HotModuleReplacementPlugin, optimize } from 'webpack'
 import buildWebpackConfig from './build-webpack-config'
 
 const projectPath = ''
@@ -27,6 +27,20 @@ describe('build webpack config', function () {
 
       const commons = config.plugins.filter(plugin => plugin instanceof optimize.CommonsChunkPlugin)
       expect(commons.length).equal(0)
+    })
+
+    it('should have the UglifyJsPlugin enabled while distributing', function () {
+      config = buildWebpackConfig({ projectPath, saguiPath, buildTarget: 'dist' }, {})
+
+      const commons = config.plugins.filter(plugin => plugin instanceof optimize.UglifyJsPlugin)
+      expect(commons.length).equal(1)
+    })
+
+    it('should have the HotModuleReplacementPlugin enabled while developing', function () {
+      config = buildWebpackConfig({ projectPath, saguiPath, buildTarget: 'develop' }, {})
+
+      const commons = config.plugins.filter(plugin => plugin instanceof HotModuleReplacementPlugin)
+      expect(commons.length).equal(1)
     })
   })
 

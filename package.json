@@ -11,7 +11,7 @@
     "test:lint": "eslint .",
     "test:unit": "mocha --compilers js:babel/register --recursive --reporter spec ./src/**/*.spec.js",
     "test:unit-watch": "npm run test:unit -- --watch",
-    "test:integration": "docker run --rm -ti -v $PWD:/sagui -w /tmp node:5.1 /bin/bash -c \"mkdir sagui-project && cd sagui-project && npm init -y . && npm install --loglevel=silent --save-dev /sagui && ./node_modules/.bin/sagui install && npm test && npm run sagui:build\"",
+    "test:integration": "docker run --rm -ti -v $PWD:/sagui -w /tmp node:5.1 /bin/bash -c \"mkdir sagui-project && cd sagui-project && npm init -y . && npm install --loglevel=silent --save-dev /sagui && ./node_modules/.bin/sagui install && npm test && npm run sagui:build && npm run sagui:dist\"",
     "prepublish": "npm prune && npm test",
     "postinstall": "./bin/sagui install"
   },

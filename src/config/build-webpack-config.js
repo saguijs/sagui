@@ -114,9 +114,15 @@ function buildEntryConfig (pages) {
 
 
 function buildPluginsConfig (pages, buildTarget) {
-  let plugins = [
-    new HotModuleReplacementPlugin()
-  ]
+  let plugins = []
+
+  if (buildTarget === 'develop') {
+    plugins.push(new HotModuleReplacementPlugin())
+  }
+
+  if (buildTarget === 'dist') {
+    plugins.push(new optimize.UglifyJsPlugin())
+  }
 
   if (buildTarget !== 'test') {
     plugins.push(new optimize.CommonsChunkPlugin({ name: 'common' }))
