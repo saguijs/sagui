@@ -5,10 +5,19 @@ import buildKarmaConfig from './config/build-karma-config'
 import startDevelop from './action/start-develop'
 import runTest from './action/run-test'
 import install from './action/install'
+import build from './action/build'
 import json from './util/json'
 
 
 export default {
+  build (env, options) {
+    const envWithConfig = loadProjectConfig(env)
+    envWithConfig.buildTarget = 'develop'
+
+    const webpackConfig = buildWebpackConfig(envWithConfig, options)
+    build(webpackConfig)
+  },
+
   develop (env, options) {
     const envWithConfig = loadProjectConfig(env)
     envWithConfig.buildTarget = 'develop'

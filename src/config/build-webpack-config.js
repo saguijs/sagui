@@ -19,6 +19,10 @@ export default function buildWebpackConfig ({ projectPath, saguiPath, pages = de
   return {
     context: projectPath,
 
+    // https://webpack.github.io/docs/configuration.html#bail
+    // report the first error as a hard error instead of tolerating it
+    bail: !watch,
+
     eslint: {
       configFile: path.join(saguiPath, '.eslintrc'),
       failOnError: !watch
