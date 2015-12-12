@@ -19,6 +19,10 @@ export default function buildWebpackConfig ({ projectPath, saguiPath, pages = de
   return {
     context: projectPath,
 
+    // https://webpack.github.io/docs/configuration.html#bail
+    // report the first error as a hard error instead of tolerating it
+    bail: !watch,
+
     eslint: {
       configFile: path.join(saguiPath, '.eslintrc'),
       failOnError: !watch
@@ -110,9 +114,15 @@ function buildEntryConfig (pages) {
 
 
 function buildPluginsConfig (pages, buildTarget) {
-  let plugins = [
-    new HotModuleReplacementPlugin()
-  ]
+  let plugins = []
+
+  if (buildTarget === 'develop') {
+    plugins.push(new HotModuleReplacementPlugin())
+  }
+
+  if (buildTarget === 'dist') {
+    plugins.push(new optimize.UglifyJsPlugin())
+  }
 
   if (buildTarget !== 'test') {
     plugins.push(new optimize.CommonsChunkPlugin({ name: 'common' }))

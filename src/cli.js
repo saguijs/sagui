@@ -14,6 +14,20 @@ const env = process.env.SAGUI_LINK ? {
 }
 
 
+program.command('build')
+  .description('Build the project')
+  .action(function (options) {
+    sagui.build(env, options)
+  })
+
+
+program.command('dist')
+  .description('Builds an optimized distribution of the project')
+  .action(function (options) {
+    sagui.dist(env, options)
+  })
+
+
 program.command('develop')
   .description('Run development environment')
   .action(function (options) {
