@@ -12,7 +12,7 @@ import json from './util/json'
 export default {
   build (env, options) {
     const envWithConfig = loadProjectConfig(env)
-    envWithConfig.buildTarget = 'develop'
+    envWithConfig.buildTarget = 'build'
 
     const webpackConfig = buildWebpackConfig(envWithConfig, options)
     buildAndDistribute(webpackConfig)
