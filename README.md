@@ -17,10 +17,12 @@ Right off of the bat you get:
 
 In simpler terms, it is **your last devDependency**!
 
+- A local dependency, not another global tool. It should be just `node` and `npm`;
 - No more generators;
 - No more boiletplate projects;
-- No more starter kits;
-- No more strange global dependencies. Just `node` and `npm`.
+- No more starter kits.
+
+It acts as a frontend for [webpack](http://webpack.github.io/), [Babel](http://babeljs.io/) and [Karma](http://karma-runner.github.io/) so you don't have to worry about them.
 
 **Note**: Still early in development, and might miss something that you want.
 
@@ -53,7 +55,7 @@ $ tree
     └── index.spec.js
 ```
 
-Start developing!
+Start developing **using common NPM run scripts**:
 
 ```bash
 npm start
@@ -102,8 +104,6 @@ Sagui is made possible by a bunch of pretty awesome projects:
 - [JavaScript Standard Style](http://standardjs.com/);
 - [webpack](http://webpack.github.io/);
 - [React transform](https://github.com/gaearon/react-transform).
-
-But the idea is that you shouldn't worry about that.
 
 ## Development
 
