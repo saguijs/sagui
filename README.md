@@ -7,6 +7,8 @@
 
 Sagui is a modern approach on build infrastructure to front-end projects. It follows an opinionated **convention over configuration** approach, providing a solid foundation so that you can focus on writing your code.
 
+It is currently build around [React](http://reactjs.com/), a but the idea is to modularize it so that it supports other types of projects.
+
 Right off of the bat you get:
 
 - JavaScript 2015 language support;
