@@ -66,7 +66,7 @@ npm start
 Run the tests!
 
 ```bash
-num test
+npm test
 ```
 
 Sagui manages the [package.json](https://docs.npmjs.com/files/package.json) scripts for you, creating additional tasks such as:
