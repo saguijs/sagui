@@ -24,9 +24,9 @@ export default function install (projectPath) {
 function copyTemplates (projectPath) {
   const projectName = basename(projectPath)
 
-  template(templatePath, projectPath, undefined, {
+  template(templatePath, projectPath, {
     projectName: projectName
-  })
+  }, { clobber: false })
 }
 
 
