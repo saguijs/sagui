@@ -2,6 +2,7 @@ import path from 'path'
 import { HotModuleReplacementPlugin, optimize } from 'webpack'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import reactTransform from 'babel-plugin-react-transform'
+import postCSSModulesValues from 'postcss-modules-values'
 
 
 const defaultPages = ['index']
@@ -62,6 +63,12 @@ export default function buildWebpackConfig ({ projectPath, saguiPath, pages = de
       }
     },
 
+    postcss: [
+      // allow importing values (variables) between css modules
+      // see: https://github.com/css-modules/postcss-modules-values#usage
+      postCSSModulesValues
+    ],
+
     module: {
       preLoaders: [
         {
@@ -81,10 +88,14 @@ export default function buildWebpackConfig ({ projectPath, saguiPath, pages = de
           loader: 'url-loader?limit=8192&name=[name]-[hash].[ext]'
         },
         {
-          test: /\.scss$/,
-          // Query parameters are passed to node-sass
-          loader: 'style!css!resolve-url!sass?sourceMap&outputStyle=expanded&' +
-            'includePaths[]=' + (path.resolve(projectPath, './node_modules'))
+          test: /\.css$/,
+          loaders: [
+            'style-loader',
+            // importLoaders: use the following postcss-loader in @import statements
+            // modules: enable css-mobules
+            'css-loader?modules&sourceMap&importLoaders=1&localIdentName=[name]-[hash]',
+            'postcss-loader'
+          ]
         },
         {
           test: /\.(ttf|eot|woff|svg)$/,
