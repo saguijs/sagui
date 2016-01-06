@@ -70,5 +70,11 @@
     "webpack": "^1.9.6",
     "webpack-dev-middleware": "^1.2.0",
     "webpack-hot-middleware": "^2.0.0"
+  },
+  "peerDependencies": {
+    "react": "^0.14.2"
+  },
+  "devDependencies": {
+    "react": "^0.14.2"
   }
 }
