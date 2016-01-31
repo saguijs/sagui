@@ -132,8 +132,7 @@ function buildPluginsConfig (pages, buildTarget) {
     plugins.push(new HtmlWebpackPlugin({
       template: `src/${page}.html`,
       filename: `${page}.html`,
-      chunks: ['common', page],
-      inject: true
+      chunks: ['common', page]
     }))
   })
 

@@ -60,14 +60,11 @@ describe('build webpack config', function () {
         const html = config.plugins.filter(plugin => plugin instanceof HtmlWebpackPlugin)
         expect(html.length).equal(1)
 
-        const expectedConfig = {
-          chunks: [ 'common', 'index' ],
-          filename: 'index.html',
-          inject: true,
-          template: 'src/index.html'
-        }
+        const options = html[0].options
 
-        expect(html[0].options).deep.eql(expectedConfig)
+        expect(options.chunks).deep.eql([ 'common', 'index' ])
+        expect(options.filename).deep.eql('index.html')
+        expect(options.template).deep.eql('src/index.html')
       })
     })
 
@@ -89,23 +86,15 @@ describe('build webpack config', function () {
         const html = config.plugins.filter(plugin => plugin instanceof HtmlWebpackPlugin)
         expect(html.length).equal(2)
 
-        const expectedFirstConfig = {
-          chunks: [ 'common', 'index' ],
-          filename: 'index.html',
-          inject: true,
-          template: 'src/index.html'
-        }
+        const firstOptions = html[0].options
+        expect(firstOptions.chunks).deep.eql([ 'common', 'index' ])
+        expect(firstOptions.filename).deep.eql('index.html')
+        expect(firstOptions.template).deep.eql('src/index.html')
 
-        expect(html[0].options).deep.eql(expectedFirstConfig)
-
-        const expectedSecondConfig = {
-          chunks: [ 'common', 'demo' ],
-          filename: 'demo.html',
-          inject: true,
-          template: 'src/demo.html'
-        }
-
-        expect(html[1].options).deep.eql(expectedSecondConfig)
+        const secondOptions = html[1].options
+        expect(secondOptions.chunks).deep.eql([ 'common', 'demo' ])
+        expect(secondOptions.filename).deep.eql('demo.html')
+        expect(secondOptions.template).deep.eql('src/demo.html')
       })
     })
   })
