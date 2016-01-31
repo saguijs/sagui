@@ -10,9 +10,5 @@
 
   "globals": {
     "sinon": false
-  },
-
-  "rules": {
-    "no-multiple-empty-lines": 0
   }
 }

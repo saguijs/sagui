@@ -2,7 +2,6 @@ import express from 'express'
 import webpack from 'webpack'
 import { logError, log } from '../util/log'
 
-
 export default function startDevelop (webpackConfig) {
   const app = express()
   const compiler = webpack(webpackConfig)
@@ -16,7 +15,6 @@ export default function startDevelop (webpackConfig) {
 
   app.listen(3000, '0.0.0.0', onServerStarted)
 }
-
 
 function onServerStarted (err) {
   if (err) {

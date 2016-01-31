@@ -8,7 +8,6 @@ import install from './action/install'
 import buildAndDistribute from './action/build-and-distribute'
 import json from './util/json'
 
-
 export default {
   build (env, options) {
     const envWithConfig = loadProjectConfig(env)
@@ -50,7 +49,6 @@ export default {
   }
 }
 
-
 function loadProjectConfig (env) {
   const packagePath = join(env.projectPath, 'package.json')
   if (!fileExists(packagePath)) throw new InvalidUsage()
@@ -60,7 +58,6 @@ function loadProjectConfig (env) {
   return Object.assign({}, env, packageJSON.sagui || {})
 }
 
-
 function fileExists (file) {
   try {
     statSync(file)
@@ -69,7 +66,6 @@ function fileExists (file) {
     return false
   }
 }
-
 
 export class InvalidUsage extends Error {
   constructor () {

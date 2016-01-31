@@ -3,9 +3,7 @@ import { HotModuleReplacementPlugin, optimize } from 'webpack'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import reactTransform from 'babel-plugin-react-transform'
 
-
 const defaultPages = ['index']
-
 
 export default function buildWebpackConfig ({ projectPath, saguiPath, pages = defaultPages, buildTarget }, { watch }) {
   const modulesDirectories = [
@@ -100,7 +98,6 @@ export default function buildWebpackConfig ({ projectPath, saguiPath, pages = de
   }
 }
 
-
 function buildEntryConfig (pages) {
   const hotMiddleware = 'webpack-hot-middleware/client'
 
@@ -111,7 +108,6 @@ function buildEntryConfig (pages) {
 
   return entry
 }
-
 
 function buildPluginsConfig (pages, buildTarget) {
   let plugins = []
