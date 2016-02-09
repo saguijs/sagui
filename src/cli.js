@@ -1,46 +1,37 @@
 import program from 'commander'
-import { join } from 'path'
 import sagui from './index'
-import { InvalidUsage } from './index'
+import { InvalidUsage } from './env/user-settings/index'
 import { logError, log } from './util/log'
-
-const env = process.env.SAGUI_LINK ? {
-  projectPath: process.cwd(),
-  saguiPath: join(process.cwd(), 'node_modules/sagui')
-} : {
-  projectPath: join(__dirname, '../../../'),
-  saguiPath: join(__dirname, '../')
-}
 
 program.command('build')
   .description('Build the project')
   .action(function (options) {
-    sagui.build(env, options)
+    sagui.build(options)
   })
 
 program.command('dist')
   .description('Builds an optimized distribution of the project')
   .action(function (options) {
-    sagui.dist(env, options)
+    sagui.dist(options)
   })
 
 program.command('develop')
   .description('Run development environment')
   .action(function (options) {
-    sagui.develop(env, options)
+    sagui.develop(options)
   })
 
 program.command('test')
   .description('Run tests')
   .option('-w, --watch', 'Run tests on any file change')
   .action(function (options) {
-    sagui.test(env, options)
+    sagui.test(options)
   })
 
 program.command('install')
   .description('Install or update sagui in the current project')
   .action(function (options) {
-    sagui.install(env, options)
+    sagui.install(options)
     log('installed in the project')
   })
 

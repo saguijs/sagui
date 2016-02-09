@@ -1,5 +1,7 @@
-export default function buildKarmaConfig ({ projectPath, saguiPath }, { watch }, webpackConfig) {
-  return {
+export default function buildKarmaConfig (env) {
+  const { projectPath, watch, webpackConfig } = env
+
+  const karmaConfig = {
     basePath: projectPath,
 
     frameworks: ['jasmine', 'phantomjs-shim', 'sinon'],
@@ -25,4 +27,6 @@ export default function buildKarmaConfig ({ projectPath, saguiPath }, { watch },
 
     autoWatch: watch
   }
+
+  return { ...env, karmaConfig }
 }
