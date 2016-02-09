@@ -88,6 +88,12 @@ export default function buildWebpackConfig ({ projectPath, saguiPath, pages = de
           loader: 'url-loader?limit=8192&name=[name]-[hash].[ext]'
         },
         {
+          test: /\.scss$/,
+          // Query parameters are passed to node-sass
+          loader: 'style!css!resolve-url!sass?sourceMap&outputStyle=expanded&' +
+            'includePaths[]=' + (path.resolve(projectPath, './node_modules'))
+        },
+        {
           test: /\.css$/,
           loaders: [
             'style-loader',
