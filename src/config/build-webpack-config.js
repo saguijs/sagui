@@ -4,9 +4,7 @@ import HtmlWebpackPlugin from 'html-webpack-plugin'
 import reactTransform from 'babel-plugin-react-transform'
 import postCSSModulesValues from 'postcss-modules-values'
 
-
 const defaultPages = ['index']
-
 
 export default function buildWebpackConfig ({ projectPath, saguiPath, pages = defaultPages, buildTarget }, { watch }) {
   const modulesDirectories = [
@@ -53,9 +51,6 @@ export default function buildWebpackConfig ({ projectPath, saguiPath, pages = de
                 transform: 'react-transform-hmr',
                 imports: ['react'],
                 locals: ['module']
-              }, {
-                transform: 'react-transform-catch-errors',
-                imports: ['react', 'redbox-react']
               }]
             }
           }
@@ -117,7 +112,6 @@ export default function buildWebpackConfig ({ projectPath, saguiPath, pages = de
   }
 }
 
-
 function buildEntryConfig (pages) {
   const hotMiddleware = 'webpack-hot-middleware/client'
 
@@ -128,7 +122,6 @@ function buildEntryConfig (pages) {
 
   return entry
 }
-
 
 function buildPluginsConfig (pages, buildTarget) {
   let plugins = []
@@ -149,8 +142,7 @@ function buildPluginsConfig (pages, buildTarget) {
     plugins.push(new HtmlWebpackPlugin({
       template: `src/${page}.html`,
       filename: `${page}.html`,
-      chunks: ['common', page],
-      inject: true
+      chunks: ['common', page]
     }))
   })
 

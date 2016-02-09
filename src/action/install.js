@@ -2,9 +2,7 @@ import { join, basename } from 'path'
 import json from '../util/json'
 import template from 'template-directory'
 
-
 const templatePath = join(__dirname, '../../template')
-
 
 const defaultScripts = {
   'sagui:test': 'sagui test',
@@ -14,12 +12,10 @@ const defaultScripts = {
   'sagui:dist': 'sagui dist'
 }
 
-
 export default function install (projectPath) {
   updatePackageJSON(projectPath)
   copyTemplates(projectPath)
 }
-
 
 function copyTemplates (projectPath) {
   const projectName = basename(projectPath)
@@ -28,7 +24,6 @@ function copyTemplates (projectPath) {
     projectName: projectName
   }, { clobber: false })
 }
-
 
 function updatePackageJSON (projectPath) {
   const packagePath = join(projectPath, 'package.json')

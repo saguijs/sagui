@@ -1,7 +1,6 @@
 import webpack from 'webpack'
 import { logError } from '../util/log'
 
-
 export default function buildAndDistribute (webpackConfig) {
   const compiler = webpack(webpackConfig)
 

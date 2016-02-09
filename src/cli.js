@@ -4,7 +4,6 @@ import sagui from './index'
 import { InvalidUsage } from './index'
 import { logError, log } from './util/log'
 
-
 const env = process.env.SAGUI_LINK ? {
   projectPath: process.cwd(),
   saguiPath: join(process.cwd(), 'node_modules/sagui')
@@ -13,13 +12,11 @@ const env = process.env.SAGUI_LINK ? {
   saguiPath: join(__dirname, '../')
 }
 
-
 program.command('build')
   .description('Build the project')
   .action(function (options) {
     sagui.build(env, options)
   })
-
 
 program.command('dist')
   .description('Builds an optimized distribution of the project')
@@ -27,13 +24,11 @@ program.command('dist')
     sagui.dist(env, options)
   })
 
-
 program.command('develop')
   .description('Run development environment')
   .action(function (options) {
     sagui.develop(env, options)
   })
-
 
 program.command('test')
   .description('Run tests')
@@ -42,14 +37,12 @@ program.command('test')
     sagui.test(env, options)
   })
 
-
 program.command('install')
   .description('Install or update sagui in the current project')
   .action(function (options) {
     sagui.install(env, options)
     log('installed in the project')
   })
-
 
 export default function cli (argv) {
   try {
