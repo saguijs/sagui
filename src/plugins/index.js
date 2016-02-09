@@ -7,7 +7,7 @@ import pages from './pages-plugin'
 import scss from './scss-plugin'
 import webpackBase from './webpack-base-plugin'
 
-const plugins = [
+export const plugins = [
   babel,
   cssModules,
   eslint,
@@ -18,4 +18,8 @@ const plugins = [
   webpackBase
 ]
 
-export default plugins
+export default function run (env = { webpackConfig: {} }) {
+  return plugins.reduce((env, plugin) => {
+    return plugin(env)
+  }, env)
+}

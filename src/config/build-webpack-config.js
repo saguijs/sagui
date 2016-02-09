@@ -9,7 +9,5 @@ export default function buildWebpackConfig ({ projectPath, saguiPath, pages, bui
     watch
   }
 
-  return plugins.reduce((env, plugin) => {
-    return plugin(env)
-  }, env).webpackConfig
+  return plugins(env).webpackConfig
 }
