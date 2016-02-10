@@ -1,6 +1,6 @@
 import program from 'commander'
 import sagui from './index'
-import { InvalidUsage } from './plugins/user-settings/index'
+import { InvalidPath } from './plugins/path'
 import { logError, log } from './util/log'
 
 program.command('build')
@@ -39,8 +39,11 @@ export default function cli (argv) {
   try {
     program.parse(argv)
   } catch (e) {
-    if (e instanceof InvalidUsage) {
+    if (e instanceof InvalidPath) {
       logError('Must be executed in target project\'s package.json path')
+    } else {
+      logError('Error starting up')
+      logError(e.stack || e)
     }
   }
   if (!argv.slice(2).length) program.outputHelp()
