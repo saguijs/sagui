@@ -7,8 +7,8 @@ export default function (env) {
     projectPath: process.cwd(),
     saguiPath: join(process.cwd(), 'node_modules/sagui')
   } : {
-    projectPath: join(__dirname, '../../../'),
-    saguiPath: join(__dirname, '../')
+    projectPath: join(__dirname, '../../../../../'),
+    saguiPath: join(__dirname, '../../../')
   }
 
   sanityCheck(path)
