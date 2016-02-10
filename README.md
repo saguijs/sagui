@@ -132,11 +132,6 @@ module.exports = function (env, merge) {
 
 In contrast with configuration, the extension is executed as the **last step in the plugin chain**, allowing the user to overwrite or add any extra configuration.
 
-## Under the hood
-
-Sagui is made possible by a bunch of pretty awesome projects:
-
-
 ## Development
 
 To develop the tool locally, we will need to resort to a combination of a global [npm link](https://docs.npmjs.com/cli/link) and local links in projects.
