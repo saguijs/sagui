@@ -3,31 +3,31 @@ import runTest from './action/run-test'
 import install from './action/install'
 import buildAndDistribute from './action/build-and-distribute'
 
-import buildEnv from './env'
+import plugins from './plugins'
 
 export default {
   build (options) {
-    const { webpackConfig } = buildEnv({ ...options, buildTarget: 'build' })
+    const { webpackConfig } = plugins({ ...options, buildTarget: 'build' })
     buildAndDistribute(webpackConfig)
   },
 
   dist (options) {
-    const { webpackConfig } = buildEnv({ ...options, buildTarget: 'dist' })
+    const { webpackConfig } = plugins({ ...options, buildTarget: 'dist' })
     buildAndDistribute(webpackConfig)
   },
 
   develop (options) {
-    const { webpackConfig } = buildEnv({ ...options, buildTarget: 'develop' })
+    const { webpackConfig } = plugins({ ...options, buildTarget: 'develop' })
     startDevelop(webpackConfig)
   },
 
   test (options) {
-    const { karmaConfig } = buildEnv({ ...options, buildTarget: 'test' })
+    const { karmaConfig } = plugins({ ...options, buildTarget: 'test' })
     runTest(karmaConfig)
   },
 
   install (options) {
-    const { projectPath } = buildEnv({ ...options, buildTarget: 'test' })
+    const { projectPath } = plugins({ ...options, buildTarget: 'test' })
     install(projectPath)
   }
 }

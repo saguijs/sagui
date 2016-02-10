@@ -1,13 +1,13 @@
 import path from './path'
 import userSettings from './user-settings'
-import builder from './builder'
-import testRunner from './test-runner'
+import webpack from './webpack'
+import karma from './karma'
 
 export default function env (env = {}) {
   return [
     path,
     userSettings,
-    builder,
-    testRunner
+    webpack,
+    karma
   ].reduce((env, plugin) => plugin(env), env)
 }

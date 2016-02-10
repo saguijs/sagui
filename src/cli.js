@@ -1,6 +1,6 @@
 import program from 'commander'
 import sagui from './index'
-import { InvalidUsage } from './env/user-settings/index'
+import { InvalidUsage } from './plugins/user-settings/index'
 import { logError, log } from './util/log'
 
 program.command('build')
