@@ -23,7 +23,7 @@ export default {
   },
 
   install (options) {
-    const env = plugins({ ...options, buildTarget: 'test' })
+    const env = plugins(options)
     actions.install(env)
   }
 }
