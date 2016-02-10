@@ -12,7 +12,7 @@ const defaultScripts = {
   'sagui:dist': 'sagui dist'
 }
 
-export default function install (projectPath) {
+export default function install ({ projectPath }) {
   updatePackageJSON(projectPath)
   copyTemplates(projectPath)
 }

@@ -1,34 +1,30 @@
-import startDevelop from './action/start-develop'
-import runTest from './action/run-test'
-import install from './action/install'
-import buildAndDistribute from './action/build-and-distribute'
-
+import * as actions from './action'
 import plugins from './plugins'
 
 export default {
   build (options) {
-    const { webpackConfig } = plugins({ ...options, buildTarget: 'build' })
-    buildAndDistribute(webpackConfig)
+    const env = plugins({ ...options, buildTarget: 'build' })
+    actions.buildAndDistribute(env)
   },
 
   dist (options) {
-    const { webpackConfig } = plugins({ ...options, buildTarget: 'dist' })
-    buildAndDistribute(webpackConfig)
+    const env = plugins({ ...options, buildTarget: 'dist' })
+    actions.buildAndDistribute(env)
   },
 
   develop (options) {
-    const { webpackConfig } = plugins({ ...options, buildTarget: 'develop' })
-    startDevelop(webpackConfig)
+    const env = plugins({ ...options, buildTarget: 'develop' })
+    actions.startDevelop(env)
   },
 
   test (options) {
-    const { karmaConfig } = plugins({ ...options, buildTarget: 'test' })
-    runTest(karmaConfig)
+    const env = plugins({ ...options, buildTarget: 'test' })
+    actions.runTest(env)
   },
 
   install (options) {
-    const { projectPath } = plugins({ ...options, buildTarget: 'test' })
-    install(projectPath)
+    const env = plugins({ ...options, buildTarget: 'test' })
+    actions.install(env)
   }
 }
 
