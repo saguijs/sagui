@@ -14,17 +14,19 @@ export default function buildWebpackConfig ({ projectPath, saguiPath, pages = de
 
   const entry = buildEntryConfig(pages)
   const plugins = buildPluginsConfig(pages, buildTarget)
+  const failOnError = !(buildTarget === 'develop' ||
+                        buildTarget === 'test' && watch)
 
   return {
     context: projectPath,
 
     // https://webpack.github.io/docs/configuration.html#bail
     // report the first error as a hard error instead of tolerating it
-    bail: !watch,
+    bail: failOnError,
 
     eslint: {
       configFile: path.join(saguiPath, '.eslintrc'),
-      failOnError: !watch
+      failOnError
     },
 
     entry,
