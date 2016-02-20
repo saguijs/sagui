@@ -1,5 +1,5 @@
 import path from 'path'
-import { HotModuleReplacementPlugin, optimize } from 'webpack'
+import { HotModuleReplacementPlugin, DefinePlugin, optimize } from 'webpack'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import reactTransform from 'babel-plugin-react-transform'
 import postCSSModulesValues from 'postcss-modules-values'
@@ -115,7 +115,11 @@ function buildEntryConfig (pages, buildTarget) {
 }
 
 function buildPluginsConfig (pages, buildTarget) {
-  let plugins = []
+  let plugins = [
+    new DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+    })
+  ]
 
   if (buildTarget === 'develop') {
     plugins.push(new HotModuleReplacementPlugin())
