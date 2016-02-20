@@ -12,7 +12,7 @@ export default function buildWebpackConfig ({ projectPath, saguiPath, pages = de
     path.join(saguiPath, '/node_modules')
   ]
 
-  const entry = buildEntryConfig(pages)
+  const entry = buildEntryConfig(pages, buildTarget)
   const plugins = buildPluginsConfig(pages, buildTarget)
   const failOnError = !(buildTarget === 'develop' ||
                         buildTarget === 'test' && watch)
