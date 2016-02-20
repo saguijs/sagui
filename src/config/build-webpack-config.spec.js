@@ -50,9 +50,9 @@ describe('build webpack config', function () {
         config = buildWebpackConfig({ projectPath, saguiPath }, {})
       })
 
-      it('should have the entrypoints setup with the index and hot middleware', function () {
+      it('should have the entrypoints setup with the index', function () {
         expect(config.entry).eql({
-          index: ['./src/index', 'webpack-hot-middleware/client']
+          index: ['./src/index']
         })
       })
 
@@ -77,8 +77,8 @@ describe('build webpack config', function () {
 
       it('should have two distinct entrypoints', function () {
         expect(config.entry).eql({
-          index: ['./src/index', 'webpack-hot-middleware/client'],
-          demo: ['./src/demo', 'webpack-hot-middleware/client']
+          index: ['./src/index'],
+          demo: ['./src/demo']
         })
       })
 

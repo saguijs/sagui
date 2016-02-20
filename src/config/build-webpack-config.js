@@ -17,6 +17,8 @@ export default function buildWebpackConfig ({ projectPath, saguiPath, pages = de
   const failOnError = !(buildTarget === 'develop' ||
                         buildTarget === 'test' && watch)
 
+  const babel = buildBabelConfig(buildTarget)
+
   return {
     context: projectPath,
 
@@ -41,24 +43,7 @@ export default function buildWebpackConfig ({ projectPath, saguiPath, pages = de
       chunkFilename: '[id].bundle.js'
     },
 
-    babel: {
-      optional: ['runtime'],
-      stage: 0,
-      env: {
-        development: {
-          plugins: [reactTransform],
-          extra: {
-            'react-transform': {
-              transforms: [{
-                transform: 'react-transform-hmr',
-                imports: ['react'],
-                locals: ['module']
-              }]
-            }
-          }
-        }
-      }
-    },
+    babel,
 
     postcss: [
       // allow importing values (variables) between css modules
@@ -114,12 +99,16 @@ export default function buildWebpackConfig ({ projectPath, saguiPath, pages = de
   }
 }
 
-function buildEntryConfig (pages) {
+function buildEntryConfig (pages, buildTarget) {
   const hotMiddleware = 'webpack-hot-middleware/client'
 
   let entry = {}
   pages.forEach(page => {
-    entry[page] = [`./src/${page}`, hotMiddleware]
+    entry[page] = [`./src/${page}`]
+
+    if (buildTarget === 'develop') {
+      entry[page].push(hotMiddleware)
+    }
   })
 
   return entry
@@ -149,4 +138,27 @@ function buildPluginsConfig (pages, buildTarget) {
   })
 
   return plugins
+}
+
+function buildBabelConfig (buildTarget) {
+  const hmrEnv = {
+    development: {
+      plugins: [reactTransform],
+      extra: {
+        'react-transform': {
+          transforms: [{
+            transform: 'react-transform-hmr',
+            imports: ['react'],
+            locals: ['module']
+          }]
+        }
+      }
+    }
+  }
+
+  return {
+    optional: ['runtime'],
+    stage: 0,
+    env: buildTarget === 'develop' ? hmrEnv : {}
+  }
 }
