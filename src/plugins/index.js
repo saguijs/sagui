@@ -1,7 +1,7 @@
 import path from './path'
 import loadUserConfig from './load-user-config'
-import webpackConfig from './webpack-config'
-import karmaConfig from './karma-config'
+import webpackConfig from './webpack'
+import karmaConfig from './karma'
 
 /**
  * Creates a config object based on a "base" configuration
