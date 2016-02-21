@@ -3,7 +3,7 @@ import HtmlWebpackPlugin from 'html-webpack-plugin'
 const defaultPages = ['index']
 const hotMiddleware = 'webpack-hot-middleware/client'
 
-export default function pagesPlugin ({ buildTarget, pages = defaultPages }) {
+export default function ({ buildTarget, pages = defaultPages }) {
   const plugins = pages.map(page => {
     return new HtmlWebpackPlugin({
       template: `src/${page}.html`,

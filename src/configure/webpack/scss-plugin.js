@@ -1,6 +1,6 @@
 import path from 'path'
 
-export default function scssPlugin ({ projectPath }) {
+export default function ({ projectPath }) {
   return {
     module: {
       loaders: [

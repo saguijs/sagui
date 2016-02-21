@@ -1,6 +1,6 @@
 import { DefinePlugin } from 'webpack'
 
-export default function defineNodeEnvPlugin () {
+export default function () {
   return {
     plugins: [
       new DefinePlugin({

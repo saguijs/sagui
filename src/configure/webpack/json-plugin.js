@@ -1,4 +1,4 @@
-export default function jsonPlugin () {
+export default function () {
   return {
     module: {
       loaders: [

@@ -1,6 +1,6 @@
 import path from 'path'
 
-export default function eslintPlugin ({ saguiPath }) {
+export default function ({ saguiPath }) {
   return {
     eslint: {
       configFile: path.join(saguiPath, '.eslintrc')

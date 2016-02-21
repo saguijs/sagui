@@ -1,4 +1,4 @@
-export default function mediaPlugin () {
+export default function () {
   return {
     module: {
       loaders: [

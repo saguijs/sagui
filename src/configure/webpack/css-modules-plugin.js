@@ -1,6 +1,6 @@
 import postCSSModulesValues from 'postcss-modules-values'
 
-export default function cssModulesPlugin () {
+export default function () {
   return {
     postcss: [
       // allow importing values (variables) between css modules

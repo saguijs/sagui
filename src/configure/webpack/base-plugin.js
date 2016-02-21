@@ -1,7 +1,7 @@
 import { HotModuleReplacementPlugin, optimize } from 'webpack'
 import path from 'path'
 
-export default function basePlugin ({ buildTarget, projectPath, saguiPath }) {
+export default function ({ buildTarget, projectPath, saguiPath }) {
   const modulesDirectories = [
     path.join(projectPath, '/node_modules'),
     path.join(saguiPath, '/node_modules')

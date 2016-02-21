@@ -1,6 +1,6 @@
 import reactTransform from 'babel-plugin-react-transform'
 
-export default function babelPlugin ({ buildTarget }) {
+export default function ({ buildTarget }) {
   const hmrEnv = {
     development: {
       plugins: [reactTransform],
