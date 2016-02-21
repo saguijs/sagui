@@ -6,6 +6,7 @@
   "bin": {
     "sagui": "./bin/sagui"
   },
+  "main": "src/index.js",
   "scripts": {
     "test": "npm run test:lint && npm run test:unit",
     "test:lint": "eslint .",

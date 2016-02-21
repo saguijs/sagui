@@ -25,6 +25,8 @@ export default {
   install (options) {
     const env = configure(options)
     actions.install(env)
-  }
+  },
+
+  configure
 }
 
