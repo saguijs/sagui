@@ -193,16 +193,3 @@ Now, the project is set to use your development copy of Sagui. Unfortunately, yo
 ```bash
 SAGUI_LINK=true npm start
 ```
-
-## Background
-
-It is an idea I had in mind for a while, and after seeing a similar approach internally at [Klarna](https://github.com/klarna) (in the form of a global tool), I've got inspired to build a simpler (and locally installed) version of my own.
-
-The internals were based on:
-
-- [gaearon/react-transform-boilerplate](https://github.com/gaearon/react-transform-boilerplate)
-- [pirelenito/generator-react-webpack-component](https://github.com/pirelenito/generator-react-webpack-component)
-
-## Version 1.x.x
-
-The first version of this project was supposed to be a project bootstrap, you can still check its original implementation at the [1.x.x branch](https://github.com/pirelenito/sagui/tree/1.x.x).
