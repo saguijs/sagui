@@ -86,7 +86,7 @@ Then you can start writing your code inside the `src/` folder.
 
 ## Configuration
 
-The internal architecture of Sagui is [build arround plugins](https://github.com/pirelenito/sagui/tree/extend-sagui/src/plugins), each providing a set of functionalities that can be used during any of Sagui's actions.
+The internal architecture of Sagui is build arround plugins, each providing a set of functionalities that can be used during any of Sagui's actions.
 
 ### Pages
 
