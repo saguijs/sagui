@@ -7,7 +7,7 @@ import configure from './index'
 const saguiPath = join(__dirname, '../../')
 const projectPath = join(saguiPath, 'spec/fixtures/simple-project')
 
-describe('configure builder', function () {
+describe('configure', function () {
   let config
 
   describe('loaders', function () {
@@ -21,7 +21,7 @@ describe('configure builder', function () {
     })
   })
 
-  describe('extension', function () {
+  describe('webpackConfig extension', function () {
     it('should allow extending the default configuration', function () {
       const webpackConfig = {
         target: 'electron'
@@ -42,6 +42,20 @@ describe('configure builder', function () {
 
       config = configure({ projectPath, saguiPath, webpackConfig }).webpackConfig
       expect(config.devtool).equal('cheap-source-map')
+    })
+  })
+
+  describe('karmaConfig extension', function () {
+    it('should allow overwriting the default configuration', function () {
+      const defaultConfig = configure({ projectPath, saguiPath, karmaConfig }).karmaConfig
+      expect(defaultConfig.browsers).deep.eql(['PhantomJS'])
+
+      const karmaConfig = {
+        browsers: ['Chrome']
+      }
+
+      config = configure({ projectPath, saguiPath, karmaConfig }).karmaConfig
+      expect(config.browsers).deep.eql(['Chrome'])
     })
   })
 

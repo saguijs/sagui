@@ -1,7 +1,7 @@
 export default function configureKarma (config) {
-  const { projectPath, watch, webpackConfig } = config
+  const { projectPath, watch, webpackConfig, karmaConfig: userKarmaConfig } = config
 
-  const karmaConfig = {
+  const defaultKarmaConfig = {
     basePath: projectPath,
 
     frameworks: ['jasmine', 'phantomjs-shim', 'sinon'],
@@ -27,6 +27,8 @@ export default function configureKarma (config) {
 
     autoWatch: watch
   }
+
+  const karmaConfig = { ...defaultKarmaConfig, ...userKarmaConfig }
 
   return { ...config, karmaConfig }
 }
