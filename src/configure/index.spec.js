@@ -21,6 +21,18 @@ describe('configure', function () {
     })
   })
 
+  describe('disabling plugins', function () {
+    beforeEach(function () {
+      const disabledPlugins = ['webpack-json']
+      config = configure({ projectPath, saguiPath, disabledPlugins }).webpackConfig
+    })
+
+    it('should disable the specified plugins', function () {
+      const loader = config.module.loaders.find(loader => loader.loader === 'json-loader')
+      expect(loader).eql(undefined)
+    })
+  })
+
   describe('webpackConfig extension', function () {
     it('should allow extending the default configuration', function () {
       const webpackConfig = {

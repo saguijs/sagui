@@ -11,6 +11,11 @@ module.exports = {
   pages: ['index'],
 
   /**
+   * List of Sagui plugins to disable
+   */
+  disabledPlugins: [],
+
+  /**
    * Webpack configuration object
    * see: http://webpack.github.io/docs/configuration.html
    *

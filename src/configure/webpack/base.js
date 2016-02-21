@@ -1,26 +1,29 @@
 import { HotModuleReplacementPlugin, optimize } from 'webpack'
 import path from 'path'
 
-export default function ({ buildTarget, projectPath, saguiPath }) {
-  const modulesDirectories = [
-    path.join(projectPath, '/node_modules'),
-    path.join(saguiPath, '/node_modules')
-  ]
+export default {
+  name: 'base',
+  configure ({ buildTarget, projectPath, saguiPath }) {
+    const modulesDirectories = [
+      path.join(projectPath, '/node_modules'),
+      path.join(saguiPath, '/node_modules')
+    ]
 
-  return {
-    context: projectPath,
+    return {
+      context: projectPath,
 
-    devtool: 'source-map',
+      devtool: 'source-map',
 
-    plugins: buildPlugins(buildTarget),
+      plugins: buildPlugins(buildTarget),
 
-    resolve: { root: modulesDirectories },
-    resolveLoader: { modulesDirectories },
+      resolve: { root: modulesDirectories },
+      resolveLoader: { modulesDirectories },
 
-    output: {
-      path: path.join(projectPath, 'dist'),
-      filename: '[name]-[hash].js',
-      chunkFilename: '[id].bundle.js'
+      output: {
+        path: path.join(projectPath, 'dist'),
+        filename: '[name]-[hash].js',
+        chunkFilename: '[id].bundle.js'
+      }
     }
   }
 }
