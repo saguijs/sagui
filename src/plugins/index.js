@@ -2,7 +2,6 @@ import path from './path'
 import userConfig from './user-config'
 import webpackConfig from './webpack-config'
 import karmaConfig from './karma-config'
-import userExtension from './user-extension'
 
 /**
  * Passes through all the available plugins setting up the environment
@@ -15,7 +14,6 @@ export default function runPlugins (env = {}) {
     path,
     userConfig,
     webpackConfig,
-    karmaConfig,
-    userExtension
+    karmaConfig
   ].reduce((env, plugin) => plugin(env), env)
 }

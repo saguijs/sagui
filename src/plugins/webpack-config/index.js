@@ -22,10 +22,14 @@ export const plugins = [
   scss
 ]
 
-export default function run (env) {
-  const webpackConfig = plugins.reduce((webpackConfig, plugin) => {
-    return merge(webpackConfig, plugin(env))
+export default function run (config) {
+  const { webpackConfig: userWebpackConfig, ...extraConfig } = config
+
+  const defaultWebpackConfig = plugins.reduce((webpackConfig, plugin) => {
+    return merge(webpackConfig, plugin(extraConfig))
   }, {})
 
-  return { ...env, webpackConfig }
+  const webpackConfig = merge(defaultWebpackConfig, userWebpackConfig)
+
+  return { ...config, webpackConfig }
 }

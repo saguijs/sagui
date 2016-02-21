@@ -20,6 +20,30 @@ describe('configure builder', function () {
     })
   })
 
+  describe('extension', function () {
+    it('should allow extending the default configuration', function () {
+      const webpackConfig = {
+        target: 'electron'
+      }
+
+      config = configureBuilder({ projectPath, saguiPath, webpackConfig }).webpackConfig
+
+      expect(config.target).equal('electron')
+    })
+
+    it('should allow overwriting the default configuration', function () {
+      const defaultConfig = configureBuilder({ projectPath, saguiPath, webpackConfig }).webpackConfig
+      expect(defaultConfig.devtool).equal('source-map')
+
+      const webpackConfig = {
+        devtool: 'cheap-source-map'
+      }
+
+      config = configureBuilder({ projectPath, saguiPath, webpackConfig }).webpackConfig
+      expect(config.devtool).equal('cheap-source-map')
+    })
+  })
+
   describe('targets', function () {
     // see: https://github.com/webpack/karma-webpack/issues/24
     it('should not have the CommonsChunkPlugin enabled while testing', function () {
