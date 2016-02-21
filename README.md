@@ -7,28 +7,31 @@
 
 Sagui is a modern approach on build infrastructure to front-end projects. It follows an opinionated **convention over configuration** approach, providing a solid foundation so that you can focus on writing your code.
 
-It is currently build around [React](http://reactjs.com/), a but the idea is to modularize it so that it supports other types of projects.
+## Features:
 
-Right off of the bat you get:
+Sagui acts as a front-end to a bunch of amazing technology to keep your development environment always up to date.
 
-- JavaScript 2015 language support;
-- Automated testing;
+Here are some of its main features:
+
+- Build and development infrastructure via [webpack](http://webpack.github.io/);
+- Automated testing with [Jasmine](http://jasmine.github.io/) and [Karma](http://karma-runner.github.io/);
 - Linting via [JavaScript Standard Style](http://standardjs.com/);
-- Build and development infrastructure;
-- Live-reload via "hot module replacement".
+- Modern JavaScript language support with [Babel](http://babeljs.io/);
+- Live-reload with "hot module replacement", even for [React components](https://github.com/gaearon/react-transform);
+- [CSS Modules](https://github.com/css-modules);
+- [Sass lang](http://sass-lang.com/);
+- and [more...](https://github.com/pirelenito/sagui/tree/extend-sagui/src/plugins).
 
-In simpler terms, it is **your last devDependency**!
+Sagui strives to be the **last devDependency**:
 
-- A local dependency, not another global tool. It should be just `node` and `npm`;
+- [Be local](https://twitter.com/pirelenito/status/682571493092515840), not global;
+- Act in the shadows behind [npm scripts](https://docs.npmjs.com/misc/scripts);
 - No more generators;
-- No more boiletplate projects;
-- No more starter kits.
+- No more boilerplate projects;
+- No more starter kits;
+- No more updating Babel and Webpack.
 
-It acts as a frontend for [webpack](http://webpack.github.io/), [Babel](http://babeljs.io/) and [Karma](http://karma-runner.github.io/) so you don't have to worry about them.
-
-**Note**: Still early in development, and might miss something that you want.
-
-## Getting started
+## Creating a new Sagui project
 
 Create a new NPM project:
 
@@ -36,28 +39,30 @@ Create a new NPM project:
 npm init -y .
 ```
 
-Install **sagui** in the project:
+Install sagui **locally** as a development dependency:
 
 ```bash
 npm install --save-dev sagui
 ```
 
-After the install is completed, Sagui **bootstraps** its basic infrastructure:
+After the install is completed, Sagui **bootstraps** its basic infrastructure, no extra step is required.
 
 ```bash
 $ tree
 .
+├── .eslintrc
 ├── node_modules
 │   └── sagui
 ├── package.json
+├── sagui.config.js
 └── src
     ├── index.html
     ├── index.js
-    ├── index.scss
+    ├── index.css
     └── index.spec.js
 ```
 
-Start developing **using common NPM run scripts**:
+From here on, you are ready to start development. You do that by **using common NPM run scripts**:
 
 ```bash
 npm start
@@ -79,33 +84,91 @@ Sagui manages the [package.json](https://docs.npmjs.com/files/package.json) scri
 
 Then you can start writing your code inside the `src/` folder.
 
-## Pages
+## Configuration
+
+The internal architecture of Sagui is [build arround plugins](https://github.com/pirelenito/sagui/tree/extend-sagui/src/plugins), each providing a set of functionalities that can be used during any of Sagui's actions.
+
+### Pages
 
 By default, sagui will build and serve a single page for your entire application. This is your `src/index.js` and `src/index.html` files.
 
-To change it and add more pages, you can add a custom configuration in the `package.json` file:
+To change it and add more pages, you can add a custom configuration in the `sagui.config.js` file:
 
-```json
-{
-  "sagui": {
-    "pages": ["index", "demo"]
+```js
+/**
+ * Sagui configuration object
+ */
+module.exports = {
+  /**
+   * Different application entry-points
+   * Each page is a combination of a JavaScript file and a HTML file
+   *
+   * Example: 'index' -> 'index.html' and 'index.js'
+   */
+  pages: ['index', 'demo']
+}
+```
+
+And add additional `src/demo.js` and `src/demo.html` files for each page entry-point.
+
+### Custom Webpack and Karma config
+
+To overwrite and extend the default configuartion you can use the same `saqui.config.js` file to specify your custom configurations:
+
+```js
+/**
+ * Sagui configuration object
+ */
+module.exports = {
+  /**
+   * Webpack configuration object
+   * see: http://webpack.github.io/docs/configuration.html
+   *
+   * Will ovewrite and extend the default Sagui configuration
+   */
+  webpackConfig: {
+
+  },
+
+  /**
+   * Karma configuration object
+   * see: https://karma-runner.github.io/0.13/config/configuration-file.html
+   *
+   * Will overwrite and extend the default Sagui configuration
+   */
+  karmaConfig: {
+
   }
 }
 ```
 
-And add aditional `src/demo.js` and `src/demo.html` files.
+### Disable plugins
 
-## Under the hood
+If you need to disable any default behavior, it is possible via:
 
-Sagui is made possible by a bunch of pretty awesome projects:
+```js
+/**
+ * Sagui configuration object
+ */
+module.exports = {
+  /**
+   * List of Sagui plugins to disable
+   */
+  disabledPlugins: []
+}
+```
 
-- [Babel](http://babeljs.io/);
-- [Karma](http://karma-runner.github.io/);
-- [Jasmine](http://jasmine.github.io/);
-- [ESlint](http://eslint.org/);
-- [JavaScript Standard Style](http://standardjs.com/);
-- [webpack](http://webpack.github.io/);
-- [React transform](https://github.com/gaearon/react-transform).
+Default available plugins:
+
+- **webpack-babel**: ES2015 support;
+- **webpack-base**: Base paths and webpack plugins;
+- **webpack-css-modules**: [CSS Modules](https://github.com/css-modules/css-modules) support;
+- **webpack-define-node-env**: Populates `process.env.NODE_ENV`;
+- **webpack-eslint**: ESLint support via [Standard](http://standardjs.com/);
+- **webpack-json**: JSON loader;
+- **webpack-media** Basic media loading support (JPG, PNG, GIF);
+- **webpack-pages**: Add support for the above *Pages* configuration;
+- **webpack-scss**: SCSS support.
 
 ## Development
 
