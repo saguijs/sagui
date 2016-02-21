@@ -1,14 +1,14 @@
 import merge from 'webpack-merge'
 
-import babel from './babel-plugin'
-import base from './base-plugin'
-import cssModules from './css-modules-plugin'
-import defineNodeENV from './define-node-env-plugin'
-import eslint from './eslint-plugin'
-import json from './json-plugin'
-import media from './media-plugin'
-import pages from './pages-plugin'
-import scss from './scss-plugin'
+import babel from './babel'
+import base from './base'
+import cssModules from './css-modules'
+import defineNodeENV from './define-node-env'
+import eslint from './eslint'
+import json from './json'
+import media from './media'
+import pages from './pages'
+import scss from './scss'
 
 export const plugins = [
   babel,
