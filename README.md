@@ -17,14 +17,15 @@ Here are some of its main features:
 - Automated testing with [Jasmine](http://jasmine.github.io/) and [Karma](http://karma-runner.github.io/);
 - Linting via [JavaScript Standard Style](http://standardjs.com/);
 - Modern JavaScript language support with [Babel](http://babeljs.io/);
-- Live-reload with "hot module replacement", even for [React components](https://github.com/gaearon/react-transform);
+- Live-reload with "hot module replacement", specially for [React components](https://github.com/gaearon/react-transform);
 - [CSS Modules](https://github.com/css-modules);
 - [Sass lang](http://sass-lang.com/);
-- and [more...](https://github.com/pirelenito/sagui/tree/extend-sagui/src/plugins).
+- and more...
 
 Sagui strives to be the **last devDependency**:
 
 - [Be local](https://twitter.com/pirelenito/status/682571493092515840), not global;
+- [Be extensible](#custom-webpack-and-karma-config);
 - Act in the shadows behind [npm scripts](https://docs.npmjs.com/misc/scripts);
 - No more generators;
 - No more boilerplate projects;
