@@ -1,21 +1,13 @@
 import { HotModuleReplacementPlugin, optimize } from 'webpack'
-import merge from 'webpack-merge'
 import path from 'path'
 
-export default function scssPlugin (env) {
-  const {
-    buildTarget,
-    projectPath,
-    saguiPath,
-    webpackConfig: base
-  } = env
-
+export default function basePlugin ({ buildTarget, projectPath, saguiPath }) {
   const modulesDirectories = [
     path.join(projectPath, '/node_modules'),
     path.join(saguiPath, '/node_modules')
   ]
 
-  const webpackConfig = merge(base, {
+  return {
     context: projectPath,
 
     devtool: 'source-map',
@@ -30,9 +22,7 @@ export default function scssPlugin (env) {
       filename: '[name]-[hash].js',
       chunkFilename: '[id].bundle.js'
     }
-  })
-
-  return { ...env, webpackConfig }
+  }
 }
 
 function buildPlugins (buildTarget) {

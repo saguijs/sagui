@@ -1,10 +1,7 @@
-import merge from 'webpack-merge'
 import path from 'path'
 
-export default function scssPlugin (env) {
-  const { projectPath, webpackConfig: base } = env
-
-  const webpackConfig = merge(base, {
+export default function scssPlugin ({ projectPath }) {
+  return {
     module: {
       loaders: [
         {
@@ -15,7 +12,5 @@ export default function scssPlugin (env) {
         }
       ]
     }
-  })
-
-  return { ...env, webpackConfig }
+  }
 }

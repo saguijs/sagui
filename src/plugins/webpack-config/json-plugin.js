@@ -1,9 +1,5 @@
-import merge from 'webpack-merge'
-
-export default function babelPlugin (env) {
-  const { webpackConfig: base } = env
-
-  const webpackConfig = merge(base, {
+export default function jsonPlugin () {
+  return {
     module: {
       loaders: [
         {
@@ -12,7 +8,5 @@ export default function babelPlugin (env) {
         }
       ]
     }
-  })
-
-  return { ...env, webpackConfig }
+  }
 }

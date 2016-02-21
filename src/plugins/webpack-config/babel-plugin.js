@@ -1,9 +1,6 @@
-import merge from 'webpack-merge'
 import reactTransform from 'babel-plugin-react-transform'
 
-export default function babelPlugin (env) {
-  const { buildTarget, webpackConfig: base } = env
-
+export default function babelPlugin ({ buildTarget }) {
   const hmrEnv = {
     development: {
       plugins: [reactTransform],
@@ -19,7 +16,7 @@ export default function babelPlugin (env) {
     }
   }
 
-  const webpackConfig = merge(base, {
+  return {
     babel: {
       optional: ['runtime'],
       stage: 0,
@@ -35,7 +32,5 @@ export default function babelPlugin (env) {
         }
       ]
     }
-  })
-
-  return { ...env, webpackConfig }
+  }
 }

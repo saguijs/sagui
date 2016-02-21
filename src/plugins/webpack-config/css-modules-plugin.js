@@ -1,10 +1,7 @@
-import merge from 'webpack-merge'
 import postCSSModulesValues from 'postcss-modules-values'
 
-export default function scssPlugin (env) {
-  const { webpackConfig: base } = env
-
-  const webpackConfig = merge(base, {
+export default function cssModulesPlugin () {
+  return {
     postcss: [
       // allow importing values (variables) between css modules
       // see: https://github.com/css-modules/postcss-modules-values#usage
@@ -25,7 +22,5 @@ export default function scssPlugin (env) {
         }
       ]
     }
-  })
-
-  return { ...env, webpackConfig }
+  }
 }

@@ -1,12 +1,9 @@
-import merge from 'webpack-merge'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 
 const defaultPages = ['index']
 const hotMiddleware = 'webpack-hot-middleware/client'
 
-export default function babelPlugin (env) {
-  const { buildTarget, pages = defaultPages, webpackConfig: base } = env
-
+export default function pagesPlugin ({ buildTarget, pages = defaultPages }) {
   const plugins = pages.map(page => {
     return new HtmlWebpackPlugin({
       template: `src/${page}.html`,
@@ -24,7 +21,5 @@ export default function babelPlugin (env) {
     }
   })
 
-  const webpackConfig = merge(base, { plugins, entry })
-
-  return { ...env, webpackConfig }
+  return { plugins, entry }
 }
