@@ -55,7 +55,6 @@ $ tree
 │   └── sagui
 ├── package.json
 ├── sagui.config.js
-├── sagui.extension.js
 └── src
     ├── index.html
     ├── index.js
@@ -96,39 +95,80 @@ By default, sagui will build and serve a single page for your entire application
 To change it and add more pages, you can add a custom configuration in the `sagui.config.js` file:
 
 ```js
+/**
+ * Sagui configuration object
+ */
 module.exports = {
+  /**
+   * Different application entry-points
+   * Each page is a combination of a JavaScript file and a HTML file
+   *
+   * Example: 'index' -> 'index.html' and 'index.js'
+   */
   pages: ['index', 'demo']
 }
 ```
 
 And add additional `src/demo.js` and `src/demo.html` files for each page entry-point.
 
-## Extension
+### Custom Webpack and Karma config
 
-Extension is a much powerful feature, it exposes the internal environment allowing the customization of any of its internals (such as Karma and Webpack).
-
-It is recommended to leverage as much as possible the configuration driven aspect of the `sagui.config.js` file and only use the extension functionality as a fallback.
-
-Here is an example of setting up an YAML loader via the `sagui.extension.js` file:
+To overwrite and extend the default configuartion you can use the same `saqui.config.js` file to specify your custom configurations:
 
 ```js
-module.exports = function (env, merge) {
-  const webpackConfig = merge(env.webpackConfig, {
-    module: {
-      loaders: [
-        {
-          test: /\.(yaml)$/,
-          loader: 'yaml-loader'
-        }
-      ]
-    }
-  })
+/**
+ * Sagui configuration object
+ */
+module.exports = {
+  /**
+   * Webpack configuration object
+   * see: http://webpack.github.io/docs/configuration.html
+   *
+   * Will ovewrite and extend the default Sagui configuration
+   */
+  webpackConfig: {
 
-  return Object.assign({}, env, { webpackConfig: webpackConfig })
+  },
+
+  /**
+   * Karma configuration object
+   * see: https://karma-runner.github.io/0.13/config/configuration-file.html
+   *
+   * Will overwrite and extend the default Sagui configuration
+   */
+  karmaConfig: {
+
+  }
 }
 ```
 
-In contrast with configuration, the extension is executed as the **last step in the plugin chain**, allowing the user to overwrite or add any extra configuration.
+### Disable plugins
+
+If you need to disable any default behavior, it is possible via:
+
+```js
+/**
+ * Sagui configuration object
+ */
+module.exports = {
+  /**
+   * List of Sagui plugins to disable
+   */
+  disabledPlugins: []
+}
+```
+
+Default available plugins:
+
+- **webpack-babel**: ES2015 support;
+- **webpack-base**: Base paths and webpack plugins;
+- **webpack-css-modules**: [CSS Modules](https://github.com/css-modules/css-modules) support;
+- **webpack-define-node-env**: Populates `process.env.NODE_ENV`;
+- **webpack-eslint**: ESLint support via [Standard](http://standardjs.com/);
+- **webpack-json**: JSON loader;
+- **webpack-media** Basic media loading support (JPG, PNG, GIF);
+- **webpack-pages**: Add support for the above *Pages* configuration;
+- **webpack-scss**: SCSS support.
 
 ## Development
 
