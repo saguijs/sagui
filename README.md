@@ -31,8 +31,6 @@ Sagui strives to be the **last devDependency**:
 - No more starter kits;
 - No more updating Babel and Webpack.
 
-**Note**: Still early in development, and might miss something that you want.
-
 ## Creating a new Sagui project
 
 Create a new NPM project:
