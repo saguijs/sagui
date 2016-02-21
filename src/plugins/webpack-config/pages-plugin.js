@@ -5,7 +5,7 @@ const defaultPages = ['index']
 const hotMiddleware = 'webpack-hot-middleware/client'
 
 export default function babelPlugin (env) {
-  const { pages = defaultPages, webpackConfig: base } = env
+  const { buildTarget, pages = defaultPages, webpackConfig: base } = env
 
   const plugins = pages.map(page => {
     return new HtmlWebpackPlugin({
@@ -17,7 +17,11 @@ export default function babelPlugin (env) {
 
   let entry = {}
   pages.forEach(page => {
-    entry[page] = [`./src/${page}`, hotMiddleware]
+    entry[page] = [`./src/${page}`]
+
+    if (buildTarget === 'develop') {
+      entry[page].push(hotMiddleware)
+    }
   })
 
   const webpackConfig = merge(base, { plugins, entry })

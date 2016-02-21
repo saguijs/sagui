@@ -4,7 +4,6 @@ import path from 'path'
 
 export default function scssPlugin (env) {
   const {
-    watch,
     buildTarget,
     projectPath,
     saguiPath,
@@ -19,9 +18,7 @@ export default function scssPlugin (env) {
   const webpackConfig = merge(base, {
     context: projectPath,
 
-    // https://webpack.github.io/docs/configuration.html#bail
-    // report the first error as a hard error instead of tolerating it
-    bail: !watch,
+    devtool: 'source-map',
 
     plugins: buildPlugins(buildTarget),
 
