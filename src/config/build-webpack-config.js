@@ -26,6 +26,8 @@ export default function buildWebpackConfig ({ projectPath, saguiPath, pages = de
     // report the first error as a hard error instead of tolerating it
     bail: failOnError,
 
+    devtool: 'source-map',
+
     eslint: {
       configFile: path.join(saguiPath, '.eslintrc'),
       failOnError
