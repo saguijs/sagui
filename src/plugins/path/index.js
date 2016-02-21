@@ -2,8 +2,8 @@ import { join } from 'path'
 import json from '../../util/json'
 import fileExists from '../../util/file-exists'
 
-export default function (env) {
-  const path = process.env.SAGUI_LINK ? {
+export default function configurePath (config) {
+  const defaultPath = process.env.SAGUI_LINK ? {
     projectPath: process.cwd(),
     saguiPath: join(process.cwd(), 'node_modules/sagui')
   } : {
@@ -11,9 +11,11 @@ export default function (env) {
     saguiPath: join(__dirname, '../../../')
   }
 
+  // allow overwriting
+  const path = { ...defaultPath, ...config }
   sanityCheck(path)
 
-  return { ...env, ...path }
+  return path
 }
 
 function sanityCheck ({ projectPath }) {

@@ -22,7 +22,7 @@ export const plugins = [
   scss
 ]
 
-export default function run (config) {
+export default function configureWebpack (config) {
   const { webpackConfig: userWebpackConfig, ...extraConfig } = config
 
   const defaultWebpackConfig = plugins.reduce((webpackConfig, plugin) => {

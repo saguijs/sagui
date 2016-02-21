@@ -1,19 +1,19 @@
 import path from './path'
-import userConfig from './user-config'
+import loadUserConfig from './load-user-config'
 import webpackConfig from './webpack-config'
 import karmaConfig from './karma-config'
 
 /**
- * Passes through all the available plugins setting up the environment
+ * Creates a config object based on a "base" configuration
  *
- * @param  {Object} env starting environment
- * @return {Object} resulting environment constructed by the plugins
+ * @param  {Object} config base configuration
+ * @return {Object} resulting configuration constructed by the internal plugins
  */
-export default function runPlugins (env = {}) {
+export default function configure (config = {}) {
   return [
     path,
-    userConfig,
+    loadUserConfig,
     webpackConfig,
     karmaConfig
-  ].reduce((env, plugin) => plugin(env), env)
+  ].reduce((config, plugin) => plugin(config), config)
 }

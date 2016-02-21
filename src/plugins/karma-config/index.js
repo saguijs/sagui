@@ -1,5 +1,5 @@
-export default function buildKarmaConfig (env) {
-  const { projectPath, watch, webpackConfig } = env
+export default function configureKarma (config) {
+  const { projectPath, watch, webpackConfig } = config
 
   const karmaConfig = {
     basePath: projectPath,
@@ -28,5 +28,5 @@ export default function buildKarmaConfig (env) {
     autoWatch: watch
   }
 
-  return { ...env, karmaConfig }
+  return { ...config, karmaConfig }
 }

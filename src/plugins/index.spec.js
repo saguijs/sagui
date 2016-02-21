@@ -1,17 +1,18 @@
+import { join } from 'path'
 import { expect } from 'chai'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import { HotModuleReplacementPlugin, optimize } from 'webpack'
-import configureBuilder from './index'
+import configure from './index'
 
-const projectPath = ''
-const saguiPath = ''
+const saguiPath = join(__dirname, '../../')
+const projectPath = join(saguiPath, 'spec/fixtures/simple-project')
 
 describe('configure builder', function () {
   let config
 
   describe('loaders', function () {
     beforeEach(function () {
-      config = configureBuilder({ projectPath, saguiPath }).webpackConfig
+      config = configure({ projectPath, saguiPath }).webpackConfig
     })
 
     it('should have a JSON loader', function () {
@@ -26,20 +27,20 @@ describe('configure builder', function () {
         target: 'electron'
       }
 
-      config = configureBuilder({ projectPath, saguiPath, webpackConfig }).webpackConfig
+      config = configure({ projectPath, saguiPath, webpackConfig }).webpackConfig
 
       expect(config.target).equal('electron')
     })
 
     it('should allow overwriting the default configuration', function () {
-      const defaultConfig = configureBuilder({ projectPath, saguiPath, webpackConfig }).webpackConfig
+      const defaultConfig = configure({ projectPath, saguiPath, webpackConfig }).webpackConfig
       expect(defaultConfig.devtool).equal('source-map')
 
       const webpackConfig = {
         devtool: 'cheap-source-map'
       }
 
-      config = configureBuilder({ projectPath, saguiPath, webpackConfig }).webpackConfig
+      config = configure({ projectPath, saguiPath, webpackConfig }).webpackConfig
       expect(config.devtool).equal('cheap-source-map')
     })
   })
@@ -47,21 +48,21 @@ describe('configure builder', function () {
   describe('targets', function () {
     // see: https://github.com/webpack/karma-webpack/issues/24
     it('should not have the CommonsChunkPlugin enabled while testing', function () {
-      config = configureBuilder({ projectPath, saguiPath, buildTarget: 'test' }).webpackConfig
+      config = configure({ projectPath, saguiPath, buildTarget: 'test' }).webpackConfig
 
       const commons = config.plugins.filter(plugin => plugin instanceof optimize.CommonsChunkPlugin)
       expect(commons.length).equal(0)
     })
 
     it('should have the UglifyJsPlugin enabled while distributing', function () {
-      config = configureBuilder({ projectPath, saguiPath, buildTarget: 'dist' }).webpackConfig
+      config = configure({ projectPath, saguiPath, buildTarget: 'dist' }).webpackConfig
 
       const commons = config.plugins.filter(plugin => plugin instanceof optimize.UglifyJsPlugin)
       expect(commons.length).equal(1)
     })
 
     it('should have the HotModuleReplacementPlugin enabled while developing', function () {
-      config = configureBuilder({ projectPath, saguiPath, buildTarget: 'develop' }).webpackConfig
+      config = configure({ projectPath, saguiPath, buildTarget: 'develop' }).webpackConfig
 
       const commons = config.plugins.filter(plugin => plugin instanceof HotModuleReplacementPlugin)
       expect(commons.length).equal(1)
@@ -71,7 +72,7 @@ describe('configure builder', function () {
   describe('pages', function () {
     describe('default', function () {
       beforeEach(function () {
-        config = configureBuilder({ projectPath, saguiPath }).webpackConfig
+        config = configure({ projectPath, saguiPath }).webpackConfig
       })
 
       it('should have the entrypoints setup with the index', function () {
@@ -96,7 +97,7 @@ describe('configure builder', function () {
       const pages = ['index', 'demo']
 
       beforeEach(function () {
-        config = configureBuilder({ projectPath, saguiPath, pages }).webpackConfig
+        config = configure({ projectPath, saguiPath, pages }).webpackConfig
       })
 
       it('should have two distinct entrypoints', function () {
