@@ -1,6 +1,6 @@
 import program from 'commander'
 import sagui from './index'
-import { InvalidPath } from './plugins/path'
+import { InvalidPath } from './configure/path'
 import { logError, log } from './util/log'
 
 program.command('build')
