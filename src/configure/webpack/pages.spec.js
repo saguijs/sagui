@@ -29,6 +29,16 @@ describe('configure webpack pages', function () {
       expect(options.template).deep.eql('src/index.html')
     })
 
+    it('should setup the output filename of entrypoints based on the name of the page and hash', function () {
+      const webpackConfig = configure(baseConfig)
+      expect(webpackConfig.output.filename).eql('[name]-[hash].js')
+    })
+
+    it('should setup the output filename of other files based on their name and hash', function () {
+      const webpackConfig = configure(baseConfig)
+      expect(webpackConfig.output.chunkFilename).eql('[name]-[hash].chunk.js')
+    })
+
     it('should NOT have the CommonsChunkPlugin enabled (not needed)', function () {
       const webpackConfig = configure(baseConfig)
 

@@ -20,9 +20,7 @@ export default {
       resolveLoader: { modulesDirectories },
 
       output: {
-        path: path.join(projectPath, 'dist'),
-        filename: '[name]-[hash].js',
-        chunkFilename: '[id].bundle.js'
+        path: path.join(projectPath, 'dist')
       }
     }
   }

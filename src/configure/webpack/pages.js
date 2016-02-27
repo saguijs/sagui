@@ -10,7 +10,14 @@ export default {
     const entry = configureEntry(config)
     const plugins = configurePlugins(config)
 
-    return { plugins, entry }
+    return {
+      output: {
+        filename: '[name]-[hash].js',
+        chunkFilename: '[name]-[hash].chunk.js'
+      },
+      plugins,
+      entry
+    }
   }
 }
 
