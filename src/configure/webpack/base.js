@@ -10,7 +10,7 @@ export default {
     ]
 
     return {
-      context: projectPath,
+      context: path.join(projectPath, 'src'),
 
       devtool: 'source-map',
 

@@ -26,7 +26,7 @@ describe('configure webpack pages', function () {
       const webpackConfig = configure(baseConfig)
 
       expect(webpackConfig.entry).eql({
-        index: ['./src/index']
+        index: ['./index']
       })
     })
 
@@ -68,8 +68,8 @@ describe('configure webpack pages', function () {
       const webpackConfig = configure(baseConfig)
 
       expect(webpackConfig.entry).eql({
-        index: ['./src/index'],
-        demo: ['./src/demo']
+        index: ['./index'],
+        demo: ['./demo']
       })
     })
 

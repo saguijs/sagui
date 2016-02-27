@@ -13,9 +13,9 @@ describe('configure webpack library', function () {
       projectPath
     }
 
-    it('should have a single entry pointing to src/index.js', function () {
+    it('should have a single entry pointing to index.js', function () {
       const webpackConfig = configure(baseConfiguration)
-      expect(webpackConfig.entry).eql('./src/index.js')
+      expect(webpackConfig.entry).eql('./index.js')
     })
 
     it('should have the default exporting target of commonjs2 (module.exports = xxx)', function () {

@@ -1,5 +1,4 @@
 import { join } from 'path'
-import toSlugCase from 'to-slug-case'
 
 export default {
   name: 'webpack-library',
@@ -9,9 +8,9 @@ export default {
     const externals = probeExternals(projectPath)
 
     return {
-      entry: './src/index.js',
+      entry: './index.js',
       output: {
-        filename: `${toSlugCase(library)}.js`,
+        filename: 'index.js',
         libraryTarget: 'commonjs2',
         library
       },

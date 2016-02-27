@@ -26,7 +26,7 @@ function configureEntry (pages, buildTarget) {
   let entry = {}
 
   pages.forEach(page => {
-    entry[page] = [`./src/${page}`]
+    entry[page] = [`./${page}`]
 
     if (buildTarget === 'develop') {
       entry[page].push(hotMiddleware)
@@ -39,7 +39,7 @@ function configureEntry (pages, buildTarget) {
 function configurePlugins (pages, buildTarget) {
   const plugins = pages.map(page => {
     return new HtmlWebpackPlugin({
-      template: `src/${page}.html`,
+      template: `${page}.html`,
       filename: `${page}.html`,
       chunks: ['common', page]
     })
