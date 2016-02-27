@@ -94,21 +94,6 @@ describe('configure', function () {
   })
 
   describe('targets', function () {
-    // see: https://github.com/webpack/karma-webpack/issues/24
-    it('should not have the CommonsChunkPlugin enabled while testing', function () {
-      config = configure({ projectPath, saguiPath, buildTarget: 'test' }).webpackConfig
-
-      const commons = config.plugins.filter(plugin => plugin instanceof optimize.CommonsChunkPlugin)
-      expect(commons.length).equal(0)
-    })
-
-    it('should have the CommonsChunkPlugin enabled while not testing', function () {
-      config = configure({ projectPath, saguiPath, buildTarget: 'develop' }).webpackConfig
-
-      const commons = config.plugins.filter(plugin => plugin instanceof optimize.CommonsChunkPlugin)
-      expect(commons.length).equal(1)
-    })
-
     it('should have the UglifyJsPlugin enabled while distributing', function () {
       config = configure({ projectPath, saguiPath, buildTarget: 'dist' }).webpackConfig
 

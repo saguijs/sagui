@@ -165,7 +165,6 @@ Default available plugins:
 
 - **webpack-babel**: ES2015 support;
 - **webpack-base**: Base paths and webpack plugins;
-- **webpack-commons-chunk**: Generate an extra chunk, which contains common modules shared between entry points;
 - **webpack-css-modules**: [CSS Modules](https://github.com/css-modules/css-modules) support;
 - **webpack-define-node-env**: Populates `process.env.NODE_ENV`;
 - **webpack-eslint**: ESLint support via [Standard](http://standardjs.com/);

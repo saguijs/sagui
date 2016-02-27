@@ -2,7 +2,6 @@ import merge from 'webpack-merge'
 
 import babel from './babel'
 import base from './base'
-import commonsChunk from './commons-chunk'
 import cssModules from './css-modules'
 import defineNodeENV from './define-node-env'
 import eslint from './eslint'
@@ -14,7 +13,6 @@ import scss from './scss'
 export const plugins = [
   babel,
   base,
-  commonsChunk,
   cssModules,
   defineNodeENV,
   eslint,
