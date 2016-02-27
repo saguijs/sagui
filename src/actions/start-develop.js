@@ -11,6 +11,7 @@ export default function startDevelop ({ webpackConfig }) {
     publicPath: webpackConfig.output.publicPath
   }))
 
+  app.use(express.static(webpackConfig.context))
   app.use(require('webpack-hot-middleware')(compiler))
 
   app.listen(3000, '0.0.0.0', onServerStarted)
