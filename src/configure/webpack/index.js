@@ -24,7 +24,19 @@ export const plugins = [
   scss
 ]
 
-export default function configureWebpack (config) {
+export default function configureWepack (config) {
+  const { pages, ...libraryConfig } = config
+  const { library, ...pagesConfig } = config
+
+  const webpackConfig = [
+    configureWebpackNormal(pagesConfig),
+    configureWebpackNormal(libraryConfig)
+  ]
+
+  return { ...config, webpackConfig }
+}
+
+function configureWebpackNormal (config) {
   const { disabledPlugins = [], webpackConfig: userWebpackConfig, ...extraConfig } = config
 
   const defaultWebpackConfig = plugins
@@ -33,7 +45,5 @@ export default function configureWebpack (config) {
       return merge.smart(webpackConfig, plugin.configure(extraConfig))
     }, {})
 
-  const webpackConfig = merge.smart(defaultWebpackConfig, userWebpackConfig)
-
-  return { ...config, webpackConfig }
+  return merge.smart(defaultWebpackConfig, userWebpackConfig)
 }
