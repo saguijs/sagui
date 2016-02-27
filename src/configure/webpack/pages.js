@@ -1,6 +1,6 @@
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 
-const defaultPages = ['index']
+const defaultPages = []
 const hotMiddleware = 'webpack-hot-middleware/client'
 
 export default {
