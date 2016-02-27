@@ -6,9 +6,11 @@ const hotMiddleware = 'webpack-hot-middleware/client'
 
 export default {
   name: 'webpack-pages',
-  configure (config) {
-    const entry = configureEntry(config)
-    const plugins = configurePlugins(config)
+  configure ({ pages = defaultPages, buildTarget }) {
+    if (pages.length === 0) { return {} }
+
+    const entry = configureEntry(pages, buildTarget)
+    const plugins = configurePlugins(pages, buildTarget)
 
     return {
       output: {
@@ -21,7 +23,7 @@ export default {
   }
 }
 
-function configureEntry ({ pages = defaultPages, buildTarget }) {
+function configureEntry (pages, buildTarget) {
   let entry = {}
 
   pages.forEach(page => {
@@ -35,7 +37,7 @@ function configureEntry ({ pages = defaultPages, buildTarget }) {
   return entry
 }
 
-function configurePlugins ({ pages = defaultPages, buildTarget }) {
+function configurePlugins (pages, buildTarget) {
   const plugins = pages.map(page => {
     return new HtmlWebpackPlugin({
       template: `src/${page}.html`,
