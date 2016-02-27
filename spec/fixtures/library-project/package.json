@@ -1,0 +1,13 @@
+{
+  "name": "library-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "peerDependencies": {
+    "react": "^0.14.7",
+    "react-dom": "^0.14.7"
+  }
+}
