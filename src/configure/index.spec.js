@@ -9,17 +9,6 @@ const projectPath = join(saguiPath, 'spec/fixtures/simple-project')
 describe('configure', function () {
   let config
 
-  describe('loaders', function () {
-    beforeEach(function () {
-      config = configure({ projectPath, saguiPath }).webpackConfig
-    })
-
-    it('should have a JSON loader', function () {
-      const loader = config.module.loaders.find(loader => loader.loader === 'json-loader')
-      expect(loader.test).eql(/\.(json)$/)
-    })
-  })
-
   describe('disabling plugins', function () {
     beforeEach(function () {
       const disabledPlugins = ['webpack-json']
