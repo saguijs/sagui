@@ -1,12 +1,9 @@
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import { optimize } from 'webpack'
 
-const defaultPages = []
-const hotMiddleware = 'webpack-hot-middleware/client'
-
 export default {
   name: 'webpack-pages',
-  configure ({ pages = defaultPages, buildTarget }) {
+  configure ({ pages = [], buildTarget }) {
     if (pages.length === 0) { return {} }
 
     const entry = configureEntry(pages, buildTarget)
@@ -24,6 +21,8 @@ export default {
 }
 
 function configureEntry (pages, buildTarget) {
+  const hotMiddleware = 'webpack-hot-middleware/client'
+
   let entry = {}
 
   pages.forEach(page => {
