@@ -9,7 +9,7 @@ export default {
       entry: './src/index.js',
       output: {
         filename: `${toSlugCase(library)}.js`,
-        libraryTarget: 'umd',
+        libraryTarget: 'commonjs2',
         library
       }
     }
