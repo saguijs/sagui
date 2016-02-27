@@ -55,6 +55,29 @@ describe('configure', function () {
       config = configure({ projectPath, saguiPath, webpackConfig }).webpackConfig
       expect(config.devtool).equal('cheap-source-map')
     })
+
+    it('should allow changing a loader based on the test (webpack-merge feature)', function () {
+      // disable the default exclude behavior of Babel
+      const webpackConfig = {
+        module: {
+          loaders: [
+            {
+              test: /\.jsx?$/,
+              loader: 'babel'
+            }
+          ]
+        }
+      }
+
+      config = configure({ projectPath, saguiPath, webpackConfig }).webpackConfig
+      const loaders = config.module.loaders.filter((loader) => loader.loader === 'babel')
+
+      // should change the existing loader, not add another
+      expect(loaders.length).equal(1)
+
+      // should remove the exclude attribute as requested
+      expect(loaders[0].exclude).undefined
+    })
   })
 
   describe('karmaConfig extension', function () {
