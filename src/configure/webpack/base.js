@@ -17,11 +17,7 @@ export default {
       plugins: buildPlugins(buildTarget),
 
       resolve: { root: modulesDirectories },
-      resolveLoader: { modulesDirectories },
-
-      output: {
-        path: path.join(projectPath, 'dist')
-      }
+      resolveLoader: { modulesDirectories }
     }
   }
 }

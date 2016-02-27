@@ -28,6 +28,11 @@ describe('configure webpack library', function () {
       expect(webpackConfig.output.filename).eql('index.js')
     })
 
+    it('should have the output path configured as the lib folder', function () {
+      const webpackConfig = configure(baseConfiguration)
+      expect(webpackConfig.output.path).eql(join(projectPath, 'lib'))
+    })
+
     describe('externals', function () {
       it('should infer the externals based on the packgage.json peerDependencies', function () {
         const webpackConfig = configure(baseConfiguration)

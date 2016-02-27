@@ -4,6 +4,8 @@ import { expect } from 'chai'
 
 import { configure } from './pages'
 
+const projectPath = '/tmp/projec-path'
+
 describe('configure webpack pages', function () {
   describe('undefined pages', function () {
     it('should return an empty configuration', function () {
@@ -20,7 +22,12 @@ describe('configure webpack pages', function () {
   })
 
   describe('single page', function () {
-    const baseConfig = { pages: ['index'] }
+    const baseConfig = { pages: ['index'], projectPath }
+
+    it('should have the output path configured as the dist folder', function () {
+      const webpackConfig = configure(baseConfig)
+      expect(webpackConfig.output.path).eql('/tmp/projec-path/dist')
+    })
 
     it('should have the entrypoints setup with the index', function () {
       const webpackConfig = configure(baseConfig)
@@ -62,7 +69,7 @@ describe('configure webpack pages', function () {
   })
 
   describe('multiple pages', function () {
-    const baseConfig = { pages: ['index', 'demo'] }
+    const baseConfig = { pages: ['index', 'demo'], projectPath }
 
     it('should have two distinct entrypoints', function () {
       const webpackConfig = configure(baseConfig)

@@ -1,9 +1,10 @@
 import HtmlWebpackPlugin from 'html-webpack-plugin'
+import { join } from 'path'
 import { optimize } from 'webpack'
 
 export default {
   name: 'webpack-pages',
-  configure ({ pages = [], buildTarget }) {
+  configure ({ pages = [], buildTarget, projectPath }) {
     if (pages.length === 0) { return {} }
 
     const entry = configureEntry(pages, buildTarget)
@@ -11,6 +12,7 @@ export default {
 
     return {
       output: {
+        path: join(projectPath, 'dist'),
         filename: '[name]-[hash].js',
         chunkFilename: '[name]-[hash].chunk.js'
       },
