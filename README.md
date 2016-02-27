@@ -143,6 +143,8 @@ module.exports = {
 }
 ```
 
+For more information on how the merging of Webpack configurations work check [webpack-merge](https://github.com/survivejs/webpack-merge).
+
 ### Disable plugins
 
 If you need to disable any default behavior, it is possible via:
