@@ -5,14 +5,14 @@ import { expect } from 'chai'
 import { configure } from './pages'
 
 describe('configure webpack pages', function () {
-  describe('undefined', function () {
+  describe('undefined pages', function () {
     it('should return an empty configuration', function () {
       const webpackConfig = configure({})
       expect(webpackConfig).eql({})
     })
   })
 
-  describe('empty pages array', function () {
+  describe('empty pages', function () {
     it('should return an empty configuration', function () {
       const webpackConfig = configure({ pages: [] })
       expect(webpackConfig).eql({})
