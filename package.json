@@ -10,7 +10,7 @@
   "scripts": {
     "test": "npm run test:lint && npm run test:unit",
     "test:lint": "eslint .",
-    "test:unit": "mocha --compilers js:babel/register --recursive --reporter spec ./src/**/*.spec.js",
+    "test:unit": "mocha --compilers js:babel/register --recursive --reporter spec ./src",
     "test:unit-watch": "npm run test:unit -- --watch",
     "test:integration": "./bin/test-integration.sh",
     "prepublish": "npm prune && npm test",
