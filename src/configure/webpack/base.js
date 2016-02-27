@@ -39,9 +39,5 @@ function buildPlugins (buildTarget) {
     plugins.push(new optimize.UglifyJsPlugin())
   }
 
-  if (buildTarget !== 'test') {
-    plugins.push(new optimize.CommonsChunkPlugin({ name: 'common' }))
-  }
-
   return plugins
 }
