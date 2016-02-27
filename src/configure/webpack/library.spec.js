@@ -23,9 +23,9 @@ describe('configure webpack library', function () {
       expect(webpackConfig.output.libraryTarget).eql('commonjs2')
     })
 
-    it('should have the filename as the slug of the name', function () {
+    it('should have the filename as index.js', function () {
       const webpackConfig = configure(baseConfiguration)
-      expect(webpackConfig.output.filename).eql('fancy-library.js')
+      expect(webpackConfig.output.filename).eql('index.js')
     })
 
     describe('externals', function () {

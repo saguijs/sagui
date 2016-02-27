@@ -40,7 +40,7 @@ describe('configure webpack pages', function () {
 
       expect(options.chunks).deep.eql([ 'common', 'index' ])
       expect(options.filename).deep.eql('index.html')
-      expect(options.template).deep.eql('src/index.html')
+      expect(options.template).deep.eql('index.html')
     })
 
     it('should setup the output filename of entrypoints based on the name of the page and hash', function () {
@@ -82,12 +82,12 @@ describe('configure webpack pages', function () {
       const firstOptions = html[0].options
       expect(firstOptions.chunks).deep.eql([ 'common', 'index' ])
       expect(firstOptions.filename).deep.eql('index.html')
-      expect(firstOptions.template).deep.eql('src/index.html')
+      expect(firstOptions.template).deep.eql('index.html')
 
       const secondOptions = html[1].options
       expect(secondOptions.chunks).deep.eql([ 'common', 'demo' ])
       expect(secondOptions.filename).deep.eql('demo.html')
-      expect(secondOptions.template).deep.eql('src/demo.html')
+      expect(secondOptions.template).deep.eql('demo.html')
     })
 
     it('should have the CommonsChunkPlugin enabled', function () {
