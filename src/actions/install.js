@@ -1,5 +1,7 @@
 import { join, basename } from 'path'
+import { logWarning } from '../util/log'
 import json from '../util/json'
+import fileExists from '../util/file-exists'
 import template from 'template-directory'
 
 const templatePath = join(__dirname, '../../template')
@@ -13,8 +15,14 @@ const defaultScripts = {
 }
 
 export default function install ({ projectPath }) {
+  const srcFolder = join(projectPath, 'src')
+
   updatePackageJSON(projectPath)
-  copyTemplates(projectPath)
+  if (!fileExists(srcFolder)) {
+    copyTemplates(projectPath)
+  } else {
+    logWarning('skipped installing files in src, folder already exists')
+  }
 }
 
 function copyTemplates (projectPath) {
