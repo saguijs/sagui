@@ -7,6 +7,8 @@
 
 Sagui is a modern approach on build infrastructure to front-end projects. It follows an opinionated **convention over configuration** approach, providing a solid foundation so that you can focus on writing your code.
 
+This branch is home of the upcoming 4.x release. For the current stable release, please refer to: [3.x.x](https://github.com/pirelenito/sagui/tree/3.x.x).
+
 ## Features:
 
 Sagui acts as a front-end to a bunch of amazing technology to keep your development environment always up to date.
