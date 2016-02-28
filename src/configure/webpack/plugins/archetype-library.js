@@ -1,7 +1,7 @@
 import { join } from 'path'
 
 export default {
-  name: 'webpack-library',
+  name: 'webpack-archetype-library',
   configure ({ library, projectPath, buildTarget }) {
     if (!library) { return {} }
 

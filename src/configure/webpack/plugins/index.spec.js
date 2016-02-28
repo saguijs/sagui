@@ -1,9 +1,8 @@
 import { join } from 'path'
 import { expect } from 'chai'
-import { HotModuleReplacementPlugin, optimize } from 'webpack'
 import configure from './index'
 
-const saguiPath = join(__dirname, '../../')
+const saguiPath = join(__dirname, '../../../../')
 const projectPath = join(saguiPath, 'spec/fixtures/simple-project')
 
 describe('configure', function () {
@@ -12,7 +11,7 @@ describe('configure', function () {
   describe('disabling plugins', function () {
     beforeEach(function () {
       const disabledPlugins = ['webpack-json']
-      config = configure({ projectPath, saguiPath, disabledPlugins }).webpackConfig
+      config = configure({ projectPath, saguiPath, disabledPlugins })
     })
 
     it('should disable the specified plugins', function () {
@@ -27,20 +26,20 @@ describe('configure', function () {
         target: 'electron'
       }
 
-      config = configure({ projectPath, saguiPath, webpackConfig }).webpackConfig
+      config = configure({ projectPath, saguiPath, webpackConfig })
 
       expect(config.target).equal('electron')
     })
 
     it('should allow overwriting the default configuration', function () {
-      const defaultConfig = configure({ projectPath, saguiPath, webpackConfig }).webpackConfig
+      const defaultConfig = configure({ projectPath, saguiPath, webpackConfig })
       expect(defaultConfig.devtool).equal('source-map')
 
       const webpackConfig = {
         devtool: 'cheap-source-map'
       }
 
-      config = configure({ projectPath, saguiPath, webpackConfig }).webpackConfig
+      config = configure({ projectPath, saguiPath, webpackConfig })
       expect(config.devtool).equal('cheap-source-map')
     })
 
@@ -57,7 +56,7 @@ describe('configure', function () {
         }
       }
 
-      config = configure({ projectPath, saguiPath, webpackConfig }).webpackConfig
+      config = configure({ projectPath, saguiPath, webpackConfig })
       const loaders = config.module.loaders.filter((loader) => loader.loader === 'babel')
 
       // should change the existing loader, not add another
@@ -65,36 +64,6 @@ describe('configure', function () {
 
       // should remove the exclude attribute as requested
       expect(loaders[0].exclude).undefined
-    })
-  })
-
-  describe('karmaConfig extension', function () {
-    it('should allow overwriting the default configuration', function () {
-      const defaultConfig = configure({ projectPath, saguiPath, karmaConfig }).karmaConfig
-      expect(defaultConfig.browsers).deep.eql(['PhantomJS'])
-
-      const karmaConfig = {
-        browsers: ['Chrome']
-      }
-
-      config = configure({ projectPath, saguiPath, karmaConfig }).karmaConfig
-      expect(config.browsers).deep.eql(['Chrome'])
-    })
-  })
-
-  describe('targets', function () {
-    it('should have the UglifyJsPlugin enabled while distributing', function () {
-      config = configure({ projectPath, saguiPath, buildTarget: 'dist' }).webpackConfig
-
-      const commons = config.plugins.filter(plugin => plugin instanceof optimize.UglifyJsPlugin)
-      expect(commons.length).equal(1)
-    })
-
-    it('should have the HotModuleReplacementPlugin enabled while developing', function () {
-      config = configure({ projectPath, saguiPath, buildTarget: 'develop' }).webpackConfig
-
-      const commons = config.plugins.filter(plugin => plugin instanceof HotModuleReplacementPlugin)
-      expect(commons.length).equal(1)
     })
   })
 })

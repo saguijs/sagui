@@ -163,6 +163,8 @@ module.exports = {
 
 Default available plugins:
 
+- **webpack-archetype-pages**: Add support for the above *Pages* configuration;
+- **webpack-archetype-library**: Add support for the above *Library* configuration;
 - **webpack-babel**: ES2015 support;
 - **webpack-base**: Base paths and webpack plugins;
 - **webpack-css-modules**: [CSS Modules](https://github.com/css-modules/css-modules) support;
@@ -170,7 +172,6 @@ Default available plugins:
 - **webpack-eslint**: ESLint support via [Standard](http://standardjs.com/);
 - **webpack-json**: JSON loader;
 - **webpack-media** Basic media loading support (JPG, PNG, GIF);
-- **webpack-pages**: Add support for the above *Pages* configuration;
 - **webpack-scss**: SCSS support.
 
 ## Development

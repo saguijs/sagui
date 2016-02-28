@@ -1,8 +1,8 @@
 import { join } from 'path'
 import { expect } from 'chai'
-import { configure } from './library'
+import { configure } from './archetype-library'
 
-const saguiPath = join(__dirname, '../../../')
+const saguiPath = join(__dirname, '../../../../')
 const projectPath = join(saguiPath, 'spec/fixtures/library-project')
 const projectWithoutPeerDependenciesPath = join(saguiPath, 'spec/fixtures/library-project-without-peer-dependencies')
 

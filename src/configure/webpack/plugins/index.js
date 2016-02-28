@@ -1,26 +1,26 @@
 import merge from 'webpack-merge'
 
+import archetypeLibrary from './archetype-library'
+import archetypePages from './archetype-pages'
 import babel from './babel'
 import base from './base'
 import cssModules from './css-modules'
 import defineNodeENV from './define-node-env'
 import eslint from './eslint'
 import json from './json'
-import library from './library'
 import media from './media'
-import pages from './pages'
 import scss from './scss'
 
 export const plugins = [
+  archetypeLibrary,
+  archetypePages,
   babel,
   base,
   cssModules,
   defineNodeENV,
   eslint,
   json,
-  library,
   media,
-  pages,
   scss
 ]
 

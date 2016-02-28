@@ -3,7 +3,7 @@ import { join } from 'path'
 import { optimize } from 'webpack'
 
 export default {
-  name: 'webpack-pages',
+  name: 'webpack-archetype-pages',
   configure ({ pages = [], buildTarget, projectPath }) {
     if (pages.length === 0) { return {} }
 
