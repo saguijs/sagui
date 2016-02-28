@@ -11,11 +11,9 @@ export default function (webpackConfig) {
   const compiler = webpack(webpackConfig)
 
   app.use(require('webpack-dev-middleware')(compiler, {
-    noInfo: true,
-    publicPath: webpackConfig.output.publicPath
+    noInfo: true
   }))
 
-  app.use(express.static(webpackConfig.context))
   app.use(require('webpack-hot-middleware')(compiler))
 
   return app
