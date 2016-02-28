@@ -23,6 +23,11 @@ describe('configure webpack library', function () {
       expect(webpackConfig.output.libraryTarget).eql('commonjs2')
     })
 
+    it('should NOT SET the exporting target if buildTarget is test (a browser wont understand commonjs modules)', function () {
+      const webpackConfig = configure({ ...baseConfiguration, buildTarget: 'test' })
+      expect(webpackConfig.output.libraryTarget).undefined
+    })
+
     it('should have the filename as index.js', function () {
       const webpackConfig = configure(baseConfiguration)
       expect(webpackConfig.output.filename).eql('index.js')

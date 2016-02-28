@@ -2,7 +2,7 @@ import { join } from 'path'
 
 export default {
   name: 'webpack-library',
-  configure ({ library, projectPath }) {
+  configure ({ library, projectPath, buildTarget }) {
     if (!library) { return {} }
 
     const externals = probeExternals(projectPath)
@@ -12,7 +12,7 @@ export default {
       output: {
         path: join(projectPath, 'lib'),
         filename: 'index.js',
-        libraryTarget: 'commonjs2',
+        libraryTarget: buildTarget === 'test' ? undefined : 'commonjs2',
         library
       },
       externals
