@@ -34,7 +34,14 @@ Sagui strives to be the **last devDependency**:
 
 ## Creating a new Sagui project
 
-Create a new NPM project:
+Start by creating a new folder to hold your project files:
+
+```bash
+mkdir my-project
+cd my-project
+```
+
+Then, create a new NPM project (while at the project's folder):
 
 ```bash
 npm init -y .
