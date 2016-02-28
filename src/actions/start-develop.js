@@ -1,18 +1,8 @@
-import express from 'express'
-import webpack from 'webpack'
 import { logError, log } from '../util/log'
+import server from '../server'
 
 export default function startDevelop ({ webpackConfig }) {
-  const app = express()
-  const compiler = webpack(webpackConfig)
-
-  app.use(require('webpack-dev-middleware')(compiler, {
-    noInfo: true,
-    publicPath: webpackConfig.output.publicPath
-  }))
-
-  app.use(require('webpack-hot-middleware')(compiler))
-
+  const app = server(webpackConfig)
   app.listen(3000, '0.0.0.0', onServerStarted)
 }
 
