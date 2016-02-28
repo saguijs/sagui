@@ -17,7 +17,10 @@ export default function configureKarma (config) {
       'src/**/*.spec.*': ['webpack']
     },
 
-    webpack: webpackConfig,
+    // there can be multiple archetypes configured
+    // and althought harmless to have them all running the tests
+    // it is not required and only produces double execution
+    webpack: webpackConfig[0],
 
     webpackServer: {
       noInfo: true
