@@ -1,3 +1,15 @@
+### Master
+
+There were two small breaking changes, making this upgrade very simple:
+
+- The plugin `webpack-pages` was renamed to `webpack-archetype-pages`;
+- We changed the way webpack configurations are merged, now loaders are merged toghether if their test name matches.
+
+Changes:
+
+- [#36](https://github.com/pirelenito/sagui/pull/36) Add support to Library projects;
+- [#35](https://github.com/pirelenito/sagui/pull/35) Use webpack-merge smart feature to allow modifying an existing loader.
+
 ### v3.0.0 (2016-02-21)
 
 Allow extensibility and customization of webpack and karma configurations.
