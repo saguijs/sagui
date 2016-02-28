@@ -1,5 +1,5 @@
 import webpack from 'webpack'
-import { logError } from '../util/log'
+import { log } from '../util/log'
 
 export default function buildAndDistribute ({ webpackConfig, watch }) {
   const compiler = webpack(webpackConfig)
@@ -27,6 +27,6 @@ export default function buildAndDistribute ({ webpackConfig, watch }) {
       return
     }
 
-    logError('Build complete, files written in the dist/ folder.')
+    log('Build complete, files written in the dist/ folder.')
   })
 }
