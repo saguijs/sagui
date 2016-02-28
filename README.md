@@ -87,11 +87,15 @@ Then you can start writing your code inside the `src/` folder.
 
 ## Configuration
 
-The internal architecture of Sagui is build arround plugins, each providing a set of functionalities that can be used during any of Sagui's actions.
+Sagui supports two major project archetypes: **Pages** and **Library**.
+
+They are not mutually exclusive, so it is possible to create a library project and use the pages archetype to create some demo pages for example.
 
 ### Pages
 
-By default, sagui will build and serve a single page for your entire application. This is your `src/index.js` and `src/index.html` files.
+This is a static application that can be built around multiple pages. Each page is the combination of an `html` and a `js` files.
+
+It is the default bootstrapped configuration, and it will build and serve a single page for your entire application based on the `src/index.js` and `src/index.html` files.
 
 To change it and add more pages, you can add a custom configuration in the `sagui.config.js` file:
 
@@ -106,11 +110,65 @@ module.exports = {
    *
    * Example: 'index' -> 'index.html' and 'index.js'
    */
-  pages: ['index', 'demo']
+  pages: ['index', 'about']
 }
 ```
 
-And add additional `src/demo.js` and `src/demo.html` files for each page entry-point.
+And add additional `src/about.js` and `src/about.html` files for each page entry-point.
+
+### Library
+
+Create reusable libraries that can be shared across applications. Sagui will take care of the build process so that external libraries are not bundled and that you have a CommonJS module as the output.
+
+To get started, the only required configuration is the library name:
+
+```js
+/**
+ * Sagui configuration object
+ */
+module.exports = {
+  /**
+   * Library name (usually in CammelCase)
+   * Example: ReactTransition, ReactRedux
+   */
+  library: 'ReactTransition'
+}
+```
+
+#### External dependencies
+
+Sagui will use the the **peerDependencies** information in the project's `package.json` to determine what are the external dependencies of the library that shouldn't be bundled in the final build.
+
+## Advanced configuration
+
+The internal architecture of Sagui is build arround plugins, each providing a set of functionalities that can be used during any of Sagui's actions.
+
+If you need to disable any default behavior, it is possible via:
+
+```js
+/**
+ * Sagui configuration object
+ */
+module.exports = {
+  /**
+   * List of Sagui plugins to disable
+   */
+  disabledPlugins: []
+}
+```
+
+Default available plugins:
+
+- **webpack-archetype-pages**: Add support for the above *Pages* configuration;
+- **webpack-archetype-library**: Add support for the above *Library* configuration;
+- **webpack-babel**: ES2015 support;
+- **webpack-base**: Base paths and webpack plugins;
+- **webpack-css-modules**: [CSS Modules](https://github.com/css-modules/css-modules) support;
+- **webpack-define-node-env**: Populates `process.env.NODE_ENV`;
+- **webpack-eslint**: ESLint support via [Standard](http://standardjs.com/);
+- **webpack-json**: JSON loader;
+- **webpack-media** Basic media loading support (JPG, PNG, GIF);
+- **webpack-scss**: SCSS support.
 
 ### <a name="custom-webpack-and-karma-config"></a> Custom Webpack and Karma config
 
@@ -144,35 +202,6 @@ module.exports = {
 ```
 
 For more information on how the merging of Webpack configurations work check [webpack-merge](https://github.com/survivejs/webpack-merge).
-
-### Disable plugins
-
-If you need to disable any default behavior, it is possible via:
-
-```js
-/**
- * Sagui configuration object
- */
-module.exports = {
-  /**
-   * List of Sagui plugins to disable
-   */
-  disabledPlugins: []
-}
-```
-
-Default available plugins:
-
-- **webpack-archetype-pages**: Add support for the above *Pages* configuration;
-- **webpack-archetype-library**: Add support for the above *Library* configuration;
-- **webpack-babel**: ES2015 support;
-- **webpack-base**: Base paths and webpack plugins;
-- **webpack-css-modules**: [CSS Modules](https://github.com/css-modules/css-modules) support;
-- **webpack-define-node-env**: Populates `process.env.NODE_ENV`;
-- **webpack-eslint**: ESLint support via [Standard](http://standardjs.com/);
-- **webpack-json**: JSON loader;
-- **webpack-media** Basic media loading support (JPG, PNG, GIF);
-- **webpack-scss**: SCSS support.
 
 ## Development
 
