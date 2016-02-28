@@ -33,9 +33,9 @@ describe('configure webpack library', function () {
       expect(webpackConfig.output.filename).eql('index.js')
     })
 
-    it('should have the output path configured as the lib folder', function () {
+    it('should have the output path configured as the dist folder', function () {
       const webpackConfig = configure(baseConfiguration)
-      expect(webpackConfig.output.path).eql(join(projectPath, 'lib'))
+      expect(webpackConfig.output.path).eql(join(projectPath, 'dist'))
     })
 
     describe('externals', function () {
