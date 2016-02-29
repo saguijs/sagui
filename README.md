@@ -52,7 +52,7 @@ npm init -y .
 Install sagui **locally** as a development dependency:
 
 ```bash
-npm install --save-dev sagui@>4.0.0-rc
+npm install --save-dev sagui@'>4.0.0-rc'
 ```
 
 After the install is completed, Sagui **bootstraps** its basic infrastructure, no extra step is required.
