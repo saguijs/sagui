@@ -10,6 +10,11 @@ Changes:
 - [#36](https://github.com/pirelenito/sagui/pull/36) Add support to Library projects;
 - [#35](https://github.com/pirelenito/sagui/pull/35) Use webpack-merge smart feature to allow modifying an existing loader.
 
+### v3.2.0 (2016-03-03)
+
+- [#47](https://github.com/pirelenito/sagui/pull/47) Bootstrap gitignore file
+- [#49](https://github.com/pirelenito/sagui/pull/49) Resolve .jsx modules by default
+
 ### v3.0.0 (2016-02-21)
 
 Allow extensibility and customization of webpack and karma configurations.
