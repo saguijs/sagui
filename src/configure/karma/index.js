@@ -4,7 +4,7 @@ export default function configureKarma (config) {
   const defaultKarmaConfig = {
     basePath: projectPath,
 
-    frameworks: ['jasmine', 'phantomjs-shim', 'sinon'],
+    frameworks: ['jasmine', 'sinon'],
     browsers: ['PhantomJS'],
     reporters: ['mocha'],
 
