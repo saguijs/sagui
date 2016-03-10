@@ -10,6 +10,10 @@ Changes:
 - [#36](https://github.com/pirelenito/sagui/pull/36) Add support to Library projects;
 - [#35](https://github.com/pirelenito/sagui/pull/35) Use webpack-merge smart feature to allow modifying an existing loader.
 
+### v3.3.0 (2016-03-10)
+
+- [#51](https://github.com/pirelenito/sagui/pull/51) Nicer test reporter with "karma mocha reporter"
+
 ### v3.2.0 (2016-03-03)
 
 - [#47](https://github.com/pirelenito/sagui/pull/47) Bootstrap gitignore file
