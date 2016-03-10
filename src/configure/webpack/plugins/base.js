@@ -10,20 +10,14 @@ export default {
     ]
 
     return {
-      context: projectPath,
+      context: path.join(projectPath, 'src'),
 
       devtool: 'source-map',
 
       plugins: buildPlugins(buildTarget),
 
       resolve: { root: modulesDirectories },
-      resolveLoader: { modulesDirectories },
-
-      output: {
-        path: path.join(projectPath, 'dist'),
-        filename: '[name]-[hash].js',
-        chunkFilename: '[id].bundle.js'
-      }
+      resolveLoader: { modulesDirectories }
     }
   }
 }
@@ -37,10 +31,6 @@ function buildPlugins (buildTarget) {
 
   if (buildTarget === 'dist') {
     plugins.push(new optimize.UglifyJsPlugin())
-  }
-
-  if (buildTarget !== 'test') {
-    plugins.push(new optimize.CommonsChunkPlugin({ name: 'common' }))
   }
 
   return plugins

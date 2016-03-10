@@ -1,6 +1,6 @@
 {
   "name": "sagui",
-  "version": "3.1.0",
+  "version": "4.0.0-rc.1",
   "description": "Your last devDependency",
   "preferGlobal": false,
   "bin": {
@@ -10,7 +10,7 @@
   "scripts": {
     "test": "npm run test:lint && npm run test:unit",
     "test:lint": "eslint .",
-    "test:unit": "mocha --compilers js:babel/register --recursive --reporter spec ./src/**/*.spec.js",
+    "test:unit": "mocha --compilers js:babel/register --recursive --reporter spec ./src",
     "test:unit-watch": "npm run test:unit -- --watch",
     "test:integration": "./bin/test-integration.sh",
     "prepublish": "npm prune && npm test",
@@ -50,6 +50,7 @@
     "json-loader": "^0.5.4",
     "karma": "^0.13.10",
     "karma-jasmine": "^0.3.6",
+    "karma-mocha-reporter": "^2.0.0",
     "karma-phantomjs-launcher": "1.0.0",
     "karma-sinon": "^1.0.4",
     "karma-webpack": "^1.7.0",
