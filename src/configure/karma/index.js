@@ -6,6 +6,7 @@ export default function configureKarma (config) {
 
     frameworks: ['jasmine', 'phantomjs-shim', 'sinon'],
     browsers: ['PhantomJS'],
+    reporters: ['mocha'],
 
     files: [
       'src/**/*.spec.*',
