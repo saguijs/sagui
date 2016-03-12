@@ -181,7 +181,7 @@ Default available plugins:
 
 ### <a name="custom-webpack-and-karma-config"></a> Custom Webpack and Karma config
 
-To overwrite and extend the default configuartion you can use the same `saqui.config.js` file to specify your custom configurations:
+To overwrite and extend the default configuration you can use the same `saqui.config.js` file to specify your custom configurations:
 
 ```js
 /**
