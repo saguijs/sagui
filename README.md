@@ -84,15 +84,17 @@ Run the tests!
 npm test
 ```
 
-Sagui manages the [package.json](https://docs.npmjs.com/files/package.json) scripts for you, creating additional tasks such as:
+Sagui manages the [package.json](https://docs.npmjs.com/files/package.json) scripts for you:
 
-- `npm run sagui:test`
-- `npm run sagui:test-watch`
-- `npm run sagui:develop`
-- `npm run sagui:build`
-- `npm run sagui:dist`
+- `npm run start`
+- `npm run test`
+- `npm run test-watch`
+- `npm run build`
+- `npm run dist`
 
 Then you can start writing your code inside the `src/` folder.
+
+**Customize:** *Sagui doesn't overwrite any changes you make to the `package.json` file.*
 
 ## Configuration
 
