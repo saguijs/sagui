@@ -2,21 +2,21 @@ import HtmlWebpackPlugin from 'html-webpack-plugin'
 import { optimize } from 'webpack'
 import { expect } from 'chai'
 
-import { configure } from './archetype-pages'
+import plugin from './archetype-pages'
 
 const projectPath = '/tmp/projec-path'
 
 describe('configure webpack pages', function () {
   describe('undefined pages', function () {
     it('should return an empty configuration', function () {
-      const webpackConfig = configure({})
+      const webpackConfig = plugin.configure({})
       expect(webpackConfig).eql({})
     })
   })
 
   describe('empty pages', function () {
     it('should return an empty configuration', function () {
-      const webpackConfig = configure({ pages: [] })
+      const webpackConfig = plugin.configure({ pages: [] })
       expect(webpackConfig).eql({})
     })
   })
@@ -25,12 +25,12 @@ describe('configure webpack pages', function () {
     const baseConfig = { pages: ['index'], projectPath }
 
     it('should have the output path configured as the dist folder', function () {
-      const webpackConfig = configure(baseConfig)
+      const webpackConfig = plugin.configure(baseConfig)
       expect(webpackConfig.output.path).eql('/tmp/projec-path/dist')
     })
 
     it('should have the entrypoints setup with the index', function () {
-      const webpackConfig = configure(baseConfig)
+      const webpackConfig = plugin.configure(baseConfig)
 
       expect(webpackConfig.entry).eql({
         index: ['./index']
@@ -38,7 +38,7 @@ describe('configure webpack pages', function () {
     })
 
     it('should have a plugin seting up the HTML template', function () {
-      const webpackConfig = configure(baseConfig)
+      const webpackConfig = plugin.configure(baseConfig)
 
       const html = webpackConfig.plugins.filter(plugin => plugin instanceof HtmlWebpackPlugin)
       expect(html.length).equal(1)
@@ -51,17 +51,17 @@ describe('configure webpack pages', function () {
     })
 
     it('should setup the output filename of entrypoints based on the name of the page and hash', function () {
-      const webpackConfig = configure(baseConfig)
+      const webpackConfig = plugin.configure(baseConfig)
       expect(webpackConfig.output.filename).eql('[name]-[hash].js')
     })
 
     it('should setup the output filename of other files based on their name and hash', function () {
-      const webpackConfig = configure(baseConfig)
+      const webpackConfig = plugin.configure(baseConfig)
       expect(webpackConfig.output.chunkFilename).eql('[name]-[hash].chunk.js')
     })
 
     it('should NOT have the CommonsChunkPlugin enabled (not needed)', function () {
-      const webpackConfig = configure(baseConfig)
+      const webpackConfig = plugin.configure(baseConfig)
 
       const commons = webpackConfig.plugins.filter(plugin => plugin instanceof optimize.CommonsChunkPlugin)
       expect(commons.length).equal(0)
@@ -72,7 +72,7 @@ describe('configure webpack pages', function () {
     const baseConfig = { pages: ['index', 'demo'], projectPath }
 
     it('should have two distinct entrypoints', function () {
-      const webpackConfig = configure(baseConfig)
+      const webpackConfig = plugin.configure(baseConfig)
 
       expect(webpackConfig.entry).eql({
         index: ['./index'],
@@ -81,7 +81,7 @@ describe('configure webpack pages', function () {
     })
 
     it('should have a plugin seting up the HTML template for each chunk', function () {
-      const webpackConfig = configure(baseConfig)
+      const webpackConfig = plugin.configure(baseConfig)
 
       const html = webpackConfig.plugins.filter(plugin => plugin instanceof HtmlWebpackPlugin)
       expect(html.length).equal(2)
@@ -98,7 +98,7 @@ describe('configure webpack pages', function () {
     })
 
     it('should have the CommonsChunkPlugin enabled', function () {
-      const webpackConfig = configure(baseConfig)
+      const webpackConfig = plugin.configure(baseConfig)
 
       const commons = webpackConfig.plugins.filter(plugin => plugin instanceof optimize.CommonsChunkPlugin)
       expect(commons.length).equal(1)
@@ -107,7 +107,7 @@ describe('configure webpack pages', function () {
     // Karma has an issue with the CommonsChunk plugin
     // see: https://github.com/webpack/karma-webpack/issues/24
     it('should NOT have the CommonsChunkPlugin enabled if buildTarget is test (breaks Karma)', function () {
-      const webpackConfig = configure({ ...baseConfig, buildTarget: 'test' })
+      const webpackConfig = plugin.configure({ ...baseConfig, buildTarget: 'test' })
 
       const commons = webpackConfig.plugins.filter(plugin => plugin instanceof optimize.CommonsChunkPlugin)
       expect(commons.length).equal(0)

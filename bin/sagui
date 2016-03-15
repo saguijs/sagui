@@ -1,9 +1,22 @@
 #!/usr/bin/env node
 
+try {
+  /**
+   * Try loading the compiled code.
+   */
+  require('../lib/cli').default(process.argv)
+} catch (e) {
+  /**
+   * If the compiled code is not available,
+   * use the babel-registery and load from source.
+   */
+  try {
+    require('babel-register')({
+      only: /(sagui\/src)/
+    })
 
-require('babel/register')({
-  only: /(sagui\/src)/
-})
-
-
-require('../src/cli')(process.argv)
+    require('../src/cli').default(process.argv)
+  } catch (e) {
+    throw e
+  }
+}
