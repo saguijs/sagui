@@ -33,7 +33,6 @@
   },
   "homepage": "https://github.com/pirelenito/sagui#readme",
   "dependencies": {
-    "babel-cli": "^6.6.5",
     "babel-core": "^6.4.0",
     "babel-eslint": "^4.1.8",
     "babel-loader": "^6.2.1",
@@ -83,5 +82,8 @@
     "webpack-dev-middleware": "^1.2.0",
     "webpack-hot-middleware": "^2.0.0",
     "webpack-merge": "^0.7.3"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.6.5"
   }
 }
