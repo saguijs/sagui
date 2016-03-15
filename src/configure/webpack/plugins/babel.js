@@ -1,4 +1,7 @@
 import reactTransform from 'babel-plugin-react-transform'
+import es2015 from 'babel-preset-es2015'
+import stage0 from 'babel-preset-stage-0'
+import react from 'babel-preset-react'
 
 export default {
   name: 'webpack-babel',
@@ -20,8 +23,7 @@ export default {
 
     return {
       babel: {
-        optional: ['runtime'],
-        stage: 0,
+        presets: [es2015, stage0, react],
         env: buildTarget === 'develop' ? hmrEnv : {}
       },
 
