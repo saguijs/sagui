@@ -5,10 +5,12 @@ There were two small breaking changes, making this upgrade very simple:
 - The plugin `webpack-pages` was renamed to `webpack-archetype-pages`;
 - We changed the way webpack configurations are merged, now loaders are merged toghether if their test name matches.
 
-Changes:
+Major changes:
 
 - [#36](https://github.com/pirelenito/sagui/pull/36) Add support to Library projects;
 - [#35](https://github.com/pirelenito/sagui/pull/35) Use webpack-merge smart feature to allow modifying an existing loader.
+- [#41](https://github.com/pirelenito/sagui/issues/41) Add support for more browsers to run tests
+- [#22](https://github.com/pirelenito/sagui/issues/22) Upgrade to Babel 6
 
 ### v3.3.0 (2016-03-10)
 
