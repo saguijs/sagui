@@ -18,7 +18,7 @@
     "test:lint": "eslint .",
     "test:unit": "mocha --compilers js:babel-register --recursive --reporter spec ./src",
     "test:unit-watch": "npm run test:unit -- --watch",
-    "test:integration": "./bin/test-integration.sh",
+    "test:integration": "npm run build && ./bin/test-integration.sh",
     "prepublish": "npm prune && npm test && npm run build",
     "postinstall": "./bin/sagui install"
   },
