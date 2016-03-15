@@ -44,6 +44,11 @@ describe('configure webpack library', function () {
         expect(webpackConfig.externals).eql(['react', 'react-dom'])
       })
 
+      it('should have an empty externals if the buildTarget is test', function () {
+        const webpackConfig = configure({ ...baseConfiguration, buildTarget: 'test' })
+        expect(webpackConfig.externals).eql([])
+      })
+
       it('should have an empty externals if the packgage.json does not have a peerDependencies', function () {
         const webpackConfig = configure({ ...baseConfiguration, projectPath: projectWithoutPeerDependenciesPath })
         expect(webpackConfig.externals).eql([])

@@ -15,7 +15,7 @@ export default {
         libraryTarget: buildTarget === 'test' ? undefined : 'commonjs2',
         library
       },
-      externals
+      externals: buildTarget === 'test' ? [] : externals
     }
   }
 }
