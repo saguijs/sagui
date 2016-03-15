@@ -1,9 +1,11 @@
 #!/usr/bin/env node
 
+if (process.env.SAGUI_LINK === 'true') {
+  require('babel-register')({
+    only: /(sagui\/src)/
+  })
 
-require('babel/register')({
-  only: /(sagui\/src)/
-})
-
-
-require('../src/cli')(process.argv)
+  require('../src/cli').default(process.argv)
+} else {
+  require('../lib/cli').default(process.argv)
+}

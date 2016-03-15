@@ -6,14 +6,20 @@
   "bin": {
     "sagui": "./bin/sagui"
   },
-  "main": "src/index.js",
+  "main": "lib/index.js",
+  "files": [
+    "bin",
+    "lib",
+    "template"
+  ],
   "scripts": {
+    "build": "babel src --out-dir lib",
     "test": "npm run test:lint && npm run test:unit",
     "test:lint": "eslint .",
     "test:unit": "mocha --compilers js:babel-register --recursive --reporter spec ./src",
     "test:unit-watch": "npm run test:unit -- --watch",
     "test:integration": "./bin/test-integration.sh",
-    "prepublish": "npm prune && npm test",
+    "prepublish": "npm prune && npm test && npm run build",
     "postinstall": "./bin/sagui install"
   },
   "repository": {
