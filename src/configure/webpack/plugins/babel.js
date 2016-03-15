@@ -8,16 +8,15 @@ export default {
   configure ({ buildTarget }) {
     const hmrEnv = {
       development: {
-        plugins: [reactTransform],
-        extra: {
-          'react-transform': {
+        plugins: [
+          [reactTransform, {
             transforms: [{
               transform: 'react-transform-hmr',
               imports: ['react'],
               locals: ['module']
             }]
-          }
-        }
+          }]
+        ]
       }
     }
 
