@@ -45,7 +45,7 @@ describe('configure webpack library', function () {
       })
 
       it('should have an empty externals if the buildTarget is test', function () {
-        const webpackConfig = configure({ ...baseConfiguration, buildTarget: 'test' })
+        const webpackConfig = plugin.configure({ ...baseConfiguration, buildTarget: 'test' })
         expect(webpackConfig.externals).eql([])
       })
 
