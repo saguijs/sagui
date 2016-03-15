@@ -10,7 +10,8 @@
   "files": [
     "bin",
     "lib",
-    "template"
+    "template",
+    ".eslintrc"
   ],
   "scripts": {
     "build": "rm -rf lib && babel src --out-dir lib --ignore *.spec.js",
