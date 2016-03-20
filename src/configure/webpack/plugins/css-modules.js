@@ -1,8 +1,16 @@
 import postCSSModulesValues from 'postcss-modules-values'
+import ExtractTextPlugin from 'extract-text-webpack-plugin'
 
 export default {
   name: 'webpack-css-modules',
-  configure () {
+  configure ({ pages = [] }) {
+    const extractCSS = new ExtractTextPlugin('[name]-[hash]-[ext].css')
+    const hasPages = pages.length > 0
+
+    // importLoaders: use the following postcss-loader in @import statements
+    // modules: enable css-mobules
+    const baseLoader = 'css-loader?modules&sourceMap&importLoaders=1&localIdentName=[name]-[hash]!postcss-loader'
+
     return {
       postcss: [
         // allow importing values (variables) between css modules
@@ -14,16 +22,12 @@ export default {
         loaders: [
           {
             test: /\.css$/,
-            loaders: [
-              'style-loader',
-              // importLoaders: use the following postcss-loader in @import statements
-              // modules: enable css-mobules
-              'css-loader?modules&sourceMap&importLoaders=1&localIdentName=[name]-[hash]',
-              'postcss-loader'
-            ]
+            loader: hasPages ? extractCSS.extract(baseLoader) : `style!${baseLoader}`
           }
         ]
-      }
+      },
+
+      plugins: hasPages ? [extractCSS] : []
     }
   }
 }
