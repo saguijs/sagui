@@ -177,10 +177,10 @@ Default available plugins:
 - **webpack-css-modules**: [CSS Modules](https://github.com/css-modules/css-modules) support;
 - **webpack-define-node-env**: Populates `process.env.NODE_ENV`;
 - **webpack-eslint**: ESLint support via [Standard](http://standardjs.com/);
-- **webpack-image** Basic image loading support (JPG, PNG, GIF);
+- **webpack-image** Images loading support (`jpg`, `jpeg`, `png`, `gif`);
 - **webpack-json**: JSON loader;
 - **webpack-scss**: SCSS support;
-- **webpack-videos**: Video loading support (`ogg`, `mp4`).
+- **webpack-videos**: Videos loading support (`ogg`, `mp4`).
 
 ### <a name="custom-webpack-and-karma-config"></a> Custom Webpack and Karma config
 
