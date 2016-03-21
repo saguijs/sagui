@@ -1,11 +1,11 @@
 export default {
-  name: 'webpack-media',
+  name: 'webpack-images',
   configure () {
     return {
       module: {
         loaders: [
           {
-            test: /\.(png|jpg|gif)$/,
+            test: /\.(png|jpg|jpeg|gif)$/,
             loader: 'url-loader?limit=8192&name=[name]-[hash].[ext]'
           }
         ]
