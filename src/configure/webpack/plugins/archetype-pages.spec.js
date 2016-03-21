@@ -40,7 +40,7 @@ describe('configure webpack pages', function () {
     it('should have a plugin seting up the HTML template', function () {
       const webpackConfig = plugin.configure(baseConfig)
 
-      const html = webpackConfig.plugins.filter(plugin => plugin instanceof HtmlWebpackPlugin)
+      const html = webpackConfig.plugins.filter((plugin) => plugin instanceof HtmlWebpackPlugin)
       expect(html.length).equal(1)
 
       const options = html[0].options
@@ -63,7 +63,7 @@ describe('configure webpack pages', function () {
     it('should NOT have the CommonsChunkPlugin enabled (not needed)', function () {
       const webpackConfig = plugin.configure(baseConfig)
 
-      const commons = webpackConfig.plugins.filter(plugin => plugin instanceof optimize.CommonsChunkPlugin)
+      const commons = webpackConfig.plugins.filter((plugin) => plugin instanceof optimize.CommonsChunkPlugin)
       expect(commons.length).equal(0)
     })
   })
@@ -83,7 +83,7 @@ describe('configure webpack pages', function () {
     it('should have a plugin seting up the HTML template for each chunk', function () {
       const webpackConfig = plugin.configure(baseConfig)
 
-      const html = webpackConfig.plugins.filter(plugin => plugin instanceof HtmlWebpackPlugin)
+      const html = webpackConfig.plugins.filter((plugin) => plugin instanceof HtmlWebpackPlugin)
       expect(html.length).equal(2)
 
       const firstOptions = html[0].options
@@ -100,7 +100,7 @@ describe('configure webpack pages', function () {
     it('should have the CommonsChunkPlugin enabled', function () {
       const webpackConfig = plugin.configure(baseConfig)
 
-      const commons = webpackConfig.plugins.filter(plugin => plugin instanceof optimize.CommonsChunkPlugin)
+      const commons = webpackConfig.plugins.filter((plugin) => plugin instanceof optimize.CommonsChunkPlugin)
       expect(commons.length).equal(1)
     })
 
@@ -109,7 +109,7 @@ describe('configure webpack pages', function () {
     it('should NOT have the CommonsChunkPlugin enabled if buildTarget is test (breaks Karma)', function () {
       const webpackConfig = plugin.configure({ ...baseConfig, buildTarget: 'test' })
 
-      const commons = webpackConfig.plugins.filter(plugin => plugin instanceof optimize.CommonsChunkPlugin)
+      const commons = webpackConfig.plugins.filter((plugin) => plugin instanceof optimize.CommonsChunkPlugin)
       expect(commons.length).equal(0)
     })
   })

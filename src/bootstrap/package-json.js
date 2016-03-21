@@ -33,7 +33,7 @@ function withoutDefaults (scripts) {
   }
 
   return Object.keys(scripts)
-    .filter(key => !scripts[key] !== '' && scripts[key] !== defaultScripts[key])
+    .filter((key) => !scripts[key] !== '' && scripts[key] !== defaultScripts[key])
     .reduce((filtered, key) => {
       return {
         ...filtered,
