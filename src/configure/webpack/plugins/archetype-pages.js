@@ -27,7 +27,7 @@ function configureEntry (pages, buildTarget) {
 
   let entry = {}
 
-  pages.forEach(page => {
+  pages.forEach((page) => {
     entry[page] = [`./${page}`]
 
     if (buildTarget === 'develop') {
@@ -39,7 +39,7 @@ function configureEntry (pages, buildTarget) {
 }
 
 function configurePlugins (pages, buildTarget) {
-  const plugins = pages.map(page => {
+  const plugins = pages.map((page) => {
     return new HtmlWebpackPlugin({
       template: `${page}.html`,
       filename: `${page}.html`,

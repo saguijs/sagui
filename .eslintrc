@@ -1,7 +1,7 @@
 {
   "extends": [
     "eslint-config-standard",
-    "eslint-config-standard-react",
+    "eslint-config-standard-jsx",
   ],
 
   "env": {
