@@ -179,7 +179,8 @@ Default available plugins:
 - **webpack-eslint**: ESLint support via [Standard](http://standardjs.com/);
 - **webpack-image** Basic image loading support (JPG, PNG, GIF);
 - **webpack-json**: JSON loader;
-- **webpack-scss**: SCSS support.
+- **webpack-scss**: SCSS support;
+- **webpack-videos**: Video loading support (`ogg`, `mp4`).
 
 ### <a name="custom-webpack-and-karma-config"></a> Custom Webpack and Karma config
 

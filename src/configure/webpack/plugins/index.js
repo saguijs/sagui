@@ -10,6 +10,7 @@ import eslint from './eslint'
 import images from './images'
 import json from './json'
 import scss from './scss'
+import videos from './videos'
 
 export const plugins = [
   archetypeLibrary,
@@ -21,7 +22,8 @@ export const plugins = [
   eslint,
   images,
   json,
-  scss
+  scss,
+  videos
 ]
 
 export default function configureWebpackPlugins (config) {
