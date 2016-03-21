@@ -13,6 +13,7 @@ Major changes:
 - [#22](https://github.com/pirelenito/sagui/issues/22) Upgrade to Babel 6
 - [#62](https://github.com/pirelenito/sagui/pull/62) Build CSS files as separated artefacts while using pages
 - [#64](https://github.com/pirelenito/sagui/pull/64) Update to Standard 5.1
+- [#66](https://github.com/pirelenito/sagui/pull/66) Refactor media loaders and add support to videos
 
 ### v3.3.0 (2016-03-10)
 
