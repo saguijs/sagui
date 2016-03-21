@@ -7,7 +7,7 @@ const saguiScripts = {
   'test-watch': 'sagui test --watch',
   'develop': 'sagui develop',
   'build': 'sagui build',
-  'dist': 'sagui dist'
+  'dist': 'NODE_ENV=production sagui dist'
 }
 
 export default function (projectPath) {
