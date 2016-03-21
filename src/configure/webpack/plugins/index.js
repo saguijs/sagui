@@ -28,7 +28,7 @@ export default function configureWebpackPlugins (config) {
   const { disabledPlugins = [], webpackConfig: userWebpackConfig, ...extraConfig } = config
 
   const defaultWebpackConfig = plugins
-    .filter(plugin => disabledPlugins.indexOf(plugin.name) === -1)
+    .filter((plugin) => disabledPlugins.indexOf(plugin.name) === -1)
     .reduce((webpackConfig, plugin) => {
       return merge.smart(webpackConfig, plugin.configure(extraConfig))
     }, {})

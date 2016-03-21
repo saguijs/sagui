@@ -15,7 +15,7 @@ describe('configure', function () {
     })
 
     it('should disable the specified plugins', function () {
-      const loader = config.module.loaders.find(loader => loader.loader === 'json-loader')
+      const loader = config.module.loaders.find((loader) => loader.loader === 'json-loader')
       expect(loader).eql(undefined)
     })
   })
