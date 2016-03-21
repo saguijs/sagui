@@ -7,8 +7,8 @@ import base from './base'
 import cssModules from './css-modules'
 import defineNodeENV from './define-node-env'
 import eslint from './eslint'
+import images from './images'
 import json from './json'
-import media from './media'
 import scss from './scss'
 
 export const plugins = [
@@ -19,8 +19,8 @@ export const plugins = [
   cssModules,
   defineNodeENV,
   eslint,
+  images,
   json,
-  media,
   scss
 ]
 

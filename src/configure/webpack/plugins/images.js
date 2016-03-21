@@ -1,5 +1,5 @@
 export default {
-  name: 'webpack-media',
+  name: 'webpack-images',
   configure () {
     return {
       module: {

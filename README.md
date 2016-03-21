@@ -170,15 +170,15 @@ module.exports = {
 
 Default available plugins:
 
-- **webpack-archetype-pages**: Add support for the above *Pages* configuration;
 - **webpack-archetype-library**: Add support for the above *Library* configuration;
+- **webpack-archetype-pages**: Add support for the above *Pages* configuration;
 - **webpack-babel**: ES2015 support;
 - **webpack-base**: Base paths and webpack plugins;
 - **webpack-css-modules**: [CSS Modules](https://github.com/css-modules/css-modules) support;
 - **webpack-define-node-env**: Populates `process.env.NODE_ENV`;
 - **webpack-eslint**: ESLint support via [Standard](http://standardjs.com/);
+- **webpack-image** Basic image loading support (JPG, PNG, GIF);
 - **webpack-json**: JSON loader;
-- **webpack-media** Basic media loading support (JPG, PNG, GIF);
 - **webpack-scss**: SCSS support.
 
 ### <a name="custom-webpack-and-karma-config"></a> Custom Webpack and Karma config
