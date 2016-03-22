@@ -2,7 +2,7 @@
 <html lang="en-us">
   <head>
     <meta charset="UTF-8">
-    <title>Sagui - Modern front-end development made easy</title>
+    <title>Sagui by pirelenito</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
@@ -12,8 +12,10 @@
   <body>
     <section class="page-header">
       <h1 class="project-name">Sagui</h1>
-      <h2 class="project-tagline">Modern front-end development made easy</h2>
+      <h2 class="project-tagline">Configuration-free modern frontend development</h2>
       <a href="https://github.com/pirelenito/sagui" class="btn">View on GitHub</a>
+      <a href="https://github.com/pirelenito/sagui/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/pirelenito/sagui/tarball/master" class="btn">Download .tar.gz</a>
     </section>
 
     <section class="main-content">
@@ -25,58 +27,32 @@
 <a href="https://github.com/feross/standard"><img src="https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat" alt="js-standard-style"></a>
 <a href="https://codeclimate.com/github/pirelenito/sagui"><img src="https://codeclimate.com/github/pirelenito/sagui/badges/gpa.svg" alt="Code Climate"></a></p>
 
-<p>Sagui is a modern approach on build infrastructure to front-end projects. It follows an opinionated <strong>convention over configuration</strong> approach, providing a solid foundation so that you can focus on writing your code.</p>
+<p>Sagui is <strong>the single development dependency</strong> that bundles <a href="http://webpack.github.io/">Webpack</a>, <a href="http://babeljs.io/">Babel</a>, <a href="http://karma-runner.github.io/">Karma</a> and <a href="http://standardjs.com/">Standard</a> in a hassle-free, easily updatable setup.</p>
+
+<p>It follows an opinionated convention over configuration approach, providing a solid foundation so that you can focus on writing your code.</p>
 
 <h2>
-<a id="features" class="anchor" href="#features" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Features:</h2>
+<a id="get-started" class="anchor" href="#get-started" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Get started!</h2>
 
-<p>Sagui acts as a front-end to a bunch of amazing technology to keep your development environment always up to date.</p>
+<p>Start by creating a new folder to hold your project files:</p>
 
-<p>Here are some of its main features:</p>
+<div class="highlight highlight-source-shell"><pre>mkdir my-project
+<span class="pl-c1">cd</span> my-project</pre></div>
 
-<ul>
-<li>Build and development infrastructure via <a href="http://webpack.github.io/">webpack</a>;</li>
-<li>Automated testing with <a href="http://jasmine.github.io/">Jasmine</a> and <a href="http://karma-runner.github.io/">Karma</a>;</li>
-<li>Linting via <a href="http://standardjs.com/">JavaScript Standard Style</a>;</li>
-<li>Modern JavaScript language support with <a href="http://babeljs.io/">Babel</a>;</li>
-<li>Live-reload with "hot module replacement", specially for <a href="https://github.com/gaearon/react-transform">React components</a>;</li>
-<li>
-<a href="https://github.com/css-modules">CSS Modules</a>;</li>
-<li>
-<a href="http://sass-lang.com/">Sass lang</a>;</li>
-<li>and more...</li>
-</ul>
+<p>Then, create a <a href="https://docs.npmjs.com/cli/init">new NPM project</a> (while at the project's folder):</p>
 
-<p>Sagui strives to be the <strong>last devDependency</strong>:</p>
+<div class="highlight highlight-source-shell"><pre>npm init -y</pre></div>
 
-<ul>
-<li>
-<a href="https://twitter.com/pirelenito/status/682571493092515840">Be local</a>, not global;</li>
-<li>
-<a href="#custom-webpack-and-karma-config">Be extensible</a>;</li>
-<li>Act in the shadows behind <a href="https://docs.npmjs.com/misc/scripts">npm scripts</a>;</li>
-<li>No more generators;</li>
-<li>No more boilerplate projects;</li>
-<li>No more starter kits;</li>
-<li>No more updating Babel and Webpack.</li>
-</ul>
-
-<h2>
-<a id="creating-a-new-sagui-project" class="anchor" href="#creating-a-new-sagui-project" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Creating a new Sagui project</h2>
-
-<p>Create a new NPM project:</p>
-
-<div class="highlight highlight-source-shell"><pre>npm init -y <span class="pl-c1">.</span></pre></div>
-
-<p>Install sagui <strong>locally</strong> as a development dependency:</p>
+<p><strong>Install Sagui locally</strong> as a development dependency:</p>
 
 <div class="highlight highlight-source-shell"><pre>npm install --save-dev sagui</pre></div>
 
-<p>After the install is completed, Sagui <strong>bootstraps</strong> its basic infrastructure, no extra step is required.</p>
+<p>After the install is completed, Sagui <strong>bootstraps</strong> its basic infrastructure, <strong>no extra step is required</strong>.</p>
 
 <div class="highlight highlight-source-shell"><pre>$ tree
 <span class="pl-c1">.</span>
 ├── .eslintrc
+├── .gitignore
 ├── node_modules
 │   └── sagui
 ├── package.json
@@ -91,31 +67,57 @@
 
 <div class="highlight highlight-source-shell"><pre>npm start</pre></div>
 
-<p>Run the tests!</p>
+<p>To run the tests, simply:</p>
 
 <div class="highlight highlight-source-shell"><pre>npm <span class="pl-c1">test</span></pre></div>
 
-<p>Sagui manages the <a href="https://docs.npmjs.com/files/package.json">package.json</a> scripts for you, creating additional tasks such as:</p>
+<p>Sagui manages the <a href="https://docs.npmjs.com/files/package.json">package.json</a> scripts for you:</p>
 
 <ul>
-<li><code>npm run sagui:test</code></li>
-<li><code>npm run sagui:test-watch</code></li>
-<li><code>npm run sagui:develop</code></li>
-<li><code>npm run sagui:build</code></li>
-<li><code>npm run sagui:dist</code></li>
+<li>
+<code>npm run start</code>: spins a development server</li>
+<li>
+<code>npm run test</code>: run the tests</li>
+<li>
+<code>npm run test-watch</code> run a test watcher (great for development)</li>
+<li>
+<code>npm run build</code>: build a development version of the project</li>
+<li>
+<code>npm run dist</code>: build a production ready version of the project</li>
 </ul>
 
 <p>Then you can start writing your code inside the <code>src/</code> folder.</p>
 
 <h2>
+<a id="features" class="anchor" href="#features" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Features:</h2>
+
+<p>Sagui acts as a front-end to a bunch of amazing technology to keep your development environment always up to date:</p>
+
+<ul>
+<li>
+<a href="http://babeljs.io/docs/learn-es2015/">JavaScript 2015</a>;</li>
+<li>
+<a href="https://github.com/css-modules">CSS Modules</a> or <a href="http://sass-lang.com/">Sass lang</a>;</li>
+<li>
+<a href="http://webpack.github.io/">Webpack loaders</a> for common media files</li>
+<li>Automated testing with <a href="http://jasmine.github.io/">Jasmine</a> and <a href="http://karma-runner.github.io/">Karma</a>;</li>
+<li>Linting via <a href="http://standardjs.com/">JavaScript Standard Style</a>;</li>
+<li>Live-reload with <strong>hot module replacement</strong> (<a href="https://github.com/gaearon/react-transform">React components</a>);</li>
+</ul>
+
+<h2>
 <a id="configuration" class="anchor" href="#configuration" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Configuration</h2>
 
-<p>The internal architecture of Sagui is build arround plugins, each providing a set of functionalities that can be used during any of Sagui's actions.</p>
+<p>Sagui supports two major project archetypes: <strong>Pages</strong> and <strong>Library</strong>.</p>
+
+<p>They are not mutually exclusive, so it is possible to create a library project and use the pages archetype to create some demo pages for example.</p>
 
 <h3>
 <a id="pages" class="anchor" href="#pages" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Pages</h3>
 
-<p>By default, sagui will build and serve a single page for your entire application. This is your <code>src/index.js</code> and <code>src/index.html</code> files.</p>
+<p>This is a static application that can be built around multiple pages. Each page is the combination of an <code>html</code> and a <code>js</code> files.</p>
+
+<p><strong>It is the default bootstrapped configuration</strong>, and it will build and serve a single page for your entire application based on the <code>src/index.js</code> and <code>src/index.html</code> files.</p>
 
 <p>To change it and add more pages, you can add a custom configuration in the <code>sagui.config.js</code> file:</p>
 
@@ -129,15 +131,87 @@
 <span class="pl-c">   *</span>
 <span class="pl-c">   * Example: 'index' -&gt; 'index.html' and 'index.js'</span>
 <span class="pl-c">   */</span>
-  pages<span class="pl-k">:</span> [<span class="pl-s"><span class="pl-pds">'</span>index<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>demo<span class="pl-pds">'</span></span>]
+  pages<span class="pl-k">:</span> [<span class="pl-s"><span class="pl-pds">'</span>index<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>about<span class="pl-pds">'</span></span>]
 }</pre></div>
 
-<p>And add additional <code>src/demo.js</code> and <code>src/demo.html</code> files for each page entry-point.</p>
+<p>And add additional <code>src/about.js</code> and <code>src/about.html</code> files for each page entry-point.</p>
+
+<h3>
+<a id="library" class="anchor" href="#library" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Library</h3>
+
+<p>Create reusable libraries that can be shared across applications. Sagui will take care of the build process so that external libraries are not bundled and that you have a CommonJS module as the output.</p>
+
+<p>To get started, the only required configuration is the library name:</p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-c">/**</span>
+<span class="pl-c"> * Sagui configuration object</span>
+<span class="pl-c"> */</span>
+<span class="pl-c1">module</span>.<span class="pl-smi">exports</span> <span class="pl-k">=</span> {
+  <span class="pl-c">/**</span>
+<span class="pl-c">   * Library name (usually in CammelCase)</span>
+<span class="pl-c">   * Example: ReactTransition, ReactRedux</span>
+<span class="pl-c">   */</span>
+  library<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>ReactTransition<span class="pl-pds">'</span></span>
+}</pre></div>
+
+<h4>
+<a id="external-dependencies" class="anchor" href="#external-dependencies" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>External dependencies</h4>
+
+<p>Sagui will use the the <strong>peerDependencies</strong> information in the project's <code>package.json</code> to determine what are the external dependencies of the library that shouldn't be bundled in the final build.</p>
+
+<h2>
+<a id="advanced-configuration" class="anchor" href="#advanced-configuration" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Advanced configuration</h2>
+
+<p>Webpack and Karma have both very rich plugins ecosystems already, so it is no point trying to create a new ecosystem on top of them. Instead Sagui aims to provide a good set of default configurations that can be easily disabled or extended.</p>
+
+<h3>
+<a id="disabling-a-default-behavior" class="anchor" href="#disabling-a-default-behavior" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Disabling a default behavior</h3>
+
+<p>The internal architecture of Sagui is build around plugins, each providing a set of functionalities that can be used during any of Sagui's actions.</p>
+
+<p>If you need to disable any default behavior, it is possible via:</p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-c">/**</span>
+<span class="pl-c"> * Sagui configuration object</span>
+<span class="pl-c"> */</span>
+<span class="pl-c1">module</span>.<span class="pl-smi">exports</span> <span class="pl-k">=</span> {
+  <span class="pl-c">/**</span>
+<span class="pl-c">   * List of Sagui plugins to disable</span>
+<span class="pl-c">   */</span>
+  disabledPlugins<span class="pl-k">:</span> [<span class="pl-s"><span class="pl-pds">'</span>webpack-scss<span class="pl-pds">'</span></span>]
+}</pre></div>
+
+<p>Here is the complete list of existing Sagui plugins:</p>
+
+<ul>
+<li>
+<strong>webpack-archetype-library</strong>: Add support for the above <em>Library</em> configuration;</li>
+<li>
+<strong>webpack-archetype-pages</strong>: Add support for the above <em>Pages</em> configuration;</li>
+<li>
+<strong>webpack-babel</strong>: ES2015 support;</li>
+<li>
+<strong>webpack-base</strong>: Base paths and webpack plugins;</li>
+<li>
+<strong>webpack-css-modules</strong>: <a href="https://github.com/css-modules/css-modules">CSS Modules</a> support;</li>
+<li>
+<strong>webpack-define-node-env</strong>: Populates <code>process.env.NODE_ENV</code>;</li>
+<li>
+<strong>webpack-eslint</strong>: ESLint support via <a href="http://standardjs.com/">Standard</a>;</li>
+<li>
+<strong>webpack-images</strong> Images loading support (<code>jpg</code>, <code>jpeg</code>, <code>png</code>, <code>gif</code>);</li>
+<li>
+<strong>webpack-json</strong>: JSON loader;</li>
+<li>
+<strong>webpack-scss</strong>: SCSS support;</li>
+<li>
+<strong>webpack-videos</strong>: Videos loading support (<code>ogg</code>, <code>mp4</code>).</li>
+</ul>
 
 <h3>
 <a id="-custom-webpack-and-karma-config" class="anchor" href="#-custom-webpack-and-karma-config" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a name="custom-webpack-and-karma-config"></a> Custom Webpack and Karma config</h3>
 
-<p>To overwrite and extend the default configuartion you can use the same <code>saqui.config.js</code> file to specify your custom configurations:</p>
+<p>To overwrite and extend the default configuration you can use the same <code>saqui.config.js</code> file to specify your custom configurations:</p>
 
 <div class="highlight highlight-source-js"><pre><span class="pl-c">/**</span>
 <span class="pl-c"> * Sagui configuration object</span>
@@ -164,52 +238,32 @@
   }
 }</pre></div>
 
-<h3>
-<a id="disable-plugins" class="anchor" href="#disable-plugins" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Disable plugins</h3>
-
-<p>If you need to disable any default behavior, it is possible via:</p>
+<p>As <strong>an example</strong>, lets add an extra loader to handle <a href="http://yaml.org/">Yaml</a> files:</p>
 
 <div class="highlight highlight-source-js"><pre><span class="pl-c">/**</span>
 <span class="pl-c"> * Sagui configuration object</span>
 <span class="pl-c"> */</span>
 <span class="pl-c1">module</span>.<span class="pl-smi">exports</span> <span class="pl-k">=</span> {
-  <span class="pl-c">/**</span>
-<span class="pl-c">   * List of Sagui plugins to disable</span>
-<span class="pl-c">   */</span>
-  disabledPlugins<span class="pl-k">:</span> []
+  webpackConfig<span class="pl-k">:</span> {
+    module<span class="pl-k">:</span> {
+      loaders<span class="pl-k">:</span> [{
+        test<span class="pl-k">:</span><span class="pl-sr"> <span class="pl-pds">/</span><span class="pl-cce">\.</span>(yaml<span class="pl-k">|</span>yml)<span class="pl-k">$</span><span class="pl-pds">/</span></span>,
+        loader<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>json!yaml<span class="pl-pds">'</span></span>
+      }]
+    }
+  }
 }</pre></div>
 
-<p>Default available plugins:</p>
-
-<ul>
-<li>
-<strong>webpack-babel</strong>: ES2015 support;</li>
-<li>
-<strong>webpack-base</strong>: Base paths and webpack plugins;</li>
-<li>
-<strong>webpack-css-modules</strong>: <a href="https://github.com/css-modules/css-modules">CSS Modules</a> support;</li>
-<li>
-<strong>webpack-define-node-env</strong>: Populates <code>process.env.NODE_ENV</code>;</li>
-<li>
-<strong>webpack-eslint</strong>: ESLint support via <a href="http://standardjs.com/">Standard</a>;</li>
-<li>
-<strong>webpack-json</strong>: JSON loader;</li>
-<li>
-<strong>webpack-media</strong> Basic media loading support (JPG, PNG, GIF);</li>
-<li>
-<strong>webpack-pages</strong>: Add support for the above <em>Pages</em> configuration;</li>
-<li>
-<strong>webpack-scss</strong>: SCSS support.</li>
-</ul>
+<p>For more information on how the merging of Webpack configurations work check <a href="https://github.com/survivejs/webpack-merge">webpack-merge</a>.</p>
 
 <h2>
-<a id="development" class="anchor" href="#development" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Development</h2>
+<a id="contributing-and-development" class="anchor" href="#contributing-and-development" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Contributing and development</h2>
 
 <p>To develop the tool locally, we will need to resort to a combination of a global <a href="https://docs.npmjs.com/cli/link">npm link</a> and local links in projects.</p>
 
 <p>You can start by linking Sagui globally. While at its folder:</p>
 
-<div class="highlight highlight-source-shell"><pre>SAGUI_LINK=<span class="pl-c1">true</span> npm link</pre></div>
+<div class="highlight highlight-source-shell"><pre>npm link</pre></div>
 
 <p>The environment variable is to inform Sagui that it is working in a "linked environment".</p>
 
@@ -229,10 +283,16 @@
 
     </section>
 
-<p>
-  <a href="https://js.org" target="_blank" title="JS.ORG | JavaScript Community">
-  <img src="https://logo.js.org/bright_horz.png" width="102" alt="JS.ORG Logo"/></a>
-</p>
+            <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-75436789-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
 
   </body>
 </html>
