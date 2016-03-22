@@ -3,8 +3,8 @@ import json from '../util/json'
 
 const saguiScripts = {
   'start': 'npm run develop',
-  'test': 'sagui test',
-  'test-watch': 'sagui test --watch',
+  'test': 'NODE_ENV=test sagui test',
+  'test-watch': 'NODE_ENV=test sagui test --watch',
   'develop': 'sagui develop',
   'build': 'sagui build',
   'dist': 'NODE_ENV=production sagui dist'
