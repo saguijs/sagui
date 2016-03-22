@@ -1,4 +1,4 @@
-### Master
+### v4.0.0 (2016-03-22)
 
 There were two small breaking changes, making this upgrade very simple:
 
