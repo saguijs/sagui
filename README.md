@@ -5,36 +5,11 @@
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](https://github.com/feross/standard)
 [![Code Climate](https://codeclimate.com/github/pirelenito/sagui/badges/gpa.svg)](https://codeclimate.com/github/pirelenito/sagui)
 
-Sagui is a modern approach on build infrastructure to front-end projects. It follows an opinionated **convention over configuration** approach, providing a solid foundation so that you can focus on writing your code.
+Sagui is **the single development dependency** that bundles [Webpack](http://webpack.github.io/), [Babel](http://babeljs.io/), [Karma](http://karma-runner.github.io/) and [Standard](http://standardjs.com/) in a hassle-free, easily updatable setup.
 
-**Beta release**: This branch is home of the upcoming 4.x release. For the current stable release, please refer to: [3.x.x](https://github.com/pirelenito/sagui/tree/3.x.x).
+It follows an opinionated convention over configuration approach, providing a solid foundation so that you can focus on writing your code.
 
-## Features:
-
-Sagui acts as a front-end to a bunch of amazing technology to keep your development environment always up to date.
-
-Here are some of its main features:
-
-- Build and development infrastructure via [webpack](http://webpack.github.io/);
-- Automated testing with [Jasmine](http://jasmine.github.io/) and [Karma](http://karma-runner.github.io/);
-- Linting via [JavaScript Standard Style](http://standardjs.com/);
-- Modern JavaScript language support with [Babel](http://babeljs.io/);
-- Live-reload with "hot module replacement", specially for [React components](https://github.com/gaearon/react-transform);
-- [CSS Modules](https://github.com/css-modules);
-- [Sass lang](http://sass-lang.com/);
-- and more...
-
-Sagui strives to be the **last devDependency**:
-
-- [Be local](https://twitter.com/pirelenito/status/682571493092515840), not global;
-- [Be extensible](#custom-webpack-and-karma-config);
-- Act in the shadows behind [npm scripts](https://docs.npmjs.com/misc/scripts);
-- No more generators;
-- No more boilerplate projects;
-- No more starter kits;
-- No more updating Babel and Webpack.
-
-## Creating a new Sagui project
+## Get started!
 
 Start by creating a new folder to hold your project files:
 
@@ -43,24 +18,25 @@ mkdir my-project
 cd my-project
 ```
 
-Then, create a new NPM project (while at the project's folder):
+Then, create a [new NPM project](https://docs.npmjs.com/cli/init) (while at the project's folder):
 
 ```bash
-npm init -y .
+npm init -y
 ```
 
-Install sagui **locally** as a development dependency:
+**Install Sagui locally** as a development dependency:
 
 ```bash
-npm install --save-dev sagui@'>4.0.0-rc'
+npm install --save-dev sagui
 ```
 
-After the install is completed, Sagui **bootstraps** its basic infrastructure, no extra step is required.
+After the install is completed, Sagui **bootstraps** its basic infrastructure, **no extra step is required**.
 
 ```bash
 $ tree
 .
 ├── .eslintrc
+├── .gitignore
 ├── node_modules
 │   └── sagui
 ├── package.json
@@ -78,7 +54,7 @@ From here on, you are ready to start development. You do that by **using common 
 npm start
 ```
 
-Run the tests!
+To run the tests, simply:
 
 ```bash
 npm test
@@ -86,15 +62,24 @@ npm test
 
 Sagui manages the [package.json](https://docs.npmjs.com/files/package.json) scripts for you:
 
-- `npm run start`
-- `npm run test`
-- `npm run test-watch`
-- `npm run build`
-- `npm run dist`
+- `npm run start`: spins a development server
+- `npm run test`: run the tests
+- `npm run test-watch` run a test watcher (great for development)
+- `npm run build`: build a development version of the project
+- `npm run dist`: build a production ready version of the project
 
 Then you can start writing your code inside the `src/` folder.
 
-**Customize:** *Sagui doesn't overwrite any changes you make to the `package.json` file.*
+## Features:
+
+Sagui acts as a front-end to a bunch of amazing technology to keep your development environment always up to date:
+
+- [JavaScript 2015](http://babeljs.io/docs/learn-es2015/);
+- [CSS Modules](https://github.com/css-modules) or [Sass lang](http://sass-lang.com/);
+- [Webpack loaders](http://webpack.github.io/) for common media files
+- Automated testing with [Jasmine](http://jasmine.github.io/) and [Karma](http://karma-runner.github.io/);
+- Linting via [JavaScript Standard Style](http://standardjs.com/);
+- Live-reload with **hot module replacement** ([React components](https://github.com/gaearon/react-transform));
 
 ## Configuration
 
@@ -106,7 +91,7 @@ They are not mutually exclusive, so it is possible to create a library project a
 
 This is a static application that can be built around multiple pages. Each page is the combination of an `html` and a `js` files.
 
-It is the default bootstrapped configuration, and it will build and serve a single page for your entire application based on the `src/index.js` and `src/index.html` files.
+**It is the default bootstrapped configuration**, and it will build and serve a single page for your entire application based on the `src/index.js` and `src/index.html` files.
 
 To change it and add more pages, you can add a custom configuration in the `sagui.config.js` file:
 
@@ -152,7 +137,11 @@ Sagui will use the the **peerDependencies** information in the project's `packag
 
 ## Advanced configuration
 
-The internal architecture of Sagui is build arround plugins, each providing a set of functionalities that can be used during any of Sagui's actions.
+Webpack and Karma have both very rich plugins ecosystems already, so it is no point trying to create a new ecosystem on top of them. Instead Sagui aims to provide a good set of default configurations that can be easily disabled or extended.
+
+### Disabling a default behavior
+
+The internal architecture of Sagui is build around plugins, each providing a set of functionalities that can be used during any of Sagui's actions.
 
 If you need to disable any default behavior, it is possible via:
 
@@ -164,11 +153,11 @@ module.exports = {
   /**
    * List of Sagui plugins to disable
    */
-  disabledPlugins: []
+  disabledPlugins: ['webpack-scss']
 }
 ```
 
-Default available plugins:
+Here is the complete list of existing Sagui plugins:
 
 - **webpack-archetype-library**: Add support for the above *Library* configuration;
 - **webpack-archetype-pages**: Add support for the above *Pages* configuration;
@@ -177,7 +166,7 @@ Default available plugins:
 - **webpack-css-modules**: [CSS Modules](https://github.com/css-modules/css-modules) support;
 - **webpack-define-node-env**: Populates `process.env.NODE_ENV`;
 - **webpack-eslint**: ESLint support via [Standard](http://standardjs.com/);
-- **webpack-image** Images loading support (`jpg`, `jpeg`, `png`, `gif`);
+- **webpack-images** Images loading support (`jpg`, `jpeg`, `png`, `gif`);
 - **webpack-json**: JSON loader;
 - **webpack-scss**: SCSS support;
 - **webpack-videos**: Videos loading support (`ogg`, `mp4`).
@@ -213,16 +202,34 @@ module.exports = {
 }
 ```
 
+As **an example**, lets add an extra loader to handle [Yaml](http://yaml.org/) files:
+
+```js
+/**
+ * Sagui configuration object
+ */
+module.exports = {
+  webpackConfig: {
+    module: {
+      loaders: [{
+        test: /\.(yaml|yml)$/,
+        loader: 'json!yaml'
+      }]
+    }
+  }
+}
+```
+
 For more information on how the merging of Webpack configurations work check [webpack-merge](https://github.com/survivejs/webpack-merge).
 
-## Development
+## Contributing and development
 
 To develop the tool locally, we will need to resort to a combination of a global [npm link](https://docs.npmjs.com/cli/link) and local links in projects.
 
 You can start by linking Sagui globally. While at its folder:
 
 ```bash
-SAGUI_LINK=true npm link
+npm link
 ```
 
 The environment variable is to inform Sagui that it is working in a "linked environment".
