@@ -9,7 +9,7 @@ Sagui is **the single development dependency** that bundles [Webpack](http://web
 
 It follows an opinionated convention over configuration approach, providing a solid foundation so that you can focus on writing your code.
 
-## Get started!
+## Creating a new front-end project
 
 Start by creating a new folder to hold your project files:
 
