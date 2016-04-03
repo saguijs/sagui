@@ -1,3 +1,7 @@
+### v4.0.3 (2016-04-03)
+
+- [#73](https://github.com/pirelenito/sagui/pull/73) Fixes hot-module-replacement of styles
+
 ### v4.0.0 (2016-03-22)
 
 There were two small breaking changes, making this upgrade very simple:
