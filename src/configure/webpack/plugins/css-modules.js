@@ -3,9 +3,9 @@ import ExtractTextPlugin from 'extract-text-webpack-plugin'
 
 export default {
   name: 'webpack-css-modules',
-  configure ({ pages = [] }) {
+  configure ({ pages = [], buildTarget }) {
     const extractCSS = new ExtractTextPlugin('[name]-[hash]-[ext].css')
-    const hasPages = pages.length > 0
+    const enabled = pages.length > 0 && (buildTarget === 'dist' || buildTarget === 'build')
 
     // importLoaders: use the following postcss-loader in @import statements
     // modules: enable css-mobules
@@ -22,12 +22,12 @@ export default {
         loaders: [
           {
             test: /\.css$/,
-            loader: hasPages ? extractCSS.extract(baseLoader) : `style!${baseLoader}`
+            loader: enabled ? extractCSS.extract(baseLoader) : `style!${baseLoader}`
           }
         ]
       },
 
-      plugins: hasPages ? [extractCSS] : []
+      plugins: enabled ? [extractCSS] : []
     }
   }
 }

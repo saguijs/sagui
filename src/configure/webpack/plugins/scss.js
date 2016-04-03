@@ -3,9 +3,9 @@ import ExtractTextPlugin from 'extract-text-webpack-plugin'
 
 export default {
   name: 'webpack-scss',
-  configure ({ pages = [], projectPath }) {
+  configure ({ pages = [], projectPath, buildTarget }) {
     const extractCSS = new ExtractTextPlugin('[name]-[hash]-scss.css')
-    const hasPages = pages.length > 0
+    const enabled = pages.length > 0 && (buildTarget === 'dist' || buildTarget === 'build')
 
     const baseLoader = 'css!resolve-url!sass?sourceMap&outputStyle=expanded&' +
       'includePaths[]=' + (path.resolve(projectPath, './node_modules'))
@@ -15,11 +15,11 @@ export default {
         loaders: [
           {
             test: /\.scss$/,
-            loader: hasPages ? extractCSS.extract(baseLoader) : `style!${baseLoader}`
+            loader: enabled ? extractCSS.extract(baseLoader) : `style!${baseLoader}`
           }
         ]
       },
-      plugins: hasPages ? [extractCSS] : []
+      plugins: enabled ? [extractCSS] : []
     }
   }
 }
