@@ -222,6 +222,10 @@ module.exports = {
 
 For more information on how the merging of Webpack configurations work check [webpack-merge](https://github.com/survivejs/webpack-merge).
 
+## Logo
+
+[Monkey artwork](https://thenounproject.com/term/monkey/267835) created by Ryan Spiering from the Noum Project.
+
 ## Contributing and development
 
 To develop the tool locally, we will need to resort to a combination of a global [npm link](https://docs.npmjs.com/cli/link) and local links in projects.
