@@ -1,5 +1,5 @@
 import * as actions from './actions'
-import configure from './configure'
+import configure, { configureWebpack, configureKarma } from './configure'
 
 export default {
   build (options) {
@@ -27,6 +27,9 @@ export default {
     actions.install(env)
   },
 
-  configure
+  configure,
+
+  webpack: configureWebpack,
+  karma: configureKarma
 }
 

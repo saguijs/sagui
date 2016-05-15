@@ -6,7 +6,7 @@
   "bin": {
     "sagui": "./bin/sagui"
   },
-  "main": "lib/index.js",
+  "main": "index.js",
   "files": [
     "bin",
     "lib",
@@ -85,6 +85,7 @@
     "url-loader": "^0.5.6",
     "webpack": "^1.9.6",
     "webpack-dev-middleware": "^1.2.0",
+    "webpack-dev-server": "^1.14.1",
     "webpack-hot-middleware": "^2.0.0",
     "webpack-merge": "^0.7.3"
   },
