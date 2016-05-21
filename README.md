@@ -1,4 +1,4 @@
-# Sagui
+![Sagui](https://raw.githubusercontent.com/saguijs/sagui/master/banner.jpg)
 
 [![Build Status](https://travis-ci.org/saguijs/sagui.svg)](https://travis-ci.org/saguijs/sagui)
 [![npm version](https://badge.fury.io/js/sagui.svg)](https://badge.fury.io/js/sagui)
