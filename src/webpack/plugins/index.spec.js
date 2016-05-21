@@ -26,20 +26,20 @@ describe('configure', function () {
         target: 'electron'
       }
 
-      config = configure({ projectPath, saguiPath, webpackConfig })
+      config = configure({ projectPath, saguiPath }, webpackConfig)
 
       expect(config.target).equal('electron')
     })
 
     it('should allow overwriting the default configuration', function () {
-      const defaultConfig = configure({ projectPath, saguiPath, webpackConfig })
+      const defaultConfig = configure({ projectPath, saguiPath }, webpackConfig)
       expect(defaultConfig.devtool).equal('source-map')
 
       const webpackConfig = {
         devtool: 'cheap-source-map'
       }
 
-      config = configure({ projectPath, saguiPath, webpackConfig })
+      config = configure({ projectPath, saguiPath }, webpackConfig)
       expect(config.devtool).equal('cheap-source-map')
     })
 
@@ -56,7 +56,7 @@ describe('configure', function () {
         }
       }
 
-      config = configure({ projectPath, saguiPath, webpackConfig })
+      config = configure({ projectPath, saguiPath }, webpackConfig)
       const loaders = config.module.loaders.filter((loader) => loader.loader === 'babel')
 
       // should change the existing loader, not add another

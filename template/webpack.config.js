@@ -1,12 +1,6 @@
 var sagui = require('sagui')
 
-/**
- * Webpack configuration object
- * see: http://webpack.github.io/docs/configuration.html
- *
- * Will ovewrite and extend the default Sagui configuration
- */
-module.exports = sagui.webpack({
+module.exports = sagui().webpack({
   sagui: {
     /**
      * Different application entry-points
@@ -21,4 +15,10 @@ module.exports = sagui.webpack({
      */
     disabledPlugins: []
   }
+
+  /**
+   * Additional webpack configuration
+   * Will ovewrite and extend the default Sagui configuration
+   * see: http://webpack.github.io/docs/configuration.html
+   */
 })

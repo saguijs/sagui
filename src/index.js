@@ -1,35 +1,19 @@
-import * as actions from './actions'
-import configure, { configureWebpack, configureKarma } from './configure'
+import parentModule from 'parent-module'
+import path from 'path'
+import karma from './karma'
+import webpack from './webpack'
+import bootstrap from './bootstrap'
 
-export default {
-  build (options) {
-    const env = configure({ ...options, buildTarget: 'build' })
-    actions.buildAndDistribute(env)
-  },
-
-  dist (options) {
-    const env = configure({ ...options, buildTarget: 'dist' })
-    actions.buildAndDistribute(env)
-  },
-
-  develop (options) {
-    const env = configure({ ...options, buildTarget: 'develop' })
-    actions.startDevelop(env)
-  },
-
-  test (options) {
-    const env = configure({ ...options, buildTarget: 'test' })
-    actions.runTest(env)
-  },
-
-  install (options) {
-    const env = configure(options)
-    actions.install(env)
-  },
-
-  configure,
-
-  webpack: configureWebpack,
-  karma: configureKarma
+export default function sagui ({
+  buildTarget = normalize(process.env.NODE_ENV),
+  projectPath = path.dirname(parentModule()),
+  saguiPath = path.join(__dirname, '..')
+} = {}) {
+  return {
+    karma: karma({ projectPath }),
+    webpack: webpack({ buildTarget, projectPath, saguiPath }),
+    bootstrap: bootstrap({ projectPath })
+  }
 }
 
+const normalize = (env = 'development') => env.toLowerCase().trim()

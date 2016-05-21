@@ -12,7 +12,7 @@ import json from './json'
 import scss from './scss'
 import videos from './videos'
 
-export const plugins = [
+const plugins = [
   archetypeLibrary,
   archetypePages,
   babel,
@@ -26,13 +26,13 @@ export const plugins = [
   videos
 ]
 
-export default function configureWebpackPlugins (config) {
-  const { disabledPlugins = [], webpackConfig: userWebpackConfig, ...extraConfig } = config
+export default (config, userWebpackConfig = {}) => {
+  const { disabledPlugins = [] } = config
 
   const defaultWebpackConfig = plugins
     .filter((plugin) => disabledPlugins.indexOf(plugin.name) === -1)
     .reduce((webpackConfig, plugin) => {
-      return merge.smart(webpackConfig, plugin.configure(extraConfig))
+      return merge.smart(webpackConfig, plugin.configure(config))
     }, {})
 
   return merge.smart(defaultWebpackConfig, userWebpackConfig)

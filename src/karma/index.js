@@ -1,7 +1,5 @@
-export default function configureKarma (config) {
-  const { projectPath, watch, webpackConfig, karmaConfig: userKarmaConfig } = config
-
-  const defaultKarmaConfig = {
+export default ({ projectPath } = {}) => (karma, webpack) => {
+  return {
     basePath: projectPath,
 
     frameworks: ['jasmine', 'sinon'],
@@ -21,18 +19,16 @@ export default function configureKarma (config) {
     // there can be multiple archetypes configured
     // and althought harmless to have them all running the tests
     // it is not required and only produces double execution
-    webpack: webpackConfig[0],
+    webpack: webpack[0],
 
     webpackServer: {
       noInfo: true
     },
 
-    singleRun: !watch,
+    singleRun: true,
+    autoWatch: false,
 
-    autoWatch: watch
+    // extend with user configuration
+    ...karma
   }
-
-  const karmaConfig = { ...defaultKarmaConfig, ...userKarmaConfig }
-
-  return { ...config, karmaConfig }
 }
