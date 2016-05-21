@@ -1,6 +1,6 @@
 import { expect } from 'chai'
 import { join } from 'path'
-import { HotModuleReplacementPlugin, optimize } from 'webpack'
+import { HotModuleReplacementPlugin } from 'webpack'
 
 import plugin from './base'
 
