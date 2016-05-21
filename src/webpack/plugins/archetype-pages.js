@@ -30,7 +30,7 @@ function configureEntry (pages, buildTarget) {
   pages.forEach((page) => {
     entry[page] = [`./${page}`]
 
-    if (buildTarget === 'develop') {
+    if (buildTarget === 'development') {
       entry[page].push(hotMiddleware)
     }
   })

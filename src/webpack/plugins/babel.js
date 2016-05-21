@@ -23,7 +23,7 @@ export default {
     return {
       babel: {
         presets: [es2015, stage0, react],
-        env: buildTarget === 'develop' ? hmrEnv : {}
+        env: buildTarget === 'development' ? hmrEnv : {}
       },
 
       module: {

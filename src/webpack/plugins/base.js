@@ -25,7 +25,7 @@ export default {
 function buildPlugins (buildTarget) {
   let plugins = []
 
-  if (buildTarget === 'develop') {
+  if (buildTarget === 'development') {
     plugins.push(new HotModuleReplacementPlugin())
   }
 

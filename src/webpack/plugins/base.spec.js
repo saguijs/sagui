@@ -17,7 +17,7 @@ describe('configure webpack base', function () {
     })
 
     it('should have the HotModuleReplacementPlugin enabled while developing', function () {
-      const config = plugin.configure({ projectPath, saguiPath, buildTarget: 'develop' })
+      const config = plugin.configure({ projectPath, saguiPath, buildTarget: 'development' })
 
       const commons = config.plugins.filter((plugin) => plugin instanceof HotModuleReplacementPlugin)
       expect(commons.length).equal(1)
