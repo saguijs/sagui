@@ -8,6 +8,7 @@
   },
   "main": "index.js",
   "files": [
+    ".babelrc",
     "bin",
     "src",
     "lib",
