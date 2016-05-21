@@ -64,7 +64,7 @@ Sagui manages the [package.json](https://docs.npmjs.com/files/package.json) scri
 
 - `npm run start`: spins a development server
 - `npm run test`: run the tests
-- `npm run test-watch` run a test watcher (great for development)
+- `npm run test:watch` run a test watcher (great for development)
 - `npm run build`: build a development version of the project
 - `npm run dist`: build a production ready version of the project
 
