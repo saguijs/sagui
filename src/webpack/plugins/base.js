@@ -1,4 +1,4 @@
-import { HotModuleReplacementPlugin, optimize } from 'webpack'
+import { HotModuleReplacementPlugin } from 'webpack'
 import path from 'path'
 
 export default {
@@ -27,10 +27,6 @@ function buildPlugins (buildTarget) {
 
   if (buildTarget === 'development') {
     plugins.push(new HotModuleReplacementPlugin())
-  }
-
-  if (buildTarget === 'dist') {
-    plugins.push(new optimize.UglifyJsPlugin())
   }
 
   return plugins

@@ -5,7 +5,7 @@ export default {
   name: 'webpack-css-modules',
   configure ({ pages = [], buildTarget }) {
     const extractCSS = new ExtractTextPlugin('[name]-[hash]-[ext].css')
-    const enabled = pages.length > 0 && (buildTarget === 'dist' || buildTarget === 'build')
+    const enabled = pages.length > 0 && buildTarget === 'production'
 
     // importLoaders: use the following postcss-loader in @import statements
     // modules: enable css-mobules

@@ -5,7 +5,7 @@ export default {
   name: 'webpack-scss',
   configure ({ pages = [], projectPath, buildTarget }) {
     const extractCSS = new ExtractTextPlugin('[name]-[hash]-scss.css')
-    const enabled = pages.length > 0 && (buildTarget === 'dist' || buildTarget === 'build')
+    const enabled = pages.length > 0 && buildTarget === 'production'
 
     const baseLoader = 'css!resolve-url!sass?sourceMap&outputStyle=expanded&' +
       'includePaths[]=' + (path.resolve(projectPath, './node_modules'))
