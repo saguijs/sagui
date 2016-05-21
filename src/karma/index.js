@@ -1,5 +1,5 @@
-export default ({ projectPath } = {}) => (karma, webpack) => {
-  return {
+export default ({ projectPath } = {}) => (karma, webpack) => (config) => {
+  config.set({
     basePath: projectPath,
 
     frameworks: ['jasmine', 'sinon'],
@@ -30,5 +30,5 @@ export default ({ projectPath } = {}) => (karma, webpack) => {
 
     // extend with user configuration
     ...karma
-  }
+  })
 }

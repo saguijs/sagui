@@ -21,8 +21,7 @@ describe('sagui', function () {
     })
 
     const karma = sagui().karma({}, webpack)
-
-    expect(karma.webpack).to.equal(webpack[0])
+    expect(typeof karma === 'function').to.equal(true)
   })
 
   // wee need the karma and webpack cli accessibles for example
