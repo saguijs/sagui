@@ -9,6 +9,7 @@
   "main": "index.js",
   "files": [
     "bin",
+    "src",
     "lib",
     "template",
     ".eslintrc"
