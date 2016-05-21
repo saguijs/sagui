@@ -3,8 +3,8 @@ import json from '../util/json'
 
 const saguiScripts = {
   'start': 'npm run develop',
-  'test': 'NODE_ENV=test karma start --single-run --no-auto-watch',
-  'test:watch': 'NODE_ENV=test karma start --no-single-run --auto-watch',
+  'test': 'NODE_ENV=test karma start',
+  'test:watch': 'npm run test -- --no-single-run --auto-watch',
   'develop': 'webpack-dev-server --port 3000 --host 0.0.0.0',
   'build': 'webpack',
   'dist': 'NODE_ENV=production webpack -p'
