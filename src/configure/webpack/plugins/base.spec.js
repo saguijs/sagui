@@ -17,6 +17,7 @@ describe('configure webpack base', function () {
 
     const cleanWebpackPlugin = commons[0]
     expect(cleanWebpackPlugin.paths).to.eql(['dist'])
+    expect(cleanWebpackPlugin.options.verbose).to.eql(false)
     expect(cleanWebpackPlugin.options.root).to.eql(projectPath)
   })
 

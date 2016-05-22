@@ -27,7 +27,7 @@ function buildPlugins (buildTarget, projectPath) {
   let plugins = [
     new CleanWebpackPlugin(['dist'], {
       root: projectPath,
-      verbose: true
+      verbose: false
     })
   ]
 
