@@ -1,4 +1,5 @@
 import { HotModuleReplacementPlugin, optimize } from 'webpack'
+import CleanWebpackPlugin from 'clean-webpack-plugin'
 import path from 'path'
 
 export default {
@@ -14,7 +15,7 @@ export default {
 
       devtool: 'source-map',
 
-      plugins: buildPlugins(buildTarget),
+      plugins: buildPlugins(buildTarget, projectPath),
 
       resolve: { root: modulesDirectories },
       resolveLoader: { modulesDirectories }
@@ -22,8 +23,13 @@ export default {
   }
 }
 
-function buildPlugins (buildTarget) {
-  let plugins = []
+function buildPlugins (buildTarget, projectPath) {
+  let plugins = [
+    new CleanWebpackPlugin(['dist'], {
+      root: projectPath,
+      verbose: false
+    })
+  ]
 
   if (buildTarget === 'develop') {
     plugins.push(new HotModuleReplacementPlugin())
