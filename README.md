@@ -177,7 +177,7 @@ module.exports = sagui().webpack({
     /**
      * List of Sagui plugins to disable
      */
-    disabledPlugins: ['scss']
+    disabledSaguiPlugins: ['scss']
   }
 })
 ```

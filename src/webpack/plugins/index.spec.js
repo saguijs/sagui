@@ -10,8 +10,8 @@ describe('configure', function () {
 
   describe('disabling plugins', function () {
     beforeEach(function () {
-      const disabledPlugins = ['webpack-json']
-      config = configure({ projectPath, saguiPath, disabledPlugins })
+      const disabledSaguiPlugins = ['webpack-json']
+      config = configure({ projectPath, saguiPath, disabledSaguiPlugins })
     })
 
     it('should disable the specified plugins', function () {
