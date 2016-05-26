@@ -4,12 +4,12 @@ import archetypeLibrary from './archetype-library'
 import archetypePages from './archetype-pages'
 import babel from './babel'
 import base from './base'
-import cssModules from './css-modules'
+import css from './css'
 import defineNodeENV from './define-node-env'
 import eslint from './eslint'
 import images from './images'
 import json from './json'
-import scss from './scss'
+import sass from './sass'
 import videos from './videos'
 
 const plugins = [
@@ -17,12 +17,12 @@ const plugins = [
   archetypePages,
   babel,
   base,
-  cssModules,
+  css,
   defineNodeENV,
   eslint,
   images,
   json,
-  scss,
+  sass,
   videos
 ]
 

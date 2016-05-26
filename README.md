@@ -69,7 +69,7 @@ Then you can start writing your code inside the `src/` folder.
 Sagui acts as a front-end to a bunch of amazing technology to keep your development environment always up to date:
 
 - [JavaScript 2015](http://babeljs.io/docs/learn-es2015/);
-- [CSS Modules](https://github.com/css-modules) or [Sass lang](http://sass-lang.com/);
+- [CSS Modules](https://github.com/css-modules) with either [Sass lang](http://sass-lang.com/) or vanilla CSS;
 - [Webpack loaders](http://webpack.github.io/) for common media files
 - Automated testing with [Jasmine](http://jasmine.github.io/) and [Karma](http://karma-runner.github.io/);
 - Linting via [JavaScript Standard Style](http://standardjs.com/);
@@ -168,7 +168,7 @@ module.exports = sagui().webpack({
     /**
      * List of Sagui presets to disable
      */
-    disabledSaguiPresets: ['scss']
+    disabledSaguiPresets: ['sass']
   }
 })
 ```
@@ -179,12 +179,12 @@ Here is the complete list of existing Sagui presets:
 - **archetype-pages**: Add support for the above *Pages* configuration;
 - **babel**: ES2015 support;
 - **base**: Base paths and webpack plugins;
-- **css-modules**: [CSS Modules](https://github.com/css-modules/css-modules) support;
+- **css**: Vanilla CSS with [CSS Modules](https://github.com/css-modules/css-modules) support;
 - **define-node-env**: Populates `process.env.NODE_ENV`;
 - **eslint**: ESLint support via [Standard](http://standardjs.com/);
 - **images** Images loading support (`jpg`, `jpeg`, `png`, `gif`);
 - **json**: JSON loader;
-- **scss**: SCSS support;
+- **sass**: [Sass language](http://sass-lang.com/) with [CSS Modules](https://github.com/css-modules/css-modules) support;
 - **videos**: Videos loading support (`ogg`, `mp4`).
 
 ### Extending the default Karma configuration
