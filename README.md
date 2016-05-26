@@ -40,7 +40,8 @@ $ tree
 ├── node_modules
 │   └── sagui
 ├── package.json
-├── sagui.config.js
+├── karma.conf.js
+├── webpack.config.js
 └── src
     ├── index.html
     ├── index.js
@@ -93,21 +94,22 @@ This is a static application that can be built around multiple pages. Each page 
 
 **It is the default bootstrapped configuration**, and it will build and serve a single page for your entire application based on the `src/index.js` and `src/index.html` files.
 
-To change it and add more pages, you can add a custom configuration in the `sagui.config.js` file:
+To change it and add more pages, you can add a custom configuration in the `webpack.config.js` file:
 
 ```js
-/**
- * Sagui configuration object
- */
-module.exports = {
-  /**
-   * Different application entry-points
-   * Each page is a combination of a JavaScript file and a HTML file
-   *
-   * Example: 'index' -> 'index.html' and 'index.js'
-   */
-  pages: ['index', 'about']
-}
+var sagui = require('sagui')
+
+module.exports = sagui().webpack({
+  sagui: {
+    /**
+     * Different application entry-points
+     * Each page is a combination of a JavaScript file and a HTML file
+     *
+     * Example: 'index' -> 'index.html' and 'index.js'
+     */
+    pages: ['index', 'about'],
+  }
+})
 ```
 
 And add additional `src/about.js` and `src/about.html` files for each page entry-point.
@@ -119,16 +121,17 @@ Create reusable libraries that can be shared across applications. Sagui will tak
 To get started, the only required configuration is the library name:
 
 ```js
-/**
- * Sagui configuration object
- */
-module.exports = {
-  /**
-   * Library name (usually in CammelCase)
-   * Example: ReactTransition, ReactRedux
-   */
-  library: 'ReactTransition'
-}
+var sagui = require('sagui')
+
+module.exports = sagui().webpack({
+  sagui: {
+    /**
+     * Library name (usually in CammelCase)
+     * Example: ReactTransition, ReactRedux
+     */
+    library: 'ReactTransition'
+  }
+})
 ```
 
 #### External dependencies
@@ -146,15 +149,16 @@ The internal architecture of Sagui is build around plugins, each providing a set
 If you need to disable any default behavior, it is possible via:
 
 ```js
-/**
- * Sagui configuration object
- */
-module.exports = {
-  /**
-   * List of Sagui plugins to disable
-   */
-  disabledPlugins: ['webpack-scss']
-}
+var sagui = require('sagui')
+
+module.exports = sagui().webpack({
+  sagui: {
+    /**
+     * List of Sagui plugins to disable
+     */
+    disabledPlugins: ['webpack-scss']
+  }
+})
 ```
 
 Here is the complete list of existing Sagui plugins:
@@ -171,56 +175,41 @@ Here is the complete list of existing Sagui plugins:
 - **webpack-scss**: SCSS support;
 - **webpack-videos**: Videos loading support (`ogg`, `mp4`).
 
-### <a name="custom-webpack-and-karma-config"></a> Custom Webpack and Karma config
+### <a name="custom-webpack-config"></a> Custom Webpack config
 
-To overwrite and extend the default configuration you can use the same `saqui.config.js` file to specify your custom configurations:
-
-```js
-/**
- * Sagui configuration object
- */
-module.exports = {
-  /**
-   * Webpack configuration object
-   * see: http://webpack.github.io/docs/configuration.html
-   *
-   * Will ovewrite and extend the default Sagui configuration
-   */
-  webpackConfig: {
-
-  },
-
-  /**
-   * Karma configuration object
-   * see: https://karma-runner.github.io/0.13/config/configuration-file.html
-   *
-   * Will overwrite and extend the default Sagui configuration
-   */
-  karmaConfig: {
-
-  }
-}
-```
+Sagui uses the standard Webpack [CLI](http://webpack.github.io/docs/cli.html) and [configuration file](http://webpack.github.io/docs/configuration.html) file, so extending it is pretty straightforward.
 
 As **an example**, lets add an extra loader to handle [Yaml](http://yaml.org/) files:
 
 ```js
-/**
- * Sagui configuration object
- */
-module.exports = {
-  webpackConfig: {
-    module: {
-      loaders: [{
-        test: /\.(yaml|yml)$/,
-        loader: 'json!yaml'
-      }]
-    }
+var sagui = require('sagui')
+
+module.exports = sagui().webpack({
+  module: {
+    loaders: [{
+      test: /\.(yaml|yml)$/,
+      loader: 'json!yaml'
+    }]
   }
-}
+})
 ```
 
 For more information on how the merging of Webpack configurations work check [webpack-merge](https://github.com/survivejs/webpack-merge).
+
+### <a name="custom-webpack-config"></a> Custom Karma config
+
+Sagui uses the standard Karma [CLI](https://karma-runner.github.io/0.13/intro/configuration.html) and [configuration file](https://karma-runner.github.io/0.13/config/configuration-file.html) file, so extending it is pretty straightforward.
+
+As **an example**, lets change the default browser used to execute the tests from *PhantomJS* to *Chrome*:
+
+```js
+var sagui = require('sagui')
+var webpackConfig = require('./webpack.config')
+
+module.exports = sagui().karma({
+  browsers: ['Chrome']
+}, webpackConfig)
+```
 
 ## Logo
 
