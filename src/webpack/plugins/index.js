@@ -4,7 +4,7 @@ import archetypeLibrary from './archetype-library'
 import archetypePages from './archetype-pages'
 import babel from './babel'
 import base from './base'
-import cssModules from './css-modules'
+import css from './css'
 import defineNodeENV from './define-node-env'
 import eslint from './eslint'
 import images from './images'
@@ -17,7 +17,7 @@ const plugins = [
   archetypePages,
   babel,
   base,
-  cssModules,
+  css,
   defineNodeENV,
   eslint,
   images,

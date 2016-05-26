@@ -2,7 +2,7 @@ import postCSSModulesValues from 'postcss-modules-values'
 import ExtractTextPlugin from 'extract-text-webpack-plugin'
 
 export default {
-  name: 'css-modules',
+  name: 'css',
   configure ({ pages = [], buildTarget }) {
     const extractCSS = new ExtractTextPlugin('[name]-[hash].css')
     const enabled = pages.length > 0 && buildTarget === 'production'
