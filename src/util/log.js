@@ -16,5 +16,5 @@ export function log (entry) {
 }
 
 function sagui () {
-  return chalk.black.bgCyan('[sagui]')
+  return chalk.dim('🐵  Sagui')
 }

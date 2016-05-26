@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# Intergration test that attemts to create a new Sagui project
+# run tests and build in both LTS and Current versions of Node
+
 TEST="mkdir sagui-project &&
       cd sagui-project &&
       npm init -y . &&
@@ -9,4 +12,8 @@ TEST="mkdir sagui-project &&
       npm run build &&
       npm run dist"
 
-docker run --rm -ti -v $PWD:/sagui -w /tmp node:5.1 /bin/bash -c "$TEST"
+# LTS
+docker run --rm -ti -v $PWD:/sagui -w /tmp node:4.4.4 /bin/bash -c "$TEST"
+
+# Current
+docker run --rm -ti -v $PWD:/sagui -w /tmp node:6.2.0 /bin/bash -c "$TEST"
