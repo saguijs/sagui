@@ -191,7 +191,7 @@ Here is the complete list of existing Sagui presets:
 
 Sagui uses the standard Karma [CLI](https://karma-runner.github.io/0.13/intro/configuration.html) and [configuration file](https://karma-runner.github.io/0.13/config/configuration-file.html) file, so extending it is pretty straightforward.
 
-As **an example**, lets change the default browser used to execute the tests from *PhantomJS* to *Chrome*:
+As **an example**, lets change the default browser used to execute the tests from *PhantomJS* to *Chrome* by updating the configuration file `karma.conf.js`:
 
 ```js
 var sagui = require('sagui')
