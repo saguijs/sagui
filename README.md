@@ -179,12 +179,12 @@ Here is the complete list of existing Sagui presets:
 - **archetype-pages**: Add support for the above *Pages* configuration;
 - **babel**: ES2015 support;
 - **base**: Base paths and webpack plugins;
-- **css**: [CSS Modules](https://github.com/css-modules/css-modules) support;
+- **css**: Vanilla CSS with [CSS Modules](https://github.com/css-modules/css-modules) support;
 - **define-node-env**: Populates `process.env.NODE_ENV`;
 - **eslint**: ESLint support via [Standard](http://standardjs.com/);
 - **images** Images loading support (`jpg`, `jpeg`, `png`, `gif`);
 - **json**: JSON loader;
-- **sass**: Sass language support;
+- **sass**: [Sass language](http://sass-lang.com/) with [CSS Modules](https://github.com/css-modules/css-modules) support;
 - **videos**: Videos loading support (`ogg`, `mp4`).
 
 ### Extending the default Karma configuration
