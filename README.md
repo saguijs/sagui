@@ -138,11 +138,11 @@ module.exports = sagui().webpack({
 
 Sagui will use the the **peerDependencies** information in the project's `package.json` to determine what are the external dependencies of the library that shouldn't be bundled in the final build.
 
-## Advanced configuration
+## <a name="advanced-configuration"></a>Advanced configuration
 
-Webpack and Karma have both very rich plugins ecosystems already, so it is no point trying to create a new ecosystem on top of them. Instead Sagui aims to provide a good set of default configurations that can be easily disabled or extended.
+Webpack and Karma have both very rich plugins ecosystems already, so it is no point trying to create a new ecosystem on top of them. Instead Sagui aims to provide a good base configuration that can be easily extended or changed.
 
-### <a name="custom-webpack-config"></a> Custom Webpack config
+### Extending the default Webpack configuration
 
 Sagui uses the standard Webpack [CLI](http://webpack.github.io/docs/cli.html) and [configuration file](http://webpack.github.io/docs/configuration.html) file, so extending it is pretty straightforward.
 
@@ -163,7 +163,7 @@ module.exports = sagui().webpack({
 
 For more information on how the merging of Webpack configurations work check [webpack-merge](https://github.com/survivejs/webpack-merge).
 
-#### Disabling a default Sagui Preset
+### Disabling the default Webpack configuration
 
 The internal architecture of Sagui is build around presets, each providing a set of functionalities that can be used during any of Sagui's actions.
 
@@ -196,7 +196,7 @@ Here is the complete list of existing Sagui presets:
 - **scss**: SCSS support;
 - **videos**: Videos loading support (`ogg`, `mp4`).
 
-### <a name="custom-webpack-config"></a> Custom Karma config
+### Extending the default Karma configuration
 
 Sagui uses the standard Karma [CLI](https://karma-runner.github.io/0.13/intro/configuration.html) and [configuration file](https://karma-runner.github.io/0.13/config/configuration-file.html) file, so extending it is pretty straightforward.
 
