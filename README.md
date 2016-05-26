@@ -142,7 +142,28 @@ Sagui will use the the **peerDependencies** information in the project's `packag
 
 Webpack and Karma have both very rich plugins ecosystems already, so it is no point trying to create a new ecosystem on top of them. Instead Sagui aims to provide a good set of default configurations that can be easily disabled or extended.
 
-### Disabling a default behavior
+### <a name="custom-webpack-config"></a> Custom Webpack config
+
+Sagui uses the standard Webpack [CLI](http://webpack.github.io/docs/cli.html) and [configuration file](http://webpack.github.io/docs/configuration.html) file, so extending it is pretty straightforward.
+
+As **an example**, lets add an extra loader to handle [Yaml](http://yaml.org/) files:
+
+```js
+var sagui = require('sagui')
+
+module.exports = sagui().webpack({
+  module: {
+    loaders: [{
+      test: /\.(yaml|yml)$/,
+      loader: 'json!yaml'
+    }]
+  }
+})
+```
+
+For more information on how the merging of Webpack configurations work check [webpack-merge](https://github.com/survivejs/webpack-merge).
+
+#### Disabling a default Webpack behavior
 
 The internal architecture of Sagui is build around plugins, each providing a set of functionalities that can be used during any of Sagui's actions.
 
@@ -174,27 +195,6 @@ Here is the complete list of existing Sagui plugins:
 - **webpack-json**: JSON loader;
 - **webpack-scss**: SCSS support;
 - **webpack-videos**: Videos loading support (`ogg`, `mp4`).
-
-### <a name="custom-webpack-config"></a> Custom Webpack config
-
-Sagui uses the standard Webpack [CLI](http://webpack.github.io/docs/cli.html) and [configuration file](http://webpack.github.io/docs/configuration.html) file, so extending it is pretty straightforward.
-
-As **an example**, lets add an extra loader to handle [Yaml](http://yaml.org/) files:
-
-```js
-var sagui = require('sagui')
-
-module.exports = sagui().webpack({
-  module: {
-    loaders: [{
-      test: /\.(yaml|yml)$/,
-      loader: 'json!yaml'
-    }]
-  }
-})
-```
-
-For more information on how the merging of Webpack configurations work check [webpack-merge](https://github.com/survivejs/webpack-merge).
 
 ### <a name="custom-webpack-config"></a> Custom Karma config
 
