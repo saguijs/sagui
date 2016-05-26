@@ -11,14 +11,7 @@ It follows an opinionated convention over configuration approach, providing a so
 
 ## Creating a new front-end project
 
-Start by creating a new folder to hold your project files:
-
-```bash
-mkdir my-project
-cd my-project
-```
-
-Then, create a [new NPM project](https://docs.npmjs.com/cli/init) (while at the project's folder):
+**On a new folder**, create a [new NPM project](https://docs.npmjs.com/cli/init):
 
 ```bash
 npm init -y
@@ -165,9 +158,7 @@ For more information on how the merging of Webpack configurations work check [we
 
 ### Disabling the default Webpack configuration
 
-The internal architecture of Sagui is build around presets, each providing a set of functionalities that can be used during any of Sagui's actions.
-
-If you need to disable any default behavior, it is possible via:
+The internal architecture of Sagui is build around presets, If you need to disable any default behavior, it is possible via:
 
 ```js
 var sagui = require('sagui')
