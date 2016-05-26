@@ -1,5 +1,5 @@
 export default {
-  name: 'webpack-videos',
+  name: 'videos',
   configure () {
     return {
       module: {

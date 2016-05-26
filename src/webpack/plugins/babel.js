@@ -2,7 +2,7 @@ import reactTransform from 'babel-plugin-react-transform'
 import sagui from 'babel-preset-sagui'
 
 export default {
-  name: 'webpack-babel',
+  name: 'babel',
   configure ({ buildTarget }) {
     const hmrEnv = {
       development: {

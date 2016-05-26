@@ -177,24 +177,24 @@ module.exports = sagui().webpack({
     /**
      * List of Sagui plugins to disable
      */
-    disabledPlugins: ['webpack-scss']
+    disabledPlugins: ['scss']
   }
 })
 ```
 
 Here is the complete list of existing Sagui plugins:
 
-- **webpack-archetype-library**: Add support for the above *Library* configuration;
-- **webpack-archetype-pages**: Add support for the above *Pages* configuration;
-- **webpack-babel**: ES2015 support;
-- **webpack-base**: Base paths and webpack plugins;
-- **webpack-css-modules**: [CSS Modules](https://github.com/css-modules/css-modules) support;
-- **webpack-define-node-env**: Populates `process.env.NODE_ENV`;
-- **webpack-eslint**: ESLint support via [Standard](http://standardjs.com/);
-- **webpack-images** Images loading support (`jpg`, `jpeg`, `png`, `gif`);
-- **webpack-json**: JSON loader;
-- **webpack-scss**: SCSS support;
-- **webpack-videos**: Videos loading support (`ogg`, `mp4`).
+- **archetype-library**: Add support for the above *Library* configuration;
+- **archetype-pages**: Add support for the above *Pages* configuration;
+- **babel**: ES2015 support;
+- **base**: Base paths and webpack plugins;
+- **css-modules**: [CSS Modules](https://github.com/css-modules/css-modules) support;
+- **define-node-env**: Populates `process.env.NODE_ENV`;
+- **eslint**: ESLint support via [Standard](http://standardjs.com/);
+- **images** Images loading support (`jpg`, `jpeg`, `png`, `gif`);
+- **json**: JSON loader;
+- **scss**: SCSS support;
+- **videos**: Videos loading support (`ogg`, `mp4`).
 
 ### <a name="custom-webpack-config"></a> Custom Karma config
 

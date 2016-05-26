@@ -1,5 +1,5 @@
 export default {
-  name: 'webpack-json',
+  name: 'json',
   configure () {
     return {
       module: {

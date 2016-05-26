@@ -1,7 +1,7 @@
 import path from 'path'
 
 export default {
-  name: 'webpack-eslint',
+  name: 'eslint',
   configure ({ saguiPath }) {
     return {
       eslint: {
