@@ -2,14 +2,18 @@ import postCSSModulesValues from 'postcss-modules-values'
 import ExtractTextPlugin from 'extract-text-webpack-plugin'
 
 export default {
-  name: 'css-modules',
+  name: 'css',
   configure ({ pages = [], buildTarget }) {
-    const extractCSS = new ExtractTextPlugin('[name]-[hash]-[ext].css')
+    const extractCSS = new ExtractTextPlugin('[name]-[hash].css')
     const enabled = pages.length > 0 && buildTarget === 'production'
+    const localIdentName = enabled ? '[hash]' : '[path][local]-[hash:base64:5]'
 
     // importLoaders: use the following postcss-loader in @import statements
-    // modules: enable css-mobules
-    const baseLoader = 'css-loader?modules&sourceMap&importLoaders=1&localIdentName=[name]-[hash]!postcss-loader'
+    // modules: enable css-modules
+    const loaders = [
+      `css?modules&sourceMap&importLoaders=1&localIdentName=${localIdentName}`,
+      'postcss-loader'
+    ]
 
     return {
       postcss: [
@@ -22,7 +26,7 @@ export default {
         loaders: [
           {
             test: /\.css$/,
-            loader: enabled ? extractCSS.extract(baseLoader) : `style!${baseLoader}`
+            loader: enabled ? extractCSS.extract(...loaders) : ['style', ...loaders].join('!')
           }
         ]
       },
