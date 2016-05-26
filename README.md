@@ -9,9 +9,11 @@ Sagui is **the single development dependency** that bundles [Webpack](http://web
 
 It follows an opinionated convention over configuration approach, providing a solid foundation so that you can focus on writing your code.
 
+**This branch is for the upcoming v5 release**, for the current stable release check the [v4 branch](https://github.com/saguijs/sagui/tree/v4).
+
 ## Creating a new front-end project
 
-**On a new folder**, create a [new NPM project](https://docs.npmjs.com/cli/init):
+**In a new folder**, create a [new NPM project](https://docs.npmjs.com/cli/init):
 
 ```bash
 npm init -y
@@ -20,7 +22,7 @@ npm init -y
 **Install Sagui locally** as a development dependency:
 
 ```bash
-npm install --save-dev sagui
+npm install --save-dev sagui@beta
 ```
 
 After the install is completed, Sagui **bootstraps** its basic infrastructure, **no extra step is required**.
