@@ -27,10 +27,10 @@ const plugins = [
 ]
 
 export default (config, userWebpackConfig = {}) => {
-  const { disabledSaguiPlugins = [] } = config
+  const { disabledSaguiPresets = [] } = config
 
   const defaultWebpackConfig = plugins
-    .filter((plugin) => disabledSaguiPlugins.indexOf(plugin.name) === -1)
+    .filter((plugin) => disabledSaguiPresets.indexOf(plugin.name) === -1)
     .reduce((webpackConfig, plugin) => {
       return merge.smart(webpackConfig, plugin.configure(config))
     }, {})

@@ -8,13 +8,13 @@ const projectPath = join(saguiPath, 'spec/fixtures/simple-project')
 describe('configure', function () {
   let config
 
-  describe('disabling plugins', function () {
+  describe('disabling presets', function () {
     beforeEach(function () {
-      const disabledSaguiPlugins = ['webpack-json']
-      config = configure({ projectPath, saguiPath, disabledSaguiPlugins })
+      const disabledSaguiPresets = ['webpack-json']
+      config = configure({ projectPath, saguiPath, disabledSaguiPresets })
     })
 
-    it('should disable the specified plugins', function () {
+    it('should disable the specified presets', function () {
       const loader = config.module.loaders.find((loader) => loader.loader === 'json-loader')
       expect(loader).eql(undefined)
     })
