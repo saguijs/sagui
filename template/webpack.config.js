@@ -11,9 +11,9 @@ module.exports = sagui().webpack({
     pages: ['index'],
 
     /**
-     * List of Sagui plugins to disable
+     * List of Sagui presets to disable
      */
-    disabledPlugins: []
+    disabledSaguiPresets: []
   }
 
   /**
