@@ -6,7 +6,7 @@ export default {
   configure ({ pages = [], projectPath, buildTarget }) {
     const extractCSS = new ExtractTextPlugin('[name]-[hash]-sass.css')
     const enabled = pages.length > 0 && buildTarget === 'production'
-    const localIdentName = enabled ? '[hash]' : '[path][local]'
+    const localIdentName = enabled ? '[hash]' : '[path][local]-[hash:base64:5]'
 
     // importLoaders: use the following sass-loader in @import statements
     // modules: enable css-modules

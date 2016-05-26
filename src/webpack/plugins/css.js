@@ -6,7 +6,7 @@ export default {
   configure ({ pages = [], buildTarget }) {
     const extractCSS = new ExtractTextPlugin('[name]-[hash].css')
     const enabled = pages.length > 0 && buildTarget === 'production'
-    const localIdentName = enabled ? '[hash]' : '[path][local]'
+    const localIdentName = enabled ? '[hash]' : '[path][local]-[hash:base64:5]'
 
     // importLoaders: use the following postcss-loader in @import statements
     // modules: enable css-modules
