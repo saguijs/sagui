@@ -9,7 +9,7 @@ import defineNodeENV from './define-node-env'
 import eslint from './eslint'
 import images from './images'
 import json from './json'
-import scss from './scss'
+import sass from './sass'
 import videos from './videos'
 
 const plugins = [
@@ -22,7 +22,7 @@ const plugins = [
   eslint,
   images,
   json,
-  scss,
+  sass,
   videos
 ]
 
