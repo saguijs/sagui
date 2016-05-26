@@ -10,7 +10,7 @@ describe('configure', function () {
 
   describe('disabling presets', function () {
     beforeEach(function () {
-      const disabledSaguiPresets = ['webpack-json']
+      const disabledSaguiPresets = ['json']
       config = configure({ projectPath, saguiPath, disabledSaguiPresets })
     })
 
