@@ -9,7 +9,17 @@ const saguiPath = join(__dirname, '../../../../')
 const projectPath = join(saguiPath, 'spec/fixtures/simple-project')
 
 describe('configure webpack base', function () {
-  it('should have the CleanWebpackPlugin enabled allways', function () {
+  it('should add the project\'s `src/` and `node_modules/` to root resolve', function () {
+    const config = plugin.configure({ projectPath, saguiPath, buildTarget: 'dist' })
+
+    expect(config.resolve.root).to.eql([
+      join(projectPath, '/node_modules'),
+      join(saguiPath, '/node_modules'),
+      join(projectPath, '/src')
+    ])
+  })
+
+  it('should have the CleanWebpackPlugin enabled always', function () {
     const config = plugin.configure({ projectPath, saguiPath, buildTarget: 'dist' })
 
     const commons = config.plugins.filter((plugin) => plugin instanceof CleanWebpackPlugin)

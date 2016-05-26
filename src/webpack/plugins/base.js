@@ -9,15 +9,21 @@ export default {
       path.join(projectPath, '/node_modules'),
       path.join(saguiPath, '/node_modules')
     ]
+    const projectSourcePath = path.join(projectPath, 'src')
 
     return {
-      context: path.join(projectPath, 'src'),
+      context: projectSourcePath,
 
       devtool: 'source-map',
 
       plugins: buildPlugins(buildTarget, projectPath),
 
-      resolve: { root: modulesDirectories },
+      resolve: {
+        root: [
+          ...modulesDirectories,
+          projectSourcePath
+        ]
+      },
       resolveLoader: { modulesDirectories }
     }
   }
