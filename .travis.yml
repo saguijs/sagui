@@ -1,9 +1,33 @@
 language: node_js
 node_js:
-  - "5.1"
-sudo: required
-services:
-  - docker
+  - "4.4.4"
+  - "6.2.0"
+sudo: false
+cache:
+  directories:
+    - node_modules
 script:
-  - npm test
-  - npm run test:integration
+- |
+    if [ "$TEST_TYPE" = unit_test ]; then
+      set -e
+      npm test
+
+    elif [ "$TEST_TYPE" = integration_test ]; then
+      set -e
+
+      SAGUI_DIR="${pwd}"
+      PROJECT_DIR="${mktemp -d}"
+      cd $PROJECT_DIR
+
+      # Create a new project and install Sagui
+      npm init -y .
+      npm install --save-dev file://$SAGUI_DIR
+
+      # Run some basic scripts
+      npm test
+      npm run build
+      npm run dist
+env:
+  matrix:
+  - TEST_TYPE=unit_test
+  - TEST_TYPE=integration_test
