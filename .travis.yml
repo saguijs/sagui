@@ -15,8 +15,8 @@ script:
     elif [ "$TEST_TYPE" = integration_test ]; then
       set -e
 
-      SAGUI_DIR="${pwd}"
-      PROJECT_DIR="${mktemp -d}"
+      SAGUI_DIR=`pwd`
+      PROJECT_DIR=`mktemp -d`
       cd $PROJECT_DIR
 
       # Create a new project and install Sagui
@@ -27,6 +27,7 @@ script:
       npm test
       npm run build
       npm run dist
+    fi
 env:
   matrix:
   - TEST_TYPE=unit_test
