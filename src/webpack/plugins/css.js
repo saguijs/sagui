@@ -26,7 +26,7 @@ export default {
         loaders: [
           {
             test: /\.css$/,
-            loader: enabled ? extractCSS.extract(...loaders) : ['style', ...loaders].join('!')
+            loader: enabled ? extractCSS.extract(loaders) : ['style', ...loaders].join('!')
           }
         ]
       },
