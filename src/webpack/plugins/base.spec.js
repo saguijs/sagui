@@ -19,7 +19,7 @@ describe('configure webpack base', function () {
     ])
   })
 
-  it('should have the CleanWebpackPlugin enabled always', function () {
+  it('should configure CleanWebpackPlugin', function () {
     const config = plugin.configure({ projectPath, saguiPath, buildTarget: 'dist' })
 
     const commons = config.plugins.filter((plugin) => plugin instanceof CleanWebpackPlugin)
@@ -31,15 +31,15 @@ describe('configure webpack base', function () {
     expect(cleanWebpackPlugin.options.root).to.eql(projectPath)
   })
 
-  it('should configure the NoErrorsPlugin to prevent assets with erros from being emitted', function () {
+  it('should configure NoErrorsPlugin to prevent assets with erros from being emitted', function () {
     const config = plugin.configure({ projectPath, saguiPath, buildTarget: 'dist' })
 
     const commons = config.plugins.filter((plugin) => plugin instanceof NoErrorsPlugin)
     expect(commons.length).equal(1)
   })
 
-  describe('targets', function () {
-    it('should have the HotModuleReplacementPlugin enabled while developing', function () {
+  describe('development build target', function () {
+    it('should configure HotModuleReplacementPlugin', function () {
       const config = plugin.configure({ projectPath, saguiPath, buildTarget: 'development' })
 
       const commons = config.plugins.filter((plugin) => plugin instanceof HotModuleReplacementPlugin)
