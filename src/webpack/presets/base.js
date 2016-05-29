@@ -1,4 +1,4 @@
-import { HotModuleReplacementPlugin, NoErrorsPlugin } from 'webpack'
+import { HotModuleReplacementPlugin, NoErrorsPlugin, optimize } from 'webpack'
 import CleanWebpackPlugin from 'clean-webpack-plugin'
 import path from 'path'
 
@@ -42,6 +42,10 @@ function buildPlugins (buildTarget, projectPath) {
 
   if (buildTarget === 'development') {
     plugins.push(new HotModuleReplacementPlugin())
+  }
+
+  if (buildTarget === 'production') {
+    plugins.push(new optimize.DedupePlugin())
   }
 
   return plugins
