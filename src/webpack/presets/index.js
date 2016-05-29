@@ -1,27 +1,27 @@
 import merge from 'webpack-merge'
 
-import archetypeLibrary from './archetype-library'
-import archetypePages from './archetype-pages'
 import babel from './babel'
 import base from './base'
 import defineNodeENV from './define-node-env'
 import eslint from './eslint'
-import images from './images'
 import fonts from './fonts'
+import images from './images'
 import json from './json'
+import library from './library'
+import pages from './pages'
 import style from './style'
 import videos from './videos'
 
 const presets = [
-  archetypeLibrary,
-  archetypePages,
   babel,
   base,
   defineNodeENV,
   eslint,
-  images,
   fonts,
+  images,
   json,
+  library,
+  pages,
   style,
   videos
 ]
