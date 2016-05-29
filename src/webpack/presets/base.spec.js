@@ -1,6 +1,6 @@
 import { expect } from 'chai'
 import { join } from 'path'
-import { HotModuleReplacementPlugin, NoErrorsPlugin } from 'webpack'
+import { HotModuleReplacementPlugin, NoErrorsPlugin, optimize } from 'webpack'
 import CleanWebpackPlugin from 'clean-webpack-plugin'
 
 import plugin from './base'
@@ -43,6 +43,15 @@ describe('configure webpack base', function () {
       const config = plugin.configure({ projectPath, saguiPath, buildTarget: 'development' })
 
       const commons = config.plugins.filter((plugin) => plugin instanceof HotModuleReplacementPlugin)
+      expect(commons.length).equal(1)
+    })
+  })
+
+  describe('production build target', function () {
+    it('should configure DedupePlugin', function () {
+      const config = plugin.configure({ projectPath, saguiPath, buildTarget: 'production' })
+
+      const commons = config.plugins.filter((plugin) => plugin instanceof optimize.DedupePlugin)
       expect(commons.length).equal(1)
     })
   })
