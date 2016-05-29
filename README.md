@@ -182,15 +182,15 @@ module.exports = sagui().webpack({
 
 Here is the complete list of existing Sagui presets:
 
-- **archetype-library**: Add support for the above *Library* configuration;
-- **archetype-pages**: Add support for the above *Pages* configuration;
 - **babel**: ES2015 support;
 - **base**: Base paths and webpack plugins;
 - **define-node-env**: Populates `process.env.NODE_ENV`;
 - **eslint**: ESLint support via [Standard](http://standardjs.com/);
-- **images** Images loading support (`jpg`, `jpeg`, `png`, `gif`, `svg`);
 - **fonts**: Font loading support (`woff`, `woff2`, `ttf`, `eot`);
+- **images** Images loading support (`jpg`, `jpeg`, `png`, `gif`, `svg`);
 - **json**: JSON loader;
+- **library**: Add support for the above *Library* configuration;
+- **pages**: Add support for the above *Pages* configuration;
 - **style**: Vanilla CSS and [Sass language](http://sass-lang.com/) with [CSS Modules](https://github.com/css-modules/css-modules) support;
 - **videos**: Videos loading support (`ogg`, `mp4`).
 

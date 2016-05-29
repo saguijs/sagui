@@ -2,7 +2,7 @@ import HtmlWebpackPlugin from 'html-webpack-plugin'
 import { optimize } from 'webpack'
 import { expect } from 'chai'
 
-import plugin from './archetype-pages'
+import plugin from './pages'
 
 const projectPath = '/tmp/projec-path'
 

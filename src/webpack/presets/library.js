@@ -1,7 +1,7 @@
 import { join } from 'path'
 
 export default {
-  name: 'archetype-library',
+  name: 'library',
   configure ({ library, projectPath, buildTarget }) {
     if (!library) { return {} }
 
