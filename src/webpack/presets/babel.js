@@ -32,10 +32,6 @@ export default {
             loader: 'babel'
           }
         ]
-      },
-
-      resolve: {
-        extensions: ['', '.js', '.jsx']
       }
     }
   }
