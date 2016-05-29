@@ -24,9 +24,9 @@ describe('configure webpack pages', function () {
   describe('single page', function () {
     const baseConfig = { pages: ['index'], projectPath }
 
-    it('should have the output path configured as the dist folder', function () {
+    it('should have the output path configured as the build folder', function () {
       const webpackConfig = plugin.configure(baseConfig)
-      expect(webpackConfig.output.path).eql('/tmp/projec-path/dist')
+      expect(webpackConfig.output.path).eql('/tmp/projec-path/build')
     })
 
     it('should have the entrypoints setup with the index', function () {
