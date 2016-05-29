@@ -4,12 +4,11 @@ import archetypeLibrary from './archetype-library'
 import archetypePages from './archetype-pages'
 import babel from './babel'
 import base from './base'
-import css from './css'
 import defineNodeENV from './define-node-env'
 import eslint from './eslint'
 import images from './images'
 import json from './json'
-import sass from './sass'
+import style from './style'
 import videos from './videos'
 
 const presets = [
@@ -17,12 +16,11 @@ const presets = [
   archetypePages,
   babel,
   base,
-  css,
   defineNodeENV,
   eslint,
   images,
   json,
-  sass,
+  style,
   videos
 ]
 

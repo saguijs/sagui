@@ -170,7 +170,7 @@ module.exports = sagui().webpack({
     /**
      * List of Sagui presets to disable
      */
-    disabledSaguiPresets: ['sass']
+    disabledSaguiPresets: ['style']
   }
 })
 ```
@@ -181,12 +181,11 @@ Here is the complete list of existing Sagui presets:
 - **archetype-pages**: Add support for the above *Pages* configuration;
 - **babel**: ES2015 support;
 - **base**: Base paths and webpack plugins;
-- **css**: Vanilla CSS with [CSS Modules](https://github.com/css-modules/css-modules) support;
 - **define-node-env**: Populates `process.env.NODE_ENV`;
 - **eslint**: ESLint support via [Standard](http://standardjs.com/);
 - **images** Images loading support (`jpg`, `jpeg`, `png`, `gif`);
 - **json**: JSON loader;
-- **sass**: [Sass language](http://sass-lang.com/) with [CSS Modules](https://github.com/css-modules/css-modules) support;
+- **style**: Vanila CSS and [Sass language](http://sass-lang.com/) with [CSS Modules](https://github.com/css-modules/css-modules) support;
 - **videos**: Videos loading support (`ogg`, `mp4`).
 
 ### Extending the default Karma configuration
