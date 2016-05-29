@@ -183,9 +183,9 @@ Here is the complete list of existing Sagui presets:
 - **base**: Base paths and webpack plugins;
 - **define-node-env**: Populates `process.env.NODE_ENV`;
 - **eslint**: ESLint support via [Standard](http://standardjs.com/);
-- **images** Images loading support (`jpg`, `jpeg`, `png`, `gif`);
+- **images** Images loading support (`jpg`, `jpeg`, `png`, `gif`, `svg`);
 - **json**: JSON loader;
-- **style**: Vanila CSS and [Sass language](http://sass-lang.com/) with [CSS Modules](https://github.com/css-modules/css-modules) support;
+- **style**: Vanilla CSS and [Sass language](http://sass-lang.com/) with [CSS Modules](https://github.com/css-modules/css-modules) support;
 - **videos**: Videos loading support (`ogg`, `mp4`).
 
 ### Extending the default Karma configuration
