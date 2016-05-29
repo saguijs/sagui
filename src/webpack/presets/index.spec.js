@@ -49,7 +49,7 @@ describe('configure', function () {
         module: {
           loaders: [
             {
-              test: /\.jsx?$/,
+              test: /\.(jsx?|es6)$/,
               loader: 'babel'
             }
           ]
