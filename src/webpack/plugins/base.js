@@ -34,7 +34,7 @@ function buildPlugins (buildTarget, projectPath) {
     // prevent assets emitted that include errors
     new NoErrorsPlugin(),
 
-    new CleanWebpackPlugin(['dist'], {
+    new CleanWebpackPlugin(['build'], {
       root: projectPath,
       verbose: false
     })
