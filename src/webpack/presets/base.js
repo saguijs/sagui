@@ -19,6 +19,7 @@ export default {
       plugins: buildPlugins(buildTarget, projectPath),
 
       resolve: {
+        extensions: ['', '.js', '.jsx'],
         root: [
           ...modulesDirectories,
           projectSourcePath
