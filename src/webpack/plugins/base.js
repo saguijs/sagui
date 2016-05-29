@@ -1,4 +1,4 @@
-import { HotModuleReplacementPlugin } from 'webpack'
+import { HotModuleReplacementPlugin, NoErrorsPlugin } from 'webpack'
 import CleanWebpackPlugin from 'clean-webpack-plugin'
 import path from 'path'
 
@@ -31,6 +31,9 @@ export default {
 
 function buildPlugins (buildTarget, projectPath) {
   let plugins = [
+    // prevent assets emitted that include errors
+    new NoErrorsPlugin(),
+
     new CleanWebpackPlugin(['dist'], {
       root: projectPath,
       verbose: false

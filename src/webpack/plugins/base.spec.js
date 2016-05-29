@@ -1,6 +1,6 @@
 import { expect } from 'chai'
 import { join } from 'path'
-import { HotModuleReplacementPlugin } from 'webpack'
+import { HotModuleReplacementPlugin, NoErrorsPlugin } from 'webpack'
 import CleanWebpackPlugin from 'clean-webpack-plugin'
 
 import plugin from './base'
@@ -19,7 +19,7 @@ describe('configure webpack base', function () {
     ])
   })
 
-  it('should have the CleanWebpackPlugin enabled always', function () {
+  it('should configure CleanWebpackPlugin', function () {
     const config = plugin.configure({ projectPath, saguiPath, buildTarget: 'dist' })
 
     const commons = config.plugins.filter((plugin) => plugin instanceof CleanWebpackPlugin)
@@ -31,8 +31,15 @@ describe('configure webpack base', function () {
     expect(cleanWebpackPlugin.options.root).to.eql(projectPath)
   })
 
-  describe('targets', function () {
-    it('should have the HotModuleReplacementPlugin enabled while developing', function () {
+  it('should configure NoErrorsPlugin to prevent assets with erros from being emitted', function () {
+    const config = plugin.configure({ projectPath, saguiPath, buildTarget: 'dist' })
+
+    const commons = config.plugins.filter((plugin) => plugin instanceof NoErrorsPlugin)
+    expect(commons.length).equal(1)
+  })
+
+  describe('development build target', function () {
+    it('should configure HotModuleReplacementPlugin', function () {
       const config = plugin.configure({ projectPath, saguiPath, buildTarget: 'development' })
 
       const commons = config.plugins.filter((plugin) => plugin instanceof HotModuleReplacementPlugin)
