@@ -12,7 +12,7 @@ import json from './json'
 import sass from './sass'
 import videos from './videos'
 
-const plugins = [
+const presets = [
   archetypeLibrary,
   archetypePages,
   babel,
@@ -29,7 +29,7 @@ const plugins = [
 export default (config, userWebpackConfig = {}) => {
   const { disabledSaguiPresets = [] } = config
 
-  const defaultWebpackConfig = plugins
+  const defaultWebpackConfig = presets
     .filter((plugin) => disabledSaguiPresets.indexOf(plugin.name) === -1)
     .reduce((webpackConfig, plugin) => {
       return merge.smart(webpackConfig, plugin.configure(config))

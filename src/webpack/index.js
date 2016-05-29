@@ -1,4 +1,4 @@
-import configurePlugins from './plugins'
+import presets from './presets'
 import splitArchetypeConfigs from './split-archetype-configs'
 
 export default ({ buildTarget, projectPath, saguiPath }) => (webpack = {}) => {
@@ -6,6 +6,6 @@ export default ({ buildTarget, projectPath, saguiPath }) => (webpack = {}) => {
 
   return splitArchetypeConfigs(sagui).map((archetypes) => {
     const config = { buildTarget, projectPath, saguiPath, ...archetypes }
-    return configurePlugins(config, userWebpackConfig)
+    return presets(config, userWebpackConfig)
   })
 }
