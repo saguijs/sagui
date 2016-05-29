@@ -3,7 +3,7 @@ import sagui from 'babel-preset-sagui'
 
 export default {
   name: 'babel',
-  configure ({ buildTarget }) {
+  configure ({ buildTarget, babel = {} }) {
     const hmrEnv = {
       development: {
         plugins: [
@@ -29,7 +29,8 @@ export default {
           {
             test: /\.jsx?$/,
             exclude: /node_modules/,
-            loader: 'babel'
+            loader: 'babel',
+            ...babel
           }
         ]
       },
