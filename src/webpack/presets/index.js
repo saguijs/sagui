@@ -7,6 +7,7 @@ import base from './base'
 import defineNodeENV from './define-node-env'
 import eslint from './eslint'
 import images from './images'
+import fonts from './fonts'
 import json from './json'
 import style from './style'
 import videos from './videos'
@@ -19,6 +20,7 @@ const presets = [
   defineNodeENV,
   eslint,
   images,
+  fonts,
   json,
   style,
   videos

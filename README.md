@@ -184,6 +184,7 @@ Here is the complete list of existing Sagui presets:
 - **define-node-env**: Populates `process.env.NODE_ENV`;
 - **eslint**: ESLint support via [Standard](http://standardjs.com/);
 - **images** Images loading support (`jpg`, `jpeg`, `png`, `gif`, `svg`);
+- **fonts**: Font loading support (`woff`, `woff2`, `ttf`, `eot`);
 - **json**: JSON loader;
 - **style**: Vanilla CSS and [Sass language](http://sass-lang.com/) with [CSS Modules](https://github.com/css-modules/css-modules) support;
 - **videos**: Videos loading support (`ogg`, `mp4`).
