@@ -22,7 +22,7 @@ describe('configure webpack base', function () {
   it('should resolve jsx files', function () {
     const config = plugin.configure({ projectPath, saguiPath, buildTarget: 'production' })
 
-    expect(config.resolve.extensions).to.eql(['', '.js', '.jsx'])
+    expect(config.resolve.extensions).to.eql(['', '.js', '.jsx', '.es6'])
   })
 
   it('should configure CleanWebpackPlugin', function () {
