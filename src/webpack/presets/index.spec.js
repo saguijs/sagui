@@ -10,8 +10,8 @@ describe('configure', function () {
 
   describe('disabling presets', function () {
     beforeEach(function () {
-      const disabledSaguiPresets = ['json']
-      config = configure({ projectPath, saguiPath, disabledSaguiPresets })
+      const disabledPresets = ['json']
+      config = configure({ projectPath, saguiPath, disabledPresets })
     })
 
     it('should disable the specified presets', function () {

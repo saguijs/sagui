@@ -170,7 +170,7 @@ module.exports = sagui().webpack({
     /**
      * List of Sagui presets to disable
      */
-    disabledSaguiPresets: ['style']
+    disabledPresets: ['style']
   }
 })
 ```
