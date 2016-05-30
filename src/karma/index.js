@@ -1,4 +1,6 @@
-export default ({ projectPath } = {}) => (karma, webpack) => (config) => {
+export default ({ projectPath } = {}) => (userConfig) => (config) => {
+  const { webpack, ...karma } = userConfig
+
   config.set({
     basePath: projectPath,
 
