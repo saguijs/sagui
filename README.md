@@ -56,15 +56,20 @@ To run the tests, simply:
 npm test
 ```
 
+Then you can start writing your code inside the `src/` folder.
+
+## npm scripts
+
 Sagui manages the [package.json](https://docs.npmjs.com/files/package.json) scripts for you:
 
-- `npm run start`: spins a development server
-- `npm run test`: run the tests
-- `npm run test:watch` run a test watcher (great for development)
-- `npm run build`: build a development version of the project
-- `npm run dist`: build a production ready version of the project
-
-Then you can start writing your code inside the `src/` folder.
+- `npm run build`: build a development version of the project;
+- `npm run develop`: spins a development server;
+- `npm run dist`: build a production ready version of the project;
+- `npm run start`: alias for the *develop* script;
+- `npm run test`: run all test scripts;
+- `npm run test:lint`: run static analysis in the code;
+- `npm run test:unit`: run the unit tests;
+- `npm run test:unit:watch`: run a test watcher (great for development).
 
 ## Features:
 
