@@ -27,6 +27,7 @@ function copyBase (projectPath) {
 }
 
 function copyDotFiles (projectPath) {
+  copySync(join(dotFilesPath, 'babelrc'), join(projectPath, '.babelrc'))
   copySync(join(dotFilesPath, 'editorconfig'), join(projectPath, '.editorconfig'))
   copySync(join(dotFilesPath, 'eslintrc'), join(projectPath, '.eslintrc'))
   copySync(join(dotFilesPath, 'gitignore'), join(projectPath, '.gitignore'))

@@ -1,9 +1,9 @@
+import path from 'path'
 import reactTransform from 'babel-plugin-react-transform'
-import sagui from 'babel-preset-sagui'
 
 export default {
   name: 'babel',
-  configure ({ buildTarget }) {
+  configure ({ buildTarget, projectPath }) {
     const hmrEnv = {
       development: {
         plugins: [
@@ -20,7 +20,7 @@ export default {
 
     return {
       babel: {
-        presets: [sagui],
+        babelrc: path.join(projectPath, '.babelrc'),
         env: buildTarget === 'development' ? hmrEnv : {}
       },
 

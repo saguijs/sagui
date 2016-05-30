@@ -2,10 +2,10 @@ import path from 'path'
 
 export default {
   name: 'eslint',
-  configure ({ saguiPath }) {
+  configure ({ projectPath }) {
     return {
       eslint: {
-        configFile: path.join(saguiPath, '.eslintrc')
+        configFile: path.join(projectPath, '.eslintrc')
       },
 
       module: {
