@@ -202,11 +202,14 @@ As **an example**, lets change the default browser used to execute the tests fro
 
 ```js
 var sagui = require('sagui')
-var webpackConfig = require('./webpack.config')
+var webpack = require('./webpack.config')
 
 module.exports = sagui().karma({
+  // webpack configuration used to build the tests
+  webpack,
+
   browsers: ['Chrome']
-}, webpackConfig)
+})
 ```
 
 ## Logo
