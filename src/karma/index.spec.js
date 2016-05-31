@@ -20,10 +20,14 @@ describe('configure karma', function () {
         set: sinon.spy()
       }
 
-      karma()({ webpack: webpackConfig })(karmaObject)
+      const sagui = {
+        enabledPresets: ['browsers']
+      }
+
+      karma()({ sagui, webpack: webpackConfig })(karmaObject)
       expect(karmaObject.set.lastCall.args[0].browsers).eql(['PhantomJS'])
 
-      karma()({ browsers: ['Chrome'], webpack: webpackConfig })(karmaObject)
+      karma()({ sagui, browsers: ['Chrome'], webpack: webpackConfig })(karmaObject)
       expect(karmaObject.set.lastCall.args[0].browsers).eql(['Chrome'])
     })
   })
