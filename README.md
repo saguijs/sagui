@@ -163,19 +163,28 @@ module.exports = sagui().webpack({
 
 For more information on how the merging of Webpack configurations work check [webpack-merge](https://github.com/survivejs/webpack-merge).
 
-### Disabling the default Webpack configuration
+### Disabling a default Webpack configuration
 
-The internal architecture of Sagui is build around presets, If you need to disable any default behavior, it is possible via:
+The internal architecture of Sagui is build around presets. If you need to disable any default behavior, it is possible by removing a preset from the list of `enabledPresets`:
 
 ```js
 var sagui = require('sagui')
 
 module.exports = sagui().webpack({
   sagui: {
-    /**
-     * List of Sagui presets to disable
-     */
-    disabledPresets: ['style']
+    enabledPresets: [
+      'babel',
+      'base',
+      'defineNodeENV',
+      'eslint',
+      'fonts',
+      'images',
+      'json',
+      'library',
+      'pages',
+      'style',
+      'videos'
+    ]
   }
 })
 ```

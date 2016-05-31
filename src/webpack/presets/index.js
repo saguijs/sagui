@@ -27,10 +27,10 @@ const presets = [
 ]
 
 export default (config, userWebpackConfig = {}) => {
-  const { disabledPresets = [] } = config
+  const { enabledPresets = [] } = config
 
   const defaultWebpackConfig = presets
-    .filter((plugin) => disabledPresets.indexOf(plugin.name) === -1)
+    .filter((plugin) => enabledPresets.indexOf(plugin.name) !== -1)
     .reduce((webpackConfig, plugin) => {
       return merge.smart(webpackConfig, plugin.configure(config))
     }, {})

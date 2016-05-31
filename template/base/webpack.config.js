@@ -10,10 +10,19 @@ module.exports = sagui().webpack({
      */
     pages: ['index'],
 
-    /**
-     * List of Sagui presets to disable
-     */
-    disabledSaguiPresets: []
+    enabledPresets: [
+      'babel',
+      'base',
+      'defineNodeENV',
+      'eslint',
+      'fonts',
+      'images',
+      'json',
+      'library',
+      'pages',
+      'style',
+      'videos'
+    ]
   }
 
   /**
