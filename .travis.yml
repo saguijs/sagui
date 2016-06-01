@@ -29,3 +29,6 @@ env:
   matrix:
   - TEST_TYPE=unit_test
   - TEST_TYPE=integration_test
+cache:
+  directories:
+    - node_modules
