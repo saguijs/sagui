@@ -7,12 +7,13 @@ import cli from './cli'
 
 export default function sagui ({
   buildTarget = normalize(process.env.NODE_ENV),
+  enableCoverage = !!process.env.SAGUI_COVERAGE,
   projectPath = path.dirname(parentModule()),
   saguiPath = path.join(__dirname, '..')
 } = {}) {
   return {
-    karma: karma({ projectPath }),
-    webpack: webpack({ buildTarget, projectPath, saguiPath }),
+    karma: karma({ projectPath, enableCoverage }),
+    webpack: webpack({ buildTarget, projectPath, saguiPath, enableCoverage }),
     bootstrap: bootstrap({ projectPath })
   }
 }

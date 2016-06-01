@@ -3,6 +3,7 @@ import merge from 'webpack-merge'
 import babel from './babel'
 import base from './base'
 import clean from './clean'
+import coverage from './coverage'
 import defineNodeENV from './define-node-env'
 import eslint from './eslint'
 import fonts from './fonts'
@@ -18,6 +19,7 @@ const presets = [
   babel,
   base,
   clean,
+  coverage,
   defineNodeENV,
   eslint,
   fonts,

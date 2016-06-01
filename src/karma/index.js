@@ -1,8 +1,7 @@
 import presets from './presets'
 
-export default ({ projectPath } = {}) => (karma) => (config) => {
-  const { sagui = {}, ...userKarmaConfig } = karma
-  const saguiConfig = { projectPath, ...sagui }
-  const result = presets(saguiConfig, userKarmaConfig)
-  config.set(result)
+export default (config = {}) => (userConfig) => (karmaObject) => {
+  const { sagui = {}, ...userKarmaConfig } = userConfig
+  const result = presets({ ...config, ...sagui }, userKarmaConfig)
+  karmaObject.set(result)
 }

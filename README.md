@@ -69,6 +69,7 @@ Sagui manages the [package.json](https://docs.npmjs.com/files/package.json) scri
 - `npm run test`: run all test scripts;
 - `npm run test:lint`: run static analysis in the code;
 - `npm run test:unit`: run the unit tests;
+- `npm run test:coverage`: run the unit tests with HTML coverage report;
 - `npm run test:unit:watch`: run a test watcher (great for development).
 
 ## Features:
@@ -186,6 +187,7 @@ Here is the complete list of existing Sagui presets:
 - **babel**: ES2015 support;
 - **base**: Base paths and webpack plugins;
 - **clean**: Clean the build folder;
+- **coverage**: Intruments the code to generate code coverage report using [Isparta](https://github.com/douglasduteil/isparta);
 - **define-node-env**: Populates `process.env.NODE_ENV`;
 - **eslint**: ESLint support via [Standard](http://standardjs.com/);
 - **fonts**: Font loading support (`woff`, `woff2`, `ttf`, `eot`);
@@ -243,6 +245,7 @@ Here is the complete list of existing Sagui presets:
 
 - **base**: base configuration setting up the path and Webpack;
 - **browsers**: default Sagui recommended browsers [PhantomJS](http://phantomjs.org);
+- **coverage**: outputs HTML coverage report using [karma-coverage](https://github.com/karma-runner/karma-coverage);
 - **frameworks**: recommended testing framework [Jasmine](http://jasmine.github.io/) and [Sinon](http://sinonjs.org/) setup so that they are available as globals in the test environment;
 - **reporters**: Basic reporting of test results using the *mocha* style.
 

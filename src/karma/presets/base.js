@@ -11,7 +11,7 @@ export default {
 
       preprocessors: {
         // add webpack as preprocessor
-        'src/**/*.spec.*': ['webpack', 'sourcemap']
+        'src/**/*.spec.*': ['webpack']
       },
 
       webpackServer: {
