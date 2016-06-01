@@ -12,7 +12,7 @@ module.exports = sagui().karma({
   },
 
   // webpack configuration used to build the tests
-  webpack
+  webpack: webpack
 
   /**
    * Additional Karma configuration
