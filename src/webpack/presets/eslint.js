@@ -2,7 +2,11 @@ import path from 'path'
 
 export default {
   name: 'eslint',
-  configure ({ projectPath }) {
+  configure ({ projectPath, enableCoverage }) {
+    if (!enableCoverage) {
+      return {}
+    }
+
     return {
       eslint: {
         configFile: path.join(projectPath, '.eslintrc')
