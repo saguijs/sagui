@@ -1,13 +1,13 @@
 import { expect } from 'chai'
 import CleanWebpackPlugin from 'clean-webpack-plugin'
-import plugin from './clean'
+import preset from './clean'
 
-describe('clean', function () {
+describe('clean webpack preset', function () {
   it('should configure CleanWebpackPlugin', function () {
     const projectPath = 'a/demo/path'
-    const config = plugin.configure({ projectPath })
+    const config = preset.configure({ projectPath })
 
-    const commons = config.plugins.filter((plugin) => plugin instanceof CleanWebpackPlugin)
+    const commons = config.plugins.filter((preset) => preset instanceof CleanWebpackPlugin)
     expect(commons.length).equal(1)
 
     const cleanWebpackPlugin = commons[0]

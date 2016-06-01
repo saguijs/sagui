@@ -1,11 +1,11 @@
 import { join } from 'path'
 import { expect } from 'chai'
-import configure from './index'
+import presets from './index'
 
 const saguiPath = join(__dirname, '../../../../')
 const projectPath = join(saguiPath, 'spec/fixtures/simple-project')
 
-describe('configure', function () {
+describe('webpack presets', function () {
   let config
 
   const enabledPresets = [
@@ -25,7 +25,7 @@ describe('configure', function () {
   describe('disabling presets by removing from the enabledPresets list', function () {
     beforeEach(function () {
       const withoutJSON = enabledPresets.filter((preset) => preset !== 'json')
-      config = configure({ enabledPresets: withoutJSON, projectPath, saguiPath })
+      config = presets({ enabledPresets: withoutJSON, projectPath, saguiPath })
     })
 
     it('should disable the specified presets', function () {
@@ -40,20 +40,20 @@ describe('configure', function () {
         target: 'electron'
       }
 
-      config = configure({ enabledPresets, projectPath, saguiPath }, webpackConfig)
+      config = presets({ enabledPresets, projectPath, saguiPath }, webpackConfig)
 
       expect(config.target).equal('electron')
     })
 
     it('should allow overwriting the default configuration', function () {
-      const defaultConfig = configure({ enabledPresets, projectPath, saguiPath }, webpackConfig)
+      const defaultConfig = presets({ enabledPresets, projectPath, saguiPath }, webpackConfig)
       expect(defaultConfig.devtool).equal('source-map')
 
       const webpackConfig = {
         devtool: 'cheap-source-map'
       }
 
-      config = configure({ enabledPresets, projectPath, saguiPath }, webpackConfig)
+      config = presets({ enabledPresets, projectPath, saguiPath }, webpackConfig)
       expect(config.devtool).equal('cheap-source-map')
     })
 
@@ -70,7 +70,7 @@ describe('configure', function () {
         }
       }
 
-      config = configure({ enabledPresets, projectPath, saguiPath }, webpackConfig)
+      config = presets({ enabledPresets, projectPath, saguiPath }, webpackConfig)
       const loaders = config.module.loaders.filter((loader) => loader.loader === 'babel')
 
       // should change the existing loader, not add another

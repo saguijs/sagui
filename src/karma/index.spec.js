@@ -2,7 +2,7 @@ import { expect } from 'chai'
 import sinon from 'sinon'
 import karma from './index'
 
-describe('configure karma', function () {
+describe('karma', function () {
   const webpackConfig = ['first', 'seccond']
 
   it('should the first availbale webpackConfig from the webpackConfig array to prevent double test execution', function () {

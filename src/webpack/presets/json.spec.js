@@ -1,10 +1,10 @@
 import { expect } from 'chai'
 
-import plugin from './json'
+import preset from './json'
 
-describe('configure webpack json', function () {
+describe('json webpack preset', function () {
   it('should have a JSON loader', function () {
-    const webpackConfig = plugin.configure({})
+    const webpackConfig = preset.configure({})
     const loader = webpackConfig.module.loaders.find((loader) => loader.loader === 'json-loader')
     expect(loader.test).eql(/\.(json)$/)
   })

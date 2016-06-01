@@ -34,9 +34,9 @@ export default (config, userWebpackConfig = {}) => {
   const { enabledPresets = [] } = config
 
   const defaultWebpackConfig = presets
-    .filter((plugin) => enabledPresets.indexOf(plugin.name) !== -1)
-    .reduce((webpackConfig, plugin) => {
-      return merge.smart(webpackConfig, plugin.configure(config))
+    .filter((preset) => enabledPresets.indexOf(preset.name) !== -1)
+    .reduce((webpackConfig, preset) => {
+      return merge.smart(webpackConfig, preset.configure(config))
     }, {})
 
   return merge.smart(defaultWebpackConfig, userWebpackConfig)
