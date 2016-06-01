@@ -14,6 +14,7 @@ module.exports = sagui().webpack({
       'babel',
       'base',
       'clean',
+      'coverage',
       'defineNodeENV',
       'eslint',
       'fonts',

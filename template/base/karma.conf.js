@@ -6,6 +6,7 @@ module.exports = sagui().karma({
     enabledPresets: [
       'base',
       'browsers',
+      'coverage',
       'frameworks',
       'reporters'
     ]

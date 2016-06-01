@@ -9,6 +9,7 @@ const saguiScripts = {
   'test': 'npm run test:lint && npm run test:unit',
   'test:lint': 'eslint src/',
   'test:unit': 'NODE_ENV=test karma start',
+  'test:coverage': 'SAGUI_COVERAGE=true npm run test:unit',
   'test:unit:watch': 'npm run test -- --no-single-run --auto-watch'
 }
 

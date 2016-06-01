@@ -2,7 +2,13 @@ import path from 'path'
 
 export default {
   name: 'eslint',
-  configure ({ projectPath }) {
+  configure ({ projectPath, enableCoverage }) {
+    // We need to disable linting when generating coverage because the code is instrumented
+    // and therefore it's not following the linting rules anymore.
+    if (enableCoverage) {
+      return {}
+    }
+
     return {
       eslint: {
         configFile: path.join(projectPath, '.eslintrc')
