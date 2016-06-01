@@ -172,18 +172,10 @@ var sagui = require('sagui')
 
 module.exports = sagui().webpack({
   sagui: {
+    // example: enables only babel and base
     enabledPresets: [
       'babel',
-      'base',
-      'defineNodeENV',
-      'eslint',
-      'fonts',
-      'images',
-      'json',
-      'library',
-      'pages',
-      'style',
-      'videos'
+      'base'
     ]
   }
 })
@@ -193,12 +185,14 @@ Here is the complete list of existing Sagui presets:
 
 - **babel**: ES2015 support;
 - **base**: Base paths and webpack plugins;
+- **clean**: Clean the build folder;
 - **define-node-env**: Populates `process.env.NODE_ENV`;
 - **eslint**: ESLint support via [Standard](http://standardjs.com/);
 - **fonts**: Font loading support (`woff`, `woff2`, `ttf`, `eot`);
 - **images** Images loading support (`jpg`, `jpeg`, `png`, `gif`, `svg`);
 - **json**: JSON loader;
 - **library**: Add support for the above *Library* configuration;
+- **optimize**: Optimize the build using UglifyJsPlugin and DedupePlugin;
 - **pages**: Add support for the above *Pages* configuration;
 - **style**: Vanilla CSS and [Sass language](http://sass-lang.com/) with [CSS Modules](https://github.com/css-modules/css-modules) support;
 - **videos**: Videos loading support (`ogg`, `mp4`).

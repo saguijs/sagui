@@ -1,7 +1,6 @@
 import { expect } from 'chai'
 import { join } from 'path'
-import { HotModuleReplacementPlugin, NoErrorsPlugin, optimize } from 'webpack'
-import CleanWebpackPlugin from 'clean-webpack-plugin'
+import { HotModuleReplacementPlugin, NoErrorsPlugin } from 'webpack'
 
 import plugin from './base'
 
@@ -25,18 +24,6 @@ describe('configure webpack base', function () {
     expect(config.resolve.extensions).to.eql(['', '.js', '.jsx', '.es6'])
   })
 
-  it('should configure CleanWebpackPlugin', function () {
-    const config = plugin.configure({ projectPath, saguiPath, buildTarget: 'production' })
-
-    const commons = config.plugins.filter((plugin) => plugin instanceof CleanWebpackPlugin)
-    expect(commons.length).equal(1)
-
-    const cleanWebpackPlugin = commons[0]
-    expect(cleanWebpackPlugin.paths).to.eql(['build'])
-    expect(cleanWebpackPlugin.options.verbose).to.eql(false)
-    expect(cleanWebpackPlugin.options.root).to.eql(projectPath)
-  })
-
   it('should configure NoErrorsPlugin to prevent assets with erros from being emitted', function () {
     const config = plugin.configure({ projectPath, saguiPath, buildTarget: 'production' })
 
@@ -50,25 +37,6 @@ describe('configure webpack base', function () {
 
       const commons = config.plugins.filter((plugin) => plugin instanceof HotModuleReplacementPlugin)
       expect(commons.length).equal(1)
-    })
-  })
-
-  describe('production build target', function () {
-    it('should configure DedupePlugin', function () {
-      const config = plugin.configure({ projectPath, saguiPath, buildTarget: 'production' })
-
-      const commons = config.plugins.filter((plugin) => plugin instanceof optimize.DedupePlugin)
-      expect(commons.length).equal(1)
-    })
-
-    it('should configure UglifyJsPlugin without the warnings', function () {
-      const config = plugin.configure({ projectPath, saguiPath, buildTarget: 'production' })
-
-      const commons = config.plugins.filter((plugin) => plugin instanceof optimize.UglifyJsPlugin)
-      expect(commons.length).equal(1)
-
-      const uglifyJsPlugin = commons[0]
-      expect(uglifyJsPlugin.options.compress.warnings).to.eql(false)
     })
   })
 })

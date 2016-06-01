@@ -13,12 +13,14 @@ module.exports = sagui().webpack({
     enabledPresets: [
       'babel',
       'base',
+      'clean',
       'defineNodeENV',
       'eslint',
       'fonts',
       'images',
       'json',
       'library',
+      'optimize',
       'pages',
       'style',
       'videos'
