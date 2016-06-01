@@ -2,6 +2,15 @@ var sagui = require('sagui')
 var webpack = require('./webpack.config')
 
 module.exports = sagui().karma({
+  sagui: {
+    enabledPresets: [
+      'base',
+      'browsers',
+      'frameworks',
+      'reporters'
+    ]
+  },
+
   // webpack configuration used to build the tests
   webpack
 

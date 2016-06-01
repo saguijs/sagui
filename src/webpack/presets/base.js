@@ -1,5 +1,4 @@
-import { HotModuleReplacementPlugin, NoErrorsPlugin, optimize } from 'webpack'
-import CleanWebpackPlugin from 'clean-webpack-plugin'
+import { HotModuleReplacementPlugin, NoErrorsPlugin } from 'webpack'
 import path from 'path'
 
 export default {
@@ -16,7 +15,7 @@ export default {
 
       devtool: 'source-map',
 
-      plugins: buildPlugins(buildTarget, projectPath),
+      plugins: buildPlugins(buildTarget),
 
       resolve: {
         extensions: ['', '.js', '.jsx', '.es6'],
@@ -30,32 +29,14 @@ export default {
   }
 }
 
-function buildPlugins (buildTarget, projectPath) {
-  let plugins = [
+function buildPlugins (buildTarget) {
+  const plugins = [
     // prevent assets emitted that include errors
-    new NoErrorsPlugin(),
-
-    new CleanWebpackPlugin(['build'], {
-      root: projectPath,
-      verbose: false
-    })
+    new NoErrorsPlugin()
   ]
 
   if (buildTarget === 'development') {
     plugins.push(new HotModuleReplacementPlugin())
-  }
-
-  if (buildTarget === 'production') {
-    plugins.push(new optimize.DedupePlugin())
-
-    plugins.push(new optimize.UglifyJsPlugin({
-      compress: {
-        // disable warning messages
-        // since they are very verbose
-        // and provide little value
-        warnings: false
-      }
-    }))
   }
 
   return plugins

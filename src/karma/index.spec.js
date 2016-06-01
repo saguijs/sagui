@@ -2,7 +2,7 @@ import { expect } from 'chai'
 import sinon from 'sinon'
 import karma from './index'
 
-describe('configure karma', function () {
+describe('karma', function () {
   const webpackConfig = ['first', 'seccond']
 
   it('should the first availbale webpackConfig from the webpackConfig array to prevent double test execution', function () {
@@ -20,10 +20,14 @@ describe('configure karma', function () {
         set: sinon.spy()
       }
 
-      karma()({ webpack: webpackConfig })(karmaObject)
+      const sagui = {
+        enabledPresets: ['browsers']
+      }
+
+      karma()({ sagui, webpack: webpackConfig })(karmaObject)
       expect(karmaObject.set.lastCall.args[0].browsers).eql(['PhantomJS'])
 
-      karma()({ browsers: ['Chrome'], webpack: webpackConfig })(karmaObject)
+      karma()({ sagui, browsers: ['Chrome'], webpack: webpackConfig })(karmaObject)
       expect(karmaObject.set.lastCall.args[0].browsers).eql(['Chrome'])
     })
   })

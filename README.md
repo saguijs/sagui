@@ -163,34 +163,37 @@ module.exports = sagui().webpack({
 
 For more information on how the merging of Webpack configurations work check [webpack-merge](https://github.com/survivejs/webpack-merge).
 
-### Disabling the default Webpack configuration
+### Disabling a default Webpack configuration
 
-The internal architecture of Sagui is build around presets, If you need to disable any default behavior, it is possible via:
+The internal architecture of Sagui is build around presets. If you need to disable any default behavior, it is possible by removing a preset from the list of `enabledPresets` in the `webpack.config.js` file:
 
 ```js
 var sagui = require('sagui')
 
 module.exports = sagui().webpack({
   sagui: {
-    /**
-     * List of Sagui presets to disable
-     */
-    disabledPresets: ['style']
+    // example: enables only babel and base
+    enabledPresets: [
+      'babel',
+      'base'
+    ]
   }
 })
 ```
 
 Here is the complete list of existing Sagui presets:
 
-- **archetype-library**: Add support for the above *Library* configuration;
-- **archetype-pages**: Add support for the above *Pages* configuration;
 - **babel**: ES2015 support;
 - **base**: Base paths and webpack plugins;
+- **clean**: Clean the build folder;
 - **define-node-env**: Populates `process.env.NODE_ENV`;
 - **eslint**: ESLint support via [Standard](http://standardjs.com/);
-- **images** Images loading support (`jpg`, `jpeg`, `png`, `gif`, `svg`);
 - **fonts**: Font loading support (`woff`, `woff2`, `ttf`, `eot`);
+- **images** Images loading support (`jpg`, `jpeg`, `png`, `gif`, `svg`);
 - **json**: JSON loader;
+- **library**: Add support for the above *Library* configuration;
+- **optimize**: Optimize the build using UglifyJsPlugin and DedupePlugin;
+- **pages**: Add support for the above *Pages* configuration;
 - **style**: Vanilla CSS and [Sass language](http://sass-lang.com/) with [CSS Modules](https://github.com/css-modules/css-modules) support;
 - **videos**: Videos loading support (`ogg`, `mp4`).
 
@@ -211,6 +214,37 @@ module.exports = sagui().karma({
   browsers: ['Chrome']
 })
 ```
+
+### Disabling a default Karma configuration
+
+Following the same architecture of the Webpack presets, it is also possible to disable a specific Sagui behavior by also removing a preset from the list of `enabledPresets` in the `karma.conf.js` file:
+
+```js
+var sagui = require('sagui')
+var webpack = require('./webpack.config')
+
+module.exports = sagui().karma({
+  sagui: {
+    enabledPresets: [
+      'base',
+      'browsers',
+      'frameworks',
+      'reporters'
+    ]
+  },
+
+  // webpack configuration used to build the tests
+  webpack
+})
+
+```
+
+Here is the complete list of existing Sagui presets:
+
+- **base**: base configuration setting up the path and Webpack;
+- **browsers**: default Sagui recommended browsers [PhantomJS](http://phantomjs.org);
+- **frameworks**: recommended testing framework [Jasmine](http://jasmine.github.io/) and [Sinon](http://sinonjs.org/) setup so that they are available as globals in the test environment;
+- **reporters**: Basic reporting of test results using the *mocha* style.
 
 ## Logo
 
