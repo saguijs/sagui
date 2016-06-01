@@ -3,7 +3,6 @@ import path from 'path'
 export default {
   name: 'coverage',
   configure ({ projectPath, enableCoverage }) {
-    console.log(enableCoverage)
     if (!enableCoverage) {
       return {}
     }

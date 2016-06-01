@@ -20,7 +20,7 @@ export default (config, userKarmaConfig = {}) => {
   const defaultKarmaConfig = presets
     .filter((preset) => enabledPresets.indexOf(preset.name) !== -1)
     .reduce((karmaConfig, preset) => mergeKarma(karmaConfig, preset.configure(config)), {})
-  console.log(defaultKarmaConfig)
+
   return {
     ...defaultKarmaConfig,
     ...karmaConfig,
