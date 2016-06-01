@@ -13,7 +13,7 @@ export default {
     return {
       context: projectSourcePath,
 
-      devtool: 'source-map',
+      devtool: 'inline-source-map',
 
       plugins: buildPlugins(buildTarget),
 

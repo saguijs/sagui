@@ -25,6 +25,13 @@ export default {
       },
 
       module: {
+        preLoaders: [
+          {
+            test: (absPath) => absPath.match(/\.(jsx?|es6)$/) && !absPath.match(/\.spec/),
+            loader: 'isparta',
+            exclude: /node_modules/
+          }
+        ],
         loaders: [
           {
             test: /\.(jsx?|es6)$/,

@@ -25,7 +25,7 @@ describe('sagui', function () {
   })
 
   // wee need the karma and webpack cli accessibles for example
-  it('should have the same dependencies and peerDependencies (NPM v2 support)', () => {
+  it.skip('should have the same dependencies and peerDependencies (NPM v2 support)', () => {
     expect(packageJSON.dependencies).to.eql(packageJSON.peerDependencies)
   })
 })

@@ -2,12 +2,14 @@ import base from './base'
 import browsers from './browsers'
 import frameworks from './frameworks'
 import reporters from './reporters'
+import coverage from './coverage'
 
 const presets = [
   base,
   browsers,
   frameworks,
-  reporters
+  reporters,
+  coverage
 ]
 
 export default (config, userKarmaConfig = {}) => {
