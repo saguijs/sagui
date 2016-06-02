@@ -2,6 +2,7 @@ import path from 'path'
 import postCSSModulesValues from 'postcss-modules-values'
 import ExtractTextPlugin from 'extract-text-webpack-plugin'
 import autoprefixer from 'autoprefixer'
+import fileExtensions from '../file-extensions'
 
 /**
  * Style preset with
@@ -49,13 +50,13 @@ export default {
       module: {
         loaders: [
           {
-            test: /\.css$/,
+            test: fileExtensions.CSS,
             loader: shouldExtract
               ? extractCss.extract(cssLoaders)
               : ['style', ...cssLoaders].join('!')
           },
           {
-            test: /\.scss$/,
+            test: fileExtensions.SCSS,
             loader: shouldExtract
               ? extractSass.extract(sassLoaders)
               : ['style', ...sassLoaders].join('!')

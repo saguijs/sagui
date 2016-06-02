@@ -1,5 +1,6 @@
 import path from 'path'
 import reactTransform from 'babel-plugin-react-transform'
+import fileExtensions from '../file-extensions'
 
 export default {
   name: 'babel',
@@ -27,7 +28,7 @@ export default {
       module: {
         loaders: [
           {
-            test: /\.(jsx?|es6)$/,
+            test: fileExtensions.JAVASCRIPT,
             exclude: /node_modules/,
             loader: 'babel'
           }

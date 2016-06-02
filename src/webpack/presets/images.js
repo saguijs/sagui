@@ -1,3 +1,5 @@
+import fileExtensions from '../file-extensions'
+
 export default {
   name: 'images',
   configure () {
@@ -5,7 +7,7 @@ export default {
       module: {
         loaders: [
           {
-            test: /\.(png|jpg|jpeg|gif|svg)$/,
+            test: fileExtensions.IMAGE,
             loader: 'url-loader?limit=8192&name=[name]-[hash].[ext]'
           }
         ]
