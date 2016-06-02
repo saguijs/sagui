@@ -1,4 +1,5 @@
 import { join } from 'path'
+import buildTargets from '../../build-targets'
 
 export default {
   name: 'library',
@@ -12,10 +13,10 @@ export default {
       output: {
         path: join(projectPath, 'build'),
         filename: 'index.js',
-        libraryTarget: buildTarget === 'test' ? undefined : 'commonjs2',
+        libraryTarget: buildTarget === buildTargets.TEST ? undefined : 'commonjs2',
         library
       },
-      externals: buildTarget === 'test' ? [] : externals
+      externals: buildTarget === buildTargets.TEST ? [] : externals
     }
   }
 }

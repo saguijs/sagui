@@ -3,6 +3,7 @@ import postCSSModulesValues from 'postcss-modules-values'
 import ExtractTextPlugin from 'extract-text-webpack-plugin'
 import autoprefixer from 'autoprefixer'
 import fileExtensions from '../file-extensions'
+import buildTargets from '../../build-targets'
 
 /**
  * Style preset with
@@ -13,7 +14,7 @@ import fileExtensions from '../file-extensions'
 export default {
   name: 'style',
   configure ({ pages = [], projectPath, buildTarget }) {
-    const isProduction = buildTarget === 'production'
+    const isProduction = buildTarget === buildTargets.PRODUCTION
     const shouldExtract = pages.length > 0 && isProduction
     const localIdentName = isProduction ? '[hash]' : '[path][local]-[hash:base64:5]'
 

@@ -4,6 +4,7 @@ import karma from './karma'
 import webpack from './webpack'
 import bootstrap from './bootstrap'
 import cli from './cli'
+import buildTargets from './build-targets'
 
 export default function sagui ({
   buildTarget = normalize(process.env.NODE_ENV),
@@ -23,4 +24,4 @@ export default function sagui ({
  */
 sagui.cli = cli
 
-const normalize = (env = 'development') => env.toLowerCase().trim()
+const normalize = (env = buildTargets.DEVELOPMENT) => env.toLowerCase().trim()

@@ -1,6 +1,7 @@
 import { join } from 'path'
 import { expect } from 'chai'
 import preset from './library'
+import buildTargets from '../../build-targets'
 
 const saguiPath = join(__dirname, '../../../')
 const projectPath = join(saguiPath, 'spec/fixtures/library-project')
@@ -24,7 +25,7 @@ describe('library webpack preset', function () {
     })
 
     it('should NOT SET the exporting target if buildTarget is test (a browser wont understand commonjs modules)', function () {
-      const webpackConfig = preset.configure({ ...baseConfiguration, buildTarget: 'test' })
+      const webpackConfig = preset.configure({ ...baseConfiguration, buildTarget: buildTargets.TEST })
       expect(webpackConfig.output.libraryTarget).undefined
     })
 
@@ -45,7 +46,7 @@ describe('library webpack preset', function () {
       })
 
       it('should have an empty externals if the buildTarget is test', function () {
-        const webpackConfig = preset.configure({ ...baseConfiguration, buildTarget: 'test' })
+        const webpackConfig = preset.configure({ ...baseConfiguration, buildTarget: buildTargets.TEST })
         expect(webpackConfig.externals).eql([])
       })
 
