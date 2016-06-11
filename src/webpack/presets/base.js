@@ -1,5 +1,6 @@
 import { HotModuleReplacementPlugin, NoErrorsPlugin } from 'webpack'
 import path from 'path'
+import buildTargets from '../../build-targets'
 
 export default {
   name: 'base',
@@ -35,7 +36,7 @@ function buildPlugins (buildTarget) {
     new NoErrorsPlugin()
   ]
 
-  if (buildTarget === 'development') {
+  if (buildTarget === buildTargets.DEVELOPMENT) {
     plugins.push(new HotModuleReplacementPlugin())
   }
 

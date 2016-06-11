@@ -1,3 +1,5 @@
+import fileExtensions from '../file-extensions'
+
 export default {
   name: 'json',
   configure () {
@@ -5,7 +7,7 @@ export default {
       module: {
         loaders: [
           {
-            test: /\.(json)$/,
+            test: fileExtensions.JSON,
             loader: 'json-loader'
           }
         ]

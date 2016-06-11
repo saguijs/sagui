@@ -1,3 +1,5 @@
+import fileExtensions from '../file-extensions'
+
 export default {
   name: 'videos',
   configure () {
@@ -5,7 +7,7 @@ export default {
       module: {
         loaders: [
           {
-            test: /\.(ogg|mp4)$/,
+            test: fileExtensions.VIDEO,
             loader: 'file?name=[name]-[hash].[ext]'
           }
         ]

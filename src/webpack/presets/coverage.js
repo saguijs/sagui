@@ -1,3 +1,5 @@
+import fileExtensions from '../file-extensions'
+
 export default {
   name: 'babel',
   configure ({ enableCoverage }) {
@@ -9,7 +11,7 @@ export default {
       module: {
         preLoaders: [
           {
-            test: (absPath) => absPath.match(/\.(jsx?|es6)$/) && !absPath.match(/\.spec/),
+            test: (absPath) => absPath.match(fileExtensions.JAVASCRIPT) && !absPath.match(/\.spec/),
             loader: 'isparta',
             exclude: /node_modules/
           }

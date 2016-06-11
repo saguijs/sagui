@@ -1,11 +1,12 @@
 import { optimize } from 'webpack'
+import buildTargets from '../../build-targets'
 
 export default {
   name: 'optimize',
   configure ({ buildTarget }) {
     const plugins = []
 
-    if (buildTarget === 'production') {
+    if (buildTarget === buildTargets.PRODUCTION) {
       plugins.push(new optimize.DedupePlugin())
 
       plugins.push(new optimize.UglifyJsPlugin({

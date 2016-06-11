@@ -1,3 +1,5 @@
+import fileExtensions from '../file-extensions'
+
 export default {
   name: 'fonts',
   configure () {
@@ -5,19 +7,19 @@ export default {
       module: {
         loaders: [
           {
-            test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
+            test: fileExtensions.WOFF,
             loader: 'file?name=[name]-[hash].[ext]&mimetype=application/font-woff'
           },
           {
-            test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/,
+            test: fileExtensions.WOFF2,
             loader: 'file?name=[name]-[hash].[ext]&mimetype=application/font-woff'
           },
           {
-            test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
+            test: fileExtensions.TTF,
             loader: 'file?name=[name]-[hash].[ext]&mimetype=application/octet-stream'
           },
           {
-            test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
+            test: fileExtensions.EOT,
             loader: 'file?name=[name]-[hash].[ext]'
           }
         ]

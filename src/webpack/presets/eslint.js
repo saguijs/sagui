@@ -1,4 +1,5 @@
 import path from 'path'
+import fileExtensions from '../file-extensions'
 
 export default {
   name: 'eslint',
@@ -17,7 +18,7 @@ export default {
       module: {
         preLoaders: [
           {
-            test: /\.jsx?$/,
+            test: fileExtensions.JAVASCRIPT,
             loader: 'eslint',
             exclude: /node_modules/
           }

@@ -1,6 +1,7 @@
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import { join } from 'path'
 import { optimize } from 'webpack'
+import buildTargets from '../../build-targets'
 
 export default {
   name: 'pages',
@@ -30,7 +31,7 @@ function configureEntry (pages, buildTarget) {
   pages.forEach((page) => {
     entry[page] = [`./${page}`]
 
-    if (buildTarget === 'development') {
+    if (buildTarget === buildTargets.DEVELOPMENT) {
       entry[page].push(hotMiddleware)
     }
   })
@@ -47,7 +48,7 @@ function configurePlugins (pages, buildTarget) {
     })
   })
 
-  if (pages.length > 1 && buildTarget !== 'test') {
+  if (pages.length > 1 && buildTarget !== buildTargets.TEST) {
     plugins.push(new optimize.CommonsChunkPlugin({ name: 'common' }))
   }
 
