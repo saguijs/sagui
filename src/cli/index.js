@@ -1,12 +1,12 @@
 import program from 'commander'
 import sagui from '../index'
-import configurePath, { MissingPackageJSON, SaguiPath } from './path'
+import environment, { MissingPackageJSON, SaguiPath } from './environment'
 import { logError, logWarning, log } from '../util/log'
 
 program.command('install')
   .description('Install or update sagui in the current project')
   .action(function () {
-    sagui(configurePath()).bootstrap()
+    sagui(environment()).bootstrap()
     log('installed in the project')
   })
 
@@ -28,3 +28,6 @@ export default (argv = []) => {
 
   if (!argv.slice(2).length) program.outputHelp()
 }
+
+
+

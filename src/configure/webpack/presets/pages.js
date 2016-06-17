@@ -1,7 +1,7 @@
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import { join } from 'path'
 import { optimize } from 'webpack'
-import buildTargets from '../../build-targets'
+import buildTargets from '../../../build-targets'
 
 export default {
   name: 'pages',

@@ -32,14 +32,14 @@ const presets = [
   videos
 ]
 
-export default (options) => {
+export default (saguiOptions) => {
   const webpackConfig = presets
     .reduce((webpackConfig, preset) => (
-      merge.smart(webpackConfig, preset.configure(options))
+      merge.smart(webpackConfig, preset.configure(saguiOptions))
     ), {})
 
   return merge.smart(
     webpackConfig,
-    options.webpack || {}
+    saguiOptions.webpack || {}
   )
 }

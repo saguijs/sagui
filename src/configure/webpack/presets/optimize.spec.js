@@ -1,7 +1,7 @@
 import { expect } from 'chai'
 import { optimize } from 'webpack'
 import preset from './optimize'
-import buildTargets from '../../build-targets'
+import buildTargets from '../../../build-targets'
 
 describe('optimize webpack preset', function () {
   describe('production build target', function () {

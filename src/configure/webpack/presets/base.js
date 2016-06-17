@@ -1,6 +1,6 @@
 import { HotModuleReplacementPlugin, NoErrorsPlugin } from 'webpack'
 import path from 'path'
-import buildTargets from '../../build-targets'
+import buildTargets from '../../../build-targets'
 
 export default {
   name: 'base',

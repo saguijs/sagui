@@ -1,4 +1,4 @@
-const fileExtensions = {
+export default {
   CSS: /\.css$/,
   EOT: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
   IMAGE: /\.(png|jpg|jpeg|gif|svg)$/,
@@ -10,5 +10,3 @@ const fileExtensions = {
   WOFF2: /\.woff2(\?v=\d+\.\d+\.\d+)?$/,
   WOFF: /\.woff(\?v=\d+\.\d+\.\d+)?$/
 }
-
-export default fileExtensions

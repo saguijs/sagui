@@ -1,6 +1,7 @@
 import { join } from 'path'
 import { expect } from 'chai'
 import presets from './index'
+import fileExtensions from '../../../file-extensions'
 
 const saguiPath = join(__dirname, '../../../../')
 const projectPath = join(saguiPath, 'spec/fixtures/simple-project')
@@ -8,69 +9,42 @@ const projectPath = join(saguiPath, 'spec/fixtures/simple-project')
 describe('webpack presets', function () {
   let config
 
-  const enabledPresets = [
-    'babel',
-    'base',
-    'defineNodeENV',
-    'eslint',
-    'fonts',
-    'images',
-    'json',
-    'library',
-    'pages',
-    'style',
-    'videos'
-  ]
-
-  describe('disabling presets by removing from the enabledPresets list', function () {
-    beforeEach(function () {
-      const withoutJSON = enabledPresets.filter((preset) => preset !== 'json')
-      config = presets({ enabledPresets: withoutJSON, projectPath, saguiPath })
-    })
-
-    it('should disable the specified presets', function () {
-      const loader = config.module.loaders.find((loader) => loader.loader === 'json-loader')
-      expect(loader).eql(undefined)
-    })
-  })
-
   describe('webpackConfig extension', function () {
     it('should allow extending the default configuration', function () {
-      const webpackConfig = {
+      const webpack = {
         target: 'electron'
       }
 
-      config = presets({ enabledPresets, projectPath, saguiPath }, webpackConfig)
-
+      config = presets({ projectPath, saguiPath, webpack })
       expect(config.target).equal('electron')
     })
 
     it('should allow overwriting the default configuration', function () {
-      const defaultConfig = presets({ enabledPresets, projectPath, saguiPath }, webpackConfig)
+      const defaultConfig = presets({ projectPath, saguiPath })
       expect(defaultConfig.devtool).equal('source-map')
 
-      const webpackConfig = {
+      const webpack = {
         devtool: 'cheap-source-map'
       }
 
-      config = presets({ enabledPresets, projectPath, saguiPath }, webpackConfig)
+      config = presets({ projectPath, saguiPath, webpack })
       expect(config.devtool).equal('cheap-source-map')
     })
 
     it('should allow changing a loader based on the test (webpack-merge feature)', function () {
       // disable the default exclude behavior of Babel
-      const webpackConfig = {
+      const webpack = {
         module: {
           loaders: [
             {
-              test: /\.(jsx?|es6)$/,
+              test: fileExtensions.JAVASCRIPT,
               loader: 'babel'
             }
           ]
         }
       }
 
-      config = presets({ enabledPresets, projectPath, saguiPath }, webpackConfig)
+      config = presets({ projectPath, saguiPath, webpack })
       const loaders = config.module.loaders.filter((loader) => loader.loader === 'babel')
 
       // should change the existing loader, not add another

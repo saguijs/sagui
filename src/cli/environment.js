@@ -1,9 +1,14 @@
 import { join } from 'path'
 import json from '../util/json'
 import fileExists from '../util/file-exists'
+import buildTargets from '../build-targets'
 
-export default function configurePath () {
-  const path = process.env.SAGUI_LINK ? {
+/**
+ * Setup saguiPath, projectPath and buildTarget
+ * based on the current environment
+ */
+export default function () {
+  const paths = process.env.SAGUI_LINK ? {
     projectPath: process.cwd(),
     saguiPath: join(process.cwd(), 'node_modules/sagui')
   } : {
@@ -11,8 +16,14 @@ export default function configurePath () {
     saguiPath: join(__dirname, '../../')
   }
 
-  sanityCheck(path)
-  return path
+  const environment = {
+    ...paths,
+    buildTarget: normalize(process.env.NODE_ENV)
+  }
+
+  sanityCheck(environment)
+
+  return environment
 }
 
 function sanityCheck ({ projectPath }) {
@@ -38,3 +49,5 @@ export function SaguiPath () {
 }
 SaguiPath.prototype = Object.create(Error.prototype)
 SaguiPath.prototype.constructor = SaguiPath
+
+const normalize = (env = buildTargets.DEVELOPMENT) => env.toLowerCase().trim()

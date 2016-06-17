@@ -1,8 +1,9 @@
+import mergeKarma from '../../../util/merge-karma'
+
 import base from './base'
 import browsers from './browsers'
 import coverage from './coverage'
 import frameworks from './frameworks'
-import mergeKarma from './merge-karma'
 import reporters from './reporters'
 import webpack from './webpack'
 
@@ -15,14 +16,14 @@ const presets = [
   webpack
 ]
 
-export default (options) => {
+export default (saguiOptions) => {
   const karmaConfig = presets
     .reduce((karmaConfig, preset) => (
-      mergeKarma(karmaConfig, preset.configure(options))
+      mergeKarma(karmaConfig, preset.configure(saguiOptions))
     ), {})
 
   return mergeKarma(
     karmaConfig,
-    options.karma || {}
+    saguiOptions.karma || {}
   )
 }
