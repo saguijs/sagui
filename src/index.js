@@ -6,16 +6,41 @@ import bootstrap from './bootstrap'
 import cli from './cli'
 import buildTargets from './build-targets'
 
-export default function sagui ({
-  buildTarget = normalize(process.env.NODE_ENV),
-  enableCoverage = !!process.env.SAGUI_COVERAGE,
-  projectPath = path.dirname(parentModule()),
-  saguiPath = path.join(__dirname, '..')
-} = {}) {
+export default function sagui (instanceOptions = {}) {
+  const defaultOptions = {
+    /**
+     * Path
+     */
+    buildTarget: normalize(process.env.NODE_ENV),
+    projectPath: path.dirname(parentModule()),
+    saguiPath: path.join(__dirname, '..'),
+
+    /**
+     * Miscellaneous
+     * @type {Boolean}
+     */
+    hotReloading: false,
+    optimize: false,
+    defineNodeEnv: false,
+    clean: false,
+    testCoverage: false,
+    lint: false,
+
+    /**
+     * Default application is a single index page
+     */
+    pages: ['/index'],
+
+    disabledLoaders: [],
+
+    webpack: {},
+
+    karma: {}
+  }
+
   return {
-    karma: karma({ projectPath, enableCoverage }),
-    webpack: webpack({ buildTarget, projectPath, saguiPath, enableCoverage }),
-    bootstrap: bootstrap({ projectPath })
+    webpack: (options = {}) => webpack({ ...defaultOptions, ...instanceOptions, ...options }),
+    karma: (options = {}) => karma({ ...defaultOptions, ...instanceOptions, ...options })
   }
 }
 

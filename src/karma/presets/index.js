@@ -4,30 +4,25 @@ import coverage from './coverage'
 import frameworks from './frameworks'
 import mergeKarma from './merge-karma'
 import reporters from './reporters'
+import webpack from './webpack'
 
 const presets = [
   base,
   browsers,
   coverage,
   frameworks,
-  reporters
+  reporters,
+  webpack
 ]
 
-export default (config, userKarmaConfig = {}) => {
-  const { enabledPresets = [] } = config
-  const { webpack, ...karmaConfig } = userKarmaConfig
+export default (options) => {
+  const karmaConfig = presets
+    .reduce((karmaConfig, preset) => (
+      mergeKarma(karmaConfig, preset.configure(options))
+    ), {})
 
-  const defaultKarmaConfig = presets
-    .filter((preset) => enabledPresets.indexOf(preset.name) !== -1)
-    .reduce((karmaConfig, preset) => mergeKarma(karmaConfig, preset.configure(config)), {})
-
-  return {
-    ...defaultKarmaConfig,
-    ...karmaConfig,
-
-    // there can be multiple webpack configurations
-    // and although harmless to have them all running the tests
-    // it is not required and only produces double execution
-    webpack: Array.isArray(webpack) ? webpack[0] : webpack
-  }
+  return mergeKarma(
+    karmaConfig,
+    options.karma || {}
+  )
 }

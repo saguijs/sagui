@@ -32,14 +32,14 @@ const presets = [
   videos
 ]
 
-export default (config, userWebpackConfig = {}) => {
-  const { enabledPresets = [] } = config
+export default (options) => {
+  const webpackConfig = presets
+    .reduce((webpackConfig, preset) => (
+      merge.smart(webpackConfig, preset.configure(options))
+    ), {})
 
-  const defaultWebpackConfig = presets
-    .filter((preset) => enabledPresets.indexOf(preset.name) !== -1)
-    .reduce((webpackConfig, preset) => {
-      return merge.smart(webpackConfig, preset.configure(config))
-    }, {})
-
-  return merge.smart(defaultWebpackConfig, userWebpackConfig)
+  return merge.smart(
+    webpackConfig,
+    options.webpack || {}
+  )
 }
