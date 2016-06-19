@@ -1,5 +1,5 @@
-import { join } from 'path'
-import json from '../util/json'
+import path from 'path'
+import json from '../../util/json'
 
 const saguiScripts = {
   'build': 'webpack --bail',
@@ -14,7 +14,7 @@ const saguiScripts = {
 }
 
 export default function (projectPath) {
-  const packagePath = join(projectPath, 'package.json')
+  const packagePath = path.join(projectPath, 'package.json')
   const packageJSON = json.read(packagePath)
 
   json.write(packagePath, {

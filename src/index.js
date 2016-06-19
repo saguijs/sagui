@@ -3,6 +3,8 @@ import loadProjectConfig from './project-config'
 import configureKarma from './karma'
 import configureWebpack from './webpack'
 import run from './runner'
+import json from './util/json'
+import fileExists from './util/file-exists'
 import pipeline from './util/pipeline'
 
 /**
@@ -29,6 +31,7 @@ import pipeline from './util/pipeline'
  */
 export default (options = {}) => {
   const saguiOptions = pipeline(
+    sanityCheck,
     loadProjectConfig,
     configureWebpack,
     configureKarma
@@ -53,3 +56,31 @@ const DEFAULT_OPTIONS = {
   webpack: {},
   karma: {}
 }
+
+function sanityCheck (saguiOptions) {
+  const { projectPath } = saguiOptions
+
+  const packagePath = path.join(projectPath, 'package.json')
+  if (!fileExists(packagePath)) throw new MissingPackageJSON()
+
+  const packageJSON = json.read(packagePath)
+  if (packageJSON.name === 'sagui') throw new SaguiPath()
+
+  return saguiOptions
+}
+
+export function MissingPackageJSON () {
+  this.name = 'MissingPackageJSON'
+  this.message = 'Must be executed in target project\'s package.json path'
+  this.stack = (new Error()).stack
+}
+MissingPackageJSON.prototype = Object.create(Error.prototype)
+MissingPackageJSON.prototype.constructor = MissingPackageJSON
+
+export function SaguiPath () {
+  this.name = 'SaguiPath'
+  this.message = 'Sagui CLI must not be run in Sagui\'s path'
+  this.stack = (new Error()).stack
+}
+SaguiPath.prototype = Object.create(Error.prototype)
+SaguiPath.prototype.constructor = SaguiPath

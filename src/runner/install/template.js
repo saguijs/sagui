@@ -1,11 +1,11 @@
 import { join, basename } from 'path'
 import { copySync } from 'fs-extra'
-import { logWarning } from '../util/log'
-import fileExists from '../util/file-exists'
 import template from 'template-directory'
+import { logWarning } from '../../util/log'
+import fileExists from '../../util/file-exists'
 
-const basePath = join(__dirname, '../../template/base')
-const dotFilesPath = join(__dirname, '../../template/dot-files')
+const basePath = join(__dirname, '../../../template/base')
+const dotFilesPath = join(__dirname, '../../../template/dot-files')
 
 export default function (projectPath) {
   const srcFolder = join(projectPath, 'src')
