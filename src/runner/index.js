@@ -20,5 +20,8 @@ export default (saguiOptions) => {
 
     case 'lint':
       return lint(saguiOptions)
+
+    default:
+      return Promise.reject('A valid action is required.')
   }
 }

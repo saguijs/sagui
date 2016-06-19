@@ -1,7 +1,6 @@
 import webpack from 'webpack'
-import { log } from '../util/log'
 
-export default function build (saguiOptions) {
+export default (saguiOptions) => new Promise((resolve, reject) => {
   const compiler = webpack(saguiOptions.webpack)
 
   compiler.run((err, stats) => {
@@ -21,12 +20,10 @@ export default function build (saguiOptions) {
 
     if (!saguiOptions.watch && (err || hasSoftErrors)) {
       process.on('exit', function () {
-        process.exit(1)
+        reject()
       })
-
-      return
+    } else {
+      resolve()
     }
-
-    log('Build complete, files written in the dist/ folder.')
   })
-}
+})

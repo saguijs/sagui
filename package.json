@@ -19,7 +19,7 @@
     "build": "rm -rf lib && babel src --out-dir lib --ignore *.spec.js",
     "test": "npm run test:lint && npm run test:unit",
     "test:lint": "eslint .",
-    "test:unit": "mocha --compilers js:babel-register --recursive --reporter spec ./src",
+    "test:unit": "mocha --timeout 0 --compilers js:babel-register --recursive --reporter spec ./src",
     "test:unit-watch": "npm run test:unit -- --watch",
     "prepublish": "not-in-install && npm prune && npm test && npm run build || in-install",
     "postinstall": "./bin/sagui install"

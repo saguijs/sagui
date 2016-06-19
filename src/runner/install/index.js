@@ -3,9 +3,14 @@ import template from './template'
 
 /**
  * Bootstrap and updates project structures
- * @param  {String} projectPath target Sagui project
  */
-export default ({ projectPath }) => () => {
-  packageJSON(projectPath)
-  template(projectPath)
-}
+export default ({ projectPath }) => new Promise((resolve, reject) => {
+  try {
+    packageJSON(projectPath)
+    template(projectPath)
+  } catch (e) {
+    reject(e)
+  }
+
+  resolve()
+})
