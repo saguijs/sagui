@@ -13,8 +13,8 @@ describe('base webpack preset', function () {
 
     expect(config.resolve.root).to.eql([
       join(projectPath, '/node_modules'),
-      join(saguiPath, '/node_modules'),
-      join(projectPath, '/src')
+      join(projectPath, '/src'),
+      join(saguiPath, '/node_modules')
     ])
   })
 
