@@ -45,6 +45,7 @@ program.command('install')
 program.command('test')
   .description('Run tests')
   .option('-w, --watch', 'Run tests on any file change')
+  .option('-c, --coverage', 'Generate a coverage report')
   .action(setupAction('test'))
 
 program.command('build')
