@@ -1,15 +1,9 @@
 import fs from 'fs-extra'
 import path from 'path'
 import { expect } from 'chai'
-import packageJSON from '../package.json'
 import sagui from '.'
 
 describe('sagui', function () {
-  // wee need the karma and webpack cli accessibles for example
-  it('should have the same dependencies and peerDependencies (NPM v2 support)', () => {
-    expect(packageJSON.dependencies).to.eql(packageJSON.peerDependencies)
-  })
-
   describe('simple project', () => {
     const projectFixture = path.join(__dirname, '../spec/fixtures/simple-project')
     const projectPath = path.join(__dirname, '../tmp/project')
