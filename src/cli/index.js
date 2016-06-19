@@ -48,6 +48,10 @@ program.command('test')
   .option('-c, --coverage', 'Generate a coverage report')
   .action(setupAction('test'))
 
+program.command('lint')
+  .description('Lint the code')
+  .action(setupAction('lint'))
+
 program.command('build')
   .description('Build the project')
   .action(setupAction('build'))
