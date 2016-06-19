@@ -5,10 +5,6 @@ import buildTargets from '../../build-targets'
 export default {
   name: 'base',
   configure ({ buildTarget, projectPath, saguiPath }) {
-    const modulesDirectories = [
-      path.join(projectPath, '/node_modules'),
-      path.join(saguiPath, '/node_modules')
-    ]
     const projectSourcePath = path.join(projectPath, 'src')
 
     return {
@@ -21,8 +17,12 @@ export default {
       resolve: {
         extensions: ['', '.js', '.jsx', '.es6'],
         root: [
-          ...modulesDirectories,
-          projectSourcePath
+          path.join(projectPath, '/node_modules'),
+          projectSourcePath,
+
+          // Sagui node_modules is required in the path to be able
+          // to load the `webpack-hot-middleware`
+          path.join(saguiPath, '/node_modules')
         ]
       },
       resolveLoader: {
