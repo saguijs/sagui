@@ -1,24 +1,24 @@
-import express from 'express'
 import webpack from 'webpack'
+import { logError, log } from '../util/log'
+import Server from 'webpack-dev-server'
 
 /**
  * Development server
  */
 export default (saguiOptions) => new Promise((resolve, reject) => {
-  const app = express()
-  const compiler = webpack(saguiOptions.webpack)
+  const options = {
+    info: false,
+    quiet: true,
+    inline: true,
+    historyApiFallback: saguiOptions.pages && saguiOptions.pages[0] && `${saguiOptions.pages[0]}.html`
+  }
 
-  app.use(require('webpack-dev-middleware')(compiler, {
-    noInfo: true
-  }))
-
-  app.use(require('webpack-hot-middleware')(compiler))
-
-  app.listen(3000, '0.0.0.0', (err) => {
+  new Server(webpack(saguiOptions.webpack), options).listen(saguiOptions.port, '0.0.0.0', (err) => {
     if (err) {
+      logError(`Server failed to started at http://localhost:${saguiOptions.port}`)
       reject(err)
     } else {
-      resolve()
+      log(`Server started at http://localhost:${saguiOptions.port}/webpack-dev-server/`)
     }
   })
 })

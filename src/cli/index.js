@@ -54,4 +54,5 @@ program.command('build')
 
 program.command('develop')
   .description('Run development environment')
+  .option('-p, --port <n>', 'Port the server will listen (default: 3000)', parseInt)
   .action(setupAction('develop'))

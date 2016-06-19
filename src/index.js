@@ -52,6 +52,7 @@ sagui.cli = cli
 export default sagui
 
 const DEFAULT_OPTIONS = {
+  port: 3000,
   saguiPath: path.join(__dirname, '../'),
   hotReloading: true,
   optimize: true,
