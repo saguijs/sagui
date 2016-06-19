@@ -1,7 +1,7 @@
 import { join } from 'path'
 import { expect } from 'chai'
 import presets from './index'
-import fileExtensions from '../../../file-extensions'
+import fileExtensions from '../../file-extensions'
 
 const saguiPath = join(__dirname, '../../../../')
 const projectPath = join(saguiPath, 'spec/fixtures/simple-project')

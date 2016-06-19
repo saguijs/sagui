@@ -10,6 +10,15 @@ program.command('install')
     log('installed in the project')
   })
 
+program.command('test')
+  .description('Run tests')
+  .option('-w, --watch', 'Run tests on any file change')
+  .action(function (options) {
+    const config = configure(environment())
+
+    sagui.test(options)
+  })
+
 /**
  * Command line interface for Sagui
  */

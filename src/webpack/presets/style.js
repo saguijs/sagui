@@ -2,8 +2,8 @@ import path from 'path'
 import postCSSModulesValues from 'postcss-modules-values'
 import ExtractTextPlugin from 'extract-text-webpack-plugin'
 import autoprefixer from 'autoprefixer'
-import fileExtensions from '../../../file-extensions'
-import buildTargets from '../../../build-targets'
+import fileExtensions from '../../file-extensions'
+import buildTargets from '../../build-targets'
 
 /**
  * Style preset with

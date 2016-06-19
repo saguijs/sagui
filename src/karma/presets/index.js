@@ -1,4 +1,4 @@
-import mergeKarma from '../../../util/merge-karma'
+import mergeKarma from '../../util/merge-karma'
 
 import base from './base'
 import browsers from './browsers'

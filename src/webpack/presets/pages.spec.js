@@ -2,7 +2,7 @@ import HtmlWebpackPlugin from 'html-webpack-plugin'
 import { optimize } from 'webpack'
 import { expect } from 'chai'
 import preset from './pages'
-import buildTargets from '../../../build-targets'
+import buildTargets from '../../build-targets'
 
 const projectPath = '/tmp/projec-path'
 

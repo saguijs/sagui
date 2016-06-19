@@ -2,7 +2,7 @@ import { expect } from 'chai'
 import { join } from 'path'
 import { HotModuleReplacementPlugin, NoErrorsPlugin } from 'webpack'
 import preset from './base'
-import buildTargets from '../../../build-targets'
+import buildTargets from '../../build-targets'
 
 const saguiPath = join(__dirname, '../../../../../')
 const projectPath = join(saguiPath, 'spec/fixtures/simple-project')

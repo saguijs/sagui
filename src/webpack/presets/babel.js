@@ -1,7 +1,7 @@
 import path from 'path'
 import reactTransform from 'babel-plugin-react-transform'
-import fileExtensions from '../../../file-extensions'
-import buildTargets from '../../../build-targets'
+import fileExtensions from '../../file-extensions'
+import buildTargets from '../../build-targets'
 
 export default {
   name: 'babel',

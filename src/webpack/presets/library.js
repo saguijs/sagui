@@ -1,5 +1,5 @@
 import { join } from 'path'
-import buildTargets from '../../../build-targets'
+import buildTargets from '../../build-targets'
 
 export default {
   name: 'library',
