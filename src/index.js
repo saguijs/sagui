@@ -1,4 +1,5 @@
 import path from 'path'
+import cli from './cli'
 import loadProjectConfig from './project-config'
 import configureKarma from './karma'
 import configureWebpack from './webpack'
@@ -29,7 +30,7 @@ import pipeline from './util/pipeline'
  * @param {Object} [options.webpack] Webpack configuration object to extend the internal configuration.
  * @param {Object} [options.karma] Karma configuration object to extend the internal configuration.
  */
-export default (options = {}) => {
+const sagui = (options = {}) => {
   const saguiOptions = pipeline(
     sanityCheck,
     loadProjectConfig,
@@ -42,6 +43,13 @@ export default (options = {}) => {
     run: () => run(saguiOptions)
   }
 }
+
+/**
+ * Command Line Interface
+ */
+sagui.cli = cli
+
+export default sagui
 
 const DEFAULT_OPTIONS = {
   saguiPath: path.join(__dirname, '../'),
