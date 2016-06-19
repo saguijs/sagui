@@ -1,4 +1,5 @@
 import webpack from 'webpack'
+import { logError, log } from '../util/log'
 
 export default (saguiOptions) => new Promise((resolve, reject) => {
   const compiler = webpack(saguiOptions.webpack)
@@ -7,22 +8,25 @@ export default (saguiOptions) => new Promise((resolve, reject) => {
     var softErrors = !err && stats.toJson().errors
     var hasSoftErrors = softErrors && softErrors.length > 0
 
-    if (err) {
-      console.error(err.stack || err)
-      if (err.details) console.error(err.details)
-    }
+    if (err || hasSoftErrors) {
+      logError('Build failed.')
 
-    if (hasSoftErrors) {
-      softErrors.forEach(function (error) {
-        console.error(error)
-      })
-    }
+      if (err) {
+        console.error(err.stack || err)
+        if (err.details) console.error(err.details)
+      }
 
-    if (!saguiOptions.watch && (err || hasSoftErrors)) {
+      if (hasSoftErrors) {
+        softErrors.forEach(function (error) {
+          console.error(error)
+        })
+      }
+
       process.on('exit', function () {
         reject()
       })
     } else {
+      log('Built successfull.')
       resolve()
     }
   })
