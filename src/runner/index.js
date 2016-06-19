@@ -2,6 +2,7 @@ import developmentServer from './development-server'
 import build from './build'
 import test from './test'
 import install from './install'
+import lint from './lint'
 
 export default (saguiOptions) => {
   switch (saguiOptions.action) {
@@ -16,5 +17,8 @@ export default (saguiOptions) => {
 
     case 'install':
       return install(saguiOptions)
+
+    case 'lint':
+      return lint(saguiOptions)
   }
 }
