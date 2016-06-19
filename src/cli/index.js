@@ -33,7 +33,7 @@ const setupAction = (action) => (cliOptions = {}) => {
       : path.join(__dirname, '../../../../')
   }
 
-  sagui(options).run()
+  sagui(options).run().then(() => process.exit(0), () => process.exit(1))
 }
 
 const normalize = (env = buildTargets.DEVELOPMENT) => env.toLowerCase().trim()

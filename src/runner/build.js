@@ -22,9 +22,7 @@ export default (saguiOptions) => new Promise((resolve, reject) => {
         })
       }
 
-      process.on('exit', function () {
-        reject()
-      })
+      reject()
     } else {
       log('Built successfull.')
       resolve()
