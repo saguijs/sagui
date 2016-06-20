@@ -1,5 +1,5 @@
 import path from 'path'
-import fileExtensions from '../file-extensions'
+import fileExtensions from '../../file-extensions'
 
 export default {
   name: 'eslint',

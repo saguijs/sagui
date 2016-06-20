@@ -1,4 +1,4 @@
-import fileExtensions from '../file-extensions'
+import fileExtensions from '../../file-extensions'
 
 export default {
   name: 'videos',

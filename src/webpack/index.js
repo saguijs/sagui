@@ -1,10 +1,11 @@
 import presets from './presets'
-import splitArchetypeConfigs from './split-archetype-configs'
+import splitArchetypes from './split-archetypes'
 
-export default (config) => (webpack = {}) => {
-  const { sagui = {}, ...userWebpackConfig } = webpack
-
-  return splitArchetypeConfigs(sagui).map((archetypes) => {
-    return presets({ ...config, ...archetypes }, userWebpackConfig)
-  })
+export default (saguiOptions = {}) => {
+  return {
+    ...saguiOptions,
+    webpack: splitArchetypes(saguiOptions).map(
+      (saguiOptionsByArchetype) => presets(saguiOptionsByArchetype)
+    )
+  }
 }

@@ -4,7 +4,7 @@ import { HotModuleReplacementPlugin, NoErrorsPlugin } from 'webpack'
 import preset from './base'
 import buildTargets from '../../build-targets'
 
-const saguiPath = join(__dirname, '../../../../')
+const saguiPath = join(__dirname, '../../../../../')
 const projectPath = join(saguiPath, 'spec/fixtures/simple-project')
 
 describe('base webpack preset', function () {
@@ -13,8 +13,8 @@ describe('base webpack preset', function () {
 
     expect(config.resolve.root).to.eql([
       join(projectPath, '/node_modules'),
-      join(saguiPath, '/node_modules'),
-      join(projectPath, '/src')
+      join(projectPath, '/src'),
+      join(saguiPath, '/node_modules')
     ])
   })
 
