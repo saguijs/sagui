@@ -2,8 +2,8 @@ import path from 'path'
 
 export default {
   name: 'coverage',
-  configure ({ projectPath, enableCoverage }) {
-    if (!enableCoverage) {
+  configure ({ projectPath, coverage }) {
+    if (!coverage) {
       return {}
     }
 
