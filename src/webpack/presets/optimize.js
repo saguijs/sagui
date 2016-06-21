@@ -1,26 +1,24 @@
-import { optimize } from 'webpack'
-import buildTargets from '../../build-targets'
+import webpack from 'webpack'
 
 export default {
   name: 'optimize',
-  configure ({ buildTarget }) {
-    const plugins = []
-
-    if (buildTarget === buildTargets.PRODUCTION) {
-      plugins.push(new optimize.DedupePlugin())
-
-      plugins.push(new optimize.UglifyJsPlugin({
-        compress: {
-          // disable warning messages
-          // since they are very verbose
-          // and provide little value
-          warnings: false
-        }
-      }))
+  configure ({ buildTarget, optimize }) {
+    if (!optimize) {
+      return {}
     }
 
     return {
-      plugins
+      plugins: [
+        new webpack.optimize.DedupePlugin(),
+        new webpack.optimize.UglifyJsPlugin({
+          compress: {
+            // disable warning messages
+            // since they are very verbose
+            // and provide little value
+            warnings: false
+          }
+        })
+      ]
     }
   }
 }

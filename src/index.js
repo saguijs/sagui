@@ -20,7 +20,7 @@ import pipeline from './util/pipeline'
  * @param {string} options.buildTarget Target: (development, production, test).
  * @param {string} options.action Action: (develop, test, build)
  * @param {boolean} [options.hotReloading = true] Enable hot reloading
- * @param {boolean} [options.optimize = true] Optimize the output (minify, dedup...)
+ * @param {boolean} [options.optimize = false] Optimize the output (minify, dedup...)
  * @param {boolean} [options.defineNodeEnv = true] Define and replace NODE_ENV environment in the code
  * @param {boolean} [options.clean = true] Clean the build directory
  * @param {boolean} [options.testCoverage = false] Outputs test coverage while running the tests
@@ -55,7 +55,7 @@ const DEFAULT_OPTIONS = {
   port: 3000,
   saguiPath: path.join(__dirname, '../'),
   hotReloading: true,
-  optimize: true,
+  optimize: false,
   defineNodeEnv: true,
   clean: true,
   testCoverage: false,

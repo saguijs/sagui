@@ -54,6 +54,7 @@ program.command('lint')
 
 program.command('build')
   .description('Build the project')
+  .option('-p, --optimize', 'Optimize the build (minify, dedup...)')
   .action(setupAction('build'))
 
 program.command('develop')
