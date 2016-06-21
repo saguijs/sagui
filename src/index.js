@@ -23,7 +23,7 @@ import pipeline from './util/pipeline'
  * @param {boolean} [options.optimize = true] Optimize the output (minify, dedup...)
  * @param {boolean} [options.defineNodeEnv = true] Define and replace NODE_ENV environment in the code
  * @param {boolean} [options.clean = true] Clean the build directory
- * @param {boolean} [options.testCoverage = false] Outputs test coverage while running the tests
+ * @param {boolean} [options.coverage = false] Outputs test coverage while running the tests
  * @param {boolean} [options.lint = true] Perform static analysis of the code through ESLint
  * @param {string[]} [options.pages = ['index']] Define a build output based on a HTML and JS files.
  * @param {string[]} [options.disabledLoaders = []] Disables loaders for specific file types.
@@ -58,7 +58,7 @@ const DEFAULT_OPTIONS = {
   optimize: true,
   defineNodeEnv: true,
   clean: true,
-  testCoverage: false,
+  coverage: false,
   lint: true,
   pages: ['/index'],
   disabledLoaders: [],

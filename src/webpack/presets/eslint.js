@@ -3,10 +3,10 @@ import fileExtensions from '../../file-extensions'
 
 export default {
   name: 'eslint',
-  configure ({ projectPath, enableCoverage }) {
+  configure ({ projectPath, coverage }) {
     // We need to disable linting when generating coverage because the code is instrumented
     // and therefore it's not following the linting rules anymore.
-    if (enableCoverage) {
+    if (coverage) {
       return {}
     }
 
