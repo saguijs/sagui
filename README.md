@@ -9,7 +9,9 @@ Sagui is **the single development dependency** that bundles [Webpack](http://web
 
 It follows an opinionated convention over configuration approach, providing a solid foundation so that you can focus on writing your code.
 
-**This branch is for the upcoming v5 release**, for the current stable release check the [v4 branch](https://github.com/saguijs/sagui/tree/v4).
+**This branch is for the upcoming v6 release**, for the current stable release check the [v4 branch](https://github.com/saguijs/sagui/tree/v4).
+
+**The documentation in this branch is still outdated.**
 
 ## Creating a new front-end project
 
