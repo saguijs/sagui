@@ -30,5 +30,6 @@ function copyDotFiles (projectPath) {
   copySync(join(dotFilesPath, 'babelrc'), join(projectPath, '.babelrc'), { clobber: false })
   copySync(join(dotFilesPath, 'editorconfig'), join(projectPath, '.editorconfig'), { clobber: false })
   copySync(join(dotFilesPath, 'eslintrc'), join(projectPath, '.eslintrc'), { clobber: false })
+  copySync(join(dotFilesPath, 'eslintignore'), join(projectPath, '.eslintignore'), { clobber: false })
   copySync(join(dotFilesPath, 'gitignore'), join(projectPath, '.gitignore'), { clobber: false })
 }
