@@ -13,7 +13,7 @@ export default {
 
     return {
       output: {
-        path: join(projectPath, 'build'),
+        path: join(projectPath, 'dist'),
         filename: '[name]-[hash].js',
         chunkFilename: '[name]-[hash].chunk.js'
       },

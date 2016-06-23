@@ -11,7 +11,7 @@ export default {
     return {
       entry: './index.js',
       output: {
-        path: join(projectPath, 'build'),
+        path: join(projectPath, 'dist'),
         filename: 'index.js',
         libraryTarget: buildTarget === buildTargets.TEST ? undefined : 'commonjs2',
         library
