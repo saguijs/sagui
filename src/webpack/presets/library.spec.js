@@ -36,7 +36,7 @@ describe('library webpack preset', function () {
 
     it('should have the output path configured as the build folder', function () {
       const webpackConfig = preset.configure(baseConfiguration)
-      expect(webpackConfig.output.path).eql(join(projectPath, 'build'))
+      expect(webpackConfig.output.path).eql(join(projectPath, 'dist'))
     })
 
     describe('externals', function () {
