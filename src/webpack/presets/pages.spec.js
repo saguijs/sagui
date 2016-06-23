@@ -26,7 +26,7 @@ describe('pages webpack preset', function () {
 
     it('should have the output path configured as the build folder', function () {
       const webpackConfig = preset.configure(baseConfig)
-      expect(webpackConfig.output.path).eql('/tmp/projec-path/build')
+      expect(webpackConfig.output.path).eql('/tmp/projec-path/dist')
     })
 
     it('should have the entrypoints setup with the index', function () {

@@ -5,7 +5,7 @@ export default {
   configure ({ projectPath }) {
     return {
       plugins: [
-        new CleanWebpackPlugin(['build'], {
+        new CleanWebpackPlugin(['dist'], {
           root: projectPath,
           verbose: false
         })
