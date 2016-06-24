@@ -14,6 +14,7 @@ import optimize from './optimize'
 import pages from './pages'
 import style from './style'
 import videos from './videos'
+import yaml from './yaml'
 
 const presets = [
   babel,
@@ -29,7 +30,8 @@ const presets = [
   optimize,
   pages,
   style,
-  videos
+  videos,
+  yaml
 ]
 
 export default (saguiOptions) => {
