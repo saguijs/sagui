@@ -3,7 +3,7 @@ import path from 'path'
 import { expect } from 'chai'
 import sagui from '.'
 
-describe('sagui', function () {
+describe('[integration] sagui', function () {
   describe('simple project', () => {
     const projectFixture = path.join(__dirname, '../spec/fixtures/simple-project')
     const projectPath = path.join(__dirname, '../tmp/project')
