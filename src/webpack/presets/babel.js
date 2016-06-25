@@ -5,7 +5,7 @@ import buildTargets from '../../build-targets'
 
 export default {
   name: 'babel',
-  configure ({ buildTarget, projectPath }) {
+  configure ({ buildTarget, projectPath, javaScript = {} }) {
     const hmrEnv = {
       development: {
         plugins: [
@@ -20,6 +20,10 @@ export default {
       }
     }
 
+    const userPaths = (javaScript.transpileDependencies || []).map((dependency) => (
+      path.join(projectPath, 'node_modules', dependency)
+    ))
+
     return {
       babel: {
         babelrc: path.join(projectPath, '.babelrc'),
@@ -30,7 +34,10 @@ export default {
         loaders: [
           {
             test: fileExtensions.JAVASCRIPT,
-            exclude: /node_modules/,
+            include: [
+              path.join(projectPath, 'src'),
+              ...userPaths
+            ],
             loader: 'babel'
           }
         ]
