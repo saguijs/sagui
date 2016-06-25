@@ -21,7 +21,7 @@
     "test:lint": "eslint .",
     "test:integration": "mocha --timeout 0 --compilers js:babel-register --recursive --reporter spec --fgrep [integration] ./src",
     "test:unit": "mocha --timeout 0 --compilers js:babel-register --recursive --reporter spec --fgrep [integration] --invert ./src",
-    "test:unit-watch": "npm run test:unit -- --watch",
+    "test:unit:watch": "npm run test:unit -- --watch",
     "prepublish": "not-in-install && npm prune && npm test && npm run build || in-install",
     "postinstall": "./bin/sagui install"
   },
