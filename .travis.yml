@@ -5,11 +5,16 @@ node_js:
 sudo: false
 script:
 - |
-    if [ "$TEST_TYPE" = unit_test ]; then
+    if [ "$TEST_TYPE" = lint_and_test_unit ]; then
       set -e
-      npm test
+      npm run test:lint
+      npm run test:unit
 
     elif [ "$TEST_TYPE" = integration_test ]; then
+      set -e
+      npm run test:integration
+
+    elif [ "$TEST_TYPE" = test_create_project ]; then
       set -e
 
       SAGUI_DIR=`pwd`
@@ -28,8 +33,9 @@ script:
     fi
 env:
   matrix:
-  - TEST_TYPE=unit_test
+  - TEST_TYPE=lint_and_test_unit
   - TEST_TYPE=integration_test
+  - TEST_TYPE=test_create_project
 cache:
   directories:
     - node_modules
