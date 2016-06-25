@@ -12,7 +12,10 @@ export default {
       coverageReporter: {
         dir: path.join(projectPath, 'coverage'),
         reporters: [
-          { type: 'html', subdir: 'html' }
+          { type: 'html', subdir: 'html' },
+
+          // outputs the coverage report in the console
+          { type: 'text' }
         ]
       }
     }

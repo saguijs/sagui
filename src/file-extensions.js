@@ -8,5 +8,6 @@ export default {
   TTF: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
   VIDEO: /\.(ogg|mp4)$/,
   WOFF2: /\.woff2(\?v=\d+\.\d+\.\d+)?$/,
-  WOFF: /\.woff(\?v=\d+\.\d+\.\d+)?$/
+  WOFF: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
+  YAML: /\.(yml|yaml)$/
 }
