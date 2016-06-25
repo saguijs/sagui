@@ -13,7 +13,7 @@ describe('babel', () => {
     const config = {
       projectPath,
       javaScript: {
-        buildDependencies: [
+        transpileDependencies: [
           // an example project
           'ui-react-components'
         ]

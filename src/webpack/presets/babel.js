@@ -20,7 +20,7 @@ export default {
       }
     }
 
-    const userPaths = (javaScript.buildDependencies || []).map((dependency) => (
+    const userPaths = (javaScript.transpileDependencies || []).map((dependency) => (
       path.join(projectPath, 'node_modules', dependency)
     ))
 
