@@ -1,7 +1,7 @@
 import fileExtensions from '../../file-extensions'
 
 export default {
-  name: 'videos',
+  name: 'video',
   configure () {
     return {
       module: {

@@ -4,7 +4,7 @@ import fileExtensions from '../../file-extensions'
 import buildTargets from '../../build-targets'
 
 export default {
-  name: 'babel',
+  name: 'javaScript',
   configure ({ buildTarget, projectPath, javaScript = {} }) {
     const hmrEnv = {
       development: {
