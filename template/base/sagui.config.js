@@ -16,9 +16,7 @@ module.exports = {
    *
    * Will ovewrite and extend the default Sagui configuration
    */
-  webpackConfig: {
-
-  },
+  webpack: {},
 
   /**
    * Karma configuration object
@@ -26,7 +24,5 @@ module.exports = {
    *
    * Will overwrite and extend the default Sagui configuration
    */
-  karmaConfig: {
-
-  }
+  karma: {}
 }
