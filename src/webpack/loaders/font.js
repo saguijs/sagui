@@ -1,7 +1,7 @@
 import fileExtensions from '../../file-extensions'
 
 export default {
-  name: 'fonts',
+  name: 'font',
   configure () {
     return {
       module: {

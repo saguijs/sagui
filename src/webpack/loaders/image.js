@@ -1,7 +1,7 @@
 import fileExtensions from '../../file-extensions'
 
 export default {
-  name: 'images',
+  name: 'image',
   configure () {
     return {
       module: {

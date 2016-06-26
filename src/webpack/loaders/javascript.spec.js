@@ -1,11 +1,11 @@
 import { expect } from 'chai'
-import preset from './babel'
+import loader from './javascript'
 
-describe('babel', () => {
+describe('javaScript', () => {
   const projectPath = '/tmp/test-project'
 
   it('should only build files inside the src folder by default', () => {
-    const webpack = preset.configure({ projectPath })
+    const webpack = loader.configure({ projectPath })
     expect(webpack.module.loaders[0].include).to.eql(['/tmp/test-project/src'])
   })
 
@@ -20,7 +20,7 @@ describe('babel', () => {
       }
     }
 
-    const webpack = preset.configure(config)
+    const webpack = loader.configure(config)
     expect(webpack.module.loaders[0].include).to.eql([
       '/tmp/test-project/src',
       '/tmp/test-project/node_modules/ui-react-components'
