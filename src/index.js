@@ -26,7 +26,7 @@ import pipeline from './util/pipeline'
  * @param {boolean} [options.clean = true] Clean the build directory
  * @param {boolean} [options.coverage = false] Outputs test coverage while running the tests
  * @param {boolean} [options.lint = true] Perform static analysis of the code through ESLint
- * @param {string[]} [options.pages = ['index']] Define a build output based on a HTML and JS files.
+ * @param {string[]} [options.pages = []] Define a build output based on a HTML and JS files.
  * @param {string[]} [options.disabledLoaders = []] Disables loaders for specific file types.
  * @param {Object} [options.webpack] Webpack configuration object to extend the internal configuration.
  * @param {Object} [options.karma] Karma configuration object to extend the internal configuration.
@@ -61,7 +61,7 @@ const DEFAULT_OPTIONS = {
   clean: true,
   coverage: false,
   lint: true,
-  pages: ['/index'],
+  pages: [],
   disabledLoaders: [],
   javaScript: {},
   webpack: {},

@@ -24,16 +24,10 @@ export default {
 }
 
 function configureEntry (pages, buildTarget) {
-  const hotMiddleware = 'webpack-hot-middleware/client'
-
   let entry = {}
 
   pages.forEach((page) => {
     entry[page] = [`./${page}`]
-
-    if (buildTarget === buildTargets.DEVELOPMENT) {
-      entry[page].push(hotMiddleware)
-    }
   })
 
   return entry
