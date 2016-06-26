@@ -13,19 +13,19 @@ describe('[integration] sagui', function () {
       fs.copySync(projectFixture, projectPath)
     })
 
-    it('should configure webpack', () => {
-      const webpack = sagui({ projectPath }).webpack
-      expect(webpack.length).to.equal(1)
-    })
-
-    it('should configure karma', () => {
-      const karma = sagui({ projectPath }).karma
-      expect(karma.webpack).to.exist
-    })
-
     describe('after install', () => {
       beforeEach(() => {
         sagui({ projectPath, action: 'install' }).run()
+      })
+
+      it('should configure webpack', () => {
+        const webpack = sagui({ projectPath }).webpack
+        expect(webpack.length).to.equal(1)
+      })
+
+      it('should configure karma', () => {
+        const karma = sagui({ projectPath }).karma
+        expect(karma.webpack).to.exist
       })
 
       it('should be possible to build', () => {
