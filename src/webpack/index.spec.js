@@ -13,6 +13,16 @@ const baseSaguiConfig = {
 }
 
 describe('webpack', function () {
+  it('should allow disabling all loaders', () => {
+    const saguiConfig = {
+      ...baseSaguiConfig,
+      disabledLoaders: ['font', 'image', 'javaScript', 'json', 'style', 'video', 'yaml']
+    }
+
+    const config = webpack(saguiConfig).webpack[0]
+    expect(config.module.loaders).to.be.undefined
+  })
+
   describe('webpackConfig extension', function () {
     it('should allow extending the default configuration', function () {
       const saguiConfig = {
