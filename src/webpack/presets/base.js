@@ -3,7 +3,7 @@ import path from 'path'
 
 export default {
   name: 'base',
-  configure ({ buildTarget, projectPath, saguiPath }) {
+  configure ({ projectPath, saguiPath }) {
     const projectSourcePath = path.join(projectPath, 'src')
 
     return {
@@ -14,7 +14,8 @@ export default {
       plugins: [new NoErrorsPlugin()],
 
       resolve: {
-        extensions: ['', '.js', '.jsx', '.es6'],
+        extensions: [''],
+
         root: [
           path.join(projectPath, '/node_modules'),
           projectSourcePath,

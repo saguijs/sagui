@@ -32,6 +32,10 @@ export default {
 
       plugins: action === 'develop' ? [new HotModuleReplacementPlugin()] : [],
 
+      resolve: {
+        extensions: ['.js', '.jsx', '.es6']
+      },
+
       module: {
         loaders: [
           {

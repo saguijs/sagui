@@ -29,6 +29,11 @@ describe('javaScript', () => {
     ])
   })
 
+  it('should resolve js, jsx and es6 files', function () {
+    const webpack = loader.configure({ projectPath })
+    expect(webpack.resolve.extensions).to.eql(['.js', '.jsx', '.es6'])
+  })
+
   describe('HMR', () => {
     it('should not setup any babel plugin by default', () => {
       const webpack = loader.configure({ projectPath })
