@@ -10,7 +10,7 @@ const projectWithoutPeerDependenciesPath = join(saguiPath, 'spec/fixtures/librar
 describe('library webpack preset', function () {
   describe('simple name configuration', function () {
     const baseConfiguration = {
-      library: 'FancyLibrary',
+      library: 'index',
       projectPath
     }
 
