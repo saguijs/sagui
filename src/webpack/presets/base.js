@@ -1,6 +1,5 @@
-import { HotModuleReplacementPlugin, NoErrorsPlugin } from 'webpack'
+import { NoErrorsPlugin } from 'webpack'
 import path from 'path'
-import buildTargets from '../../build-targets'
 
 export default {
   name: 'base',
@@ -12,7 +11,7 @@ export default {
 
       devtool: 'source-map',
 
-      plugins: buildPlugins(buildTarget),
+      plugins: [new NoErrorsPlugin()],
 
       resolve: {
         extensions: ['', '.js', '.jsx', '.es6'],
@@ -36,17 +35,4 @@ export default {
       }
     }
   }
-}
-
-function buildPlugins (buildTarget) {
-  const plugins = [
-    // prevent assets emitted that include errors
-    new NoErrorsPlugin()
-  ]
-
-  if (buildTarget === buildTargets.DEVELOPMENT) {
-    plugins.push(new HotModuleReplacementPlugin())
-  }
-
-  return plugins
 }

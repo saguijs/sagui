@@ -1,6 +1,6 @@
 import { expect } from 'chai'
 import { join } from 'path'
-import { HotModuleReplacementPlugin, NoErrorsPlugin } from 'webpack'
+import { NoErrorsPlugin } from 'webpack'
 import preset from './base'
 import buildTargets from '../../build-targets'
 
@@ -29,14 +29,5 @@ describe('base webpack preset', function () {
 
     const commons = config.plugins.filter((plugin) => plugin instanceof NoErrorsPlugin)
     expect(commons.length).equal(1)
-  })
-
-  describe('development build target', function () {
-    it('should configure HotModuleReplacementPlugin', function () {
-      const config = preset.configure({ projectPath, saguiPath, buildTarget: buildTargets.DEVELOPMENT })
-
-      const commons = config.plugins.filter((plugin) => plugin instanceof HotModuleReplacementPlugin)
-      expect(commons.length).equal(1)
-    })
   })
 })
