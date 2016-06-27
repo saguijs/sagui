@@ -1,6 +1,6 @@
 export default {
   name: 'base',
-  configure ({ projectPath }) {
+  configure ({ projectPath, watch }) {
     return {
       basePath: projectPath,
 
@@ -18,8 +18,8 @@ export default {
         noInfo: true
       },
 
-      singleRun: true,
-      autoWatch: false
+      singleRun: !watch,
+      autoWatch: watch
     }
   }
 }
