@@ -81,6 +81,7 @@
     "karma-webpack": "^1.7.0",
     "lodash.merge": "^4.4.0",
     "lodash.mergewith": "^4.4.0",
+    "lodash.uniq": "^4.3.0",
     "mkdirp": "^0.5.1",
     "mocha": "^2.3.3",
     "node-sass": "^3.3.3",
