@@ -3,7 +3,7 @@ import fileExtensions from '../../file-extensions'
 
 export default {
   name: 'eslint',
-  configure ({ projectPath, coverage }) {
+  configure ({ action, projectPath, coverage }) {
     // We need to disable linting when generating coverage because the code is instrumented
     // and therefore it's not following the linting rules anymore.
     if (coverage) {
@@ -12,7 +12,10 @@ export default {
 
     return {
       eslint: {
-        configFile: path.join(projectPath, '.eslintrc')
+        configFile: path.join(projectPath, '.eslintrc'),
+        rules: action === 'develop' ? {
+          'no-debugger': 0
+        } : {}
       },
 
       module: {
