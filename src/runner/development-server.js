@@ -8,8 +8,6 @@ import Server from 'webpack-dev-server'
 export default (saguiOptions) => new Promise((resolve, reject) => {
   const options = {
     hot: true,
-    info: false,
-    quiet: true,
     historyApiFallback: saguiOptions.pages && saguiOptions.pages[0] && `${saguiOptions.pages[0]}.html`
   }
 
