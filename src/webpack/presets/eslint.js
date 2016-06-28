@@ -14,7 +14,7 @@ export default {
       eslint: {
         configFile: path.join(projectPath, '.eslintrc'),
         rules: action === 'develop' ? {
-          'no-debugger': 0
+          'no-debugger': 0 // 0 => "off"
         } : {}
       },
 
