@@ -1,10 +1,9 @@
-import { HotModuleReplacementPlugin, NoErrorsPlugin } from 'webpack'
+import { NoErrorsPlugin } from 'webpack'
 import path from 'path'
-import buildTargets from '../../build-targets'
 
 export default {
   name: 'base',
-  configure ({ buildTarget, projectPath, saguiPath }) {
+  configure ({ projectPath, saguiPath }) {
     const projectSourcePath = path.join(projectPath, 'src')
 
     return {
@@ -12,10 +11,11 @@ export default {
 
       devtool: 'source-map',
 
-      plugins: buildPlugins(buildTarget),
+      plugins: [new NoErrorsPlugin()],
 
       resolve: {
-        extensions: ['', '.js', '.jsx', '.es6'],
+        extensions: [''],
+
         root: [
           path.join(projectPath, '/node_modules'),
           projectSourcePath,
@@ -36,17 +36,4 @@ export default {
       }
     }
   }
-}
-
-function buildPlugins (buildTarget) {
-  const plugins = [
-    // prevent assets emitted that include errors
-    new NoErrorsPlugin()
-  ]
-
-  if (buildTarget === buildTargets.DEVELOPMENT) {
-    plugins.push(new HotModuleReplacementPlugin())
-  }
-
-  return plugins
 }

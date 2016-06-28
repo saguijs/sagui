@@ -1,11 +1,11 @@
+import { HotModuleReplacementPlugin } from 'webpack'
 import path from 'path'
 import reactTransform from 'babel-plugin-react-transform'
 import fileExtensions from '../../file-extensions'
-import buildTargets from '../../build-targets'
 
 export default {
   name: 'javaScript',
-  configure ({ buildTarget, projectPath, javaScript = {} }) {
+  configure ({ action, projectPath, javaScript = {} }) {
     const hmrEnv = {
       development: {
         plugins: [
@@ -27,7 +27,13 @@ export default {
     return {
       babel: {
         babelrc: path.join(projectPath, '.babelrc'),
-        env: buildTarget === buildTargets.DEVELOPMENT ? hmrEnv : {}
+        env: action === 'develop' ? hmrEnv : {}
+      },
+
+      plugins: action === 'develop' ? [new HotModuleReplacementPlugin()] : [],
+
+      resolve: {
+        extensions: ['.js', '.jsx', '.es6']
       },
 
       module: {
