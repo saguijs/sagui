@@ -2,6 +2,7 @@ import fs from 'fs-extra'
 import path from 'path'
 import { expect } from 'chai'
 import sagui from '.'
+import actions from './actions'
 
 describe('[integration] sagui', function () {
   describe('simple project', () => {
@@ -15,7 +16,7 @@ describe('[integration] sagui', function () {
 
     describe('after install', () => {
       beforeEach(() => {
-        sagui({ projectPath, action: 'install' }).run()
+        sagui({ projectPath, action: actions.INSTALL }).run()
       })
 
       it('should configure webpack', () => {
@@ -29,15 +30,15 @@ describe('[integration] sagui', function () {
       })
 
       it('should be possible to build', () => {
-        return sagui({ projectPath, action: 'build' }).run()
+        return sagui({ projectPath, action: actions.BUILD }).run()
       })
 
       it('should be possible to test', () => {
-        return sagui({ projectPath, action: 'test' }).run()
+        return sagui({ projectPath, action: actions.TEST }).run()
       })
 
       it('should be possible to lint', () => {
-        return sagui({ projectPath, action: 'lint' }).run()
+        return sagui({ projectPath, action: actions.LINT }).run()
       })
     })
   })

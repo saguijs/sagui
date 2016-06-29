@@ -1,15 +1,15 @@
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import { join } from 'path'
 import { optimize } from 'webpack'
-import buildTargets from '../../build-targets'
+import actions from '../../actions'
 
 export default {
   name: 'pages',
-  configure ({ pages = [], buildTarget, projectPath }) {
+  configure ({ pages = [], action, projectPath }) {
     if (pages.length === 0) { return {} }
 
-    const entry = configureEntry(pages, buildTarget)
-    const plugins = configurePlugins(pages, buildTarget)
+    const entry = configureEntry(pages)
+    const plugins = configurePlugins(pages, action)
 
     return {
       output: {
@@ -23,7 +23,7 @@ export default {
   }
 }
 
-function configureEntry (pages, buildTarget) {
+function configureEntry (pages) {
   let entry = {}
 
   pages.forEach((page) => {
@@ -33,7 +33,7 @@ function configureEntry (pages, buildTarget) {
   return entry
 }
 
-function configurePlugins (pages, buildTarget) {
+function configurePlugins (pages, action) {
   const plugins = pages.map((page) => {
     return new HtmlWebpackPlugin({
       template: `${page}.html`,
@@ -42,7 +42,7 @@ function configurePlugins (pages, buildTarget) {
     })
   })
 
-  if (pages.length > 1 && buildTarget !== buildTargets.TEST) {
+  if (pages.length > 1 && action !== actions.TEST) {
     plugins.push(new optimize.CommonsChunkPlugin({ name: 'common' }))
   }
 

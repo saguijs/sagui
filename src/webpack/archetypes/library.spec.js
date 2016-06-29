@@ -1,7 +1,7 @@
 import { join } from 'path'
 import { expect } from 'chai'
 import preset from './library'
-import buildTargets from '../../build-targets'
+import actions from '../../actions'
 
 const saguiPath = join(__dirname, '../../../')
 const projectPath = join(saguiPath, 'spec/fixtures/library-project')
@@ -10,7 +10,7 @@ const projectWithoutPeerDependenciesPath = join(saguiPath, 'spec/fixtures/librar
 describe('library webpack preset', function () {
   describe('simple name configuration', function () {
     const baseConfiguration = {
-      library: 'FancyLibrary',
+      library: 'index',
       projectPath
     }
 
@@ -24,8 +24,8 @@ describe('library webpack preset', function () {
       expect(webpackConfig.output.libraryTarget).eql('commonjs2')
     })
 
-    it('should NOT SET the exporting target if buildTarget is test (a browser wont understand commonjs modules)', function () {
-      const webpackConfig = preset.configure({ ...baseConfiguration, buildTarget: buildTargets.TEST })
+    it('should NOT SET the exporting target if action is test (a browser wont understand commonjs modules)', function () {
+      const webpackConfig = preset.configure({ ...baseConfiguration, action: actions.TEST })
       expect(webpackConfig.output.libraryTarget).undefined
     })
 
@@ -45,8 +45,8 @@ describe('library webpack preset', function () {
         expect(webpackConfig.externals).eql(['react', 'react-dom'])
       })
 
-      it('should have an empty externals if the buildTarget is test', function () {
-        const webpackConfig = preset.configure({ ...baseConfiguration, buildTarget: buildTargets.TEST })
+      it('should have an empty externals if the action is test', function () {
+        const webpackConfig = preset.configure({ ...baseConfiguration, action: actions.TEST })
         expect(webpackConfig.externals).eql([])
       })
 

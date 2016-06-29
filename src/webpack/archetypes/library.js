@@ -1,22 +1,32 @@
 import { join } from 'path'
-import buildTargets from '../../build-targets'
+import actions from '../../actions'
 
+/**
+ * Defines how to build a single library.
+ *
+ * The library parameter is both the name of the file
+ * is the src/ directory and also the name of the built
+ * artefact.
+ *
+ * To find more information about how the original configuration
+ * parameter `libraries` turns into a single `library`, check
+ * the function `splitArchetypes`.
+ */
 export default {
   name: 'library',
-  configure ({ library, projectPath, buildTarget }) {
+  configure ({ library, projectPath, action }) {
     if (!library) { return {} }
 
     const externals = probeExternals(projectPath)
 
     return {
-      entry: './index.js',
+      entry: `./${library}.js`,
       output: {
         path: join(projectPath, 'dist'),
-        filename: 'index.js',
-        libraryTarget: buildTarget === buildTargets.TEST ? undefined : 'commonjs2',
-        library
+        filename: `${library}.js`,
+        libraryTarget: action === actions.TEST ? undefined : 'commonjs2'
       },
-      externals: buildTarget === buildTargets.TEST ? [] : externals
+      externals: action === actions.TEST ? [] : externals
     }
   }
 }

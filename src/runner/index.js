@@ -3,22 +3,23 @@ import build from './build'
 import test from './test'
 import install from './install'
 import lint from './lint'
+import actions from '../actions'
 
 export default (saguiOptions) => {
   switch (saguiOptions.action) {
-    case 'test':
+    case actions.TEST:
       return test(saguiOptions)
 
-    case 'develop':
+    case actions.DEVELOP:
       return developmentServer(saguiOptions)
 
-    case 'build':
+    case actions.BUILD:
       return build(saguiOptions)
 
-    case 'install':
+    case actions.INSTALL:
       return install(saguiOptions)
 
-    case 'lint':
+    case actions.LINT:
       return lint(saguiOptions)
 
     default:
