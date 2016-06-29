@@ -23,7 +23,7 @@ npm init -y
 **Install Sagui locally** as a development dependency:
 
 ```bash
-npm install --save-dev sagui@beta
+npm install --save-dev sagui
 ```
 
 Start the development server:
