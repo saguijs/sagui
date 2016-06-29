@@ -2,7 +2,6 @@ import HtmlWebpackPlugin from 'html-webpack-plugin'
 import { optimize } from 'webpack'
 import { expect } from 'chai'
 import preset from './pages'
-import buildTargets from '../../build-targets'
 
 const projectPath = '/tmp/projec-path'
 
@@ -106,8 +105,8 @@ describe('pages webpack preset', function () {
 
     // Karma has an issue with the CommonsChunk plugin
     // see: https://github.com/webpack/karma-webpack/issues/24
-    it('should NOT have the CommonsChunkPlugin enabled if buildTarget is test (breaks Karma)', function () {
-      const webpackConfig = preset.configure({ ...baseConfig, buildTarget: buildTargets.TEST })
+    it('should NOT have the CommonsChunkPlugin enabled if action is test (breaks Karma)', function () {
+      const webpackConfig = preset.configure({ ...baseConfig, action: 'test' })
 
       const commons = webpackConfig.plugins.filter((plugin) => plugin instanceof optimize.CommonsChunkPlugin)
       expect(commons.length).equal(0)
