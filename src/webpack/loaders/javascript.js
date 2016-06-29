@@ -2,6 +2,7 @@ import { HotModuleReplacementPlugin } from 'webpack'
 import path from 'path'
 import reactTransform from 'babel-plugin-react-transform'
 import fileExtensions from '../../file-extensions'
+import actions from '../../actions'
 
 export default {
   name: 'javaScript',
@@ -27,10 +28,10 @@ export default {
     return {
       babel: {
         babelrc: path.join(projectPath, '.babelrc'),
-        env: action === 'develop' ? hmrEnv : {}
+        env: action === actions.DEVELOP ? hmrEnv : {}
       },
 
-      plugins: action === 'develop' ? [new HotModuleReplacementPlugin()] : [],
+      plugins: action === actions.DEVELOP ? [new HotModuleReplacementPlugin()] : [],
 
       resolve: {
         extensions: ['.js', '.jsx', '.es6']

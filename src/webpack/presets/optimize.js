@@ -2,7 +2,7 @@ import webpack from 'webpack'
 
 export default {
   name: 'optimize',
-  configure ({ buildTarget, optimize }) {
+  configure ({ optimize }) {
     if (!optimize) {
       return {}
     }

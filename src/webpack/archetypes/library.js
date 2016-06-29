@@ -1,5 +1,5 @@
 import { join } from 'path'
-import buildTargets from '../../build-targets'
+import actions from '../../actions'
 
 /**
  * Defines how to build a single library.
@@ -14,7 +14,7 @@ import buildTargets from '../../build-targets'
  */
 export default {
   name: 'library',
-  configure ({ library, projectPath, buildTarget }) {
+  configure ({ library, projectPath, action }) {
     if (!library) { return {} }
 
     const externals = probeExternals(projectPath)
@@ -24,9 +24,9 @@ export default {
       output: {
         path: join(projectPath, 'dist'),
         filename: `${library}.js`,
-        libraryTarget: buildTarget === buildTargets.TEST ? undefined : 'commonjs2'
+        libraryTarget: action === actions.TEST ? undefined : 'commonjs2'
       },
-      externals: buildTarget === buildTargets.TEST ? [] : externals
+      externals: action === actions.TEST ? [] : externals
     }
   }
 }
