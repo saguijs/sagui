@@ -175,7 +175,7 @@ module.exports = {
 
 ### `javaScript.transpileDependencies`
 
-Dependencies installed thought npm are not transpiled with Babel by default. If you have a dependency that needs to be transpiled it is very easy, just add its name to the list:
+Dependencies **installed thought npm** are not transpiled with Babel by default. If you have a dependency that needs to be transpiled it is very easy, just add its name to the list:
 
 ```js
 module.exports = {
