@@ -179,7 +179,7 @@ And somewhere in the source there are the following imports:
 
 ```js
 import React from 'react'
-import leftPath from 'left-pad'
+import leftPad from 'left-pad'
 ```
 
 When building the project, `react` won't actually be bundled in the output but `left-pad` will, so your project won't blow up once `left-pad` is unpublished again.
