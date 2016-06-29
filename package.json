@@ -1,7 +1,7 @@
 {
   "name": "sagui",
   "version": "6.0.0-rc.8",
-  "description": "Your last devDependency",
+  "description": "Front-end tooling in a single dependency",
   "preferGlobal": false,
   "bin": {
     "sagui": "./bin/sagui"
