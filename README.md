@@ -159,6 +159,31 @@ And these will build the files:
 
 Regarding **external dependencies**, Sagui will use the the **peerDependencies** information in the project's `package.json` to determine what are the external dependencies of the library that shouldn't be bundled in the final build.
 
+As an example, given a project with the `package.json`:
+
+```json
+{
+  "name": "library-project",
+  "version": "1.0.0",
+  "main": "index.js",
+  "dependencies": {
+    "left-pad": "1.1.0"
+  },
+  "peerDependencies": {
+    "react": "^0.14.7"
+  }
+}
+```
+
+And somewhere in the source there are the following imports:
+
+```js
+import React from 'react'
+import leftPath from 'left-pad'
+```
+
+When building the project, `react` won't actually be bundled in the output but `left-pad` will, so your project won't blow up once `left-pad` is unpublished again.
+
 ### `style.cssModules`
 
 By default, styles compiled with Sagui will be outputed as [CSS Modules](https://github.com/css-modules), meaning they won't be global.
