@@ -1,4 +1,5 @@
 import { join } from 'path'
+import actions from '../../actions'
 
 /**
  * Defines how to build a single library.
@@ -23,9 +24,9 @@ export default {
       output: {
         path: join(projectPath, 'dist'),
         filename: `${library}.js`,
-        libraryTarget: action === 'test' ? undefined : 'commonjs2'
+        libraryTarget: action === actions.TEST ? undefined : 'commonjs2'
       },
-      externals: action === 'test' ? [] : externals
+      externals: action === actions.TEST ? [] : externals
     }
   }
 }
