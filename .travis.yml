@@ -17,6 +17,9 @@ script:
     elif [ "$TEST_TYPE" = test_create_project ]; then
       set -e
 
+      # builds Sagui before installing
+      npm run build
+
       SAGUI_DIR=`pwd`
       PROJECT_DIR=`mktemp -d`
       cd $PROJECT_DIR
