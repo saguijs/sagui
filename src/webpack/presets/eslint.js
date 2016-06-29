@@ -1,5 +1,6 @@
 import path from 'path'
 import fileExtensions from '../../file-extensions'
+import actions from '../../actions'
 
 export default {
   name: 'eslint',
@@ -13,7 +14,7 @@ export default {
     return {
       eslint: {
         configFile: path.join(projectPath, '.eslintrc'),
-        rules: action === 'develop' ? {
+        rules: action === actions.DEVELOP ? {
           'no-debugger': 0 // 0 => "off"
         } : {}
       },

@@ -1,6 +1,7 @@
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import { join } from 'path'
 import { optimize } from 'webpack'
+import actions from '../../actions'
 
 export default {
   name: 'pages',
@@ -41,7 +42,7 @@ function configurePlugins (pages, action) {
     })
   })
 
-  if (pages.length > 1 && action !== 'test') {
+  if (pages.length > 1 && action !== actions.TEST) {
     plugins.push(new optimize.CommonsChunkPlugin({ name: 'common' }))
   }
 

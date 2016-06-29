@@ -2,6 +2,7 @@ import { HotModuleReplacementPlugin } from 'webpack'
 import reactTransform from 'babel-plugin-react-transform'
 import { expect } from 'chai'
 import loader from './javascript'
+import actions from '../../actions'
 
 describe('javaScript', () => {
   const projectPath = '/tmp/test-project'
@@ -46,12 +47,12 @@ describe('javaScript', () => {
     })
 
     it('should setup react transform babel plugin if action is develop', () => {
-      const webpack = loader.configure({ projectPath, action: 'develop' })
+      const webpack = loader.configure({ projectPath, action: actions.DEVELOP })
       expect(webpack.babel.env.development.plugins[0][0]).to.equal(reactTransform)
     })
 
     it('should setup the HotModuleReplacementPlugin if action is develop', () => {
-      const webpack = loader.configure({ projectPath, action: 'develop' })
+      const webpack = loader.configure({ projectPath, action: actions.DEVELOP })
 
       const plugins = webpack.plugins.filter((plugin) => plugin instanceof HotModuleReplacementPlugin)
       expect(plugins.length).equal(1)
