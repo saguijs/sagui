@@ -4,15 +4,15 @@
 [![npm version](https://badge.fury.io/js/sagui.svg)](https://badge.fury.io/js/sagui)
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](https://github.com/feross/standard)
 
-Sagui is **the single development dependency** that bundles [Webpack](http://webpack.github.io/), [Babel](http://babeljs.io/), [Karma](http://karma-runner.github.io/) and [Standard](http://standardjs.com/) in a hassle-free, easily updatable setup.
+Sagui is the **single development dependency** that provides the tooling required to build, test and development modern JavaScript applications.
 
-It follows an opinionated convention over configuration approach, providing a solid foundation so that you can focus on writing your code.
+Its main goal is to kill the need of global CLIs and boilerplates, making a reproducible and easily updated environment across projects.
 
-**This branch is for the upcoming v6 release**, for the current stable release check the [v4 branch](https://github.com/saguijs/sagui/tree/v4).
+It follows an opinionated convention over configuration approach, providing a solid foundation so that you can focus on writing your code and not your tooling.
 
-**The documentation in still a work in progress.**
+## Quick start in 3 steps!
 
-## Creating a new front-end project
+Lets create a new front-end project from scratch.
 
 **In a new folder**, create a [new npm project](https://docs.npmjs.com/cli/init):
 
@@ -26,14 +26,19 @@ npm init -y
 npm install --save-dev sagui@beta
 ```
 
-After the install is completed, Sagui **bootstraps** its basic infrastructure, **no extra step is required**.
+Start the development server:
 
 ```bash
-$ tree
-.
+npm start
+```
+
+Done! Sagui is a *auto-bootstraping* library, so during the install process (in a fresh npm project) it automatically creates a basic project scaffolding:
+
+```bash
 ├── .babelrc
-├── .eslintrc
+├── .editorconfig
 ├── .eslintignore
+├── .eslintrc
 ├── .gitignore
 ├── node_modules
 │   └── sagui
@@ -46,58 +51,80 @@ $ tree
     └── index.spec.js
 ```
 
-From here on, you are ready to start development. You do that by **using common npm run scripts**:
-
-```bash
-npm start
-```
-
-To run the tests, simply:
-
-```bash
-npm test
-```
-
-Then you can start writing your code inside the `src/` folder.
+Just start writing the code inside the `src/` folder.
 
 ## npm scripts
 
 Sagui manages the [package.json](https://docs.npmjs.com/files/package.json) scripts for you:
 
 - `npm run build`: build a development version of the project;
-- `npm run develop`: spins a development server;
+- `npm run develop`: spins a development server with live-reload and [HMR](http://webpack.github.io/docs/hot-module-replacement.html);
 - `npm run dist`: build a production ready version of the project;
 - `npm run start`: alias for the *develop* script;
-- `npm run test`: run all test scripts;
+- `npm run test`: run all test related scripts bellow;
 - `npm run test:lint`: run static analysis in the code;
 - `npm run test:unit`: run the unit tests;
-- `npm run test:coverage`: run the unit tests with HTML coverage report;
+- `npm run test:coverage`: run the unit tests with coverage report;
 - `npm run test:unit:watch`: run a test watcher (great for development).
 
-## Features:
+## Features
 
-Sagui acts as a front-end to a bunch of amazing technology to keep your development environment always up to date:
+As stated earlier, Sagui strives to provide all the basic needs to create modern JavaScript applications.
 
-- [JavaScript 2015](http://babeljs.io/docs/learn-es2015/);
-- [CSS Modules](https://github.com/css-modules) with either [Sass lang](http://sass-lang.com/) or vanilla CSS;
-- [Webpack loaders](http://webpack.github.io/) for common media files
-- Automated testing with [Jasmine](http://jasmine.github.io/) and [Karma](http://karma-runner.github.io/);
-- Linting via [JavaScript Standard Style](http://standardjs.com/);
-- Live-reload with **hot module replacement** ([React components](https://github.com/gaearon/react-transform));
+### Development server
+
+The development server out-of-the-box has live reloading and **hot-module replacement**.
+
+[ReactJS](http://reactjs.com/) has first-class support via [react-transform](https://github.com/gaearon/babel-plugin-react-transform), so updating components source reflect instantly (without full refresh) in the browser.
+
+### Build
+
+Sagui uses [Webpack](http://webpack.github.io/) as its underlying bundling tool. The biggest feature that Webpack provides is that everything is a module. Sagui supports the following module types by default:
+
+- Fonts (`.woff`, `.woff2`, `.ttf`, `.eot`)
+- Images (`.png`, `.jpg`, `.jpeg`, `.gif`, `.svg`)
+- JavaScript (`.js`, `.es6`, `.jsx`) via [Babel]((http://babeljs.io/docs/learn-es2015/))
+- JSON
+- Styles in [CSS Modules](https://github.com/css-modules) in either plain CSS or [Sass lang](http://sass-lang.com/)
+- Video (`.ogg`, `.mp4`)
+- YAML
+
+During build, optimizations are also performed in the output bundle:
+
+- [Commons code splitting](https://webpack.github.io/docs/list-of-plugins.html#commonschunkplugin)
+- [Extract styles as separated files](https://github.com/webpack/extract-text-webpack-plugin)
+- Minification
+
+### Testing and quality
+
+Test automation in Sagui is achieved by creating `.spec.js` files inside the `src/` folder using the [Jasmine](http://jasmine.github.io/) framework.
+
+A simple example would be:
+
+- `src/components/button.js`
+- `src/components/button.spec.js`
+
+Sagui will automatically run every test file that follows this convention.
+
+Under the hood it uses [Karma test runner](http://karma-runner.github.io/) to allow running the tests in the most diverse browsers and even through [Selenium](http://docs.seleniumhq.org/) (not natively).
+
+Static code analysis is also performed on the code following the [JavaScript Standard Style](http://standardjs.com/) convention.
 
 ## Configuration
 
-Sagui supports two major project archetypes: **Pages** and **Library**.
+The Sagui configuration is all performed via the single `sagui.config.js` that is bootstraped in the project root folder once Sagui is first installed. At its simplest it could be just:
 
-They are not mutually exclusive, so it is possible to create a library project and use the pages archetype to create some demo pages for example.
+```js
+module.exports = {
+  pages: ['index']
+}
+```
 
-### Pages
+Then we can add extra configuration on top of it:
 
-This is a static application that can be built around multiple pages. Each page is the combination of an `html` and a `js` files.
+### `pages`
 
-**It is the default bootstrapped configuration**, and it will build and serve a single page for your entire application based on the `src/index.js` and `src/index.html` files.
-
-To change it and add more pages, you can add a custom configuration in the `sagui.config.js` file:
+These are static **applications** that can be built around multiple pages. Each page is the combination of a `html` and a `js` file.
 
 ```js
 module.exports = {
@@ -105,33 +132,89 @@ module.exports = {
 }
 ```
 
-And add additional `src/about.js` and `src/about.html` files for each page entry-point.
+The previous configuration will expect and build the files:
 
-### Library
+- `src/about.html` => `dist/about.html`
+- `src/about.js` => `dist/about.js`
+- `src/index.html` => `dist/index.html`
+- `src/index.js` => `dist/index.js`
 
-Create reusable libraries that can be shared across applications. Sagui will take care of the build process so that external libraries are not bundled and that you have a CommonJS module as the output.
+### `library`
 
-To get started, the only required configuration is the library name:
+Create **reusable libraries** that can be shared across applications. Sagui will take care of the build process so that external libraries are not bundled and that you have a CommonJS module as the output.
+
+It works similarly as *pages*, allowing a list of "library entry-points" to be built. The only difference here is that each library points to a single JavaScript file. Taking the example of a UI toolkit project, it could have the following libraries:
 
 ```js
 module.exports = {
-  library: 'ReactTransition'
+  libraries: ['button', 'field', 'select']
 }
 ```
 
-#### External dependencies
+And these will build the files:
 
-Sagui will use the the **peerDependencies** information in the project's `package.json` to determine what are the external dependencies of the library that shouldn't be bundled in the final build.
+- `src/button.js` => `dist/button.js`
+- `src/field.js` => `dist/field.js`
+- `src/select.js` => `dist/select.js`
 
-## <a name="advanced-configuration"></a>Advanced configuration
+Regarding **external dependencies**, Sagui will use the the **peerDependencies** information in the project's `package.json` to determine what are the external dependencies of the library that shouldn't be bundled in the final build.
 
-Webpack and Karma have both very rich plugins ecosystems already, so it is no point trying to create a new ecosystem on top of them. Instead Sagui aims to provide a good base configuration that can be easily extended or changed.
+As an example, given a project with the `package.json`:
 
-### Extending the default Webpack configuration
+```json
+{
+  "name": "library-project",
+  "version": "1.0.0",
+  "main": "index.js",
+  "dependencies": {
+    "left-pad": "1.1.0"
+  },
+  "peerDependencies": {
+    "react": "^0.14.7"
+  }
+}
+```
 
-Sagui supports the standard [configuration](http://webpack.github.io/docs/configuration.html), so if a feature you need is not supported, extending Sagui should be pretty straightforward.
+And somewhere in the source there are the following imports:
 
-As **an example**, lets add an extra loader to load HTML files. In the `sagui.config.js` file:
+```js
+import React from 'react'
+import leftPath from 'left-pad'
+```
+
+When building the project, `react` won't actually be bundled in the output but `left-pad` will, so your project won't blow up once `left-pad` is unpublished again.
+
+### `style.cssModules`
+
+By default, styles compiled with Sagui will be outputed as [CSS Modules](https://github.com/css-modules), meaning they won't be global.
+
+It is possible to disable this behavior and have regular CSS styles:
+
+```js
+module.exports = {
+  style: {
+    cssModules: false
+  }
+}
+```
+
+### `javaScript.transpileDependencies`
+
+Dependencies **installed thought npm** are not transpiled with Babel by default. If you have a dependency that needs to be transpiled it is very easy, just add its name to the list:
+
+```js
+module.exports = {
+  javaScript: {
+    transpileDependencies: ['dependency-to-be-transpiled']
+  }
+}
+```
+
+### `webpack`
+
+If a build requirement can't be achieved via the previous configuration options, a **escape hatch** is offered allowing extension of the internal Webpack configuration.
+
+As an example, lets add an extra loader to load HTML files. In the `sagui.config.js` file:
 
 ```js
 module.exports = {
@@ -146,13 +229,15 @@ module.exports = {
 }
 ```
 
+For more information about configuring Webpack, check the [Webpack documentation](http://webpack.github.io/docs/configuration.html).
+
 For more information on how the merging of Webpack configurations work check [webpack-merge](https://github.com/survivejs/webpack-merge).
 
-### Extending the default Karma configuration
+### `karma`
 
-Sagui also supports the standard Karma [configuration](https://karma-runner.github.io/0.13/config/configuration-file.html).
+If a test automation requirement can't be achieved via the previous configuration options, a **escape hatch** is offered allowing extension of the internal Karma configuration.
 
-As **an example**, lets change the default browser used to execute the tests from *PhantomJS* to *Chrome*. In the `sagui.config.js` file:
+As an example, lets change the default browser used to execute the tests from *PhantomJS* to *Chrome*. In the `sagui.config.js` file:
 
 ```js
 module.exports = {
@@ -161,6 +246,8 @@ module.exports = {
   }
 }
 ```
+
+For more information about configuring Karma, check the [Karma documentation](https://karma-runner.github.io/0.13/config/configuration-file.html).
 
 ## Logo
 
