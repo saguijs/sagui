@@ -3,6 +3,14 @@ import preset from './eslint'
 import actions from '../../actions'
 
 describe('eslint webpack preset', function () {
+  describe('when watch is enabled', () => {
+    it('should set "no-debugger" rule to 0', function () {
+      const projectPath = 'a/demo/path'
+      const config = preset.configure({ watch: true, projectPath })
+
+      expect(config.eslint.rules['no-debugger']).to.eql(0)
+    })
+  })
   describe('when action is "develop"', () => {
     it('should set "no-debugger" rule to 0', function () {
       const projectPath = 'a/demo/path'
