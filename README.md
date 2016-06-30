@@ -4,7 +4,7 @@
 [![npm version](https://badge.fury.io/js/sagui.svg)](https://badge.fury.io/js/sagui)
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](https://github.com/feross/standard)
 
-Sagui is the **single development dependency** that provides the tooling required to build, test and development modern JavaScript applications.
+Sagui is the **single development dependency** that provides the tooling required to build, test and develop modern JavaScript applications.
 
 Its main goal is to kill the need of global CLIs and boilerplates, making a reproducible and easily updated environment across projects.
 
@@ -12,7 +12,7 @@ It follows an opinionated convention over configuration approach, providing a so
 
 ## Quick start in 3 steps!
 
-Lets create a new front-end project from scratch.
+Let's create a new front-end project from scratch.
 
 **In a new folder**, create a [new npm project](https://docs.npmjs.com/cli/init):
 
@@ -32,7 +32,7 @@ Start the development server:
 npm start
 ```
 
-Done! Sagui is a *auto-bootstraping* library, so during the install process (in a fresh npm project) it automatically creates a basic project scaffolding:
+Done! Sagui is an *auto-bootstraping* library, so during the install process (in a fresh npm project) it automatically creates a basic project scaffolding:
 
 ```bash
 ├── .babelrc
@@ -58,10 +58,10 @@ Just start writing the code inside the `src/` folder.
 Sagui manages the [package.json](https://docs.npmjs.com/files/package.json) scripts for you:
 
 - `npm run build`: build a development version of the project;
-- `npm run develop`: spins a development server with live-reload and [HMR](http://webpack.github.io/docs/hot-module-replacement.html);
+- `npm run develop`: spin up a development server with live-reload and [HMR](http://webpack.github.io/docs/hot-module-replacement.html);
 - `npm run dist`: build a production ready version of the project;
 - `npm run start`: alias for the *develop* script;
-- `npm run test`: run all test related scripts bellow;
+- `npm run test`: run all test related scripts below;
 - `npm run test:lint`: run static analysis in the code;
 - `npm run test:unit`: run the unit tests;
 - `npm run test:coverage`: run the unit tests with coverage report;
@@ -75,7 +75,7 @@ As stated earlier, Sagui strives to provide all the basic needs to create modern
 
 The development server out-of-the-box has live reloading and **hot-module replacement**.
 
-[ReactJS](http://reactjs.com/) has first-class support via [react-transform](https://github.com/gaearon/babel-plugin-react-transform), so updating components source reflect instantly (without full refresh) in the browser.
+[ReactJS](http://reactjs.com/) has first-class support via [react-transform](https://github.com/gaearon/babel-plugin-react-transform), so updating components' source reflects instantly (without full refresh) in the browser.
 
 ### Build
 
@@ -124,7 +124,7 @@ Then we can add extra configuration on top of it:
 
 ### `pages`
 
-These are static **applications** that can be built around multiple pages. Each page is the combination of a `html` and a `js` file.
+These are static **applications** that can be built around multiple pages. Each page is the combination of an `html` and a `js` file.
 
 ```js
 module.exports = {
@@ -143,7 +143,7 @@ The previous configuration will expect and build the files:
 
 Create **reusable libraries** that can be shared across applications. Sagui will take care of the build process so that external libraries are not bundled and that you have a CommonJS module as the output.
 
-It works similarly as *pages*, allowing a list of "library entry-points" to be built. The only difference here is that each library points to a single JavaScript file. Taking the example of a UI toolkit project, it could have the following libraries:
+It works similarly to *pages*, allowing a list of "library entry points" to be built. The only difference here is that each library points to a single JavaScript file. Taking the example of a UI toolkit project, it could have the following libraries:
 
 ```js
 module.exports = {
@@ -157,7 +157,7 @@ And these will build the files:
 - `src/field.js` => `dist/field.js`
 - `src/select.js` => `dist/select.js`
 
-Regarding **external dependencies**, Sagui will use the the **peerDependencies** information in the project's `package.json` to determine what are the external dependencies of the library that shouldn't be bundled in the final build.
+Regarding **external dependencies**, Sagui will use the **peerDependencies** information in the project's `package.json` to determine what are the external dependencies of the library that shouldn't be bundled in the final build.
 
 As an example, given a project with the `package.json`:
 
@@ -186,7 +186,7 @@ When building the project, `react` won't actually be bundled in the output but `
 
 ### `style.cssModules`
 
-By default, styles compiled with Sagui will be outputed as [CSS Modules](https://github.com/css-modules), meaning they won't be global.
+By default, styles compiled with Sagui will be output as [CSS Modules](https://github.com/css-modules), meaning they won't be global.
 
 It is possible to disable this behavior and have regular CSS styles:
 
@@ -200,7 +200,7 @@ module.exports = {
 
 ### `javaScript.transpileDependencies`
 
-Dependencies **installed thought npm** are not transpiled with Babel by default. If you have a dependency that needs to be transpiled it is very easy, just add its name to the list:
+Dependencies **installed through npm** are not transpiled with Babel by default. If you have a dependency that needs to be transpiled it is very easy, just add its name to the list:
 
 ```js
 module.exports = {
@@ -212,9 +212,9 @@ module.exports = {
 
 ### `webpack`
 
-If a build requirement can't be achieved via the previous configuration options, a **escape hatch** is offered allowing extension of the internal Webpack configuration.
+If a build requirement can't be achieved via the previous configuration options, an **escape hatch** is offered allowing extension of the internal Webpack configuration.
 
-As an example, lets add an extra loader to load HTML files. In the `sagui.config.js` file:
+As an example, let's add an extra loader to load HTML files. In the `sagui.config.js` file:
 
 ```js
 module.exports = {
@@ -231,13 +231,13 @@ module.exports = {
 
 For more information about configuring Webpack, check the [Webpack documentation](http://webpack.github.io/docs/configuration.html).
 
-For more information on how the merging of Webpack configurations work check [webpack-merge](https://github.com/survivejs/webpack-merge).
+For more information on how the merging of Webpack configurations work, check [webpack-merge](https://github.com/survivejs/webpack-merge).
 
 ### `karma`
 
-If a test automation requirement can't be achieved via the previous configuration options, a **escape hatch** is offered allowing extension of the internal Karma configuration.
+If a test automation requirement can't be achieved via the previous configuration options, an **escape hatch** is offered allowing extension of the internal Karma configuration.
 
-As an example, lets change the default browser used to execute the tests from *PhantomJS* to *Chrome*. In the `sagui.config.js` file:
+As an example, let's change the default browser used to execute the tests from *PhantomJS* to *Chrome*. In the `sagui.config.js` file:
 
 ```js
 module.exports = {
@@ -251,7 +251,7 @@ For more information about configuring Karma, check the [Karma documentation](ht
 
 ## Logo
 
-[Monkey artwork](https://thenounproject.com/term/monkey/267835) created by Ryan Spiering from the Noum Project.
+[Monkey artwork](https://thenounproject.com/term/monkey/267835) created by Ryan Spiering from the Noun Project.
 
 ## Contributing and development
 
@@ -265,7 +265,7 @@ npm link
 
 The environment variable is to inform Sagui that it is working in a "linked environment".
 
-Then, **at the project you intend to use Sagui**, link it locally:
+Then, **in the project you intend to use Sagui**, link it locally:
 
 ```bash
 npm link sagui
