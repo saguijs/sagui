@@ -233,6 +233,26 @@ For more information about configuring Webpack, check the [Webpack documentation
 
 For more information on how the merging of Webpack configurations work, check [webpack-merge](https://github.com/survivejs/webpack-merge).
 
+### `disabledLoaders`
+
+Disable internal Sagui loaders in order to implement custom behavior via the `webpack` configuration.
+
+```js
+module.exports = {
+  disabledLoaders: ['yaml']
+}
+```
+
+Possible values:
+
+- `font`
+- `image`
+- `javaScript`
+- `json`
+- `style`
+- `video`
+- `yaml`
+
 ### `karma`
 
 If a test automation requirement can't be achieved via the previous configuration options, an **escape hatch** is offered allowing extension of the internal Karma configuration.
