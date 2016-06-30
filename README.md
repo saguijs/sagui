@@ -89,11 +89,12 @@ Sagui uses [Webpack](http://webpack.github.io/) as its underlying bundling tool.
 - Video (`.ogg`, `.mp4`)
 - YAML
 
-During build, optimizations are also performed in the output bundle:
+During build, optimizations and special processing are also performed in the output bundle:
 
-- [Commons code splitting](https://webpack.github.io/docs/list-of-plugins.html#commonschunkplugin)
-- [Extract styles as separated files](https://github.com/webpack/extract-text-webpack-plugin)
-- Minification
+- [Autoprefixer for CSS properties](https://github.com/postcss/autoprefixer) for cross-browser support;
+- [Commons code splitting](https://webpack.github.io/docs/list-of-plugins.html#commonschunkplugin) if there is more than a single entry-point;
+- [Extract styles as separated files](https://github.com/webpack/extract-text-webpack-plugin) to style the page before the JavaScript is loaded and parsed;
+- Minification and code dedupication.
 
 ### Testing and quality
 
