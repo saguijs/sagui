@@ -2,6 +2,7 @@ import { HotModuleReplacementPlugin } from 'webpack'
 import reactTransform from 'babel-plugin-react-transform'
 import { expect } from 'chai'
 import loader from './javascript'
+import fileExtensions from '../../file-extensions'
 import actions from '../../actions'
 
 describe('javaScript', () => {
@@ -30,9 +31,9 @@ describe('javaScript', () => {
     ])
   })
 
-  it('should resolve js, jsx and es6 files', function () {
+  it(`should resolve JavaScript files (${fileExtensions.list.JAVASCRIPT})`, function () {
     const webpack = loader.configure({ projectPath })
-    expect(webpack.resolve.extensions).to.eql(['.js', '.jsx', '.es6'])
+    expect(webpack.resolve.extensions).to.eql(fileExtensions.list.JAVASCRIPT)
   })
 
   describe('HMR', () => {

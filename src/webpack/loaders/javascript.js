@@ -34,13 +34,13 @@ export default {
       plugins: action === actions.DEVELOP ? [new HotModuleReplacementPlugin()] : [],
 
       resolve: {
-        extensions: ['.js', '.jsx', '.es6']
+        extensions: fileExtensions.list.JAVASCRIPT
       },
 
       module: {
         loaders: [
           {
-            test: fileExtensions.JAVASCRIPT,
+            test: fileExtensions.pattern.JAVASCRIPT,
             include: [
               path.join(projectPath, 'src'),
               ...userPaths
