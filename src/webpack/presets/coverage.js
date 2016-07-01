@@ -11,7 +11,7 @@ export default {
       module: {
         preLoaders: [
           {
-            test: (absPath) => absPath.match(fileExtensions.pattern.JAVASCRIPT) && !absPath.match(/\.spec/),
+            test: (absPath) => absPath.match(fileExtensions.test.JAVASCRIPT) && !absPath.match(/\.spec/),
             loader: 'isparta',
             exclude: /node_modules/
           }

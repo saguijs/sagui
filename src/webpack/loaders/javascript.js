@@ -40,7 +40,7 @@ export default {
       module: {
         loaders: [
           {
-            test: fileExtensions.pattern.JAVASCRIPT,
+            test: fileExtensions.test.JAVASCRIPT,
             include: [
               path.join(projectPath, 'src'),
               ...userPaths

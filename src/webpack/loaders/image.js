@@ -7,7 +7,7 @@ export default {
       module: {
         loaders: [
           {
-            test: fileExtensions.pattern.IMAGE,
+            test: fileExtensions.test.IMAGE,
             loader: 'url-loader?limit=8192&name=[name]-[hash].[ext]'
           }
         ]

@@ -7,7 +7,7 @@ export default {
       module: {
         loaders: [
           {
-            test: fileExtensions.pattern.VIDEO,
+            test: fileExtensions.test.VIDEO,
             loader: 'file?name=[name]-[hash].[ext]'
           }
         ]

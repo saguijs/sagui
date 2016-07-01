@@ -59,13 +59,13 @@ export default {
       module: {
         loaders: [
           {
-            test: fileExtensions.pattern.CSS,
+            test: fileExtensions.test.CSS,
             loader: shouldExtract
               ? extractCss.extract(cssLoaders)
               : ['style', ...cssLoaders].join('!')
           },
           {
-            test: fileExtensions.pattern.SCSS,
+            test: fileExtensions.test.SCSS,
             loader: shouldExtract
               ? extractSass.extract(sassLoaders)
               : ['style', ...sassLoaders].join('!')

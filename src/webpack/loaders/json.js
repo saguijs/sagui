@@ -7,7 +7,7 @@ export default {
       module: {
         loaders: [
           {
-            test: fileExtensions.pattern.JSON,
+            test: fileExtensions.test.JSON,
             loader: 'json-loader'
           }
         ]

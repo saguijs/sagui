@@ -2,7 +2,7 @@ export default {
   list: {
     JAVASCRIPT: ['.js', '.jsx', '.es6']
   },
-  pattern: {
+  test: {
     CSS: /\.css$/,
     EOT: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
     IMAGE: /\.(png|jpg|jpeg|gif|svg)$/,
