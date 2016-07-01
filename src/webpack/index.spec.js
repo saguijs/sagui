@@ -60,7 +60,7 @@ describe('webpack', function () {
           module: {
             loaders: [
               {
-                test: fileExtensions.JAVASCRIPT,
+                test: fileExtensions.pattern.JAVASCRIPT,
                 loader: 'babel'
               }
             ]

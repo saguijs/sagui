@@ -7,7 +7,7 @@ export default {
       module: {
         loaders: [
           {
-            test: fileExtensions.YAML,
+            test: fileExtensions.pattern.YAML,
             loader: 'json!yaml'
           }
         ]
