@@ -1,9 +1,10 @@
 import eslint from 'eslint'
 import { logError, log } from '../util/log'
+import fileExtensions from '../file-extensions'
 
 export default ({ projectPath }) => new Promise((resolve, reject) => {
   const cli = new eslint.CLIEngine({
-    extensions: ['.es6', '.js', '.jsx']
+    extensions: fileExtensions.list.JAVASCRIPT
   })
 
   const report = cli.executeOnFiles([projectPath])
