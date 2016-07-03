@@ -7,19 +7,19 @@ export default {
       module: {
         loaders: [
           {
-            test: fileExtensions.WOFF,
+            test: fileExtensions.test.WOFF,
             loader: 'file?name=[name]-[hash].[ext]&mimetype=application/font-woff'
           },
           {
-            test: fileExtensions.WOFF2,
+            test: fileExtensions.test.WOFF2,
             loader: 'file?name=[name]-[hash].[ext]&mimetype=application/font-woff'
           },
           {
-            test: fileExtensions.TTF,
+            test: fileExtensions.test.TTF,
             loader: 'file?name=[name]-[hash].[ext]&mimetype=application/octet-stream'
           },
           {
-            test: fileExtensions.EOT,
+            test: fileExtensions.test.EOT,
             loader: 'file?name=[name]-[hash].[ext]'
           }
         ]
