@@ -1,4 +1,5 @@
 import { HotModuleReplacementPlugin } from 'webpack'
+import path from 'path'
 import reactTransform from 'babel-plugin-react-transform'
 import { expect } from 'chai'
 import loader from './javascript'
@@ -10,7 +11,7 @@ describe('javaScript', () => {
 
   it('should only build files inside the src folder by default', () => {
     const webpack = loader.configure({ projectPath })
-    expect(webpack.module.loaders[0].include).to.eql(['/tmp/test-project/src'])
+    expect(webpack.module.loaders[0].include).to.eql([path.join(projectPath, 'src')])
   })
 
   it('should include the user defined dependencies to be built', () => {
@@ -26,8 +27,8 @@ describe('javaScript', () => {
 
     const webpack = loader.configure(config)
     expect(webpack.module.loaders[0].include).to.eql([
-      '/tmp/test-project/src',
-      '/tmp/test-project/node_modules/ui-react-components'
+      path.join(projectPath, 'src'),
+      path.join(projectPath, 'node_modules', 'ui-react-components')
     ])
   })
 

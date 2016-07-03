@@ -4,7 +4,7 @@
   "description": "Front-end tooling in a single dependency",
   "preferGlobal": false,
   "bin": {
-    "sagui": "./bin/sagui"
+    "sagui": "./bin/sagui.js"
   },
   "main": "index.js",
   "files": [
@@ -23,7 +23,7 @@
     "test:unit": "mocha --timeout 0 --compilers js:babel-register --recursive --reporter spec --fgrep [integration] --invert ./src",
     "test:unit:watch": "npm run test:unit -- --watch",
     "prepublish": "not-in-install && npm prune && npm test && npm run build || in-install",
-    "postinstall": "./bin/sagui install"
+    "postinstall": "node ./bin/sagui.js install"
   },
   "repository": {
     "type": "git",
@@ -40,7 +40,8 @@
     "babel-register": "^6.7.2",
     "chai": "^3.3.0",
     "in-publish": "^2.0.0",
-    "mocha": "^2.3.3"
+    "mocha": "^2.3.3",
+    "tmp": "0.0.28"
   },
   "dependencies": {
     "autoprefixer": "^6.3.6",
@@ -54,6 +55,7 @@
     "chalk": "^1.1.1",
     "clean-webpack-plugin": "^0.1.9",
     "commander": "^2.8.1",
+    "cross-env": "^1.0.8",
     "css-loader": "^0.23.1",
     "eslint": "~2.2.0",
     "eslint-config-sagui": "^1.0.1",
@@ -103,6 +105,7 @@
     "babel-plugin-transform-es2015-modules-commonjs": "^6.7.0",
     "babel-plugin-transform-runtime": "^6.4.3",
     "babel-preset-sagui": "^6.5.1",
+    "cross-env": "^1.0.8",
     "eslint": "~2.2.0",
     "eslint-config-sagui": "^1.0.1",
     "eslint-config-standard": "5.1.0",
