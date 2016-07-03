@@ -3,5 +3,6 @@ export default {
   DEVELOP: 'develop',
   INSTALL: 'install',
   LINT: 'lint',
-  TEST: 'test'
+  TEST: 'test',
+  TYPECHECK: 'typecheck'
 }
