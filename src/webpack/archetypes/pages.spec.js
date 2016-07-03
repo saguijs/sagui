@@ -1,4 +1,5 @@
 import HtmlWebpackPlugin from 'html-webpack-plugin'
+import path from 'path'
 import { optimize } from 'webpack'
 import { expect } from 'chai'
 import preset from './pages'
@@ -26,7 +27,7 @@ describe('pages webpack preset', function () {
 
     it('should have the output path configured as the build folder', function () {
       const webpackConfig = preset.configure(baseConfig)
-      expect(webpackConfig.output.path).eql('/tmp/projec-path/dist')
+      expect(webpackConfig.output.path).eql(path.join(projectPath, 'dist'))
     })
 
     it('should have the entrypoints setup with the index', function () {
