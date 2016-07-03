@@ -1,9 +1,22 @@
 # http://www.appveyor.com/docs/appveyor-yml
 version: "{build}-{branch}"
+
 environment:
   matrix:
     - nodejs_version: "6.2.0"
+
 install:
+  # Update Node to the specified version
+  - ps: Install-Product node $env:nodejs_version
+  # Install dependencies
   - npm install
+
 test_script:
   - npm test
+
+# Disable automatic builds
+build: off
+
+matrix:
+  # Immediately finish build once one of the jobs fails.
+  fast_finish: true
