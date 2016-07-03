@@ -2,7 +2,6 @@
 version: "{build}-{branch}"
 environment:
   matrix:
-    - nodejs_version: "4.4.4"
     - nodejs_version: "6.2.0"
 install:
   - npm install
