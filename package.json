@@ -4,7 +4,7 @@
   "description": "Front-end tooling in a single dependency",
   "preferGlobal": false,
   "bin": {
-    "sagui": "./bin/sagui"
+    "sagui": "./bin/sagui.js"
   },
   "main": "index.js",
   "files": [
