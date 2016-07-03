@@ -4,12 +4,12 @@ import json from '../../util/json'
 const saguiScripts = {
   'build': 'sagui build',
   'develop': 'sagui develop --port 3000',
-  'dist': 'NODE_ENV=production sagui build --optimize',
+  'dist': 'cross-env NODE_ENV=production sagui build --optimize',
   'start': 'npm run develop',
   'test': 'npm run test:lint && npm run test:unit',
   'test:coverage': 'npm run test:unit -- --coverage',
   'test:lint': 'sagui lint',
-  'test:unit': 'NODE_ENV=test sagui test',
+  'test:unit': 'cross-env NODE_ENV=test sagui test',
   'test:unit:watch': 'npm run test:unit -- --watch'
 }
 
