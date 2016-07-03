@@ -4,6 +4,13 @@ version: "{build}"
 environment:
   matrix:
     - nodejs_version: "6.2.0"
+      TEST_TYPE: lint_and_test_unit
+
+    - nodejs_version: "6.2.0"
+      TEST_TYPE: integration_test
+
+    - nodejs_version: "6.2.0"
+      TEST_TYPE: test_create_project
 
 install:
   # Update Node to the specified version
@@ -12,7 +19,7 @@ install:
   - npm install
 
 test_script:
-  - npm test
+  - node bin/ci.js
 
 # Disable automatic builds
 build: off

@@ -4,36 +4,7 @@ node_js:
   - "6.2.0"
 sudo: false
 script:
-- |
-    if [ "$TEST_TYPE" = lint_and_test_unit ]; then
-      set -e
-      npm run test:lint
-      npm run test:unit
-
-    elif [ "$TEST_TYPE" = integration_test ]; then
-      set -e
-      npm run test:integration
-
-    elif [ "$TEST_TYPE" = test_create_project ]; then
-      set -e
-
-      # builds Sagui before installing
-      npm run build
-
-      SAGUI_DIR=`pwd`
-      PROJECT_DIR=`mktemp -d`
-      cd $PROJECT_DIR
-
-      # Create a new project and install Sagui
-      npm init -y .
-      npm install --save-dev file://$SAGUI_DIR
-
-      # Run some basic scripts
-      npm test
-      npm run build
-      npm run dist
-      npm run test:coverage
-    fi
+- node bin/ci.js
 env:
   matrix:
   - TEST_TYPE=lint_and_test_unit
