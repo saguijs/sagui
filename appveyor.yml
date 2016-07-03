@@ -1,5 +1,5 @@
 # http://www.appveyor.com/docs/appveyor-yml
-version: "{build}-{branch}"
+version: "{build}"
 
 environment:
   matrix:
