@@ -141,7 +141,7 @@ The previous configuration will expect and build the files:
 - `src/index.html` => `dist/index.html`
 - `src/index.js` => `dist/index.js`
 
-### `library`
+### `libraries`
 
 Create **reusable libraries** that can be shared across applications. Sagui will take care of the build process so that external libraries are not bundled and that you have a CommonJS module as the output.
 
