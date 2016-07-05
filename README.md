@@ -65,6 +65,7 @@ Sagui manages the [package.json](https://docs.npmjs.com/files/package.json) scri
 - `npm run test:lint`: run static analysis in the code;
 - `npm run test:unit`: run the unit tests;
 - `npm run test:coverage`: run the unit tests with coverage report;
+- `npm run test:typecheck`: run the static type analysis in the code;
 - `npm run test:unit:watch`: run a test watcher (great for development).
 
 ## Features
@@ -110,6 +111,8 @@ Sagui will automatically run every test file that follows this convention.
 Under the hood it uses [Karma test runner](http://karma-runner.github.io/) to allow running the tests in the most diverse browsers and even through [Selenium](http://docs.seleniumhq.org/) (not natively).
 
 Static code analysis is also performed on the code following the [JavaScript Standard Style](http://standardjs.com/) convention.
+
+[Flowtype](flowtype.org) static type analysis is available as part of the testing suite. By default flow type checker only runs on files with the `// @flow` comment at the beginning, so no static type analysis will be actually performed unless you add that. See the [Flowtype docs](https://flowtype.org/docs/existing.html) for an more in depth explanation of why it is a good idea to have it like this.
 
 ## Configuration
 
@@ -207,6 +210,18 @@ Dependencies **installed through npm** are not transpiled with Babel by default.
 module.exports = {
   javaScript: {
     transpileDependencies: ['dependency-to-be-transpiled']
+  }
+}
+```
+
+### `javaScript.typeCheckAll`
+
+By default, Flowtype ignores files that don't start with the `// @flow` comment line. If you want all your files to be statically type checked, you can enable that feature in the sagui config:
+
+```js
+module.exports = {
+  javaScript: {
+    typeCheckAll: true
   }
 }
 ```
