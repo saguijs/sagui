@@ -1,0 +1,29 @@
+# http://www.appveyor.com/docs/appveyor-yml
+version: "{build}"
+
+environment:
+  matrix:
+    - nodejs_version: "6.2.0"
+      TEST_TYPE: lint_and_test_unit
+
+    - nodejs_version: "6.2.0"
+      TEST_TYPE: integration_test
+
+    - nodejs_version: "6.2.0"
+      TEST_TYPE: test_create_project
+
+install:
+  # Update Node to the specified version
+  - ps: Install-Product node $env:nodejs_version
+  # Install dependencies
+  - npm install
+
+test_script:
+  - node bin/ci.js
+
+# Disable automatic builds
+build: off
+
+matrix:
+  # Immediately finish build once one of the jobs fails.
+  fast_finish: true

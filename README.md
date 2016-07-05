@@ -3,6 +3,7 @@
 [![Build Status](https://travis-ci.org/saguijs/sagui.svg)](https://travis-ci.org/saguijs/sagui)
 [![npm version](https://badge.fury.io/js/sagui.svg)](https://badge.fury.io/js/sagui)
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](https://github.com/feross/standard)
+[![Join the chat at https://gitter.im/saguijs/sagui](https://badges.gitter.im/saguijs/sagui.svg)](https://gitter.im/saguijs/sagui?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 Sagui is the **single development dependency** that provides the tooling required to build, test and develop modern JavaScript applications.
 
@@ -143,7 +144,7 @@ The previous configuration will expect and build the files:
 - `src/index.html` => `dist/index.html`
 - `src/index.js` => `dist/index.js`
 
-### `library`
+### `libraries`
 
 Create **reusable libraries** that can be shared across applications. Sagui will take care of the build process so that external libraries are not bundled and that you have a CommonJS module as the output.
 
