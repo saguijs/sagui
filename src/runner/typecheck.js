@@ -6,8 +6,14 @@ const errorCodes = {
   TYPECHECK_ERROR: 2
 }
 
-export default ({ projectPath }) => new Promise((resolve, reject) => {
-  execFile(flow, ['check', '--color=always'], (err, stdout, stderr) => {
+export default (saguiOptions) => new Promise((resolve, reject) => {
+  const commandArgs = ['check', '--color=always']
+
+  if (saguiOptions.javaScript && saguiOptions.javaScript.typeCheckAll) {
+    commandArgs.push('--all')
+  }
+
+  execFile(flow, commandArgs, (err, stdout, stderr) => {
     if (err) {
       logError('Type check failed:\n')
 
