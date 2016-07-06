@@ -212,6 +212,18 @@ module.exports = {
 }
 ```
 
+### `style.extract`
+
+By default, when building **pages**, Sagui [extracts](https://github.com/webpack/extract-text-webpack-plugin) the CSS definitions into separated `.css` files. It is possible to disable this behavior and have the CSS inlined in the same JavaScript bundle.
+
+```js
+module.exports = {
+  style: {
+    extract: false
+  }
+}
+```
+
 ### `javaScript.transpileDependencies`
 
 Dependencies **installed through npm** are not transpiled with Babel by default. If you have a dependency that needs to be transpiled it is very easy, just add its name to the list:

@@ -7,7 +7,8 @@ import actions from '../../actions'
 
 const defaultOptions = {
   cssModules: true,
-  sourceMaps: true
+  sourceMaps: true,
+  extract: true
 }
 
 /**
@@ -24,7 +25,7 @@ export default {
       ...style
     }
 
-    const shouldExtract = pages.length > 0 && action === actions.BUILD
+    const shouldExtract = options.extract && pages.length > 0 && action === actions.BUILD
     const localIdentName = optimize ? '[hash]' : '[path][local]-[hash:base64:5]'
 
     const extractSass = new ExtractTextPlugin('[name]-[hash]-0.css')
