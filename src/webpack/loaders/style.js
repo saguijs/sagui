@@ -30,20 +30,24 @@ export default {
     const extractSass = new ExtractTextPlugin('[name]-[hash]-0.css')
     const extractCss = new ExtractTextPlugin('[name]-[hash]-1.css')
 
+    // toggle source maps and CSS Modules
+    const cssModules = options.cssModules ? 'modules' : ''
+    const sourceMaps = options.sourceMaps ? 'sourceMap' : ''
+
     // importLoaders: use the following postcss-loader in @import statements
     // modules: enable css-modules
     const cssLoaders = [
-      `css?${options.cssModules ? 'modules' : ''}&${options.sourceMaps ? 'sourceMap' : ''}&importLoaders=1&localIdentName=${localIdentName}`,
+      `css?${cssModules}&${sourceMaps}&importLoaders=1&localIdentName=${localIdentName}`,
       'postcss-loader'
     ]
 
     // importLoaders: use the following sass-loader in @import statements
     // modules: enable css-modules
     const sassLoaders = [
-      `css?${options.cssModules ? 'modules' : ''}&${options.sourceMaps ? 'sourceMap' : ''}&importLoaders=3&localIdentName=${localIdentName}`,
+      `css?${cssModules}&${sourceMaps}&importLoaders=3&localIdentName=${localIdentName}`,
       'postcss-loader',
       'resolve-url', // Fixes loading of relative URLs in nested Sass modules
-      `sass?${options.sourceMaps ? 'sourceMap' : ''}&outputStyle=expanded&` +
+      `sass?${sourceMaps}&outputStyle=expanded&` +
         'includePaths[]=' + (path.resolve(projectPath, './node_modules'))
     ]
 
