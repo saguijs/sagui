@@ -6,7 +6,8 @@ import fileExtensions from '../../file-extensions'
 import actions from '../../actions'
 
 const defaultOptions = {
-  cssModules: true
+  cssModules: true,
+  sourceMaps: true
 }
 
 /**
@@ -32,17 +33,17 @@ export default {
     // importLoaders: use the following postcss-loader in @import statements
     // modules: enable css-modules
     const cssLoaders = [
-      `css?${options.cssModules ? 'modules' : ''}&sourceMap&importLoaders=1&localIdentName=${localIdentName}`,
+      `css?${options.cssModules ? 'modules' : ''}&${options.sourceMaps ? 'sourceMap' : ''}&importLoaders=1&localIdentName=${localIdentName}`,
       'postcss-loader'
     ]
 
     // importLoaders: use the following sass-loader in @import statements
     // modules: enable css-modules
     const sassLoaders = [
-      `css?${options.cssModules ? 'modules' : ''}&sourceMap&importLoaders=3&localIdentName=${localIdentName}`,
+      `css?${options.cssModules ? 'modules' : ''}&${options.sourceMaps ? 'sourceMap' : ''}&importLoaders=3&localIdentName=${localIdentName}`,
       'postcss-loader',
       'resolve-url', // Fixes loading of relative URLs in nested Sass modules
-      'sass?sourceMap&outputStyle=expanded&' +
+      `sass?${options.sourceMaps ? 'sourceMap' : ''}&outputStyle=expanded&` +
         'includePaths[]=' + (path.resolve(projectPath, './node_modules'))
     ]
 

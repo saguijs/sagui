@@ -200,6 +200,18 @@ module.exports = {
 }
 ```
 
+### `style.sourceMaps`
+
+Disable source maps for styles only.
+
+```js
+module.exports = {
+  style: {
+    sourceMaps: false
+  }
+}
+```
+
 ### `javaScript.transpileDependencies`
 
 Dependencies **installed through npm** are not transpiled with Babel by default. If you have a dependency that needs to be transpiled it is very easy, just add its name to the list:

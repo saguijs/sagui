@@ -18,5 +18,19 @@ describe('style', function () {
     expect(config.module.loaders[0].loader.includes('css?modules')).to.eql(false)
     expect(config.module.loaders[1].loader.includes('css?modules')).to.eql(false)
   })
+
+  it('should have source maps enabled by default', () => {
+    const config = loader.configure({ projectPath })
+
+    expect(config.module.loaders[0].loader.includes('sourceMap')).to.eql(true)
+    expect(config.module.loaders[1].loader.includes('sourceMap')).to.eql(true)
+  })
+
+  it('should be possible to disable source maps', () => {
+    const config = loader.configure({ projectPath, style: { sourceMaps: false } })
+
+    expect(config.module.loaders[0].loader.includes('sourceMap')).to.eql(false)
+    expect(config.module.loaders[1].loader.includes('sourceMap')).to.eql(false)
+  })
 })
 
