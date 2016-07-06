@@ -2,6 +2,7 @@ import { expect } from 'chai'
 import { join } from 'path'
 import { NoErrorsPlugin } from 'webpack'
 import preset from './base'
+import actions from '../../actions'
 
 const saguiPath = join(__dirname, '../../../../../')
 const projectPath = join(saguiPath, 'spec/fixtures/simple-project')
@@ -27,5 +28,17 @@ describe('base webpack preset', function () {
 
     const commons = config.plugins.filter((plugin) => plugin instanceof NoErrorsPlugin)
     expect(commons.length).equal(1)
+  })
+
+  describe('devtool', () => {
+    it('should setup the much faster cheap-module-eval-source-map by default', () => {
+      const config = preset.configure({ projectPath, saguiPath })
+      expect(config.devtool).equal('cheap-module-eval-source-map')
+    })
+
+    it('should output a separated source-map file when building', () => {
+      const config = preset.configure({ projectPath, saguiPath, action: actions.BUILD })
+      expect(config.devtool).equal('source-map')
+    })
   })
 })
