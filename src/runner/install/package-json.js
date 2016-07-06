@@ -6,9 +6,10 @@ const saguiScripts = {
   'develop': 'sagui develop --port 3000',
   'dist': 'cross-env NODE_ENV=production sagui build --optimize',
   'start': 'npm run develop',
-  'test': 'npm run test:lint && npm run test:unit',
+  'test': 'npm run test:lint && npm run test:typecheck && npm run test:unit',
   'test:coverage': 'npm run test:unit -- --coverage',
   'test:lint': 'sagui lint',
+  'test:typecheck': 'sagui typecheck',
   'test:unit': 'cross-env NODE_ENV=test sagui test',
   'test:unit:watch': 'npm run test:unit -- --watch'
 }
