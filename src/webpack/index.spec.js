@@ -39,7 +39,7 @@ describe('webpack', function () {
 
     it('should allow overwriting the default configuration', function () {
       const defaultConfig = webpack(baseSaguiConfig).webpack[0]
-      expect(defaultConfig.devtool).equal('source-map')
+      expect(defaultConfig.devtool).equal('cheap-module-eval-source-map')
 
       const saguiConfig = {
         ...baseSaguiConfig,
