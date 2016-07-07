@@ -3,6 +3,7 @@ import { copySync } from 'fs-extra'
 import template from 'template-directory'
 import { logWarning } from '../../util/log'
 import fileExists from '../../util/file-exists'
+import templatesDotFiles from './template-dotfiles'
 
 const basePath = join(__dirname, '../../../template/base')
 const dotFilesPath = join(__dirname, '../../../template/dot-files')
@@ -27,9 +28,11 @@ function copyBase (projectPath) {
 }
 
 function copyDotFiles (projectPath) {
-  copySync(join(dotFilesPath, 'babelrc'), join(projectPath, '.babelrc'), { clobber: false })
-  copySync(join(dotFilesPath, 'editorconfig'), join(projectPath, '.editorconfig'), { clobber: false })
-  copySync(join(dotFilesPath, 'eslintrc'), join(projectPath, '.eslintrc'), { clobber: false })
-  copySync(join(dotFilesPath, 'eslintignore'), join(projectPath, '.eslintignore'), { clobber: false })
-  copySync(join(dotFilesPath, 'gitignore'), join(projectPath, '.gitignore'), { clobber: false })
+  Object.keys(templatesDotFiles)
+    .map((key) => [key, templatesDotFiles[key]])
+    .map(([templateName, path]) => copySync(
+      join(dotFilesPath, templateName),
+      join(projectPath, path),
+      { clobber: false }
+    ))
 }
