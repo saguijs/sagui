@@ -88,6 +88,7 @@
     "phantomjs-prebuilt": "^2.1.4",
     "postcss-loader": "^0.9.1",
     "postcss-modules-values": "^1.1.1",
+    "raw-loader": "^0.5.1",
     "react-transform-hmr": "^1.0.4",
     "resolve-url-loader": "^1.4.4",
     "sass-loader": "^3.2.2",
