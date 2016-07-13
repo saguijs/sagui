@@ -39,5 +39,14 @@ describe('updateNpmScripts', function () {
       const saguiScripts = updateNpmScripts(scripts)
       expect(saguiScripts['test:unit']).to.eql('cross-env NODE_ENV=test sagui test')
     })
+
+    it('should update old `dist` scripts', () => {
+      const scripts = {
+        'dist': 'NODE_ENV=production sagui build --optimize'
+      }
+
+      const saguiScripts = updateNpmScripts(scripts)
+      expect(saguiScripts['dist']).to.eql('cross-env NODE_ENV=production sagui build --optimize')
+    })
   })
 })

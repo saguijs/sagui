@@ -14,6 +14,7 @@ const saguiScripts = {
     'sagui develop --port 3000'
   ],
   'dist': [
+    'NODE_ENV=production sagui build --optimize',
     'cross-env NODE_ENV=production sagui build --optimize'
   ],
   'start': [
