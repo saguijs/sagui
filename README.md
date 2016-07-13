@@ -87,6 +87,7 @@ Sagui uses [Webpack](http://webpack.github.io/) as its underlying bundling tool.
 - JavaScript (`.js`, `.es6`, `.jsx`) via [Babel]((http://babeljs.io/docs/learn-es2015/))
 - JSON
 - Styles in [CSS Modules](https://github.com/css-modules) in either plain CSS or [Sass lang](http://sass-lang.com/)
+- Text (`.txt`) files [loaded](https://github.com/webpack/raw-loader) without any processing
 - Video (`.ogg`, `.mp4`)
 - YAML
 
@@ -276,6 +277,7 @@ Possible values:
 - `javaScript`
 - `json`
 - `style`
+- `txt`
 - `video`
 - `yaml`
 
