@@ -27,9 +27,21 @@ function copyBase (projectPath) {
 }
 
 function copyDotFiles (projectPath) {
-  copySync(join(dotFilesPath, 'babelrc'), join(projectPath, '.babelrc'), { clobber: false })
-  copySync(join(dotFilesPath, 'editorconfig'), join(projectPath, '.editorconfig'), { clobber: false })
-  copySync(join(dotFilesPath, 'eslintrc'), join(projectPath, '.eslintrc'), { clobber: false })
-  copySync(join(dotFilesPath, 'eslintignore'), join(projectPath, '.eslintignore'), { clobber: false })
-  copySync(join(dotFilesPath, 'gitignore'), join(projectPath, '.gitignore'), { clobber: false })
+  safeCopy(join(dotFilesPath, 'babelrc'), join(projectPath, '.babelrc'))
+  safeCopy(join(dotFilesPath, 'editorconfig'), join(projectPath, '.editorconfig'))
+  safeCopy(join(dotFilesPath, 'eslintrc'), join(projectPath, '.eslintrc'))
+  safeCopy(join(dotFilesPath, 'eslintignore'), join(projectPath, '.eslintignore'))
+  safeCopy(join(dotFilesPath, 'gitignore'), join(projectPath, '.gitignore'))
+}
+
+function safeCopy (source, destination) {
+  try {
+    copySync(source, destination, { clobber: false })
+  } catch (e) {
+    if (e.message === 'EEXIST') {
+      // file exists, don't try to overwrite it
+    } else {
+      throw e
+    }
+  }
 }
