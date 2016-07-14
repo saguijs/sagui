@@ -8,22 +8,22 @@ const basePath = join(__dirname, '../../../template/base')
 const dotFilesPath = join(__dirname, '../../../template/dot-files')
 
 export default function (projectPath) {
-  const srcFolder = join(projectPath, 'src')
-
-  if (!fileExists(srcFolder)) {
-    copyBase(projectPath)
-    copyDotFiles(projectPath)
-  } else {
-    logWarning('skipped installing files in src, folder already exists')
-  }
+  copyBase(projectPath)
+  copyDotFiles(projectPath)
 }
 
 function copyBase (projectPath) {
-  const projectName = basename(projectPath)
+  const srcFolder = join(projectPath, 'src')
 
-  template(basePath, projectPath, {
-    projectName: projectName
-  }, { clobber: false })
+  if (!fileExists(srcFolder)) {
+    const projectName = basename(projectPath)
+
+    template(basePath, projectPath, {
+      projectName: projectName
+    }, { clobber: false })
+  } else {
+    logWarning('skipped installing files in src, folder already exists')
+  }
 }
 
 function copyDotFiles (projectPath) {

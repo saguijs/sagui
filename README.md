@@ -68,6 +68,8 @@ Sagui manages the [package.json](https://docs.npmjs.com/files/package.json) scri
 - `npm run test:coverage`: run the unit tests with coverage report;
 - `npm run test:unit:watch`: run a test watcher (great for development).
 
+If you don't change the scripts, they will be **automatically updated** on new Sagui releases.
+
 ## Features
 
 As stated earlier, Sagui strives to provide all the basic needs to create modern JavaScript applications.
