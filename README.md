@@ -241,7 +241,7 @@ module.exports = {
 
 ### `webpack`
 
-If a build requirement can't be achieved via the previous configuration options, an **escape hatch** is offered allowing extension of the internal Webpack configuration.
+If a build requirement can't be achieved via the previous configuration options, first [open an issue](https://github.com/saguijs/sagui/issues) so that we can add official support, and if you can't wait or is something very specific to your project, there is an **escape hatch** to allow extending the internal Webpack configuration.
 
 As an example, let's add an extra loader to load HTML files. In the `sagui.config.js` file:
 
@@ -285,7 +285,7 @@ Possible values:
 
 ### `karma`
 
-If a test automation requirement can't be achieved via the previous configuration options, an **escape hatch** is offered allowing extension of the internal Karma configuration.
+If a test automation requirement can't be achieved via the previous configuration options, first [open an issue](https://github.com/saguijs/sagui/issues) so that we can add official support, and if you can't wait or is something very specific to your project, there is an **escape hatch** to allow extending the internal Karma configuration.
 
 As an example, let's change the default browser used to execute the tests from *PhantomJS* to *Chrome*. In the `sagui.config.js` file:
 
