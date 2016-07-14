@@ -50,6 +50,10 @@ describe('[integration] sagui', function () {
       it('should be possible to build', () => {
         return sagui({ projectPath, action: actions.BUILD }).run()
       })
+
+      it('should be possible to keep updating Sagui', () => {
+        return sagui({ projectPath, action: actions.INSTALL }).run()
+      })
     })
   })
 })
