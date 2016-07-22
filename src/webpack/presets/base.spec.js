@@ -23,11 +23,20 @@ describe('base webpack preset', function () {
     expect(config.resolve.extensions).to.eql([''])
   })
 
-  it('should configure NoErrorsPlugin to prevent assets with erros from being emitted', function () {
-    const config = preset.configure({ projectPath, saguiPath })
+  describe('NoErrorsPlugin', () => {
+    it('should prevent assets with erros from being emitted if not watching', function () {
+      const config = preset.configure({ projectPath, saguiPath })
 
-    const commons = config.plugins.filter((plugin) => plugin instanceof NoErrorsPlugin)
-    expect(commons.length).equal(1)
+      const commons = config.plugins.filter((plugin) => plugin instanceof NoErrorsPlugin)
+      expect(commons.length).equal(1)
+    })
+
+    it('should allow erros if watching', function () {
+      const config = preset.configure({ projectPath, saguiPath, watch: true })
+
+      const commons = config.plugins.filter((plugin) => plugin instanceof NoErrorsPlugin)
+      expect(commons.length).equal(0)
+    })
   })
 
   describe('devtool', () => {
