@@ -1,6 +1,6 @@
 {
   "name": "sagui",
-  "version": "6.3.2",
+  "version": "6.3.3",
   "description": "Front-end tooling in a single dependency",
   "preferGlobal": false,
   "bin": {
