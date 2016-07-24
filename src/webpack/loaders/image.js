@@ -2,7 +2,7 @@ import fileExtensions from '../../file-extensions'
 
 export default {
   name: 'image',
-  configure () {
+  configure ({ action }) {
     return {
       module: {
         loaders: [

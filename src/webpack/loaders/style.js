@@ -20,6 +20,25 @@ const defaultOptions = {
 export default {
   name: 'style',
   configure ({ action, optimize, pages = [], projectPath, style = {} }) {
+    // User null-loader during tests
+    // for better performance
+    if (action === actions.TEST) {
+      return {
+        module: {
+          loaders: [
+            {
+              test: fileExtensions.test.CSS,
+              loader: 'null-loader'
+            },
+            {
+              test: fileExtensions.test.SCSS,
+              loader: 'null-loader'
+            }
+          ]
+        }
+      }
+    }
+
     const options = {
       ...defaultOptions,
       ...style
