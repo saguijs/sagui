@@ -32,7 +32,12 @@ export default {
               path.join(projectPath, 'src'),
               ...userPaths
             ],
-            loader: 'babel'
+            loader: 'babel',
+            query: {
+              // speed up build time
+              // see: https://blog.mariusschulz.com/2016/07/12/speeding-up-babel-transpilation-with-compact-mode
+              compact: true
+            }
           }
         ]
       }

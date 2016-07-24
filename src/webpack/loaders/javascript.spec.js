@@ -33,6 +33,11 @@ describe('javaScript', () => {
     ])
   })
 
+  it('should enable compact mode (there is already source-maps and the performance is better)', () => {
+    const webpack = loader.configure({ projectPath })
+    expect(webpack.module.loaders[0].query).to.eql({ compact: true })
+  })
+
   it(`should resolve JavaScript files (${fileExtensions.list.JAVASCRIPT})`, function () {
     const webpack = loader.configure({ projectPath })
     expect(webpack.resolve.extensions).to.eql(fileExtensions.list.JAVASCRIPT)
