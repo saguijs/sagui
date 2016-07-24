@@ -4,13 +4,7 @@ import actions from '../../actions'
 
 export default {
   name: 'eslint',
-  configure ({ watch, action, projectPath, coverage }) {
-    // We need to disable linting when generating coverage because the code is instrumented
-    // and therefore it's not following the linting rules anymore.
-    if (coverage) {
-      return {}
-    }
-
+  configure ({ watch, action, projectPath }) {
     // we ignore debugger warning on any developer driven environment
     // such as running the development server or any "watch" (such as test watch)
     const ignoreDebugger = watch || action === actions.DEVELOP
