@@ -32,9 +32,9 @@ describe('javaScript', () => {
     ])
   })
 
-  it('should enable compact mode (there is already source-maps and the performance is better)', () => {
+  it('should disable compact mode (enabling it breaks source maps)', () => {
     const webpack = loader.configure({ projectPath })
-    expect(webpack.module.loaders[0].query).to.eql({ compact: true })
+    expect(webpack.module.loaders[0].query).to.eql({ compact: false })
   })
 
   it(`should resolve JavaScript files (${fileExtensions.list.JAVASCRIPT})`, function () {
