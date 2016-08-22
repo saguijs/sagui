@@ -1,7 +1,7 @@
 language: node_js
 node_js:
-  - "4.4.4"
-  - "6.2.0"
+  - "4.5.0"
+  - "6.4.0"
 sudo: false
 script:
 - node bin/ci.js
