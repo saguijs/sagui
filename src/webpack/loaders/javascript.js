@@ -61,7 +61,8 @@ const babelPlugins = (action, coverage) => {
     return [
       [istanbul, {
         exclude: [
-          '**/*.spec.*'
+          '**/*.spec.*',
+          '**/node_modules/**/*'
         ]
       }]
     ]
