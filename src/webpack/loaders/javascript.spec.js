@@ -73,7 +73,8 @@ describe('javaScript', () => {
       expect(webpack.babel.plugins[0][0]).to.equal(istanbul)
       expect(webpack.babel.plugins[0][1]).to.eql({
         exclude: [
-          '**/*.spec.*'
+          '**/*.spec.*',
+          '**/node_modules/**/*'
         ]
       })
     })
