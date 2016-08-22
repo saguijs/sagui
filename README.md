@@ -1,6 +1,7 @@
 ![Sagui](https://raw.githubusercontent.com/saguijs/sagui/master/banner.jpg)
 
 [![Build Status](https://travis-ci.org/saguijs/sagui.svg)](https://travis-ci.org/saguijs/sagui)
+[![Windows Tests](https://img.shields.io/appveyor/ci/pirelenito/sagui.svg?label=Windows%20Tests)](https://ci.appveyor.com/project/pirelenito/sagui)
 [![npm version](https://badge.fury.io/js/sagui.svg)](https://badge.fury.io/js/sagui)
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](https://github.com/feross/standard)
 [![Join the chat at https://gitter.im/saguijs/sagui](https://badges.gitter.im/saguijs/sagui.svg)](https://gitter.im/saguijs/sagui?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
@@ -238,6 +239,25 @@ module.exports = {
   }
 }
 ```
+
+### `develop.proxy`
+
+Allow proxying requests to a separate, possible external, backend server.
+
+```js
+module.exports = {
+  develop: {
+    proxy: {
+      '/some/path*': {
+        target: 'https://other-server.example.com',
+        secure: false
+      }
+    }
+  }
+}
+```
+
+Please check [node-http-proxy documentation](https://github.com/nodejitsu/node-http-proxy#options) for the available configuration options.
 
 ### `webpack`
 

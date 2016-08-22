@@ -34,9 +34,8 @@ export default {
             ],
             loader: 'babel',
             query: {
-              // speed up build time
-              // see: https://blog.mariusschulz.com/2016/07/12/speeding-up-babel-transpilation-with-compact-mode
-              compact: true
+              // enabling it breaks source maps
+              compact: false
             }
           }
         ]
