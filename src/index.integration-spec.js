@@ -38,6 +38,10 @@ describe('[integration] sagui', function () {
       return sagui({ projectPath, action: actions.TEST }).run()
     })
 
+    it('should be possible to test (with coverage)', () => {
+      return sagui({ projectPath, action: actions.TEST, coverage: true }).run()
+    })
+
     it('should be possible to lint', () => {
       return sagui({ projectPath, action: actions.LINT }).run()
     })
