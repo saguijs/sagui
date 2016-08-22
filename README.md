@@ -240,6 +240,25 @@ module.exports = {
 }
 ```
 
+### `develop.proxy`
+
+Allow proxying requests to a separate, possible external, backend server.
+
+```js
+module.exports = {
+  develop: {
+    proxy: {
+      '/some/path*': {
+        target: 'https://other-server.example.com',
+        secure: false
+      }
+    }
+  }
+}
+```
+
+Please check [node-http-proxy documentation](https://github.com/nodejitsu/node-http-proxy#options) for the available configuration options.
+
 ### `webpack`
 
 If a build requirement can't be achieved via the previous configuration options, first [open an issue](https://github.com/saguijs/sagui/issues) so that we can add official support, and if you can't wait or is something very specific to your project, there is an **escape hatch** to allow extending the internal Webpack configuration.
