@@ -12,13 +12,13 @@ describe('[integration] sagui', function () {
   const projectPath = path.join(__dirname, '../tmp/project')
   const projectSrcPath = path.join(projectPath, 'src')
 
-  before(function () {
+  beforeEach(function () {
     fs.emptyDirSync(projectPath)
     fs.copySync(projectFixture, projectPath)
   })
 
   describe('after install', () => {
-    before(() => {
+    beforeEach(() => {
       sagui({ projectPath, action: actions.INSTALL }).run()
     })
 
@@ -49,7 +49,7 @@ describe('[integration] sagui', function () {
     })
 
     describe('once we add content', () => {
-      before(function () {
+      beforeEach(function () {
         fs.copySync(projectContent, projectSrcPath, { clobber: true })
       })
 
