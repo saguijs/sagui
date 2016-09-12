@@ -16,7 +16,7 @@ export default {
 
       devtool,
 
-      plugins: watch ? [] : [new NoErrorsPlugin()],
+      plugins: watch || action === actions.DEVELOP ? [] : [new NoErrorsPlugin()],
 
       resolve: {
         extensions: [''],
