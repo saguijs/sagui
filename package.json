@@ -27,14 +27,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/pirelenito/sagui.git"
+    "url": "git+https://github.com/saguijs/sagui.git"
   },
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/pirelenito/sagui/issues"
+    "url": "https://github.com/saguijs/sagui/issues"
   },
-  "homepage": "https://github.com/pirelenito/sagui#readme",
+  "homepage": "https://github.com/saguijs/sagui#readme",
   "devDependencies": {
     "babel-cli": "^6.6.5",
     "babel-register": "^6.7.2",
