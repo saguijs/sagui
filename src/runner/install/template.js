@@ -32,6 +32,7 @@ function copyDotFiles (projectPath) {
   safeCopy(join(dotFilesPath, 'eslintrc'), join(projectPath, '.eslintrc'))
   safeCopy(join(dotFilesPath, 'eslintignore'), join(projectPath, '.eslintignore'))
   safeCopy(join(dotFilesPath, 'gitignore'), join(projectPath, '.gitignore'))
+  safeCopy(join(dotFilesPath, 'npmignore'), join(projectPath, '.npmignore'))
 }
 
 function safeCopy (source, destination) {

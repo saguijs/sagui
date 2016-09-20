@@ -71,6 +71,10 @@ describe('[integration] sagui', function () {
       return sagui({ projectPath, action: actions.LINT }).run()
     })
 
+    it('should have an .npmignore file', () => {
+      fs.readFileSync(path.join(projectPath, '.npmignore'))
+    })
+
     describe('once we add content', () => {
       beforeEach(function () {
         fs.copySync(projectContent, projectSrcPath, { clobber: true })
