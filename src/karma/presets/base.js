@@ -5,13 +5,13 @@ export default {
       basePath: projectPath,
 
       files: [
-        'src/**/*.spec.*',
+        { pattern: 'node_modules/sagui/karma-static-files/test-bundle.js', watched: false },
         { pattern: 'src/**/*', watched: true, included: false }
       ],
 
       preprocessors: {
         // add webpack as preprocessor
-        'src/**/*.spec.*': ['webpack']
+        'node_modules/sagui/karma-static-files/test-bundle.js': ['webpack']
       },
 
       webpackServer: {
