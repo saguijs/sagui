@@ -1,6 +1,6 @@
 import { execFile } from 'child_process'
 import flow from 'flow-bin'
-import { logError, logWarning, log } from '../util/log'
+import { logError, log } from '../util/log'
 
 const errorCodes = {
   TYPECHECK_ERROR: 2
