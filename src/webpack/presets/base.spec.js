@@ -56,5 +56,10 @@ describe('base webpack preset', function () {
       const config = preset.configure({ projectPath, saguiPath, action: actions.BUILD })
       expect(config.devtool).equal('source-map')
     })
+
+    it('should inline the source-map while testing', () => {
+      const config = preset.configure({ projectPath, saguiPath, action: actions.TEST })
+      expect(config.devtool).equal('inline-source-map')
+    })
   })
 })

@@ -2,19 +2,35 @@ import { NoErrorsPlugin } from 'webpack'
 import path from 'path'
 import actions from '../../actions'
 
+/**
+ * Configure a proper devtool that best suits
+ * a specific action we want to perform
+ *
+ * see: http://webpack.github.io/docs/configuration.html#devtool
+ */
+const devtool = (action) => {
+  // generate the actual source map files on build
+  if (action === actions.BUILD) {
+    return 'source-map'
+  }
+
+  if (action === actions.TEST) {
+    return 'inline-source-map'
+  }
+
+  // Use a much faster cheap-module-eval-source-map setup when possible
+  return 'cheap-module-eval-source-map'
+}
+
 export default {
   name: 'base',
   configure ({ action, projectPath, saguiPath, watch }) {
     const projectSourcePath = path.join(projectPath, 'src')
 
-    // Use a much faster cheap-module-eval-source-map setup when possible
-    // see: http://webpack.github.io/docs/configuration.html#devtool
-    const devtool = action === actions.BUILD ? 'source-map' : 'cheap-module-eval-source-map'
-
     return {
       context: projectSourcePath,
 
-      devtool,
+      devtool: devtool(action),
 
       plugins: watch || action === actions.DEVELOP ? [] : [new NoErrorsPlugin()],
 
