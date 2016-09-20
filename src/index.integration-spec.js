@@ -3,15 +3,40 @@ import path from 'path'
 import { expect } from 'chai'
 import sagui from '.'
 import actions from './actions'
+import temp from 'temp'
+
+// make sure the temp folders are cleaned up
+temp.track()
+
+/**
+ * Simulate a complete install of Sagui in a target folder.
+ *
+ * It symlinks all the dependencies in place
+ * and copies the Sagui source folder.
+ */
+const npmInstall = (projectPath) => {
+  const saguiInNodeModules = path.join(projectPath, 'node_modules/sagui')
+  const nodeModules = path.join(__dirname, '../node_modules')
+  const packages = fs.readdirSync(nodeModules)
+
+  packages.forEach((name) => fs.ensureSymlinkSync(path.join(nodeModules, name), path.join(projectPath, 'node_modules', name)))
+
+  fs.ensureDirSync(saguiInNodeModules)
+  fs.copySync(path.join(__dirname, '..'), saguiInNodeModules, {
+    filter: (file) => !file.match(/node_modules/)
+  })
+}
 
 describe('[integration] sagui', function () {
   const projectFixture = path.join(__dirname, '../spec/fixtures/simple-project')
   const projectContent = path.join(__dirname, '../spec/fixtures/project-content')
-  const projectPath = path.join(__dirname, '../tmp/project')
-  const projectSrcPath = path.join(projectPath, 'src')
+  let projectPath, projectSrcPath
 
   beforeEach(function () {
-    fs.emptyDirSync(projectPath)
+    projectPath = temp.mkdirSync('sagui-test-project')
+    projectSrcPath = path.join(projectPath, 'src')
+
+    npmInstall(projectPath)
     fs.copySync(projectFixture, projectPath)
   })
 
