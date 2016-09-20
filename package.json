@@ -9,12 +9,12 @@
   "main": "index.js",
   "files": [
     ".babelrc",
-    ".eslintrc"
+    ".eslintrc",
     "bin",
     "karma-static-files",
     "lib",
     "src",
-    "template",
+    "template"
   ],
   "scripts": {
     "build": "rm -rf lib && babel src --out-dir lib --ignore *.spec.js",
