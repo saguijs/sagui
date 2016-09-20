@@ -13,7 +13,7 @@ export default (saguiOptions) => new Promise((resolve, reject) => {
     commandArgs.push('--all')
   }
 
-  execFile(flow, commandArgs, (err, stdout, stderr) => {
+  execFile(flow, commandArgs, { cwd: saguiOptions.projectPath }, (err, stdout, stderr) => {
     if (err) {
       logError('Type check failed:\n')
 
