@@ -4,7 +4,7 @@ import actions from '../../actions'
 
 export default {
   name: 'base',
-  configure ({ action, projectPath, saguiPath }) {
+  configure ({ action, projectPath, saguiPath, watch }) {
     const projectSourcePath = path.join(projectPath, 'src')
 
     // Use a much faster cheap-module-eval-source-map setup when possible
@@ -16,7 +16,7 @@ export default {
 
       devtool,
 
-      plugins: [new NoErrorsPlugin()],
+      plugins: watch || action === actions.DEVELOP ? [] : [new NoErrorsPlugin()],
 
       resolve: {
         extensions: [''],

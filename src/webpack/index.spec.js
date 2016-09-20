@@ -16,7 +16,7 @@ describe('webpack', function () {
   it('should allow disabling all loaders', () => {
     const saguiConfig = {
       ...baseSaguiConfig,
-      disabledLoaders: ['font', 'image', 'javaScript', 'json', 'style', 'video', 'yaml']
+      disabledLoaders: ['font', 'image', 'javaScript', 'json', 'style', 'txt', 'video', 'yaml']
     }
 
     const config = webpack(saguiConfig).webpack[0]

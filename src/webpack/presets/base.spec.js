@@ -23,11 +23,27 @@ describe('base webpack preset', function () {
     expect(config.resolve.extensions).to.eql([''])
   })
 
-  it('should configure NoErrorsPlugin to prevent assets with erros from being emitted', function () {
-    const config = preset.configure({ projectPath, saguiPath })
+  describe('NoErrorsPlugin', () => {
+    it('should prevent assets with erros from being emitted if action is BUILD', function () {
+      const config = preset.configure({ projectPath, saguiPath, action: actions.BUILD })
 
-    const commons = config.plugins.filter((plugin) => plugin instanceof NoErrorsPlugin)
-    expect(commons.length).equal(1)
+      const commons = config.plugins.filter((plugin) => plugin instanceof NoErrorsPlugin)
+      expect(commons.length).equal(1)
+    })
+
+    it('should allow erros if watching while running action TEST', function () {
+      const config = preset.configure({ projectPath, saguiPath, action: actions.TEST, watch: true })
+
+      const commons = config.plugins.filter((plugin) => plugin instanceof NoErrorsPlugin)
+      expect(commons.length).equal(0)
+    })
+
+    it('should allow erros if action is DEVELOP', function () {
+      const config = preset.configure({ projectPath, saguiPath, action: actions.DEVELOP })
+
+      const commons = config.plugins.filter((plugin) => plugin instanceof NoErrorsPlugin)
+      expect(commons.length).equal(0)
+    })
   })
 
   describe('devtool', () => {

@@ -3,36 +3,47 @@ import { copySync } from 'fs-extra'
 import template from 'template-directory'
 import { logWarning } from '../../util/log'
 import fileExists from '../../util/file-exists'
-import templatesDotFiles from './template-dotfiles'
 
 const basePath = join(__dirname, '../../../template/base')
 const dotFilesPath = join(__dirname, '../../../template/dot-files')
 
 export default function (projectPath) {
+  copyBase(projectPath)
+  copyDotFiles(projectPath)
+}
+
+function copyBase (projectPath) {
   const srcFolder = join(projectPath, 'src')
 
   if (!fileExists(srcFolder)) {
-    copyBase(projectPath)
-    copyDotFiles(projectPath)
+    const projectName = basename(projectPath)
+
+    template(basePath, projectPath, {
+      projectName: projectName
+    }, { clobber: false })
   } else {
     logWarning('skipped installing files in src, folder already exists')
   }
 }
 
-function copyBase (projectPath) {
-  const projectName = basename(projectPath)
-
-  template(basePath, projectPath, {
-    projectName: projectName
-  }, { clobber: false })
+function copyDotFiles (projectPath) {
+  safeCopy(join(dotFilesPath, 'babelrc'), join(projectPath, '.babelrc'))
+  safeCopy(join(dotFilesPath, 'editorconfig'), join(projectPath, '.editorconfig'))
+  safeCopy(join(dotFilesPath, 'eslintrc'), join(projectPath, '.eslintrc'))
+  safeCopy(join(dotFilesPath, 'eslintignore'), join(projectPath, '.eslintignore'))
+  safeCopy(join(dotFilesPath, 'flowconfig'), join(projectPath, '.flowconfig'))
+  safeCopy(join(dotFilesPath, 'gitignore'), join(projectPath, '.gitignore'))
+  safeCopy(join(dotFilesPath, 'npmignore'), join(projectPath, '.npmignore'))
 }
 
-function copyDotFiles (projectPath) {
-  Object.keys(templatesDotFiles)
-    .map((key) => [key, templatesDotFiles[key]])
-    .map(([templateName, path]) => copySync(
-      join(dotFilesPath, templateName),
-      join(projectPath, path),
-      { clobber: false }
-    ))
+function safeCopy (source, destination) {
+  try {
+    copySync(source, destination, { clobber: false })
+  } catch (e) {
+    if (e.message === 'EEXIST') {
+      // file exists, don't try to overwrite it
+    } else {
+      throw e
+    }
+  }
 }
