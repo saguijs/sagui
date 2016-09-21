@@ -53,7 +53,7 @@ describe('[integration] sagui', function () {
       expect(karma.webpack).to.exist
     })
 
-    it('should be possible to build', () => {
+    it.only('should be possible to build', () => {
       return sagui({ projectPath, action: actions.BUILD }).run()
     })
 
