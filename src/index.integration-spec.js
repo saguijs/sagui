@@ -3,10 +3,7 @@ import path from 'path'
 import { expect } from 'chai'
 import sagui from '.'
 import actions from './actions'
-import temp from 'temp'
-
-// make sure the temp folders are cleaned up
-temp.track()
+import tempfile from 'tempfile'
 
 /**
  * Simulate a complete install of Sagui in a target folder.
@@ -31,7 +28,9 @@ describe('[integration] sagui', function () {
   let projectPath, projectSrcPath
 
   beforeEach(function () {
-    projectPath = temp.mkdirSync('sagui-test-project')
+    projectPath = tempfile()
+    fs.ensureDirSync(projectPath)
+
     projectSrcPath = path.join(projectPath, 'src')
 
     npmInstall(projectPath)
