@@ -11,7 +11,7 @@ export default {
 
       preprocessors: {
         // add webpack as preprocessor
-        'node_modules/sagui/karma-static-files/test-bundle.js': ['webpack', 'sourcemap']
+        'node_modules/sagui/karma-static-files/test-bundle.js': ['webpack']
       },
 
       webpackServer: {
