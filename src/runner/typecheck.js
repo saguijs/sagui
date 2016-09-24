@@ -39,7 +39,7 @@ export default (saguiOptions) => new Promise((resolve, reject) => {
     console.log('MESSAGE', e.message)
     console.log('TRACE', e.trace)
     console.log('END 🎯')
-    
+
     throw new Error('It did not work')
   }
 })
