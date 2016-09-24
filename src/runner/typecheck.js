@@ -13,9 +13,14 @@ export default (saguiOptions) => new Promise((resolve, reject) => {
     commandArgs.push('--all')
   }
 
-  console.log('DEBUGGING 🍕')
-
   execFile(flow, commandArgs, { cwd: saguiOptions.projectPath }, (err, stdout, stderr) => {
+    console.log('SOMETHING FAILED 👾')
+
+    console.error(err)
+    console.error(stderr)
+
+    console.log('END OF FAILURE 👾')
+
     if (err) {
       logError('Type check failed:\n')
 
