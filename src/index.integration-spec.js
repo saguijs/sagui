@@ -12,19 +12,17 @@ temp.track()
  * Simulate a complete install of Sagui in a target folder.
  *
  * It symlinks all the dependencies in place
- * and copies the Sagui source folder.
+ * and copies the require Sagui files.
  */
 const npmInstall = (projectPath) => {
-  const saguiInNodeModules = path.join(projectPath, 'node_modules/sagui')
   const nodeModules = path.join(__dirname, '../node_modules')
   const packages = fs.readdirSync(nodeModules)
 
   packages.forEach((name) => fs.ensureSymlinkSync(path.join(nodeModules, name), path.join(projectPath, 'node_modules', name)))
 
+  const saguiInNodeModules = path.join(projectPath, 'node_modules/sagui/karma-static-files')
   fs.ensureDirSync(saguiInNodeModules)
-  fs.copySync(path.join(__dirname, '..'), saguiInNodeModules, {
-    filter: (file) => !file.match(/node_modules/)
-  })
+  fs.copySync(path.join(__dirname, '../karma-static-files'), saguiInNodeModules)
 }
 
 describe('[integration] sagui', function () {
