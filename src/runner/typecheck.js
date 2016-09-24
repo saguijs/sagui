@@ -15,13 +15,6 @@ export default (saguiOptions) => new Promise((resolve, reject) => {
 
   try {
     execFile(flow, commandArgs, { cwd: saguiOptions.projectPath }, (err, stdout, stderr) => {
-      console.log('SOMETHING FAILED 👾')
-
-      console.error(err)
-      console.error(stderr)
-
-      console.log('END OF FAILURE 👾')
-
       if (err) {
         logError('Type check failed:\n')
 
@@ -42,8 +35,11 @@ export default (saguiOptions) => new Promise((resolve, reject) => {
     })
   } catch (e) {
     console.log('THE EXECUTION FAILED 🎯')
+    console.log('ERROR', e)
     console.log('MESSAGE', e.message)
     console.log('TRACE', e.trace)
     console.log('END 🎯')
+    
+    throw new Error('It did not work')
   }
 })
