@@ -13,30 +13,37 @@ export default (saguiOptions) => new Promise((resolve, reject) => {
     commandArgs.push('--all')
   }
 
-  execFile(flow, commandArgs, { cwd: saguiOptions.projectPath }, (err, stdout, stderr) => {
-    console.log('SOMETHING FAILED 👾')
+  try {
+    execFile(flow, commandArgs, { cwd: saguiOptions.projectPath }, (err, stdout, stderr) => {
+      console.log('SOMETHING FAILED 👾')
 
-    console.error(err)
-    console.error(stderr)
+      console.error(err)
+      console.error(stderr)
 
-    console.log('END OF FAILURE 👾')
+      console.log('END OF FAILURE 👾')
 
-    if (err) {
-      logError('Type check failed:\n')
+      if (err) {
+        logError('Type check failed:\n')
 
-      switch (err.code) {
-        case errorCodes.TYPECHECK_ERROR:
-          console.log(stdout)
-          break
+        switch (err.code) {
+          case errorCodes.TYPECHECK_ERROR:
+            console.log(stdout)
+            break
 
-        default:
-          console.log(err)
+          default:
+            console.log(err)
+        }
+
+        reject()
+      } else {
+        log('Type check completed without errors')
+        resolve()
       }
-
-      reject()
-    } else {
-      log('Type check completed without errors')
-      resolve()
-    }
-  })
+    })
+  } catch (e) {
+    console.log('THE EXECUTION FAILED 🎯')
+    console.log('MESSAGE', e.message)
+    console.log('TRACE', e.trace)
+    console.log('END 🎯')
+  }
 })
