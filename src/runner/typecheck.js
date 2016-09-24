@@ -14,6 +14,10 @@ export default (saguiOptions) => new Promise((resolve, reject) => {
   }
 
   try {
+    console.log('INSPECT THE DESCRIPTOR 🐹')
+    console.log(flow)
+    console.log('INSPECTED 🐹')
+
     execFile(flow, commandArgs, { cwd: saguiOptions.projectPath }, (err, stdout, stderr) => {
       if (err) {
         logError('Type check failed:\n')
