@@ -114,6 +114,8 @@ Sagui will automatically run every test file that follows this convention.
 
 Under the hood it uses [Karma test runner](http://karma-runner.github.io/) to allow running the tests in the most diverse browsers and even through [Selenium](http://docs.seleniumhq.org/) (not natively).
 
+By default Sagui uses [PhantomJS](http://phantomjs.org/) to run the tests headlessly. To **speed up installing the dependencies** (`npm install`) it is advisable to have PhantomJS [installed globally](https://github.com/Medium/phantomjs#using-phantomjs-from-disk) in the machine.
+
 Static code analysis is also performed on the code following the [JavaScript Standard Style](http://standardjs.com/) convention.
 
 ## Configuration
