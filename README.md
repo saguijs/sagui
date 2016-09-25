@@ -85,7 +85,7 @@ The development server out-of-the-box has live reloading and **hot-module replac
 
 Sagui uses [Webpack](http://webpack.github.io/) as its underlying bundling tool. The biggest feature that Webpack provides is that everything is a module. Sagui supports the following module types by default:
 
-- Fonts (`.woff`, `.woff2`, `.ttf`, `.eot`)
+- Fonts (`.woff`, `.woff2`, `.ttf`, `.eot`, `.otf`)
 - Images (`.png`, `.jpg`, `.jpeg`, `.gif`, `.svg`)
 - JavaScript (`.js`, `.es6`, `.jsx`) via [Babel]((http://babeljs.io/docs/learn-es2015/))
 - JSON
