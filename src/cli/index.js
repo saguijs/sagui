@@ -18,6 +18,7 @@ export default (argv = []) => {
 
     logError('Error starting up')
     logError(e.stack || e)
+    process.exit(1)
   }
 
   if (!argv.slice(2).length) program.outputHelp()
