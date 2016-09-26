@@ -4,17 +4,24 @@ version: "{build}"
 environment:
   matrix:
     - nodejs_version: "6.2.0"
+      platform: x64
       TEST_TYPE: lint_and_test_unit
 
     - nodejs_version: "6.2.0"
+      platform: x64
       TEST_TYPE: integration_test
 
     - nodejs_version: "6.2.0"
+      platform: x64
+      TEST_TYPE: test_create_project
+
+    - nodejs_version: "6.2.0"
+      platform: x86
       TEST_TYPE: test_create_project
 
 install:
   # Update Node to the specified version
-  - ps: Install-Product node $env:nodejs_version x64
+  - ps: Install-Product node $env:nodejs_version $env:platform
   # Update NPM to latest
   - npm install -g npm@latest --loglevel=warn
   # Install dependencies

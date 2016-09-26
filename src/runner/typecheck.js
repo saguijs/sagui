@@ -1,6 +1,6 @@
 import { execFile } from 'child_process'
 import flow from 'flow-bin'
-import { logError, log } from '../util/log'
+import { logError, log, logWarning } from '../util/log'
 
 const errorCodes = {
   TYPECHECK_ERROR: 2
@@ -13,11 +13,13 @@ export default (saguiOptions) => new Promise((resolve, reject) => {
     commandArgs.push('--all')
   }
 
-  try {
-    console.log('INSPECT THE DESCRIPTOR 🐹')
-    console.log(flow)
-    console.log('INSPECTED 🐹')
+  if (!flow) {
+    logWarning('Typecheck is not support in your platform.')
+    logWarning('For more information go to https://github.com/flowtype/flow-bin/issues/')
+    return resolve()
+  }
 
+  try {
     execFile(flow, commandArgs, { cwd: saguiOptions.projectPath }, (err, stdout, stderr) => {
       if (err) {
         logError('Type check failed:\n')
@@ -38,12 +40,6 @@ export default (saguiOptions) => new Promise((resolve, reject) => {
       }
     })
   } catch (e) {
-    console.log('THE EXECUTION FAILED 🎯')
-    console.log('ERROR', e)
-    console.log('MESSAGE', e.message)
-    console.log('TRACE', e.trace)
-    console.log('END 🎯')
-
-    throw new Error('It did not work')
+    reject(e)
   }
 })
