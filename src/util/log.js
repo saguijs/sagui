@@ -16,5 +16,7 @@ export function log (entry) {
 }
 
 function sagui () {
-  return chalk.dim('🐵  Sagui')
+  return process.platform === 'win32'
+    ? 'Sagui - '
+    : chalk.dim('🐵  Sagui')
 }
