@@ -14,9 +14,11 @@ environment:
 
 install:
   # Update Node to the specified version
-  - ps: Install-Product node $env:nodejs_version
+  - ps: Install-Product node $env:nodejs_version x64
+  # Update NPM to latest
+  - npm install -g npm@latest --loglevel=warn
   # Install dependencies
-  - npm install
+  - npm install --loglevel=warn
 
 test_script:
   - node bin/ci.js
