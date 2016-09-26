@@ -8,6 +8,7 @@ export default {
     IMAGE: /\.(png|jpg|jpeg|gif|svg)$/,
     JAVASCRIPT: /\.(jsx?|es6)$/,
     JSON: /\.(json)$/,
+    OTF: /\.(otf)$/,
     SCSS: /\.scss$/,
     TTF: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
     TXT: /\.(txt)$/,

@@ -1,6 +1,6 @@
 {
   "name": "sagui",
-  "version": "6.5.2",
+  "version": "6.6.0",
   "description": "Front-end tooling in a single dependency",
   "preferGlobal": false,
   "bin": {
@@ -58,7 +58,7 @@
     "chalk": "^1.1.1",
     "clean-webpack-plugin": "^0.1.9",
     "commander": "^2.8.1",
-    "cross-env": "^1.0.8",
+    "cross-env": "^3.0.0",
     "css-loader": "^0.23.1",
     "eslint": "2.13.1",
     "eslint-config-sagui": "3.0.0",
@@ -111,7 +111,7 @@
     "babel-plugin-transform-es2015-modules-commonjs": "^6.7.0",
     "babel-plugin-transform-runtime": "^6.4.3",
     "babel-preset-sagui": "6.6.1",
-    "cross-env": "^1.0.8",
+    "cross-env": "^3.0.0",
     "eslint": "2.13.1",
     "eslint-config-sagui": "3.0.0",
     "eslint-config-standard": "5.3.1",

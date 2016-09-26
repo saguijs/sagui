@@ -21,6 +21,10 @@ export default {
           {
             test: fileExtensions.test.EOT,
             loader: 'file?name=[name]-[hash].[ext]'
+          },
+          {
+            test: fileExtensions.test.OTF,
+            loader: 'file?name=[name]-[hash].[ext]'
           }
         ]
       }

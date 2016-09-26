@@ -86,7 +86,7 @@ The development server out-of-the-box has live reloading and **hot-module replac
 
 Sagui uses [Webpack](http://webpack.github.io/) as its underlying bundling tool. The biggest feature that Webpack provides is that everything is a module. Sagui supports the following module types by default:
 
-- Fonts (`.woff`, `.woff2`, `.ttf`, `.eot`)
+- Fonts (`.woff`, `.woff2`, `.ttf`, `.eot`, `.otf`)
 - Images (`.png`, `.jpg`, `.jpeg`, `.gif`, `.svg`)
 - JavaScript (`.js`, `.es6`, `.jsx`) via [Babel]((http://babeljs.io/docs/learn-es2015/))
 - JSON
@@ -114,6 +114,8 @@ A simple example would be:
 Sagui will automatically run every test file that follows this convention.
 
 Under the hood it uses [Karma test runner](http://karma-runner.github.io/) to allow running the tests in the most diverse browsers and even through [Selenium](http://docs.seleniumhq.org/) (not natively).
+
+By default Sagui uses [PhantomJS](http://phantomjs.org/) to run the tests headlessly. To **speed up installing the dependencies** (`npm install`) it is advisable to have PhantomJS [installed globally](https://github.com/Medium/phantomjs#using-phantomjs-from-disk) in the machine.
 
 #### Linting
 
