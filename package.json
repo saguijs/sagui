@@ -61,7 +61,7 @@
     "cross-env": "^3.0.0",
     "css-loader": "^0.23.1",
     "eslint": "~2.2.0",
-    "eslint-config-sagui": "^1.0.1",
+    "eslint-config-sagui": "^4.0.0",
     "eslint-config-standard": "5.1.0",
     "eslint-config-standard-jsx": "1.1.1",
     "eslint-loader": "^1.0.0",
