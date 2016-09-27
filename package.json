@@ -48,7 +48,7 @@
   "dependencies": {
     "autoprefixer": "^6.3.6",
     "babel-core": "^6.10.4",
-    "babel-eslint": "^6.1.0",
+    "babel-eslint": "^7.0.0",
     "babel-loader": "^6.2.1",
     "babel-plugin-istanbul": "^2.0.0",
     "babel-plugin-react-transform": "^2.0.2",
