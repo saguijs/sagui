@@ -29,8 +29,8 @@ function copyBase (projectPath) {
 function copyDotFiles (projectPath) {
   safeCopy(join(dotFilesPath, 'babelrc'), join(projectPath, '.babelrc'))
   safeCopy(join(dotFilesPath, 'editorconfig'), join(projectPath, '.editorconfig'))
-  safeCopy(join(dotFilesPath, 'eslintrc'), join(projectPath, '.eslintrc'))
   safeCopy(join(dotFilesPath, 'eslintignore'), join(projectPath, '.eslintignore'))
+  safeCopy(join(dotFilesPath, 'eslintrc'), join(projectPath, '.eslintrc'))
   safeCopy(join(dotFilesPath, 'flowconfig'), join(projectPath, '.flowconfig'))
   safeCopy(join(dotFilesPath, 'gitignore'), join(projectPath, '.gitignore'))
   safeCopy(join(dotFilesPath, 'npmignore'), join(projectPath, '.npmignore'))
