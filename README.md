@@ -201,6 +201,22 @@ import leftPad from 'left-pad'
 
 When building the project, `react` won't actually be bundled in the output but `left-pad` will, so your project won't blow up once `left-pad` is unpublished again.
 
+### `autoInstall`
+
+It sucks to Ctrl-C your build script & server just to install a dependency you didn't know you needed until now.
+
+Instead, use `require` or `import` how you normally would and npm install will happen automatically to install & save missing dependencies while you work!
+
+This behavior is enabled by default on a newly bootstraped project and can be easily disabled:
+
+```js
+module.exports = {
+  autoInstall: false
+}
+```
+
+Under the hood Sagui uses [npm-install-webpack-plugin](https://github.com/ericclemmons/npm-install-webpack-plugin), so check their documentation for more information on the installation process.
+
 ### `style.cssModules`
 
 By default, styles compiled with Sagui will be output as [CSS Modules](https://github.com/css-modules), meaning they won't be global.
