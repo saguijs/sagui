@@ -125,7 +125,7 @@ Static code analysis is also performed on the code following the [JavaScript Sta
 
 [Flowtype](flowtype.org) static type analysis is available as part of the testing suite. By default the flowtype checker only runs on files with the `// @flow` comment at the beginning, so no static type analysis will be actually performed unless you add that. See the [docs](https://flowtype.org/docs/existing.html) for an more in depth explanation of why it is a good idea to have it like this.
 
-Sagui bundles loose lib [interface declarations](https://flowtype.org/docs/declarations.html#pointing-your-project-to-declarations) for the Jasmine and Sinon APIs used in the tests. You might want to look into the more complete [flow-typed](https://github.com/flowtype/flow-typed) repo to get already made interfaces for common project dependencies such as React, Redux, Ramda, …
+Sagui bundles loose lib [interface declarations](https://flowtype.org/docs/declarations.html#pointing-your-project-to-declarations) for the Jasmine APIs used in the tests. You might want to look into the more complete [flow-typed](https://github.com/flowtype/flow-typed) repo to get already made interfaces for common project dependencies such as React, Redux, Ramda, …
 
 ## Configuration
 
