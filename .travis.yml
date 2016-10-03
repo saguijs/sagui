@@ -1,15 +1,22 @@
 language: node_js
 node_js:
-  - "4.4.4"
-  - "6.2.0"
+- 4.5.0
+- 6.2.0
 sudo: false
 script:
 - node bin/ci.js
 env:
   matrix:
   - TEST_TYPE=lint_and_test_unit
-  - TEST_TYPE=integration_test
   - TEST_TYPE=test_create_project
 cache:
   directories:
-    - node_modules
+  - node_modules
+deploy:
+  provider: npm
+  email: paulo@ragonha.me
+  api_key:
+    secure: uwtKe6c+QPSOi7QLCGmVw5cIxl4XDAhaxVWKmRT/GA5CUALjY7ZY1i9Kn6mjcIcvW9HxATU51BASSfq3otWoSJnJB+J3E0kMHJTDW5JMYbQoeu0jRz6ny/FnQoNGvtd3GEAxBkRLCmE0bUzA+1hY+ZxTF/k+zcn2jWcdZk6VGsE=
+  on:
+    tags: true
+    repo: saguijs/sagui

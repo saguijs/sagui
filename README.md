@@ -1,6 +1,7 @@
 ![Sagui](https://raw.githubusercontent.com/saguijs/sagui/master/banner.jpg)
 
 [![Build Status](https://travis-ci.org/saguijs/sagui.svg)](https://travis-ci.org/saguijs/sagui)
+[![Windows Tests](https://img.shields.io/appveyor/ci/pirelenito/sagui.svg?label=Windows%20Tests)](https://ci.appveyor.com/project/pirelenito/sagui)
 [![npm version](https://badge.fury.io/js/sagui.svg)](https://badge.fury.io/js/sagui)
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](https://github.com/feross/standard)
 [![Join the chat at https://gitter.im/saguijs/sagui](https://badges.gitter.im/saguijs/sagui.svg)](https://gitter.im/saguijs/sagui?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
@@ -69,6 +70,8 @@ Sagui manages the [package.json](https://docs.npmjs.com/files/package.json) scri
 - `npm run test:typecheck`: run the static type analysis in the code;
 - `npm run test:unit:watch`: run a test watcher (great for development).
 
+If you don't change the scripts, they will be **automatically updated** on new Sagui releases.
+
 ## Features
 
 As stated earlier, Sagui strives to provide all the basic needs to create modern JavaScript applications.
@@ -83,11 +86,12 @@ The development server out-of-the-box has live reloading and **hot-module replac
 
 Sagui uses [Webpack](http://webpack.github.io/) as its underlying bundling tool. The biggest feature that Webpack provides is that everything is a module. Sagui supports the following module types by default:
 
-- Fonts (`.woff`, `.woff2`, `.ttf`, `.eot`)
+- Fonts (`.woff`, `.woff2`, `.ttf`, `.eot`, `.otf`)
 - Images (`.png`, `.jpg`, `.jpeg`, `.gif`, `.svg`)
 - JavaScript (`.js`, `.es6`, `.jsx`) via [Babel]((http://babeljs.io/docs/learn-es2015/))
 - JSON
 - Styles in [CSS Modules](https://github.com/css-modules) in either plain CSS or [Sass lang](http://sass-lang.com/)
+- Text (`.txt`) files [loaded](https://github.com/webpack/raw-loader) without any processing
 - Video (`.ogg`, `.mp4`)
 - YAML
 
@@ -110,6 +114,8 @@ A simple example would be:
 Sagui will automatically run every test file that follows this convention.
 
 Under the hood it uses [Karma test runner](http://karma-runner.github.io/) to allow running the tests in the most diverse browsers and even through [Selenium](http://docs.seleniumhq.org/) (not natively).
+
+By default Sagui uses [PhantomJS](http://phantomjs.org/) to run the tests headlessly. To **speed up installing the dependencies** (`npm install`) it is advisable to have PhantomJS [installed globally](https://github.com/Medium/phantomjs#using-phantomjs-from-disk) in the machine.
 
 Static code analysis is also performed on the code following the [JavaScript Standard Style](http://standardjs.com/) convention.
 
@@ -251,9 +257,28 @@ module.exports = {
 }
 ```
 
+### `develop.proxy`
+
+Allow proxying requests to a separate, possible external, backend server.
+
+```js
+module.exports = {
+  develop: {
+    proxy: {
+      '/some/path*': {
+        target: 'https://other-server.example.com',
+        secure: false
+      }
+    }
+  }
+}
+```
+
+Please check [node-http-proxy documentation](https://github.com/nodejitsu/node-http-proxy#options) for the available configuration options.
+
 ### `webpack`
 
-If a build requirement can't be achieved via the previous configuration options, an **escape hatch** is offered allowing extension of the internal Webpack configuration.
+If a build requirement can't be achieved via the previous configuration options, first [open an issue](https://github.com/saguijs/sagui/issues) so that we can add official support, and if you can't wait or is something very specific to your project, there is an **escape hatch** to allow extending the internal Webpack configuration.
 
 As an example, let's add an extra loader to load HTML files. In the `sagui.config.js` file:
 
@@ -291,12 +316,13 @@ Possible values:
 - `javaScript`
 - `json`
 - `style`
+- `txt`
 - `video`
 - `yaml`
 
 ### `karma`
 
-If a test automation requirement can't be achieved via the previous configuration options, an **escape hatch** is offered allowing extension of the internal Karma configuration.
+If a test automation requirement can't be achieved via the previous configuration options, first [open an issue](https://github.com/saguijs/sagui/issues) so that we can add official support, and if you can't wait or is something very specific to your project, there is an **escape hatch** to allow extending the internal Karma configuration.
 
 As an example, let's change the default browser used to execute the tests from *PhantomJS* to *Chrome*. In the `sagui.config.js` file:
 

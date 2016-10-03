@@ -5,6 +5,7 @@ import image from './image'
 import javaScript from './javascript'
 import json from './json'
 import style from './style'
+import txt from './txt'
 import video from './video'
 import yaml from './yaml'
 
@@ -14,6 +15,7 @@ const loaders = [
   javaScript,
   json,
   style,
+  txt,
   video,
   yaml
 ]

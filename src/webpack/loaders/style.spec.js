@@ -62,5 +62,14 @@ describe('style', function () {
       expect(config.module.loaders[1].loader.includes('extract-text-webpack-plugin')).to.eql(false)
     })
   })
+
+  describe('while running the tests', () => {
+    it('should be a null loader for better performance', () => {
+      const config = loader.configure({ action: actions.TEST })
+
+      expect(config.module.loaders[0].loader).to.eql('null-loader')
+      expect(config.module.loaders[1].loader).to.eql('null-loader')
+    })
+  })
 })
 
