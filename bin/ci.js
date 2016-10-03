@@ -2,6 +2,8 @@
 var path = require('path')
 var saguiPath = path.join(__dirname, '..')
 
+console.log('ENVIRONMENT', process.env)
+
 function exec (command, cwd) {
   // pass the parent´s stdio to the child process
   // http://stackoverflow.com/a/31104898
@@ -37,4 +39,3 @@ if (process.env.TEST_TYPE === 'test_create_project') {
   exec('npm run dist', projectPath)
   exec('npm run test:coverage', projectPath)
 }
-

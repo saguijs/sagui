@@ -9,9 +9,9 @@ const CURRENT_SCRIPTS = {
   'test': 'npm run test:lint && npm run test:typecheck && npm run test:unit',
   'test:coverage': 'npm run test:unit -- --coverage',
   'test:lint': 'sagui lint',
+  'test:typecheck': 'sagui typecheck',
   'test:unit': 'cross-env NODE_ENV=test sagui test',
-  'test:unit:watch': 'npm run test:unit -- --watch',
-  'test:typecheck': 'sagui typecheck'
+  'test:unit:watch': 'npm run test:unit -- --watch'
 }
 
 describe('updateNpmScripts', function () {
