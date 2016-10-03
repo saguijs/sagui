@@ -6,7 +6,7 @@
 [include]
 
 [libs]
-node_modules/flowtype-interfaces-sagui/interfaces/
+node_modules/sagui/flowtype-interfaces/
 
 [options]
 module.system=haste
