@@ -20,6 +20,7 @@ import pipeline from './util/pipeline'
  * @param {string} options.buildTarget Target: (development, production, test).
  * @param {string} options.action Action: (develop, test, build)
  * @param {string[]} [options.javaScript.buildDependencies = true] Which dependencies to transpile (Ex: ['ui-react-components'])
+ * @param {boolean} [options.autoInstall = false] Automatically installs any missing dependency
  * @param {boolean} [options.hotReloading = true] Enable hot reloading
  * @param {boolean} [options.optimize = false] Optimize the output (minify, dedup...)
  * @param {boolean} [options.defineNodeEnv = true] Define and replace NODE_ENV environment in the code
@@ -53,6 +54,7 @@ sagui.cli = cli
 export default sagui
 
 const DEFAULT_OPTIONS = {
+  autoInstall: false,
   port: 3000,
   saguiPath: path.join(__dirname, '../'),
   hotReloading: true,
