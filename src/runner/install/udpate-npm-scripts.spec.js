@@ -11,8 +11,7 @@ const CURRENT_SCRIPTS = {
   'test:lint': 'sagui lint',
   'test:typecheck': 'sagui typecheck',
   'test:unit': 'cross-env NODE_ENV=test sagui test',
-  'test:unit:watch': 'npm run test:unit -- --watch',
-  'test:typecheck': 'sagui typecheck'
+  'test:unit:watch': 'npm run test:unit -- --watch'
 }
 
 describe('updateNpmScripts', function () {
