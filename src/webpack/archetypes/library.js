@@ -19,14 +19,27 @@ export default {
 
     const externals = probeExternals(projectPath)
 
-    return {
-      entry: `./${library}.js`,
-      output: {
-        path: join(projectPath, 'dist'),
-        filename: `${library}.js`,
-        libraryTarget: action === actions.TEST ? undefined : 'commonjs2'
-      },
-      externals: action === actions.TEST ? [] : externals
+    if (typeof library === 'string') {
+      return {
+        entry: `./${library}.js`,
+        output: {
+          path: join(projectPath, 'dist'),
+          filename: `${library}.js`,
+          libraryTarget: action === actions.TEST ? undefined : 'commonjs2'
+        },
+        externals: action === actions.TEST ? [] : externals
+      }
+    } else {
+      return {
+        entry: `./${library.main}.js`,
+        output: {
+          path: join(projectPath, 'dist'),
+          filename: `${library.main}.js`,
+          libraryTarget: 'umd',
+          umdNamedDefine: library.name
+        },
+        externals: action === actions.TEST ? [] : externals
+      }
     }
   }
 }
