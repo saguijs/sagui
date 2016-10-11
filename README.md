@@ -201,6 +201,21 @@ import leftPad from 'left-pad'
 
 When building the project, `react` won't actually be bundled in the output but `left-pad` will, so your project won't blow up once `left-pad` is unpublished again.
 
+#### Publishing libraries as UMD
+
+If you need to build your library targeting UMD, you can use a slightly different configuration. For UMD you need to provide a _umdName_ for the library, which is going to be the name that it will use to add itself to the `window` object when loaded as a global in the browser.
+
+```js
+module.exports = {
+  libraries: [
+    {
+      main: 'button',
+      umdName: 'MyUIButton'
+    }
+  ]
+}
+```
+
 ### `style.cssModules`
 
 By default, styles compiled with Sagui will be output as [CSS Modules](https://github.com/css-modules), meaning they won't be global.
