@@ -19,12 +19,19 @@ export default {
 
     const externals = probeExternals(projectPath)
 
+    const libraryConfig = typeof library === 'string'
+      ? { main: library }
+      : library
+
+    const target = libraryConfig.umdName ? 'umd' : 'commonjs2'
+
     return {
-      entry: `./${library}.js`,
+      entry: `./${libraryConfig.main}.js`,
       output: {
         path: join(projectPath, 'dist'),
-        filename: `${library}.js`,
-        libraryTarget: action === actions.TEST ? undefined : 'commonjs2'
+        filename: `${libraryConfig.main}.js`,
+        libraryTarget: action === actions.TEST ? undefined : target,
+        umdNamedDefine: libraryConfig.umdName
       },
       externals: action === actions.TEST ? [] : externals
     }
