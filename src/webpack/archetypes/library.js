@@ -31,7 +31,7 @@ export default {
         path: join(projectPath, 'dist'),
         filename: `${libraryConfig.main}.js`,
         libraryTarget: action === actions.TEST ? undefined : target,
-        umdNamedDefine: libraryConfig.umdName
+        library: libraryConfig.umdName
       },
       externals: action === actions.TEST ? [] : externals
     }
