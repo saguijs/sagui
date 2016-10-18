@@ -69,9 +69,9 @@ describe('library webpack preset', function () {
       expect(webpackConfig.output.libraryTarget).eql('umd')
     })
 
-    it('should have the umdNamedDefine be Library as specified', function () {
+    it('should have the library with the name of the Library as specified', function () {
       const webpackConfig = preset.configure(baseConfiguration)
-      expect(webpackConfig.output.umdNamedDefine).eql('Library')
+      expect(webpackConfig.output.library).eql('Library')
     })
   })
 })
