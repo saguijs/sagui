@@ -5,21 +5,17 @@ import actions from '../../actions'
 
 export default {
   name: 'pages',
-  configure ({ pages, action, projectPath }) {
-    const pageEntries = pages instanceof Array
-      ? pages
-      : pages.entries
-    if (pageEntries.length === 0) { return {} }
+  configure ({ pages = [], action, projectPath }) {
+    if (pages.length === 0) { return {} }
 
-    const entry = configureEntry(pageEntries)
-    const plugins = configurePlugins(pageEntries, action)
+    const entry = configureEntry(pages)
+    const plugins = configurePlugins(pages, action)
 
     return {
       output: {
         path: join(projectPath, 'dist'),
         filename: '[name]-[hash].js',
-        chunkFilename: '[name]-[hash].chunk.js',
-        publicPath: pages.publicPath
+        chunkFilename: '[name]-[hash].chunk.js'
       },
       plugins,
       entry
