@@ -357,6 +357,20 @@ module.exports = {
 
 For more information about configuring Karma, check the [Karma documentation](https://karma-runner.github.io/0.13/config/configuration-file.html).
 
+## Gotchas
+
+### React Router
+
+For [`react-router`](https://github.com/ReactTraining/react-router) to work on the development server, an absolute static path for the output has to be configured on Webpack. You can do that by adding this configuration to `sagui.config.js`:
+
+```javascript
+webpack: {
+  output: {
+    publicPath: '/'
+  }
+}
+```
+
 ## Logo
 
 [Monkey artwork](https://thenounproject.com/term/monkey/267835) created by Ryan Spiering from the Noun Project.
