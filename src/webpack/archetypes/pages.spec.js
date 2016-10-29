@@ -15,9 +15,16 @@ describe('pages webpack preset', function () {
     })
   })
 
-  describe('empty pages', function () {
+  describe('empty pages as array', function () {
     it('should return an empty configuration', function () {
       const webpackConfig = preset.configure({ pages: [] })
+      expect(webpackConfig).eql({})
+    })
+  })
+
+  describe('empty pages as object', function () {
+    it('should return an empty configuration', function () {
+      const webpackConfig = preset.configure({ pages: { entries: [] } })
       expect(webpackConfig).eql({})
     })
   })
@@ -66,6 +73,13 @@ describe('pages webpack preset', function () {
 
       const commons = webpackConfig.plugins.filter((plugin) => plugin instanceof optimize.CommonsChunkPlugin)
       expect(commons.length).equal(0)
+    })
+
+    describe('public path', function () {
+      it('should include the publicPath in the configuration', function () {
+        const webpackConfig = preset.configure({ pages: { entries: ['index'], publicPath: '/public' }, projectPath })
+        expect(webpackConfig.output.publicPath).eql('/public')
+      })
     })
   })
 
