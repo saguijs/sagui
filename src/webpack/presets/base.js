@@ -14,12 +14,7 @@ const devtool = (action) => {
     return 'source-map'
   }
 
-  if (action === actions.TEST) {
-    return 'inline-source-map'
-  }
-
-  // Use a much faster cheap-module-eval-source-map setup when possible
-  return 'cheap-module-eval-source-map'
+  return 'inline-source-map'
 }
 
 export default {

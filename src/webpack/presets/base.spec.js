@@ -47,19 +47,14 @@ describe('base webpack preset', function () {
   })
 
   describe('devtool', () => {
-    it('should setup the much faster cheap-module-eval-source-map by default', () => {
+    it('should setup the inline-source-map by default', () => {
       const config = preset.configure({ projectPath, saguiPath })
-      expect(config.devtool).equal('cheap-module-eval-source-map')
+      expect(config.devtool).equal('inline-source-map')
     })
 
     it('should output a separated source-map file when building', () => {
       const config = preset.configure({ projectPath, saguiPath, action: actions.BUILD })
       expect(config.devtool).equal('source-map')
-    })
-
-    it('should inline the source-map while testing', () => {
-      const config = preset.configure({ projectPath, saguiPath, action: actions.TEST })
-      expect(config.devtool).equal('inline-source-map')
     })
   })
 })
