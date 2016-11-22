@@ -8,7 +8,7 @@ const CURRENT_SCRIPTS = {
   'test': 'npm run test:lint && npm run test:typecheck && npm run test:unit',
   'test:lint': 'sagui test:lint',
   'test:typecheck': 'sagui test:typecheck',
-  'test:unit': 'sagui test:unit',
+  'test:unit': 'sagui test:unit --coverage',
   'test:unit:watch': 'sagui test:unit --watch'
 }
 

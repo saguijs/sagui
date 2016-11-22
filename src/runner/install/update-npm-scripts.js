@@ -44,7 +44,8 @@ const saguiScripts = {
     'NODE_ENV=test sagui test',
     'cross-env NODE_ENV=test sagui test',
     'cross-env NODE_ENV=test sagui test:unit',
-    'sagui test:unit'
+    'sagui test:unit',
+    'sagui test:unit --coverage'
   ],
   'test:unit:watch': [
     'npm run test:unit -- --watch',
