@@ -23,6 +23,13 @@ describe('pages webpack preset', function () {
     })
   })
 
+  describe('action is TEST_UNIT', function () {
+    it('should return an empty configuration', function () {
+      const webpackConfig = preset.configure({ pages: ['index'], action: actions.TEST_UNIT })
+      expect(webpackConfig).eql({})
+    })
+  })
+
   describe('single page', function () {
     const baseConfig = { pages: ['index'], projectPath }
 
@@ -94,15 +101,6 @@ describe('pages webpack preset', function () {
 
       const commons = webpackConfig.plugins.filter((plugin) => plugin instanceof optimize.CommonsChunkPlugin)
       expect(commons.length).equal(1)
-    })
-
-    // Karma has an issue with the CommonsChunk plugin
-    // see: https://github.com/webpack/karma-webpack/issues/24
-    it('should NOT have the CommonsChunkPlugin enabled if action is test (breaks Karma)', function () {
-      const webpackConfig = preset.configure({ ...baseConfig, action: actions.TEST_UNIT })
-
-      const commons = webpackConfig.plugins.filter((plugin) => plugin instanceof optimize.CommonsChunkPlugin)
-      expect(commons.length).equal(0)
     })
   })
 

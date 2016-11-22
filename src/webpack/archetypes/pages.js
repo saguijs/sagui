@@ -7,7 +7,7 @@ import actions from '../../actions'
 export default {
   name: 'pages',
   configure ({ pages = [], action, projectPath }) {
-    if (pages.length === 0) { return {} }
+    if (pages.length === 0 || action === actions.TEST_UNIT) { return {} }
 
     const entry = configureEntry(pages)
     const plugins = configurePlugins(pages, action)
@@ -46,7 +46,7 @@ function configurePlugins (pages, action) {
     })
   })
 
-  if (action !== actions.TEST_UNIT && pages.length > 1) {
+  if (pages.length > 1) {
     plugins.push(new optimize.CommonsChunkPlugin({ name: 'common' }))
   }
 

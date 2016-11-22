@@ -13,6 +13,13 @@ describe('library webpack preset', function () {
     projectPath
   }
 
+  describe('action is TEST_UNIT', function () {
+    it('should return an empty configuration', function () {
+      const webpackConfig = preset.configure({ ...baseConfiguration, action: actions.TEST_UNIT })
+      expect(webpackConfig).eql({})
+    })
+  })
+
   it('should have a single entry pointing to index.js', function () {
     const webpackConfig = preset.configure(baseConfiguration)
     expect(webpackConfig.entry).eql('./index.js')
@@ -21,11 +28,6 @@ describe('library webpack preset', function () {
   it('should have the default exporting target of commonjs2 (module.exports = xxx)', function () {
     const webpackConfig = preset.configure(baseConfiguration)
     expect(webpackConfig.output.libraryTarget).eql('commonjs2')
-  })
-
-  it('should NOT SET the exporting target if action is test (a browser wont understand commonjs modules)', function () {
-    const webpackConfig = preset.configure({ ...baseConfiguration, action: actions.TEST_UNIT })
-    expect(webpackConfig.output.libraryTarget).undefined
   })
 
   it('should have the filename as index.js', function () {
@@ -42,11 +44,6 @@ describe('library webpack preset', function () {
     it('should infer the externals based on the packgage.json peerDependencies', function () {
       const webpackConfig = preset.configure(baseConfiguration)
       expect(webpackConfig.externals).eql(['react', 'react-dom'])
-    })
-
-    it('should have an empty externals if the action is test', function () {
-      const webpackConfig = preset.configure({ ...baseConfiguration, action: actions.TEST_UNIT })
-      expect(webpackConfig.externals).eql([])
     })
 
     it('should have an empty externals if the packgage.json does not have a peerDependencies', function () {

@@ -15,7 +15,7 @@ import actions from '../../actions'
 export default {
   name: 'library',
   configure ({ library, projectPath, action }) {
-    if (!library) { return {} }
+    if (!library || action === actions.TEST_UNIT) { return {} }
 
     const externals = probeExternals(projectPath)
 
@@ -30,10 +30,10 @@ export default {
       output: {
         path: join(projectPath, 'dist'),
         filename: `${libraryConfig.main}.js`,
-        libraryTarget: action === actions.TEST_UNIT ? undefined : target,
+        libraryTarget: target,
         library: libraryConfig.umdName
       },
-      externals: action === actions.TEST_UNIT ? [] : externals
+      externals: externals
     }
   }
 }
