@@ -58,7 +58,7 @@ const DEFAULT_OPTIONS = {
   optimize: false,
   defineNodeEnv: true,
   clean: true,
-  coverage: false,
+  coverage: true,
   lint: true,
   pages: [],
   disabledLoaders: [],

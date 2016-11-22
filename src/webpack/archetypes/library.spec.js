@@ -24,7 +24,7 @@ describe('library webpack preset', function () {
   })
 
   it('should NOT SET the exporting target if action is test (a browser wont understand commonjs modules)', function () {
-    const webpackConfig = preset.configure({ ...baseConfiguration, action: actions.TEST })
+    const webpackConfig = preset.configure({ ...baseConfiguration, action: actions.TEST_UNIT })
     expect(webpackConfig.output.libraryTarget).undefined
   })
 
@@ -45,7 +45,7 @@ describe('library webpack preset', function () {
     })
 
     it('should have an empty externals if the action is test', function () {
-      const webpackConfig = preset.configure({ ...baseConfiguration, action: actions.TEST })
+      const webpackConfig = preset.configure({ ...baseConfiguration, action: actions.TEST_UNIT })
       expect(webpackConfig.externals).eql([])
     })
 

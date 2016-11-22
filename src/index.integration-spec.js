@@ -40,7 +40,7 @@ describe('[integration] sagui', function () {
 
   describe('after install', () => {
     beforeEach(() => {
-      sagui({ projectPath, action: actions.INSTALL }).run()
+      sagui({ projectPath, action: actions.UPDATE }).run()
     })
 
     it('should configure webpack', () => {
@@ -58,15 +58,15 @@ describe('[integration] sagui', function () {
     })
 
     it('should be possible to test', () => {
-      return sagui({ projectPath, action: actions.TEST }).run()
+      return sagui({ projectPath, action: actions.TEST_UNIT }).run()
     })
 
-    it('should be possible to test (with coverage)', () => {
-      return sagui({ projectPath, action: actions.TEST, coverage: true }).run()
+    it('should be possible to test (without coverage)', () => {
+      return sagui({ projectPath, action: actions.TEST_UNIT, coverage: false }).run()
     })
 
     it('should be possible to lint', () => {
-      return sagui({ projectPath, action: actions.LINT }).run()
+      return sagui({ projectPath, action: actions.TEST_LINT }).run()
     })
 
     it('should have an .npmignore file', () => {
@@ -83,7 +83,7 @@ describe('[integration] sagui', function () {
       })
 
       it('should be possible to keep updating Sagui', () => {
-        return sagui({ projectPath, action: actions.INSTALL }).run()
+        return sagui({ projectPath, action: actions.UPDATE }).run()
       })
     })
   })

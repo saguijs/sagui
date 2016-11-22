@@ -46,7 +46,7 @@ function configurePlugins (pages, action) {
     })
   })
 
-  if (action !== actions.TEST && pages.length > 1) {
+  if (action !== actions.TEST_UNIT && pages.length > 1) {
     plugins.push(new optimize.CommonsChunkPlugin({ name: 'common' }))
   }
 

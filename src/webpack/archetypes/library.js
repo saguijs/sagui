@@ -30,10 +30,10 @@ export default {
       output: {
         path: join(projectPath, 'dist'),
         filename: `${libraryConfig.main}.js`,
-        libraryTarget: action === actions.TEST ? undefined : target,
+        libraryTarget: action === actions.TEST_UNIT ? undefined : target,
         library: libraryConfig.umdName
       },
-      externals: action === actions.TEST ? [] : externals
+      externals: action === actions.TEST_UNIT ? [] : externals
     }
   }
 }

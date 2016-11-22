@@ -22,7 +22,7 @@ export default {
   configure ({ action, optimize, pages = [], projectPath, style = {} }) {
     // User null-loader during tests
     // for better performance
-    if (action === actions.TEST) {
+    if (action === actions.TEST_UNIT) {
       return {
         module: {
           loaders: [

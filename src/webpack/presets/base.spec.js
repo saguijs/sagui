@@ -32,7 +32,7 @@ describe('base webpack preset', function () {
     })
 
     it('should allow erros if watching while running action TEST', function () {
-      const config = preset.configure({ projectPath, saguiPath, action: actions.TEST, watch: true })
+      const config = preset.configure({ projectPath, saguiPath, action: actions.TEST_UNIT, watch: true })
 
       const commons = config.plugins.filter((plugin) => plugin instanceof NoErrorsPlugin)
       expect(commons.length).equal(0)
