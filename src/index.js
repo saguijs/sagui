@@ -17,7 +17,6 @@ import pipeline from './util/pipeline'
  *
  * @param {Object} options Sagui options object
  * @param {string} options.projectPath Full path of the root directory of the project being built.
- * @param {string} options.buildTarget Target: (development, production, test).
  * @param {string} options.action Action: (develop, test, build)
  * @param {string[]} [options.javaScript.buildDependencies = true] Which dependencies to transpile (Ex: ['ui-react-components'])
  * @param {boolean} [options.hotReloading = true] Enable hot reloading

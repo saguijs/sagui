@@ -1,7 +1,6 @@
 import path from 'path'
 import program from 'commander'
 import sagui, { MissingPackageJSON, SaguiPath } from '../index'
-import buildTargets from '../build-targets'
 import { logError, logWarning } from '../util/log'
 import actions from '../actions'
 
@@ -29,7 +28,6 @@ const setupAction = (action) => (cliOptions = {}) => {
   const options = {
     ...cliOptions,
     action,
-    buildTarget: normalize(process.env.NODE_ENV),
     projectPath: process.env.SAGUI_LINK
       ? process.cwd()
       : path.join(__dirname, '../../../../')
@@ -38,7 +36,6 @@ const setupAction = (action) => (cliOptions = {}) => {
   sagui(options).run().then(() => process.exit(0), () => process.exit(1))
 }
 
-const normalize = (env = buildTargets.DEVELOPMENT) => env.toLowerCase().trim()
 
 program.command(actions.INSTALL)
   .description('Install or update sagui in the current project')
