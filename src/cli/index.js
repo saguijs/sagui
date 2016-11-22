@@ -49,6 +49,7 @@ program.command(actions.BUILD)
 program.command(actions.TEST_UNIT)
   .description('Run unit tests')
   .option('-w, --watch', 'Run tests on any file change')
+  .option('-c, --coverage', 'Generate a coverage report')
   .action(setupAction(actions.TEST_UNIT))
 
 program.command(actions.TEST_LINT)
