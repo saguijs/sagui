@@ -61,8 +61,8 @@ describe('[integration] sagui', function () {
       return sagui({ projectPath, action: actions.TEST_UNIT }).run()
     })
 
-    it('should be possible to test (without coverage)', () => {
-      return sagui({ projectPath, action: actions.TEST_UNIT, coverage: false }).run()
+    it('should be possible to test (with coverage)', () => {
+      return sagui({ projectPath, action: actions.TEST_UNIT, coverage: true }).run()
     })
 
     it('should be possible to lint', () => {
