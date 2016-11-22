@@ -6,6 +6,8 @@ import Server from 'webpack-dev-server'
  * Development server
  */
 export default (saguiOptions) => new Promise((resolve, reject) => {
+  process.env.NODE_ENV = 'development'
+
   const options = {
     hot: true,
     historyApiFallback: saguiOptions.pages && saguiOptions.pages[0] && `${saguiOptions.pages[0]}.html`,

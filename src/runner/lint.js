@@ -3,6 +3,8 @@ import { logError, log } from '../util/log'
 import fileExtensions from '../file-extensions'
 
 export default ({ projectPath }) => new Promise((resolve, reject) => {
+  process.env.NODE_ENV = 'test'
+
   const cli = new eslint.CLIEngine({
     cwd: projectPath,
     extensions: fileExtensions.list.JAVASCRIPT

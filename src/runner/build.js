@@ -2,6 +2,8 @@ import webpack from 'webpack'
 import { logError, log } from '../util/log'
 
 export default (saguiOptions) => new Promise((resolve, reject) => {
+  process.env.NODE_ENV = 'production'
+
   const compiler = webpack(saguiOptions.webpack)
 
   compiler.run((err, stats) => {

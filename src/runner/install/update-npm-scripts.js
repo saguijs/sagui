@@ -16,7 +16,8 @@ const saguiScripts = {
   ],
   'dist': [
     'NODE_ENV=production sagui build --optimize',
-    'cross-env NODE_ENV=production sagui build --optimize'
+    'cross-env NODE_ENV=production sagui build --optimize',
+    'sagui build --optimize'
   ],
   'start': [
     'npm run develop',
@@ -42,11 +43,13 @@ const saguiScripts = {
   'test:unit': [
     'NODE_ENV=test sagui test',
     'cross-env NODE_ENV=test sagui test',
-    'cross-env NODE_ENV=test sagui test:unit'
+    'cross-env NODE_ENV=test sagui test:unit',
+    'sagui test:unit'
   ],
   'test:unit:watch': [
     'npm run test:unit -- --watch',
-    'cross-env NODE_ENV=test sagui test:unit --watch'
+    'cross-env NODE_ENV=test sagui test:unit --watch',
+    'sagui test:unit --watch'
   ]
 }
 

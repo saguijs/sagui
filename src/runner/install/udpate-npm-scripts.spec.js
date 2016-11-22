@@ -3,13 +3,13 @@ import updateNpmScripts from './update-npm-scripts'
 
 const CURRENT_SCRIPTS = {
   'build': 'sagui build',
-  'dist': 'cross-env NODE_ENV=production sagui build --optimize',
+  'dist': 'sagui build --optimize',
   'start': 'sagui develop --port 3000',
   'test': 'npm run test:lint && npm run test:typecheck && npm run test:unit',
   'test:lint': 'sagui test:lint',
   'test:typecheck': 'sagui test:typecheck',
-  'test:unit': 'cross-env NODE_ENV=test sagui test:unit',
-  'test:unit:watch': 'cross-env NODE_ENV=test sagui test:unit --watch'
+  'test:unit': 'sagui test:unit',
+  'test:unit:watch': 'sagui test:unit --watch'
 }
 
 describe('updateNpmScripts', function () {
