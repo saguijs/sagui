@@ -57,7 +57,7 @@ const babelPlugins = (action, coverage) => {
     ]
   }
 
-  if (action === actions.TEST && coverage) {
+  if (action === actions.TEST_UNIT && coverage) {
     return [
       [istanbul, {
         exclude: [

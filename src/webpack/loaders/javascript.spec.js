@@ -69,7 +69,7 @@ describe('javaScript', () => {
 
   describe('code coverage instrumentation', () => {
     it('should setup istanbul babel plugin ignoring test files if action is test and coverage is enabled', () => {
-      const webpack = loader.configure({ projectPath, action: actions.TEST, coverage: true })
+      const webpack = loader.configure({ projectPath, action: actions.TEST_UNIT, coverage: true })
       expect(webpack.babel.plugins[0][0]).to.equal(istanbul)
       expect(webpack.babel.plugins[0][1]).to.eql({
         exclude: [
@@ -80,7 +80,7 @@ describe('javaScript', () => {
     })
 
     it('should NOT setup istanbul babel plugin if action is test and coverage is disabled', () => {
-      const webpack = loader.configure({ projectPath, action: actions.TEST })
+      const webpack = loader.configure({ projectPath, action: actions.TEST_UNIT })
       expect(webpack.plugins).to.eql([])
     })
   })

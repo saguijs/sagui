@@ -65,7 +65,7 @@ describe('style', function () {
 
   describe('while running the tests', () => {
     it('should be a null loader for better performance', () => {
-      const config = loader.configure({ action: actions.TEST })
+      const config = loader.configure({ action: actions.TEST_UNIT })
 
       expect(config.module.loaders[0].loader).to.eql('null-loader')
       expect(config.module.loaders[1].loader).to.eql('null-loader')

@@ -14,16 +14,16 @@ export default (saguiOptions) => {
     case actions.DEVELOP:
       return developmentServer(saguiOptions)
 
-    case actions.INSTALL:
+    case actions.UPDATE:
       return install(saguiOptions)
 
-    case actions.LINT:
+    case actions.TEST_LINT:
       return lint(saguiOptions)
 
-    case actions.TEST:
+    case actions.TEST_UNIT:
       return test(saguiOptions)
 
-    case actions.TYPECHECK:
+    case actions.TEST_TYPECHECK:
       return typecheck(saguiOptions)
 
     default:

@@ -3,15 +3,13 @@ import updateNpmScripts from './update-npm-scripts'
 
 const CURRENT_SCRIPTS = {
   'build': 'sagui build',
-  'develop': 'sagui develop --port 3000',
-  'dist': 'cross-env NODE_ENV=production sagui build --optimize',
-  'start': 'npm run develop',
+  'dist': 'sagui build --optimize',
+  'start': 'sagui develop --port 3000',
   'test': 'npm run test:lint && npm run test:typecheck && npm run test:unit',
-  'test:coverage': 'npm run test:unit -- --coverage',
-  'test:lint': 'sagui lint',
-  'test:typecheck': 'sagui typecheck',
-  'test:unit': 'cross-env NODE_ENV=test sagui test',
-  'test:unit:watch': 'npm run test:unit -- --watch'
+  'test:lint': 'sagui test:lint',
+  'test:typecheck': 'sagui test:typecheck',
+  'test:unit': 'sagui test:unit --coverage',
+  'test:unit:watch': 'sagui test:unit --watch'
 }
 
 describe('updateNpmScripts', function () {
@@ -38,7 +36,7 @@ describe('updateNpmScripts', function () {
       }
 
       const saguiScripts = updateNpmScripts(scripts)
-      expect(saguiScripts['test:unit']).to.eql('cross-env NODE_ENV=test sagui test')
+      expect(saguiScripts['test:unit']).to.eql(CURRENT_SCRIPTS['test:unit'])
     })
 
     it('should update old `dist` scripts', () => {
@@ -47,7 +45,30 @@ describe('updateNpmScripts', function () {
       }
 
       const saguiScripts = updateNpmScripts(scripts)
-      expect(saguiScripts['dist']).to.eql('cross-env NODE_ENV=production sagui build --optimize')
+      expect(saguiScripts['dist']).to.eql(CURRENT_SCRIPTS['dist'])
+    })
+
+    it('should remove undefined scripts', () => {
+      const scripts = {
+        'develop': 'sagui develop --port 3000',
+        'test:coverage': 'npm run test:unit -- --coverage'
+      }
+
+      const saguiScripts = updateNpmScripts(scripts)
+      console.log(saguiScripts)
+
+      const expectedScripts = [
+        'build',
+        'dist',
+        'start',
+        'test',
+        'test:lint',
+        'test:typecheck',
+        'test:unit',
+        'test:unit:watch'
+      ]
+
+      expect(Object.keys(saguiScripts)).to.eql(expectedScripts)
     })
   })
 })

@@ -37,5 +37,4 @@ if (process.env.TEST_TYPE === 'test_create_project') {
   exec('npm test', projectPath)
   exec('npm run build', projectPath)
   exec('npm run dist', projectPath)
-  exec('npm run test:coverage', projectPath)
 }
