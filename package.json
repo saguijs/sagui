@@ -56,7 +56,7 @@
     "babel-plugin-transform-runtime": "^6.4.3",
     "babel-preset-sagui": "^6.5.1",
     "chalk": "^1.1.1",
-    "clean-webpack-plugin": "^0.1.9",
+    "clean-webpack-plugin": "^0.1.11",
     "commander": "^2.8.1",
     "cross-env": "^3.0.0",
     "css-loader": "^0.23.1",
