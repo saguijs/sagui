@@ -60,13 +60,11 @@ Just start writing the code inside the `src/` folder.
 Sagui manages the [package.json](https://docs.npmjs.com/files/package.json) scripts for you:
 
 - `npm run build`: build a development version of the project;
-- `npm run develop`: spin up a development server with live-reload and [HMR](http://webpack.github.io/docs/hot-module-replacement.html);
-- `npm run dist`: build a production ready version of the project;
-- `npm run start`: alias for the *develop* script;
+- `npm run dist`: build an optimized (ready for deployment) version of the project;
+- `npm run start`: spin up a development server with live-reload and [HMR](http://webpack.github.io/docs/hot-module-replacement.html);
 - `npm run test`: run all test related scripts below;
 - `npm run test:lint`: run static analysis in the code;
 - `npm run test:unit`: run the unit tests;
-- `npm run test:coverage`: run the unit tests with coverage report;
 - `npm run test:typecheck`: run the static type analysis in the code;
 - `npm run test:unit:watch`: run a test watcher (great for development).
 
