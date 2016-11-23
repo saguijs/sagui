@@ -58,7 +58,7 @@
     "chalk": "^1.1.1",
     "clean-webpack-plugin": "^0.1.9",
     "commander": "^2.8.1",
-    "cross-env": "^3.0.0",
+    "cross-env": "^3.1.0",
     "css-loader": "^0.23.1",
     "eslint": "~2.2.0",
     "eslint-config-sagui": "^1.0.1",
