@@ -7,7 +7,7 @@ import actions from '../../actions'
 
 const defaultOptions = {
   cssModules: true,
-  sourceMaps: true,
+  sourceMaps: false,
   extract: true
 }
 
