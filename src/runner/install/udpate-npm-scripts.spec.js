@@ -48,14 +48,13 @@ describe('updateNpmScripts', function () {
       expect(saguiScripts['dist']).to.eql(CURRENT_SCRIPTS['dist'])
     })
 
-    it('should remove undefined scripts', () => {
+    it('should remove undefined scripts if it matches previous versions', () => {
       const scripts = {
         'develop': 'sagui develop --port 3000',
         'test:coverage': 'npm run test:unit -- --coverage'
       }
 
       const saguiScripts = updateNpmScripts(scripts)
-      console.log(saguiScripts)
 
       const expectedScripts = [
         'build',
@@ -69,6 +68,52 @@ describe('updateNpmScripts', function () {
       ]
 
       expect(Object.keys(saguiScripts)).to.eql(expectedScripts)
+    })
+
+    it('should NOT remove undefined scripts if it was modified by the user', () => {
+      const scripts = {
+        'test:coverage': 'npm run test:unit'
+      }
+
+      const saguiScripts = updateNpmScripts(scripts)
+
+      const expectedScripts = [
+        'build',
+        'dist',
+        'start',
+        'test',
+        'test:coverage',
+        'test:lint',
+        'test:typecheck',
+        'test:unit',
+        'test:unit:watch'
+      ]
+
+      expect(Object.keys(saguiScripts)).to.eql(expectedScripts)
+      expect(saguiScripts['test:coverage']).to.eql('npm run test:unit')
+    })
+
+    it('should NOT remove or change custom scripts while keeping them SORTED', () => {
+      const scripts = {
+        'my-weird-script': 'do whatever'
+      }
+
+      const saguiScripts = updateNpmScripts(scripts)
+
+      const expectedScripts = [
+        'build',
+        'dist',
+        'my-weird-script',
+        'start',
+        'test',
+        'test:lint',
+        'test:typecheck',
+        'test:unit',
+        'test:unit:watch'
+      ]
+
+      expect(Object.keys(saguiScripts)).to.eql(expectedScripts)
+      expect(saguiScripts['my-weird-script']).to.eql('do whatever')
     })
   })
 })

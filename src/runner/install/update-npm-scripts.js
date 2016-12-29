@@ -1,3 +1,5 @@
+import uniq from 'lodash.uniq'
+
 /**
  * List of scripts that provide an upgrade path
  * Each "script key" has a list of all past and
@@ -54,13 +56,32 @@ const saguiScripts = {
   ]
 }
 
-export default function (scripts = {}) {
-  return Object.keys(saguiScripts).reduce((newScripts, key) => {
-    if ((!scripts[key] || saguiScripts[key].indexOf(scripts[key]) !== -1) &&
-        saguiScripts[key][saguiScripts[key].length - 1] !== undefined) {
-      newScripts[key] = saguiScripts[key][saguiScripts[key].length - 1]
+export default function (userScripts = {}) {
+  const combinedScripts = uniq([
+    ...Object.keys(saguiScripts),
+    ...Object.keys(userScripts)
+  ]).sort()
+
+  return combinedScripts.reduce((scripts, key) => {
+    const isCustomScript = !saguiScripts[key]
+
+    if (isCustomScript) {
+      return { ...scripts, [key]: userScripts[key] }
     }
 
-    return newScripts
+    const isMissingScript = !userScripts[key]
+    const hasAnOutdatedScript = saguiScripts[key].indexOf(userScripts[key]) !== -1
+    const latestScript = saguiScripts[key][saguiScripts[key].length - 1]
+    const latestScriptIsDefined = latestScript !== undefined
+
+    if (hasAnOutdatedScript && latestScriptIsDefined || isMissingScript && latestScriptIsDefined) {
+      return { ...scripts, [key]: latestScript }
+    }
+
+    if (!hasAnOutdatedScript && !isMissingScript) {
+      return { ...scripts, [key]: userScripts[key] }
+    }
+
+    return scripts
   }, {})
 }
