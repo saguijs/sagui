@@ -19,7 +19,8 @@ const saguiScripts = {
   'dist': [
     'NODE_ENV=production sagui build --optimize',
     'cross-env NODE_ENV=production sagui build --optimize',
-    'sagui build --optimize'
+    'sagui build --optimize',
+    'sagui dist'
   ],
   'start': [
     'npm run develop',
