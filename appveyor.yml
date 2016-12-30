@@ -13,11 +13,7 @@ environment:
 
     - nodejs_version: "6.2.0"
       platform: x64
-      TEST_TYPE: test_create_project
-
-    - nodejs_version: "6.2.0"
-      platform: x86
-      TEST_TYPE: test_create_project
+      TEST_TYPE: test_create_project_npm
 
 install:
   # Update Node to the specified version
