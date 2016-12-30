@@ -24,49 +24,58 @@ export default (argv = []) => {
   if (!argv.slice(2).length) program.outputHelp()
 }
 
-const setupAction = (NODE_ENV, action, options = {}) => (cliOptions = {}) => {
+const setupAction = (NODE_ENV, actionsToRun, options = {}) => (cliOptions = {}) => {
   process.env.NODE_ENV = NODE_ENV
 
   log(`Setting NODE_ENV=${NODE_ENV}`)
 
-  sagui({
-    ...options,
-    ...cliOptions,
-    action,
-    projectPath: process.env.SAGUI_LINK
-      ? process.cwd()
-      : path.join(__dirname, '../../../../')
-  }).run().then(() => process.exit(0), () => process.exit(1))
+  const tasks = actionsToRun.map((action) => {
+    return () => sagui({
+      ...options,
+      ...cliOptions,
+      action,
+      projectPath: process.env.SAGUI_LINK
+        ? process.cwd()
+        : path.join(__dirname, '../../../../')
+    }).run()
+  })
+
+  tasks.reduce((previous, next) => previous.then(next), Promise.resolve())
+    .then(() => process.exit(0), () => process.exit(1))
 }
 
 program.command('develop')
   .description('Run development environment')
   .option('-p, --port <n>', 'Port the server will listen (default: 3000)', parseInt)
-  .action(setupAction('development', actions.DEVELOP))
+  .action(setupAction('development', [actions.DEVELOP]))
 
 program.command('build')
   .description('Build based on the DEVELOPMENT environment')
   .option('-p, --optimize', 'Optimize the build (minify, dedup...)')
-  .action(setupAction('development', actions.BUILD))
+  .action(setupAction('development', [actions.BUILD]))
 
 program.command('dist')
   .description('Build and optimize a ready for PRODUCTION distribution')
-  .action(setupAction('production', actions.BUILD, { optimize: true }))
+  .action(setupAction('production', [actions.BUILD], { optimize: true }))
+
+program.command('test')
+  .description('Run all the test checks (with coverage enabled)')
+  .action(setupAction('test', [actions.TEST_LINT, actions.TEST_TYPECHECK, actions.TEST_UNIT]), { coverage: true })
 
 program.command('test:unit')
   .description('Run unit tests')
   .option('-w, --watch', 'Run tests on any file change')
   .option('-c, --coverage', 'Generate a coverage report')
-  .action(setupAction('test', actions.TEST_UNIT))
+  .action(setupAction('test', [actions.TEST_UNIT]))
 
 program.command('test:lint')
   .description('Lint the code')
-  .action(setupAction('test', actions.TEST_LINT))
+  .action(setupAction('test', [actions.TEST_LINT]))
 
 program.command('test:typecheck')
   .description('Typecheck the code')
-  .action(setupAction('test', actions.TEST_TYPECHECK))
+  .action(setupAction('test', [actions.TEST_TYPECHECK]))
 
 program.command('update')
   .description('Update Sagui in the current project')
-  .action(setupAction('development', actions.UPDATE))
+  .action(setupAction('development', [actions.UPDATE]))
