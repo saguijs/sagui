@@ -23,18 +23,34 @@ if (process.env.TEST_TYPE === 'integration_test') {
   exec('npm run test:integration', saguiPath)
 }
 
-if (process.env.TEST_TYPE === 'test_create_project') {
+if (process.env.TEST_TYPE === 'test_create_project_npm') {
   // # builds Sagui before installing
   exec('npm run build', saguiPath)
 
-  var projectPath = createTempFolder()
+  var npmProjectPath = createTempFolder()
 
   // # Create a new project and install Sagui
-  exec('npm init -y .', projectPath)
-  exec('npm install --save-dev file://' + saguiPath, projectPath)
+  exec('npm init -y .', npmProjectPath)
+  exec('npm install --save-dev file://' + saguiPath, npmProjectPath)
 
   // # Run some basic scripts
-  exec('npm test', projectPath)
-  exec('npm run build', projectPath)
-  exec('npm run dist', projectPath)
+  exec('npm test', npmProjectPath)
+  exec('npm run build', npmProjectPath)
+  exec('npm run dist', npmProjectPath)
+}
+
+if (process.env.TEST_TYPE === 'test_create_project_yarn') {
+  // # builds Sagui before installing
+  exec('npm run build', saguiPath)
+
+  var yarnProjectPath = createTempFolder()
+
+  // # Create a new project and install Sagui
+  exec('yarn init -y .', yarnProjectPath)
+  exec('yarn add --dev file://' + saguiPath, yarnProjectPath)
+
+  // # Run some basic scripts
+  exec('yarn test', yarnProjectPath)
+  exec('yarn run build', yarnProjectPath)
+  exec('yarn run dist', yarnProjectPath)
 }
