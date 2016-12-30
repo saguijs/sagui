@@ -11,17 +11,18 @@ export default (argv = []) => {
   try {
     program.parse(argv)
   } catch (e) {
-    if (e instanceof SaguiPath || e instanceof MissingPackageJSON) {
-      logWarning(e.message)
-      return
-    }
+    handleError(e)
+  }
+}
 
-    logError('Error starting up')
-    logError(e.stack || e)
-    process.exit(1)
+const handleError = (e) => {
+  if (e instanceof SaguiPath || e instanceof MissingPackageJSON) {
+    logWarning(e.message)
+    return
   }
 
-  if (!argv.slice(2).length) program.outputHelp()
+  logError(e.stack || e)
+  process.exit(1)
 }
 
 const setupAction = (NODE_ENV, actionsToRun, options = {}) => (cliOptions = {}) => {
@@ -41,7 +42,7 @@ const setupAction = (NODE_ENV, actionsToRun, options = {}) => (cliOptions = {}) 
   })
 
   tasks.reduce((previous, next) => previous.then(next), Promise.resolve())
-    .then(() => process.exit(0), () => process.exit(1))
+    .then(() => process.exit(0), handleError)
 }
 
 program.command('develop')
