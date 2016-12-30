@@ -1,7 +1,7 @@
 import path from 'path'
 import program from 'commander'
 import sagui, { MissingPackageJSON, SaguiPath } from '../index'
-import { logError, logWarning } from '../util/log'
+import { logError, logWarning, log } from '../util/log'
 import actions from '../actions'
 
 /**
@@ -26,6 +26,8 @@ export default (argv = []) => {
 
 const setupAction = (NODE_ENV, action, options = {}) => (cliOptions = {}) => {
   process.env.NODE_ENV = NODE_ENV
+
+  log(`Setting NODE_ENV=${NODE_ENV}`)
 
   sagui({
     ...options,
