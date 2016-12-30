@@ -3,7 +3,7 @@ import updateNpmScripts from './update-npm-scripts'
 
 const CURRENT_SCRIPTS = {
   'build': 'sagui build',
-  'dist': 'sagui build --optimize',
+  'dist': 'sagui dist',
   'start': 'sagui develop --port 3000',
   'test': 'npm run test:lint && npm run test:typecheck && npm run test:unit',
   'test:lint': 'sagui test:lint',

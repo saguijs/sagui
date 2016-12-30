@@ -7,8 +7,6 @@ const errorCodes = {
 }
 
 export default (saguiOptions) => new Promise((resolve, reject) => {
-  process.env.NODE_ENV = 'test'
-
   const commandArgs = ['check', '--color=always']
 
   if (saguiOptions.javaScript && saguiOptions.javaScript.typeCheckAll) {
