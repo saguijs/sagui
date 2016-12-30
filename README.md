@@ -230,12 +230,12 @@ module.exports = {
 
 ### `style.sourceMaps`
 
-Source maps are always generated for styles, but it is possible to disable it.
+Source maps are never generated for styles, but it is possible to enable it.
 
 ```js
 module.exports = {
   style: {
-    sourceMaps: false
+    sourceMaps: true
   }
 }
 ```
