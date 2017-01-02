@@ -25,9 +25,12 @@ export default (argv = []) => {
 }
 
 const setupAction = (NODE_ENV, action, options = {}) => (cliOptions = {}) => {
-  process.env.NODE_ENV = NODE_ENV
-
-  log(`Setting NODE_ENV=${NODE_ENV}`)
+  if (!process.env.NODE_ENV || process.env.NODE_ENV && process.env.NODE_ENV.trim().length === 0) {
+    process.env.NODE_ENV = NODE_ENV
+    log(`Setting NODE_ENV=${NODE_ENV}`)
+  } else {
+    log(`Already defined NODE_ENV=${NODE_ENV}`)
+  }
 
   sagui({
     ...options,
