@@ -21,7 +21,10 @@ const handleError = (e) => {
     return
   }
 
-  logError(e.stack || e)
+  if (e) {
+    logError(e.stack || e)
+  }
+
   process.exit(1)
 }
 
