@@ -45,7 +45,7 @@ export default {
     }
 
     const shouldExtract = options.extract && pages.length > 0 && action === actions.BUILD
-    const localIdentName = optimize ? '[hash]' : '[path][local]-[hash:base64:5]'
+    const localIdentName = optimize ? '[hash:base64:5]' : '[path][local]-[hash:base64:5]'
 
     const extractSass = new ExtractTextPlugin('[name]-[hash]-0.css')
     const extractCss = new ExtractTextPlugin('[name]-[hash]-1.css')
