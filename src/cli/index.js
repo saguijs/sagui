@@ -29,7 +29,7 @@ const setupAction = (NODE_ENV, action, options = {}) => (cliOptions = {}) => {
     process.env.NODE_ENV = NODE_ENV
     log(`Setting NODE_ENV=${NODE_ENV}`)
   } else {
-    log(`Already defined NODE_ENV=${NODE_ENV}`)
+    log(`Using NODE_ENV=${NODE_ENV}`)
   }
 
   sagui({
