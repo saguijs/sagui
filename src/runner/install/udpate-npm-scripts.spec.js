@@ -5,7 +5,7 @@ const CURRENT_SCRIPTS = {
   'build': 'sagui build',
   'dist': 'sagui dist',
   'start': 'sagui develop --port 3000',
-  'test': 'npm run test:lint && npm run test:typecheck && npm run test:unit',
+  'test': 'sagui test',
   'test:lint': 'sagui test:lint',
   'test:typecheck': 'sagui test:typecheck',
   'test:unit': 'sagui test:unit --coverage',

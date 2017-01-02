@@ -29,7 +29,8 @@ const saguiScripts = {
   'test': [
     'echo "Error: no test specified" && exit 1',
     'npm run test:lint && npm run test:unit',
-    'npm run test:lint && npm run test:typecheck && npm run test:unit'
+    'npm run test:lint && npm run test:typecheck && npm run test:unit',
+    'sagui test'
   ],
   'test:coverage': [
     'npm run test:unit -- --coverage',
