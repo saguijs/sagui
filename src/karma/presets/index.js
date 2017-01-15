@@ -6,6 +6,7 @@ import coverage from './coverage'
 import frameworks from './frameworks'
 import reporters from './reporters'
 import webpack from './webpack'
+import actions from '../../actions'
 
 const presets = [
   base,
@@ -17,6 +18,10 @@ const presets = [
 ]
 
 export default (saguiOptions) => {
+  const karmaActionConfig = saguiOptions.action === actions.TEST_INTEGRATION
+    ? saguiOptions.integration_test.karma || saguiOptions.karma || {}
+    : saguiOptions.karma || {}
+
   const karmaConfig = presets
     .reduce((karmaConfig, preset) => (
       mergeKarma(karmaConfig, preset.configure(saguiOptions))
@@ -24,6 +29,6 @@ export default (saguiOptions) => {
 
   return mergeKarma(
     karmaConfig,
-    saguiOptions.karma || {}
+    karmaActionConfig
   )
 }
