@@ -12,6 +12,7 @@
     ".eslintrc",
     "bin",
     "karma-static-files",
+    "flowtype-interfaces",
     "lib",
     "src",
     "template"
