@@ -40,7 +40,7 @@ function safeCopy (source, destination) {
   try {
     copySync(source, destination, { clobber: false })
   } catch (e) {
-    if (e.message === 'EEXIST') {
+    if (e.code === 'EEXIST') {
       // file exists, don't try to overwrite it
     } else {
       throw e
