@@ -7,7 +7,7 @@ import actions from '../../actions'
 
 const defaultOptions = {
   cssModules: true,
-  sourceMaps: true,
+  sourceMaps: false,
   extract: true
 }
 
@@ -20,7 +20,7 @@ const defaultOptions = {
 export default {
   name: 'style',
   configure ({ action, optimize, pages = [], projectPath, style = {} }) {
-    // User null-loader during tests
+    // Use null-loader during tests
     // for better performance
     if (action === actions.TEST_UNIT) {
       return {
@@ -45,7 +45,7 @@ export default {
     }
 
     const shouldExtract = options.extract && pages.length > 0 && action === actions.BUILD
-    const localIdentName = optimize ? '[hash]' : '[path][local]-[hash:base64:5]'
+    const localIdentName = optimize ? '[hash:base64:5]' : '[path][local]-[hash:base64:5]'
 
     const extractSass = new ExtractTextPlugin('[name]-[hash]-0.css')
     const extractCss = new ExtractTextPlugin('[name]-[hash]-1.css')

@@ -1,6 +1,6 @@
 {
   "name": "sagui",
-  "version": "8.0.0-rc.0",
+  "version": "8.0.1",
   "description": "Front-end tooling in a single dependency",
   "preferGlobal": false,
   "bin": {
@@ -12,6 +12,7 @@
     ".eslintrc",
     "bin",
     "karma-static-files",
+    "flowtype-interfaces",
     "lib",
     "src",
     "template"
