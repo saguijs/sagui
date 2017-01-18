@@ -1,3 +1,5 @@
 import text from './text.txt'
 
-console.log(text)
+const log = () => console.log(text)
+
+log()
