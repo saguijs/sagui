@@ -7,8 +7,9 @@ describe('eslint webpack preset', function () {
   it('should point to a project eslintrc file', () => {
     const projectPath = 'a/demo/path'
     const action = actions.BUILD
-    const config = preset.configure({ action, projectPath })
+    const webpackConfig = preset.configure({ action, projectPath })
+    const webpackLoader = webpackConfig.module.rules.find((loader) => loader.loader === 'eslint-loader')
 
-    expect(config.eslint.configFile).to.eql(path.join(projectPath, '.eslintrc'))
+    expect(webpackLoader.options.configFile).to.eql(path.join(projectPath, '.eslintrc'))
   })
 })

@@ -118,25 +118,6 @@ describe('pages webpack preset', function () {
       const webpackConfig = preset.configure(baseConfig)
       expect(webpackConfig.output.chunkFilename).eql('[name]-[chunkhash].chunk.js')
     })
-
-    it('should have OccurrenceOrderPlugin enabled', () => {
-      const webpackConfig = preset.configure(baseConfig)
-
-      const plugin = webpackConfig.plugins.filter((plugin) => plugin instanceof optimize.OccurrenceOrderPlugin)
-      expect(plugin.length).equal(1)
-    })
-    it('should have DedupePlugin enabled', () => {
-      const webpackConfig = preset.configure(baseConfig)
-
-      const plugin = webpackConfig.plugins.filter((plugin) => plugin instanceof optimize.DedupePlugin)
-      expect(plugin.length).equal(1)
-    })
-    it('should have WebpackMd5Hash enabled', () => {
-      const webpackConfig = preset.configure(baseConfig)
-
-      const plugin = webpackConfig.plugins.filter((plugin) => plugin instanceof WebpackMd5Hash)
-      expect(plugin.length).equal(1)
-    })
   })
 
   describe(`when action is NOT "${actions.BUILD}"`, () => {

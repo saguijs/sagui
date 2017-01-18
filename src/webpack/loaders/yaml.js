@@ -4,14 +4,14 @@ export default {
   name: 'yaml',
   configure () {
     return {
-      // module: {
-      //   loaders: [
-      //     {
-      //       test: fileExtensions.test.YAML,
-      //       loader: 'json!yaml'
-      //     }
-      //   ]
-      // }
+      module: {
+        rules: [
+          {
+            test: fileExtensions.test.YAML,
+            use: ['json-loader', 'yaml-loader']
+          }
+        ]
+      }
     }
   }
 }
