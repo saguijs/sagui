@@ -1,6 +1,7 @@
 import { NoErrorsPlugin } from 'webpack'
 import path from 'path'
 import actions from '../../actions'
+import fileExtensions from '../../file-extensions'
 
 /**
  * Configure a proper devtool that best suits
@@ -30,9 +31,8 @@ export default {
       plugins: watch || action === actions.DEVELOP ? [] : [new NoErrorsPlugin()],
 
       resolve: {
-        extensions: [''],
-
-        root: [
+        extensions: fileExtensions.list.JAVASCRIPT,
+        modules: [
           path.join(projectPath, '/node_modules'),
           projectSourcePath,
 
@@ -45,7 +45,7 @@ export default {
         // Should first try to resolve loaders nested within Sagui.
         // This fixes an issue in NPM v2 where webpack incorrectly
         // thinks that the package `eslint` is the `eslint-loader`
-        modulesDirectories: [
+        modules: [
           path.join(saguiPath, '/node_modules'),
           path.join(projectPath, '/node_modules')
         ]

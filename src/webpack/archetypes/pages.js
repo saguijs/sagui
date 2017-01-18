@@ -1,5 +1,4 @@
 import HtmlWebpackPlugin from 'html-webpack-plugin'
-import WebpackMd5Hash from 'webpack-md5-hash'
 import { join } from 'path'
 import { optimize } from 'webpack'
 import actions from '../../actions'
@@ -48,17 +47,6 @@ function configurePlugins (pages, action) {
 
   if (pages.length > 1) {
     plugins.push(new optimize.CommonsChunkPlugin({ name: 'common' }))
-  }
-
-  if (action === actions.BUILD) {
-    // Due to an issue in Webpack, its chunkhashes aren't deterministic.
-    // To ensure hashes are generated based on the file contents, use webpack-md5-hash plugin.
-    plugins.push(new WebpackMd5Hash())
-    // Use "OccurrenceOrderPlugin" in order to make build deterministic.
-    // See https://medium.com/@okonetchnikov/long-term-caching-of-static-assets-with-webpack-1ecb139adb95
-    plugins.push(new optimize.OccurrenceOrderPlugin(true))
-    // Duplicates equal or similar files
-    plugins.push(new optimize.DedupePlugin())
   }
 
   return plugins
