@@ -13,29 +13,20 @@ export default {
     ))
 
     return {
-      babel: {
-        babelrc: path.join(projectPath, '.babelrc'),
-        plugins: babelPlugins(action, coverage)
-      },
-
       plugins: action === actions.DEVELOP ? [new HotModuleReplacementPlugin()] : [],
 
-      resolve: {
-        extensions: fileExtensions.list.JAVASCRIPT
-      },
-
       module: {
-        loaders: [
+        rules: [
           {
             test: fileExtensions.test.JAVASCRIPT,
             include: [
               path.join(projectPath, 'src'),
               ...userPaths
             ],
-            loader: 'babel',
-            query: {
-              // enabling it breaks source maps
-              compact: false
+            loader: 'babel-loader',
+            options: {
+              babelrc: path.join(projectPath, '.babelrc'),
+              plugins: babelPlugins(action, coverage)
             }
           }
         ]

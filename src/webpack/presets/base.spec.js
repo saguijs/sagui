@@ -3,15 +3,16 @@ import { join } from 'path'
 import { NoErrorsPlugin } from 'webpack'
 import preset from './base'
 import actions from '../../actions'
+import fileExtensions from '../../file-extensions'
 
 const saguiPath = join(__dirname, '../../../../../')
 const projectPath = join(saguiPath, 'spec/fixtures/simple-project')
 
 describe('base webpack preset', function () {
-  it('should add the project\'s `src/` and `node_modules/` to root resolve', function () {
+  it('should add the project\'s `src/` and `node_modules/` to resolve.modules', function () {
     const config = preset.configure({ projectPath, saguiPath })
 
-    expect(config.resolve.root).to.eql([
+    expect(config.resolve.modules).to.eql([
       join(projectPath, '/node_modules'),
       join(projectPath, '/src'),
       join(saguiPath, '/node_modules')
@@ -20,7 +21,7 @@ describe('base webpack preset', function () {
 
   it('should resolve files without extension', function () {
     const config = preset.configure({ projectPath, saguiPath })
-    expect(config.resolve.extensions).to.eql([''])
+    expect(config.resolve.extensions).to.eql(fileExtensions.list.JAVASCRIPT)
   })
 
   describe('NoErrorsPlugin', () => {

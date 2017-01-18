@@ -5,26 +5,64 @@ export default {
   configure () {
     return {
       module: {
-        loaders: [
+        rules: [
           {
             test: fileExtensions.test.WOFF,
-            loader: 'file?name=[name]-[hash].[ext]&mimetype=application/font-woff'
+            use: [
+              {
+                loader: 'file-loader',
+                options: {
+                  name: '[name]-[hash].[ext]',
+                  mimetype: 'application/font-woff'
+                }
+              }
+            ]
           },
           {
             test: fileExtensions.test.WOFF2,
-            loader: 'file?name=[name]-[hash].[ext]&mimetype=application/font-woff'
-          },
-          {
-            test: fileExtensions.test.TTF,
-            loader: 'file?name=[name]-[hash].[ext]&mimetype=application/octet-stream'
+            use: [
+              {
+                loader: 'file-loader',
+                options: {
+                  name: '[name]-[hash].[ext]',
+                  mimetype: 'application/font-woff'
+                }
+              }
+            ]
           },
           {
             test: fileExtensions.test.EOT,
-            loader: 'file?name=[name]-[hash].[ext]'
+            use: [
+              {
+                loader: 'file-loader',
+                options: {
+                  name: '[name]-[hash].[ext]'
+                }
+              }
+            ]
+          },
+          {
+            test: fileExtensions.test.TTF,
+            use: [
+              {
+                loader: 'file-loader',
+                options: {
+                  name: '[name]-[hash].[ext]',
+                  mimetype: 'application/octet-stream'
+                }
+              }
+            ]
           },
           {
             test: fileExtensions.test.OTF,
-            loader: 'file?name=[name]-[hash].[ext]'
+            use: [
+              {
+                loader: 'file-loader',
+                options: {
+                  name: '[name]-[hash].[ext]'
+                }
+              }
+            ]
           }
         ]
       }

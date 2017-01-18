@@ -5,16 +5,16 @@ export default {
   name: 'eslint',
   configure ({ watch, action, projectPath }) {
     return {
-      eslint: {
-        configFile: path.join(projectPath, '.eslintrc')
-      },
-
       module: {
-        preLoaders: [
+        rules: [
           {
             test: fileExtensions.test.JAVASCRIPT,
-            loader: 'eslint',
-            exclude: /node_modules/
+            enforce: 'pre',
+            loader: 'eslint-loader',
+            exclude: /node_modules/,
+            options: {
+              configFile: path.join(projectPath, '.eslintrc')
+            }
           }
         ]
       }
