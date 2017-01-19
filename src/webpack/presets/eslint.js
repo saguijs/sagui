@@ -13,7 +13,7 @@ export default {
         preLoaders: [
           {
             test: fileExtensions.test.JAVASCRIPT,
-            loader: 'eslint',
+            loader: 'eslint-loader',
             exclude: /node_modules/
           }
         ]
