@@ -113,8 +113,6 @@ Sagui will automatically run every test file that follows this convention.
 
 Under the hood it uses [Karma test runner](http://karma-runner.github.io/) to allow running the tests in the most diverse browsers and even through [Selenium](http://docs.seleniumhq.org/) (not natively).
 
-By default Sagui uses [PhantomJS](http://phantomjs.org/) to run the tests headlessly. To **speed up installing the dependencies** (`npm install`) it is advisable to have PhantomJS [installed globally](https://github.com/Medium/phantomjs#using-phantomjs-from-disk) in the machine.
-
 #### Linting
 
 Static code analysis is also performed on the code following the [JavaScript Standard Style](http://standardjs.com/) convention.
@@ -343,7 +341,7 @@ Possible values:
 
 If a test automation requirement can't be achieved via the previous configuration options, first [open an issue](https://github.com/saguijs/sagui/issues) so that we can add official support, and if you can't wait or is something very specific to your project, there is an **escape hatch** to allow extending the internal Karma configuration.
 
-As an example, let's change the default browser used to execute the tests from *PhantomJS* to *Chrome*. In the `sagui.config.js` file:
+As an example, let's change the default browser used to execute the tests from *Electron* to *Chrome*. In the `sagui.config.js` file:
 
 ```js
 module.exports = {
