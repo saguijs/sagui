@@ -10,7 +10,7 @@ describe('karma', function () {
 
   describe('extension', function () {
     it('should allow overwriting the default configuration', function () {
-      expect(karma({ webpack: webpackConfig }).karma.browsers).eql(['PhantomJS'])
+      expect(karma({ webpack: webpackConfig }).karma.browsers).eql(['Electron'])
       expect(karma({ webpack: webpackConfig, karma: { browsers: ['Chrome'] } }).karma.browsers).eql(['Chrome'])
     })
   })
