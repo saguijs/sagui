@@ -66,7 +66,7 @@ Sagui manages the [package.json](https://docs.npmjs.com/files/package.json) scri
 - `npm run test:lint`: run static analysis in the code;
 - `npm run test:unit`: run the unit tests;
 - `npm run test:typecheck`: run the static type analysis in the code;
-- `npm run test:unit:watch`: run a test watcher (great for development).
+- `npm run test:unit:watch`: run a test watcher (great for development and debugging).
 
 If you don't change the scripts, they will be **automatically updated** on new Sagui releases.
 
@@ -114,6 +114,8 @@ Sagui will automatically run every test file that follows this convention.
 Under the hood it uses [Karma test runner](http://karma-runner.github.io/) to allow running the tests in the most diverse browsers and even through [Selenium](http://docs.seleniumhq.org/) (not natively).
 
 By default Sagui uses [PhantomJS](http://phantomjs.org/) to run the tests headlessly. To **speed up installing the dependencies** (`npm install`) it is advisable to have PhantomJS [installed globally](https://github.com/Medium/phantomjs#using-phantomjs-from-disk) in the machine.
+
+To open the tests in a browser (or in multiple browsers!), simply follow the link Karma outputs when you start running the script `test:unit:watch`. Running them in a browser allows you to set breakpoints and debug your code properly. Note watch mode is necessary, else tests will stop running when finished.
 
 #### Linting
 
