@@ -3,7 +3,7 @@ import path from 'path'
 import { expect } from 'chai'
 import { optimize } from 'webpack'
 
-import actions from '../actions'
+import actions from './actions'
 
 import buildPagesConfig from './build-pages-config'
 

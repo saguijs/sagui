@@ -1,11 +1,11 @@
 import { expect } from 'chai'
 import { join } from 'path'
 
-import actions from '../actions'
+import actions from './actions'
 
 import buildLibraryConfig from './build-library-config'
 
-const saguiPath = join(__dirname, '../../')
+const saguiPath = join(__dirname, '../')
 const projectPath = join(saguiPath, 'spec/fixtures/library-project')
 const projectWithoutPeerDependenciesPath = join(saguiPath, 'spec/fixtures/library-project-without-peer-dependencies')
 

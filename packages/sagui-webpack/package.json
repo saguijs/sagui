@@ -1,11 +1,8 @@
 {
-  "name": "sagui",
+  "name": "sagui-webpack",
   "version": "8.0.2",
   "description": "Front-end tooling in a single dependency",
   "preferGlobal": false,
-  "bin": {
-    "sagui": "./bin/sagui.js"
-  },
   "main": "index.js",
   "files": [
     ".babelrc",
@@ -19,13 +16,11 @@
   ],
   "scripts": {
     "build": "rm -rf lib && babel src --out-dir lib --ignore *.spec.js",
-    "test": "npm run test:lint && npm run test:unit && npm run test:integration",
+    "test": "npm run test:lint && npm run test:unit",
     "test:lint": "eslint .",
-    "test:integration": "mocha --timeout 0 --compilers js:babel-register --recursive --reporter spec --fgrep [integration] ./src",
     "test:unit": "mocha --timeout 0 --compilers js:babel-register --recursive --reporter spec --fgrep [integration] --invert ./src",
     "test:unit:watch": "npm run test:unit -- --watch",
-    "prepublish": "not-in-install && npm prune && npm test && npm run build || in-install",
-    "postinstall": "node ./bin/sagui.js update"
+    "prepublish": "not-in-install && npm prune && npm test && npm run build || in-install"
   },
   "repository": {
     "type": "git",
@@ -94,7 +89,6 @@
     "raw-loader": "^0.5.1",
     "react-transform-hmr": "^1.0.4",
     "resolve-url-loader": "^1.4.4",
-    "sagui-webpack": "8.0.2",
     "sass-loader": "^3.2.2",
     "style-loader": "^0.13.1",
     "template-directory": "^2.0.0",

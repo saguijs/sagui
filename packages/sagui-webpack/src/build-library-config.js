@@ -1,5 +1,5 @@
 import { join } from 'path'
-import actions from '../actions'
+import actions from './actions'
 
 /**
  * Defines how to build a single library.

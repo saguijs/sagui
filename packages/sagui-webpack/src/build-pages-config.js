@@ -1,7 +1,7 @@
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import { join } from 'path'
 import { optimize } from 'webpack'
-import actions from '../actions'
+import actions from './actions'
 
 export default (pages = [], { action, projectPath }) => {
   if (pages.length === 0 || action === actions.TEST_UNIT) { return {} }

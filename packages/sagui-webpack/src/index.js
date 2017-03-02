@@ -6,8 +6,7 @@ import reactTransform from 'babel-plugin-react-transform'
 import webpack, { DefinePlugin, HotModuleReplacementPlugin, NoErrorsPlugin } from 'webpack'
 import WebpackMd5Hash from 'webpack-md5-hash'
 
-import actions from '../actions'
-import fileExtensions from '../file-extensions'
+import actions from './actions'
 
 import buildLibraryConfig from './build-library-config'
 import buildPagesConfig from './build-pages-config'
@@ -91,35 +90,35 @@ const buildSharedWebpackConfig = (saguiOptions) => {
       loaders: [
         // fonts
         {
-          test: fileExtensions.test.WOFF,
+          test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
           loader: 'file?name=[name]-[hash].[ext]&mimetype=application/font-woff'
         },
         {
-          test: fileExtensions.test.WOFF2,
+          test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/,
           loader: 'file?name=[name]-[hash].[ext]&mimetype=application/font-woff'
         },
         {
-          test: fileExtensions.test.TTF,
+          test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
           loader: 'file?name=[name]-[hash].[ext]&mimetype=application/octet-stream'
         },
         {
-          test: fileExtensions.test.EOT,
+          test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
           loader: 'file?name=[name]-[hash].[ext]'
         },
         {
-          test: fileExtensions.test.OTF,
+          test: /\.(otf)$/,
           loader: 'file?name=[name]-[hash].[ext]'
         },
 
         // images
         {
-          test: fileExtensions.test.IMAGE,
+          test: /\.(png|jpg|jpeg|gif|svg)$/,
           loader: 'url-loader?limit=8192&name=[name]-[hash].[ext]'
         },
 
         // javascript
         {
-          test: fileExtensions.test.JAVASCRIPT,
+          test: /\.(jsx?|es6)$/,
           loader: 'babel',
           include: [
             path.join(projectPath, 'src'),
@@ -140,32 +139,32 @@ const buildSharedWebpackConfig = (saguiOptions) => {
 
         // json
         {
-          test: fileExtensions.test.JSON,
+          test: /\.(json)$/,
           loader: 'json-loader'
         },
 
         // txt
         {
-          test: fileExtensions.test.TXT,
+          test: /\.(txt)$/,
           loader: 'raw-loader'
         },
 
         // video
         {
-          test: fileExtensions.test.VIDEO,
+          test: /\.(ogg|mp4)$/,
           loader: 'file?name=[name]-[hash].[ext]'
         },
 
         // yaml
         {
-          test: fileExtensions.test.YAML,
+          test: /\.(yml|yaml)$/,
           loader: 'json!yaml'
         }
       ]
     },
 
     resolve: {
-      extensions: ['', ...fileExtensions.list.JAVASCRIPT],
+      extensions: ['', '.js', '.jsx', '.es6'],
 
       root: [
         path.join(projectPath, '/node_modules'),
