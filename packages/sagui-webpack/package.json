@@ -5,14 +5,8 @@
   "preferGlobal": false,
   "main": "index.js",
   "files": [
-    ".babelrc",
-    ".eslintrc",
-    "bin",
-    "karma-static-files",
-    "flowtype-interfaces",
     "lib",
-    "src",
-    "template"
+    "src"
   ],
   "scripts": {
     "build": "rm -rf lib && babel src --out-dir lib --ignore *.spec.js",
@@ -64,7 +58,6 @@
     "html-webpack-plugin": "^2.7.2",
     "json-loader": "^0.5.4",
     "null-loader": "^0.1.1",
-    "parent-module": "^0.1.0",
     "raw-loader": "^0.5.1",
     "react-transform-hmr": "^1.0.4",
     "resolve-url-loader": "^1.4.4",
