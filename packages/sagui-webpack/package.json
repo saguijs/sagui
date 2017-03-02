@@ -1,0 +1,70 @@
+{
+  "name": "sagui-webpack",
+  "version": "8.0.2",
+  "description": "Front-end tooling in a single dependency",
+  "preferGlobal": false,
+  "main": "index.js",
+  "files": [
+    "lib",
+    "src"
+  ],
+  "scripts": {
+    "build": "rm -rf lib && babel src --out-dir lib --ignore *.spec.js",
+    "test": "npm run test:lint && npm run test:unit",
+    "test:lint": "eslint .",
+    "test:unit": "mocha --timeout 0 --compilers js:babel-register --recursive --reporter spec --fgrep [integration] --invert ./src",
+    "test:unit:watch": "npm run test:unit -- --watch",
+    "prepublish": "not-in-install && npm prune && npm test && npm run build || in-install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/saguijs/sagui.git"
+  },
+  "author": "",
+  "license": "SEE LICENSE IN LICENSE",
+  "bugs": {
+    "url": "https://github.com/saguijs/sagui/issues"
+  },
+  "homepage": "https://github.com/saguijs/sagui#readme",
+  "devDependencies": {
+    "babel-cli": "^6.6.5",
+    "babel-plugin-react-transform": "^2.0.2",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.7.0",
+    "babel-plugin-transform-runtime": "^6.4.3",
+    "babel-preset-sagui": "6.6.1",
+    "babel-register": "^6.7.2",
+    "chai": "^3.3.0",
+    "eslint-config-sagui": "^6.0.0",
+    "eslint-config-standard": "6.2.0",
+    "eslint-config-standard-jsx": "3.2.0",
+    "eslint-plugin-promise": "^2.0.1",
+    "eslint-plugin-react": "^6.3.0",
+    "eslint-plugin-standard": "^2.0.1",
+    "in-publish": "^2.0.0",
+    "mocha": "^2.3.3",
+    "temp": "^0.8.3",
+    "tmp": "0.0.28"
+  },
+  "dependencies": {
+    "babel-core": "^6.10.4",
+    "babel-eslint": "^7.0.0",
+    "babel-loader": "^6.2.1",
+    "babel-plugin-istanbul": "^2.0.0",
+    "clean-webpack-plugin": "^0.1.9",
+    "eslint": "~3.7.0",
+    "eslint-loader": "^1.0.0",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "file-loader": "^0.9.0",
+    "html-webpack-plugin": "^2.7.2",
+    "json-loader": "^0.5.4",
+    "null-loader": "^0.1.1",
+    "raw-loader": "^0.5.1",
+    "react-transform-hmr": "^1.0.4",
+    "resolve-url-loader": "^1.4.4",
+    "url-loader": "^0.5.6",
+    "webpack": "^1.9.6",
+    "webpack-md5-hash": "0.0.5",
+    "webpack-merge": "^0.7.3",
+    "yaml-loader": "^0.2.0"
+  }
+}
