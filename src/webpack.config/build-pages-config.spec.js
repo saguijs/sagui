@@ -1,45 +1,39 @@
 import HtmlWebpackPlugin from 'html-webpack-plugin'
-import WebpackMd5Hash from 'webpack-md5-hash'
 import path from 'path'
-import { optimize } from 'webpack'
 import { expect } from 'chai'
-import preset from './pages'
-import actions from '../../actions'
+import { optimize } from 'webpack'
+
+import actions from '../actions'
+
+import buildPagesConfig from './build-pages-config'
 
 const projectPath = '/tmp/projec-path'
 
 describe('pages webpack preset', function () {
-  describe('undefined pages', function () {
-    it('should return an empty configuration', function () {
-      const webpackConfig = preset.configure({})
-      expect(webpackConfig).eql({})
-    })
-  })
-
   describe('empty pages', function () {
     it('should return an empty configuration', function () {
-      const webpackConfig = preset.configure({ pages: [] })
+      const webpackConfig = buildPagesConfig([], { })
       expect(webpackConfig).eql({})
     })
   })
 
   describe('action is TEST_UNIT', function () {
     it('should return an empty configuration', function () {
-      const webpackConfig = preset.configure({ pages: ['index'], action: actions.TEST_UNIT })
+      const webpackConfig = buildPagesConfig(['index'], { action: actions.TEST_UNIT })
       expect(webpackConfig).eql({})
     })
   })
 
   describe('single page', function () {
-    const baseConfig = { pages: ['index'], projectPath }
+    const baseConfig = { projectPath }
 
     it('should have the output path configured as the build folder', function () {
-      const webpackConfig = preset.configure(baseConfig)
+      const webpackConfig = buildPagesConfig(['index'], baseConfig)
       expect(webpackConfig.output.path).eql(path.join(projectPath, 'dist'))
     })
 
     it('should have the entrypoints setup with the index', function () {
-      const webpackConfig = preset.configure(baseConfig)
+      const webpackConfig = buildPagesConfig(['index'], baseConfig)
 
       expect(webpackConfig.entry).eql({
         index: ['./index']
@@ -47,7 +41,7 @@ describe('pages webpack preset', function () {
     })
 
     it('should have a plugin setting up the HTML template', function () {
-      const webpackConfig = preset.configure(baseConfig)
+      const webpackConfig = buildPagesConfig(['index'], baseConfig)
 
       const html = webpackConfig.plugins.filter((plugin) => plugin instanceof HtmlWebpackPlugin)
       expect(html.length).equal(1)
@@ -60,7 +54,7 @@ describe('pages webpack preset', function () {
     })
 
     it('should NOT have the CommonsChunkPlugin enabled (not needed)', function () {
-      const webpackConfig = preset.configure(baseConfig)
+      const webpackConfig = buildPagesConfig(['index'], baseConfig)
 
       const commons = webpackConfig.plugins.filter((plugin) => plugin instanceof optimize.CommonsChunkPlugin)
       expect(commons.length).equal(0)
@@ -68,10 +62,10 @@ describe('pages webpack preset', function () {
   })
 
   describe('multiple pages', function () {
-    const baseConfig = { pages: ['index', 'demo'], projectPath }
+    const baseConfig = { projectPath }
 
     it('should have two distinct entrypoints', function () {
-      const webpackConfig = preset.configure(baseConfig)
+      const webpackConfig = buildPagesConfig(['index', 'demo'], baseConfig)
 
       expect(webpackConfig.entry).eql({
         index: ['./index'],
@@ -80,7 +74,7 @@ describe('pages webpack preset', function () {
     })
 
     it('should have a plugin setting up the HTML template for each chunk', function () {
-      const webpackConfig = preset.configure(baseConfig)
+      const webpackConfig = buildPagesConfig(['index', 'demo'], baseConfig)
 
       const html = webpackConfig.plugins.filter((plugin) => plugin instanceof HtmlWebpackPlugin)
       expect(html.length).equal(2)
@@ -97,7 +91,7 @@ describe('pages webpack preset', function () {
     })
 
     it('should have the CommonsChunkPlugin enabled', function () {
-      const webpackConfig = preset.configure(baseConfig)
+      const webpackConfig = buildPagesConfig(['index', 'demo'], baseConfig)
 
       const commons = webpackConfig.plugins.filter((plugin) => plugin instanceof optimize.CommonsChunkPlugin)
       expect(commons.length).equal(1)
@@ -106,71 +100,33 @@ describe('pages webpack preset', function () {
 
   describe(`when action is "${actions.BUILD}"`, () => {
     const baseConfig = {
-      pages: ['index'], projectPath, action: actions.BUILD
+      projectPath, action: actions.BUILD
     }
 
     it('should setup the output filename of entrypoints based on the name of the page and chunkhash', function () {
-      const webpackConfig = preset.configure(baseConfig)
+      const webpackConfig = buildPagesConfig(['index'], baseConfig)
       expect(webpackConfig.output.filename).eql('[name]-[chunkhash].js')
     })
 
     it('should setup the output filename of other files based on their name and chunkhash', function () {
-      const webpackConfig = preset.configure(baseConfig)
+      const webpackConfig = buildPagesConfig(['index'], baseConfig)
       expect(webpackConfig.output.chunkFilename).eql('[name]-[chunkhash].chunk.js')
-    })
-
-    it('should have OccurrenceOrderPlugin enabled', () => {
-      const webpackConfig = preset.configure(baseConfig)
-
-      const plugin = webpackConfig.plugins.filter((plugin) => plugin instanceof optimize.OccurrenceOrderPlugin)
-      expect(plugin.length).equal(1)
-    })
-    it('should have DedupePlugin enabled', () => {
-      const webpackConfig = preset.configure(baseConfig)
-
-      const plugin = webpackConfig.plugins.filter((plugin) => plugin instanceof optimize.DedupePlugin)
-      expect(plugin.length).equal(1)
-    })
-    it('should have WebpackMd5Hash enabled', () => {
-      const webpackConfig = preset.configure(baseConfig)
-
-      const plugin = webpackConfig.plugins.filter((plugin) => plugin instanceof WebpackMd5Hash)
-      expect(plugin.length).equal(1)
     })
   })
 
   describe(`when action is NOT "${actions.BUILD}"`, () => {
     const baseConfig = {
-      pages: ['index'], projectPath, action: actions.DEVELOP
+      projectPath, action: actions.DEVELOP
     }
 
     it('should setup the output filename of entrypoints based on the name of the page', function () {
-      const webpackConfig = preset.configure(baseConfig)
+      const webpackConfig = buildPagesConfig(['index'], baseConfig)
       expect(webpackConfig.output.filename).eql('[name].js')
     })
 
     it('should setup the output filename of other files based on their name', function () {
-      const webpackConfig = preset.configure(baseConfig)
+      const webpackConfig = buildPagesConfig(['index'], baseConfig)
       expect(webpackConfig.output.chunkFilename).eql('[name].chunk.js')
-    })
-
-    it('should NOT have OccurrenceOrderPlugin enabled', () => {
-      const webpackConfig = preset.configure(baseConfig)
-
-      const plugin = webpackConfig.plugins.filter((plugin) => plugin instanceof optimize.OccurrenceOrderPlugin)
-      expect(plugin.length).equal(0)
-    })
-    it('should NOT have DedupePlugin enabled', () => {
-      const webpackConfig = preset.configure(baseConfig)
-
-      const plugin = webpackConfig.plugins.filter((plugin) => plugin instanceof optimize.DedupePlugin)
-      expect(plugin.length).equal(0)
-    })
-    it('should NOT have WebpackMd5Hash enabled', () => {
-      const webpackConfig = preset.configure(baseConfig)
-
-      const plugin = webpackConfig.plugins.filter((plugin) => plugin instanceof WebpackMd5Hash)
-      expect(plugin.length).equal(0)
     })
   })
 })

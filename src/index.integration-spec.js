@@ -6,7 +6,7 @@ import actions from './actions'
 import temp from 'temp'
 
 // make sure the temp folders are cleaned up
-temp.track()
+// temp.track()
 
 /**
  * Simulate a complete install of Sagui in a target folder.
