@@ -1,4 +1,5 @@
 import webpack from 'webpack'
+import ParallelUglifyPlugin from 'webpack-parallel-uglify-plugin'
 
 export default {
   name: 'optimize',
@@ -10,14 +11,7 @@ export default {
     return {
       plugins: [
         new webpack.optimize.DedupePlugin(),
-        new webpack.optimize.UglifyJsPlugin({
-          compress: {
-            // disable warning messages
-            // since they are very verbose
-            // and provide little value
-            warnings: false
-          }
-        })
+        new ParallelUglifyPlugin({})
       ]
     }
   }

@@ -102,6 +102,7 @@
     "webpack-dev-server": "^1.14.1",
     "webpack-md5-hash": "0.0.5",
     "webpack-merge": "^0.7.3",
+    "webpack-parallel-uglify-plugin": "^0.4.1",
     "yaml-loader": "^0.2.0"
   }
 }

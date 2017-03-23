@@ -1,6 +1,7 @@
 import { expect } from 'chai'
 import { optimize } from 'webpack'
 import preset from './optimize'
+import ParallelUglifyPlugin from 'webpack-parallel-uglify-plugin'
 
 describe('optimize webpack preset', function () {
   describe('when enabled with the optimize flag', function () {
@@ -11,14 +12,11 @@ describe('optimize webpack preset', function () {
       expect(commons.length).equal(1)
     })
 
-    it('should configure UglifyJsPlugin without the warnings', function () {
+    it('should configure ParallelUglifyPlugin', function () {
       const config = preset.configure({ optimize: true })
 
-      const commons = config.plugins.filter((preset) => preset instanceof optimize.UglifyJsPlugin)
+      const commons = config.plugins.filter((preset) => preset instanceof ParallelUglifyPlugin)
       expect(commons.length).equal(1)
-
-      const uglifyJsPlugin = commons[0]
-      expect(uglifyJsPlugin.options.compress.warnings).to.eql(false)
     })
   })
 })
