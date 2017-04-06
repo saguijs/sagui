@@ -1,6 +1,5 @@
 import fs from 'fs-extra'
 import path from 'path'
-import { expect } from 'chai'
 import sagui from '.'
 import actions from './actions'
 import temp from 'temp'
@@ -38,35 +37,25 @@ describe('[integration] sagui', function () {
     fs.copySync(projectFixture, projectPath)
   })
 
-  describe('after install', () => {
+  describe('after update', () => {
     beforeEach(() => {
-      sagui({ projectPath, action: actions.UPDATE }).run()
-    })
-
-    it('should configure webpack', () => {
-      const webpack = sagui({ projectPath }).webpack
-      expect(webpack.length).to.equal(1)
-    })
-
-    it('should configure karma', () => {
-      const karma = sagui({ projectPath }).karma
-      expect(karma.webpack).to.exist
+      return sagui({ projectPath, action: actions.UPDATE })
     })
 
     it('should be possible to build', () => {
-      return sagui({ projectPath, action: actions.BUILD }).run()
+      return sagui({ projectPath, action: actions.BUILD })
     })
 
     it('should be possible to test', () => {
-      return sagui({ projectPath, action: actions.TEST_UNIT }).run()
+      return sagui({ projectPath, action: actions.TEST_UNIT })
     })
 
     it('should be possible to test (with coverage)', () => {
-      return sagui({ projectPath, action: actions.TEST_UNIT, coverage: true }).run()
+      return sagui({ projectPath, action: actions.TEST_UNIT, coverage: true })
     })
 
     it('should be possible to lint', () => {
-      return sagui({ projectPath, action: actions.TEST_LINT }).run()
+      return sagui({ projectPath, action: actions.TEST_LINT })
     })
 
     it('should have an .npmignore file', () => {
@@ -79,11 +68,11 @@ describe('[integration] sagui', function () {
       })
 
       it('should be possible to build', () => {
-        return sagui({ projectPath, action: actions.BUILD }).run()
+        return sagui({ projectPath, action: actions.BUILD })
       })
 
       it('should be possible to keep updating Sagui', () => {
-        return sagui({ projectPath, action: actions.UPDATE }).run()
+        return sagui({ projectPath, action: actions.UPDATE })
       })
     })
   })

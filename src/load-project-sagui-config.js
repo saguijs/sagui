@@ -2,8 +2,8 @@ import path from 'path'
 import json from './util/json'
 import fileExists from './util/file-exists'
 
-export default (saguiOptions) => {
-  const { projectPath } = saguiOptions
+export default (saguiConfig) => {
+  const { projectPath } = saguiConfig
 
   sanityCheck(projectPath)
 

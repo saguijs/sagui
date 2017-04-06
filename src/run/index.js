@@ -6,25 +6,25 @@ import lint from './lint'
 import test from './test'
 import typecheck from './typecheck'
 
-export default (saguiOptions) => {
-  switch (saguiOptions.action) {
+export default (saguiConfig, webpackConfig, karmaConfig) => {
+  switch (saguiConfig.action) {
     case actions.BUILD:
-      return build(saguiOptions)
+      return build(saguiConfig, webpackConfig)
 
     case actions.DEVELOP:
-      return developmentServer(saguiOptions)
+      return developmentServer(saguiConfig, webpackConfig)
 
     case actions.UPDATE:
-      return install(saguiOptions)
+      return install(saguiConfig)
 
     case actions.TEST_LINT:
-      return lint(saguiOptions)
+      return lint(saguiConfig)
 
     case actions.TEST_UNIT:
-      return test(saguiOptions)
+      return test(karmaConfig)
 
     case actions.TEST_TYPECHECK:
-      return typecheck(saguiOptions)
+      return typecheck(saguiConfig)
 
     default:
       return Promise.reject('A valid action is required.')

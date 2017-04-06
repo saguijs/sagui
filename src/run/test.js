@@ -1,7 +1,7 @@
 import KarmaServer from 'karma/lib/server'
 
-export default (saguiOptions) => new Promise((resolve, reject) => {
-  new KarmaServer(saguiOptions.karma, (exitCode) => {
+export default (karmaConfig) => new Promise((resolve, reject) => {
+  new KarmaServer(karmaConfig, (exitCode) => {
     if (exitCode === 0) {
       resolve()
     } else {

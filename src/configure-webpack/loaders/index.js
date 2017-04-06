@@ -20,11 +20,11 @@ const loaders = [
   yaml
 ]
 
-export default (saguiOptions) => {
-  const disabledLoaders = saguiOptions.disabledLoaders || []
+export default (saguiConfig) => {
+  const disabledLoaders = saguiConfig.disabledLoaders || []
 
   return loaders.filter((loader) => disabledLoaders.indexOf(loader.name) === -1)
     .reduce((webpackConfig, loader) => (
-      merge.smart(webpackConfig, loader.configure(saguiOptions))
+      merge.smart(webpackConfig, loader.configure(saguiConfig))
     ), {})
 }

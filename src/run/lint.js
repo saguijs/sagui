@@ -2,7 +2,9 @@ import eslint from 'eslint'
 import { logError, log } from '../util/log'
 import fileExtensions from '../file-extensions'
 
-export default ({ projectPath }) => new Promise((resolve, reject) => {
+export default (saguiConfig) => new Promise((resolve, reject) => {
+  const { projectPath } = saguiConfig
+
   const cli = new eslint.CLIEngine({
     cwd: projectPath,
     extensions: fileExtensions.list.JAVASCRIPT

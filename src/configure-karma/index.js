@@ -1,21 +1,21 @@
 import mergeKarma from '../util/merge-karma'
 import path from 'path'
 
-export default (saguiOptions = {}) => {
+export default (saguiConfig = {}, webpackConfig) => {
   return mergeKarma(
-    buildStandardKarmaConfig(saguiOptions),
-    saguiOptions.karma
+    buildStandardKarmaConfig(saguiConfig, webpackConfig),
+    saguiConfig.karma
   )
 }
 
-const buildStandardKarmaConfig = (saguiOptions) => {
-  const { projectPath, watch, coverage, webpack } = saguiOptions
+const buildStandardKarmaConfig = (saguiConfig, webpackConfig) => {
+  const { projectPath, watch, coverage } = saguiConfig
 
   return {
     // Webpack itself supports an array of configurations
     // and although harmless to have them all running the tests
     // it is not required and only produces double execution
-    webpack: Array.isArray(webpack) ? webpack[0] : webpack,
+    webpack: Array.isArray(webpackConfig) ? webpackConfig[0] : webpackConfig,
 
     basePath: projectPath,
 

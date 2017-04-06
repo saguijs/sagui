@@ -12,31 +12,31 @@ import buildPagesConfig from './build-pages-config'
 import buildLoadersConfig from './loaders'
 
 /**
- * Takes a saguiOptions object and construct a webpack configuration object
+ * Takes a saguiConfig object and construct a webpack configuration object
  * It support two different types of archetypes; pages and libraries
  *
  * @return ready to use webpack configuration as an array
  */
-export default (saguiOptions = {}) => {
-  const { pages = [], libraries = [], ...sharedOptions } = saguiOptions
+export default (saguiConfig = {}) => {
+  const { pages = [], libraries = [], ...sharedSaguiConfig } = saguiConfig
 
   const sharedWebpackConfig = merge.smart(
-    buildSharedWebpackConfig(sharedOptions),
-    buildLoadersConfig(sharedOptions),
-    sharedOptions.webpack
+    buildSharedWebpackConfig(sharedSaguiConfig),
+    buildLoadersConfig(sharedSaguiConfig),
+    sharedSaguiConfig.webpack
   )
 
   return [
-    ...(pages.length > 0 ? [buildPagesConfig(pages, sharedOptions)] : []),
-    ...libraries.map((libraryConfig) => buildLibraryConfig(libraryConfig, sharedOptions))
+    ...(pages.length > 0 ? [buildPagesConfig(pages, sharedSaguiConfig)] : []),
+    ...libraries.map((libraryConfig) => buildLibraryConfig(libraryConfig, sharedSaguiConfig))
   ].map((entryPointWebpackConfig) => merge.smart(
     sharedWebpackConfig,
     entryPointWebpackConfig
   ))
 }
 
-const buildSharedWebpackConfig = (saguiOptions) => {
-  const { action, projectPath, saguiPath, watch, optimize } = saguiOptions
+const buildSharedWebpackConfig = (saguiConfig) => {
+  const { action, projectPath, saguiPath, watch, optimize } = saguiConfig
 
   const projectSourcePath = path.join(projectPath, 'src')
 

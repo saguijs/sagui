@@ -5,7 +5,7 @@ import autoprefixer from 'autoprefixer'
 import fileExtensions from '../../file-extensions'
 import actions from '../../actions'
 
-const defaultOptions = {
+const defaultConfig = {
   cssModules: true,
   sourceMaps: false,
   extract: true
@@ -39,20 +39,20 @@ export default {
       }
     }
 
-    const options = {
-      ...defaultOptions,
+    const config = {
+      ...defaultConfig,
       ...style
     }
 
-    const shouldExtract = options.extract && pages.length > 0 && action === actions.BUILD
+    const shouldExtract = config.extract && pages.length > 0 && action === actions.BUILD
     const localIdentName = optimize ? '[hash:base64:5]' : '[path][local]-[hash:base64:5]'
 
     const extractSass = new ExtractTextPlugin('[name]-[hash]-0.css')
     const extractCss = new ExtractTextPlugin('[name]-[hash]-1.css')
 
     // toggle source maps and CSS Modules
-    const cssModules = options.cssModules ? 'modules' : ''
-    const sourceMaps = options.sourceMaps ? 'sourceMap' : ''
+    const cssModules = config.cssModules ? 'modules' : ''
+    const sourceMaps = config.sourceMaps ? 'sourceMap' : ''
 
     // importLoaders: use the following postcss-loader in @import statements
     // modules: enable css-modules
