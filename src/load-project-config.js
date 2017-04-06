@@ -1,5 +1,5 @@
 import path from 'path'
-import fileExists from '../util/file-exists'
+import fileExists from './util/file-exists'
 
 export default (saguiOptions) => {
   const { projectPath } = saguiOptions

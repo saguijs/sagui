@@ -1,6 +1,6 @@
 import path from 'path'
 import cli from './cli'
-import loadProjectConfig from './project-config'
+import loadProjectConfig from './load-project-config'
 import configureKarma from './karma.conf'
 import configureWebpack from './webpack.config'
 import run from './runner'
