@@ -42,7 +42,7 @@ function setupHMR (saguiOptions) {
 
 function concatHMRBundle (saguiOptions, entry) {
   const devClient = [
-    require.resolve('webpack-dev-server/client/') + '?http://0.0.0.0:' + saguiOptions.port,
+    require.resolve('webpack-dev-server/client/') + '?/',
     'webpack/hot/dev-server'
   ]
 
