@@ -2,7 +2,7 @@ import path from 'path'
 import cli from './cli'
 import loadProjectConfig from './project-config'
 import configureKarma from './karma'
-import configureWebpack from './webpack'
+import configureWebpack from './webpack.config'
 import run from './runner'
 import json from './util/json'
 import fileExists from './util/file-exists'
@@ -34,7 +34,7 @@ const sagui = (options = {}) => {
   const saguiOptions = pipeline(
     sanityCheck,
     loadProjectConfig,
-    configureWebpack,
+    (saguiOptions) => ({ ...saguiOptions, webpack: configureWebpack(saguiOptions) }),
     configureKarma
   )({ ...DEFAULT_OPTIONS, ...options })
 
