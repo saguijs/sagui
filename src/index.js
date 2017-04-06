@@ -1,7 +1,7 @@
 import path from 'path'
 import cli from './cli'
 import loadProjectConfig from './project-config'
-import configureKarma from './karma'
+import configureKarma from './karma.conf'
 import configureWebpack from './webpack.config'
 import run from './runner'
 import json from './util/json'
@@ -19,7 +19,6 @@ import pipeline from './util/pipeline'
  * @param {string} options.projectPath Full path of the root directory of the project being built.
  * @param {string} options.action Action: (develop, test, build)
  * @param {string[]} [options.javaScript.buildDependencies = true] Which dependencies to transpile (Ex: ['ui-react-components'])
- * @param {boolean} [options.hotReloading = true] Enable hot reloading
  * @param {boolean} [options.optimize = false] Optimize the output (minify, dedup...)
  * @param {boolean} [options.defineNodeEnv = true] Define and replace NODE_ENV environment in the code
  * @param {boolean} [options.clean = true] Clean the build directory
@@ -35,7 +34,7 @@ const sagui = (options = {}) => {
     sanityCheck,
     loadProjectConfig,
     (saguiOptions) => ({ ...saguiOptions, webpack: configureWebpack(saguiOptions) }),
-    configureKarma
+    (saguiOptions) => ({ ...saguiOptions, karma: configureKarma(saguiOptions) })
   )({ ...DEFAULT_OPTIONS, ...options })
 
   return {
