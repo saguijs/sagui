@@ -8,7 +8,7 @@ export default {
         loaders: [
           {
             test: fileExtensions.test.VIDEO,
-            loader: 'file?name=[name]-[hash].[ext]'
+            loader: 'file-loader?name=[name]-[hash].[ext]'
           }
         ]
       }

@@ -57,17 +57,17 @@ export default {
     // importLoaders: use the following postcss-loader in @import statements
     // modules: enable css-modules
     const cssLoaders = [
-      `css?${cssModules}&${sourceMaps}&importLoaders=1&localIdentName=${localIdentName}`,
+      `css-loader?${cssModules}&${sourceMaps}&importLoaders=1&localIdentName=${localIdentName}`,
       'postcss-loader'
     ]
 
     // importLoaders: use the following sass-loader in @import statements
     // modules: enable css-modules
     const sassLoaders = [
-      `css?${cssModules}&${sourceMaps}&importLoaders=3&localIdentName=${localIdentName}`,
+      `css-loader?${cssModules}&${sourceMaps}&importLoaders=3&localIdentName=${localIdentName}`,
       'postcss-loader',
-      'resolve-url', // Fixes loading of relative URLs in nested Sass modules
-      `sass?${sourceMaps}&outputStyle=expanded&` +
+      'resolve-url-loader', // Fixes loading of relative URLs in nested Sass modules
+      `sass-loader?${sourceMaps}&outputStyle=expanded&` +
         'includePaths[]=' + (path.resolve(projectPath, './node_modules'))
     ]
 
@@ -87,13 +87,13 @@ export default {
             test: fileExtensions.test.CSS,
             loader: shouldExtract
               ? extractCss.extract(cssLoaders)
-              : ['style', ...cssLoaders].join('!')
+              : ['style-loader', ...cssLoaders].join('!')
           },
           {
             test: fileExtensions.test.SCSS,
             loader: shouldExtract
               ? extractSass.extract(sassLoaders)
-              : ['style', ...sassLoaders].join('!')
+              : ['style-loader', ...sassLoaders].join('!')
           }
         ]
       },

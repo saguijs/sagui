@@ -32,7 +32,7 @@ export default {
               path.join(projectPath, 'src'),
               ...userPaths
             ],
-            loader: 'babel',
+            loader: 'babel-loader',
             query: {
               // enabling it breaks source maps
               compact: false
