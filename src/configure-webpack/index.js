@@ -72,10 +72,6 @@ const buildSharedWebpackConfig = (saguiConfig) => {
       // To ensure hashes are generated based on the file contents, use webpack-md5-hash plugin.
       ...(action === actions.BUILD ? [new WebpackMd5Hash()] : []),
 
-      // Use "OccurrenceOrderPlugin" in order to make build deterministic.
-      // See https://medium.com/@okonetchnikov/long-term-caching-of-static-assets-with-webpack-1ecb139adb95
-      ...(action === actions.BUILD ? [new webpack.optimize.OccurrenceOrderPlugin(true)] : []),
-
       // We should not clean on any other action
       ...(action === actions.BUILD ? [new CleanWebpackPlugin(['dist'], {
         root: projectPath,
