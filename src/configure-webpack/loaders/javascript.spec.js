@@ -10,6 +10,13 @@ import actions from '../../actions'
 describe('javaScript', () => {
   const projectPath = '/tmp/test-project'
 
+  it('should lint the code by using a project eslintrc file', () => {
+    const projectPath = 'a/demo/path'
+    const config = loader.configure({ projectPath })
+
+    expect(config.eslint.configFile).to.eql(path.join(projectPath, '.eslintrc'))
+  })
+
   it('should only build files inside the src folder by default', () => {
     const webpack = loader.configure({ projectPath })
     expect(webpack.module.loaders[0].include).to.eql([path.join(projectPath, 'src')])
