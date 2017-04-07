@@ -18,6 +18,10 @@ export default {
         plugins: babelPlugins(action, coverage)
       },
 
+      eslint: {
+        configFile: path.join(projectPath, '.eslintrc')
+      },
+
       plugins: action === actions.DEVELOP ? [new HotModuleReplacementPlugin()] : [],
 
       resolve: {
@@ -25,6 +29,13 @@ export default {
       },
 
       module: {
+        preLoaders: [
+          {
+            test: fileExtensions.test.JAVASCRIPT,
+            loader: 'eslint-loader',
+            exclude: /node_modules/
+          }
+        ],
         loaders: [
           {
             test: fileExtensions.test.JAVASCRIPT,
