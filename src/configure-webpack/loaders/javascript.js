@@ -50,7 +50,7 @@ export default {
               path.join(projectPath, 'src'),
               ...userPaths
             ],
-            loader: 'happypack/babel'
+            loader: 'happypack/loader?id=babel'
           }
         ]
       }
