@@ -72,4 +72,3 @@ describe('style', function () {
     })
   })
 })
-

@@ -33,7 +33,7 @@ export default (saguiConfig) => new Promise((resolve, reject) => {
             console.log(err)
         }
 
-        reject()
+        reject(new Error('Type check failed'))
       } else {
         log('Type check completed without errors')
         resolve()

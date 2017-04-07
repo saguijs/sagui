@@ -65,7 +65,7 @@ describe('webpack', function () {
       expect(loaders.length).equal(1)
 
       // should remove the exclude attribute as requested
-      expect(loaders[0].exclude).undefined
+      expect(loaders[0].exclude).to.eql(undefined)
     })
   })
 })
