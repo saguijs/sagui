@@ -8,12 +8,21 @@ import Server from 'webpack-dev-server'
 export default (saguiConfig, webpackConfig) => new Promise((resolve, reject) => {
   const options = {
     hot: true,
-    historyApiFallback: saguiConfig.pages && saguiConfig.pages[0] && `${saguiConfig.pages[0]}.html`,
+    noInfo: true,
     ...saguiConfig.develop
   }
 
   try {
-    new Server(webpack(setupHMR(webpackConfig)), options).listen(saguiConfig.port, '0.0.0.0', (err) => {
+    const server = new Server(webpack(setupHMR(webpackConfig)), options)
+
+    server.listeningApp.on('error', function (e) {
+      if (e.code === 'EADDRINUSE') {
+        logError(`Server failed to started at http://localhost:${saguiConfig.port}. Port already used.`)
+        reject(new Error('This port is already used'))
+      }
+    })
+
+    server.listen(saguiConfig.port, '0.0.0.0', (err) => {
       if (err) {
         logError(`Server failed to started at http://localhost:${saguiConfig.port}`)
         reject(err)
@@ -22,6 +31,8 @@ export default (saguiConfig, webpackConfig) => new Promise((resolve, reject) => 
       }
     })
   } catch (e) {
+    logError('Server failed to start.')
+    logError(e.stack || e)
     reject(e)
   }
 })
