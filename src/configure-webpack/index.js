@@ -56,10 +56,11 @@ const buildSharedWebpackConfig = (saguiConfig) => {
         new webpack.optimize.DedupePlugin(),
         new webpack.optimize.UglifyJsPlugin({
           compress: {
-            // disable warning messages
-            // since they are very verbose
-            // and provide little value
-            warnings: false
+            sourceMap: true,
+
+            // signal loaders to minimize
+            // https://webpack.js.org/guides/migrating/#uglifyjsplugin-minimize-loaders
+            minimize: true
           }
         })
       ] : []),
