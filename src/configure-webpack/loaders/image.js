@@ -5,10 +5,18 @@ export default {
   configure ({ action }) {
     return {
       module: {
-        loaders: [
+        rules: [
           {
             test: fileExtensions.test.IMAGE,
-            loader: 'url-loader?limit=8192&name=[name]-[hash].[ext]'
+            use: [
+              {
+                loader: 'url-loader',
+                options: {
+                  limit: 8192,
+                  name: '[name]-[hash].[ext]'
+                }
+              }
+            ]
           }
         ]
       }
