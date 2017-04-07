@@ -335,7 +335,6 @@ Possible values:
 - `font`
 - `image`
 - `javaScript`
-- `json`
 - `style`
 - `txt`
 - `video`
