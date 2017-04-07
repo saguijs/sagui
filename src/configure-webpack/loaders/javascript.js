@@ -27,6 +27,11 @@ export default {
                   // with only the polyfills you need
                   // for the target browsers
                   useBuiltIns: true,
+
+                  // Disables ES6 module transformation
+                  // which Webpack2 can understand
+                  modules: false,
+
                   targets: {
                     // Unfortunately we are bound to what UglifyJS
                     // currently supports as language features
