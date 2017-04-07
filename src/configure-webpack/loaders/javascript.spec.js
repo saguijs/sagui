@@ -11,9 +11,11 @@ describe('javaScript', () => {
 
   it('should lint the code by using a project eslintrc file', () => {
     const projectPath = 'a/demo/path'
-    const config = loader.configure({ projectPath })
+    const webpack = loader.configure({ projectPath })
 
-    expect(config.eslint.configFile).to.eql(path.join(projectPath, '.eslintrc'))
+    expect(webpack.module.rules[0].loader).to.eql('eslint-loader')
+    expect(webpack.module.rules[0].enforce).to.eql('pre')
+    expect(webpack.module.rules[0].options.configFile).to.eql(path.join(projectPath, '.eslintrc'))
   })
 
   it('should only build files inside the src folder by default', () => {
