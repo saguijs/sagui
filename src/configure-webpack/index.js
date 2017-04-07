@@ -76,9 +76,6 @@ const buildSharedWebpackConfig = (saguiConfig) => {
       // See https://medium.com/@okonetchnikov/long-term-caching-of-static-assets-with-webpack-1ecb139adb95
       ...(action === actions.BUILD ? [new webpack.optimize.OccurrenceOrderPlugin(true)] : []),
 
-      // Duplicates equal or similar files
-      ...(action === actions.BUILD ? [new WebpackMd5Hash()] : []),
-
       // We should not clean on any other action
       ...(action === actions.BUILD ? [new CleanWebpackPlugin(['dist'], {
         root: projectPath,
