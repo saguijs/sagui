@@ -78,10 +78,11 @@ const buildSharedWebpackConfig = (saguiConfig) => {
       // Duplicates equal or similar files
       ...(action === actions.BUILD ? [new WebpackMd5Hash()] : []),
 
-      new CleanWebpackPlugin(['dist'], {
+      // We should not clean on any other action
+      ...(action === actions.BUILD ? [new CleanWebpackPlugin(['dist'], {
         root: projectPath,
         verbose: false
-      }),
+      })] : []),
 
       new DefinePlugin({
         'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
