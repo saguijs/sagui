@@ -3,7 +3,6 @@ import merge from 'webpack-merge'
 import font from './font'
 import image from './image'
 import javaScript from './javascript'
-import json from './json'
 import style from './style'
 import txt from './txt'
 import video from './video'
@@ -13,7 +12,6 @@ const loaders = [
   font,
   image,
   javaScript,
-  json,
   style,
   txt,
   video,
