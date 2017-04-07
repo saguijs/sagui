@@ -27,6 +27,6 @@ export default (saguiConfig, webpackConfig, karmaConfig) => {
       return typecheck(saguiConfig)
 
     default:
-      return Promise.reject('A valid action is required.')
+      return Promise.reject(new Error('A valid action is required.'))
   }
 }

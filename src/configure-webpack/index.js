@@ -56,10 +56,11 @@ const buildSharedWebpackConfig = (saguiConfig) => {
         new webpack.optimize.DedupePlugin(),
         new webpack.optimize.UglifyJsPlugin({
           compress: {
-            // disable warning messages
-            // since they are very verbose
-            // and provide little value
-            warnings: false
+            sourceMap: true,
+
+            // signal loaders to minimize
+            // https://webpack.js.org/guides/migrating/#uglifyjsplugin-minimize-loaders
+            minimize: true
           }
         })
       ] : []),
@@ -70,10 +71,6 @@ const buildSharedWebpackConfig = (saguiConfig) => {
       // Due to an issue in Webpack, its chunkhashes aren't deterministic.
       // To ensure hashes are generated based on the file contents, use webpack-md5-hash plugin.
       ...(action === actions.BUILD ? [new WebpackMd5Hash()] : []),
-
-      // Use "OccurrenceOrderPlugin" in order to make build deterministic.
-      // See https://medium.com/@okonetchnikov/long-term-caching-of-static-assets-with-webpack-1ecb139adb95
-      ...(action === actions.BUILD ? [new webpack.optimize.OccurrenceOrderPlugin(true)] : []),
 
       // We should not clean on any other action
       ...(action === actions.BUILD ? [new CleanWebpackPlugin(['dist'], {
@@ -87,9 +84,8 @@ const buildSharedWebpackConfig = (saguiConfig) => {
     ],
 
     resolve: {
-      extensions: ['', ...fileExtensions.list.JAVASCRIPT],
-
-      root: [
+      extensions: fileExtensions.list.JAVASCRIPT,
+      modules: [
         path.join(projectPath, '/node_modules'),
         projectSourcePath,
 
@@ -103,7 +99,7 @@ const buildSharedWebpackConfig = (saguiConfig) => {
       // Should first try to resolve loaders nested within Sagui.
       // This fixes an issue in NPM v2 where webpack incorrectly
       // thinks that the package `eslint` is the `eslint-loader`
-      modulesDirectories: [
+      modules: [
         path.join(saguiPath, '/node_modules'),
         path.join(projectPath, '/node_modules')
       ]

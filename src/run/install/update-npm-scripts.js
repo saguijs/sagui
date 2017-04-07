@@ -76,7 +76,7 @@ export default function (userScripts = {}) {
     const latestScript = saguiScripts[key][saguiScripts[key].length - 1]
     const latestScriptIsDefined = latestScript !== undefined
 
-    if (hasAnOutdatedScript && latestScriptIsDefined || isMissingScript && latestScriptIsDefined) {
+    if ((hasAnOutdatedScript && latestScriptIsDefined) || (isMissingScript && latestScriptIsDefined)) {
       return { ...scripts, [key]: latestScript }
     }
 
