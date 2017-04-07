@@ -1,3 +1,10 @@
 {
-  "presets": ["sagui"]
+  "presets": [
+    "stage-3",
+    ["env", {
+      "targets": {
+        "node": 4
+      }
+    }]
+  ]
 }

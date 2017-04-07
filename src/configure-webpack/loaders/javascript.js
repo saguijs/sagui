@@ -21,11 +21,16 @@ export default {
             path: 'babel-loader',
             query: {
               babelrc: false,
-              // Replaces require("babel-polyfill")
-              // with only the polyfills you need
-              // for the target browsers
-              useBuiltIns: true,
-              presets: [require.resolve('babel-preset-env'), require.resolve('babel-preset-react')],
+              presets: [
+                [require.resolve('babel-preset-env'), {
+                  // Replaces require("babel-polyfill")
+                  // with only the polyfills you need
+                  // for the target browsers
+                  useBuiltIns: true
+                }],
+                require.resolve('babel-preset-react'),
+                require.resolve('babel-preset-stage-3')
+              ],
               plugins: babelPlugins(action, coverage)
             }
           }]
