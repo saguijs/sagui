@@ -1,47 +1,51 @@
 import path from 'path'
 import cli from './cli'
-import loadProjectConfig from './project-config'
-import configureKarma from './karma'
-import configureWebpack from './webpack'
-import run from './runner'
-import json from './util/json'
-import fileExists from './util/file-exists'
-import pipeline from './util/pipeline'
+import loadProjectSaguiConfig from './load-project-sagui-config'
+import configureKarma from './configure-karma'
+import configureWebpack from './configure-webpack'
+import run from './run'
+
+const DEFAULT_SAGUI_CONFIG = {
+  port: 3000,
+  saguiPath: path.join(__dirname, '../'),
+  optimize: false,
+  coverage: false,
+  pages: [],
+  disabledLoaders: [],
+  javaScript: {},
+  webpack: {},
+  karma: {}
+}
 
 /**
  * Sagui
  *
- * This function takes a single sagui options object,
+ * This function takes a single sagui config object,
  * prepare all the required Webpack / Karma configurations
  * and execute the requested action.
  *
- * @param {Object} options Sagui options object
- * @param {string} options.projectPath Full path of the root directory of the project being built.
- * @param {string} options.action Action: (develop, test, build)
- * @param {string[]} [options.javaScript.buildDependencies = true] Which dependencies to transpile (Ex: ['ui-react-components'])
- * @param {boolean} [options.hotReloading = true] Enable hot reloading
- * @param {boolean} [options.optimize = false] Optimize the output (minify, dedup...)
- * @param {boolean} [options.defineNodeEnv = true] Define and replace NODE_ENV environment in the code
- * @param {boolean} [options.clean = true] Clean the build directory
- * @param {boolean} [options.coverage = false] Outputs test coverage while running the tests
- * @param {boolean} [options.lint = true] Perform static analysis of the code through ESLint
- * @param {string[]} [options.pages = []] Define a build output based on a HTML and JS files.
- * @param {string[]} [options.disabledLoaders = []] Disables loaders for specific file types.
- * @param {Object} [options.webpack] Webpack configuration object to extend the internal configuration.
- * @param {Object} [options.karma] Karma configuration object to extend the internal configuration.
+ * @param {Object} saguiConfig Sagui config object
+ * @param {string} saguiConfig.projectPath Full path of the root directory of the project being built.
+ * @param {string} saguiConfig.action Action: (develop, test, build)
+ * @param {string[]} [saguiConfig.javaScript.buildDependencies = true] Which dependencies to transpile (Ex: ['ui-react-components'])
+ * @param {boolean} [saguiConfig.optimize = false] Optimize the output (minify, dedup...)
+ * @param {boolean} [saguiConfig.coverage = false] Outputs test coverage while running the tests
+ * @param {string[]} [saguiConfig.pages = []] Define a build output based on a HTML and JS files.
+ * @param {string[]} [saguiConfig.disabledLoaders = []] Disables loaders for specific file types.
+ * @param {Object} [saguiConfig.webpack] Webpack configuration object to extend the internal configuration.
+ * @param {Object} [saguiConfig.karma] Karma configuration object to extend the internal configuration.
  */
-const sagui = (options = {}) => {
-  const saguiOptions = pipeline(
-    sanityCheck,
-    loadProjectConfig,
-    configureWebpack,
-    configureKarma
-  )({ ...DEFAULT_OPTIONS, ...options })
-
-  return {
-    ...saguiOptions,
-    run: () => run(saguiOptions)
+const sagui = (saguiConfig = {}) => {
+  const finalSaguiConfig = {
+    ...DEFAULT_SAGUI_CONFIG,
+    ...saguiConfig,
+    ...loadProjectSaguiConfig(saguiConfig)
   }
+
+  const webpackConfig = configureWebpack(finalSaguiConfig)
+  const karmaConfig = configureKarma(finalSaguiConfig, webpackConfig)
+
+  return run(finalSaguiConfig, webpackConfig, karmaConfig)
 }
 
 /**
@@ -50,47 +54,3 @@ const sagui = (options = {}) => {
 sagui.cli = cli
 
 export default sagui
-
-const DEFAULT_OPTIONS = {
-  port: 3000,
-  saguiPath: path.join(__dirname, '../'),
-  hotReloading: true,
-  optimize: false,
-  defineNodeEnv: true,
-  clean: true,
-  coverage: false,
-  lint: true,
-  pages: [],
-  disabledLoaders: [],
-  javaScript: {},
-  webpack: {},
-  karma: {}
-}
-
-function sanityCheck (saguiOptions) {
-  const { projectPath } = saguiOptions
-
-  const packagePath = path.join(projectPath, 'package.json')
-  if (!fileExists(packagePath)) throw new MissingPackageJSON()
-
-  const packageJSON = json.read(packagePath)
-  if (packageJSON.name === 'sagui') throw new SaguiPath()
-
-  return saguiOptions
-}
-
-export function MissingPackageJSON () {
-  this.name = 'MissingPackageJSON'
-  this.message = 'Must be executed in target project\'s package.json path'
-  this.stack = (new Error()).stack
-}
-MissingPackageJSON.prototype = Object.create(Error.prototype)
-MissingPackageJSON.prototype.constructor = MissingPackageJSON
-
-export function SaguiPath () {
-  this.name = 'SaguiPath'
-  this.message = 'Sagui CLI must not be run in Sagui\'s path'
-  this.stack = (new Error()).stack
-}
-SaguiPath.prototype = Object.create(Error.prototype)
-SaguiPath.prototype.constructor = SaguiPath

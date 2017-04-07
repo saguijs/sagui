@@ -1,6 +1,6 @@
 import uniq from 'lodash.uniq'
 
-export default (configA, configB) => {
+export default (configA, configB = {}) => {
   return {
     ...configA,
     ...configB,
