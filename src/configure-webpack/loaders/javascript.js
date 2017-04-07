@@ -26,7 +26,13 @@ export default {
                   // Replaces require("babel-polyfill")
                   // with only the polyfills you need
                   // for the target browsers
-                  useBuiltIns: true
+                  useBuiltIns: true,
+                  targets: {
+                    // Unfortunately we are bound to what UglifyJS
+                    // currently supports as language features
+                    // https://github.com/babel/babel-preset-env#targetsuglify
+                    uglify: true
+                  }
                 }],
                 require.resolve('babel-preset-react'),
                 require.resolve('babel-preset-stage-3')
