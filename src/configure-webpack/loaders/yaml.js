@@ -5,10 +5,10 @@ export default {
   configure () {
     return {
       module: {
-        loaders: [
+        rules: [
           {
             test: fileExtensions.test.YAML,
-            loader: 'json-loader!yaml-loader'
+            use: ['json-loader', 'yaml-loader']
           }
         ]
       }

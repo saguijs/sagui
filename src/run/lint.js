@@ -16,7 +16,7 @@ export default (saguiConfig) => new Promise((resolve, reject) => {
   if (report.errorCount > 0) {
     logError('Lint failed:')
     console.log(formatter(report.results))
-    reject()
+    reject(new Error('Lint failed'))
   } else {
     log('Lint completed without errors.')
     resolve()

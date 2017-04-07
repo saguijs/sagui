@@ -13,19 +13,19 @@ export default {
     ))
 
     return {
-      babel: {
-        babelrc: path.join(projectPath, '.babelrc'),
-        plugins: babelPlugins(action, coverage)
-      },
-
       plugins: action === actions.DEVELOP ? [new HotModuleReplacementPlugin()] : [],
 
-      resolve: {
-        extensions: fileExtensions.list.JAVASCRIPT
-      },
-
       module: {
-        loaders: [
+        rules: [
+          {
+            test: fileExtensions.test.JAVASCRIPT,
+            enforce: 'pre',
+            loader: 'eslint-loader',
+            exclude: /node_modules/,
+            options: {
+              configFile: path.join(projectPath, '.eslintrc')
+            }
+          },
           {
             test: fileExtensions.test.JAVASCRIPT,
             include: [
@@ -33,9 +33,9 @@ export default {
               ...userPaths
             ],
             loader: 'babel-loader',
-            query: {
-              // enabling it breaks source maps
-              compact: false
+            options: {
+              babelrc: path.join(projectPath, '.babelrc'),
+              plugins: babelPlugins(action, coverage)
             }
           }
         ]

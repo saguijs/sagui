@@ -5,7 +5,7 @@ export default {
   configure () {
     return {
       module: {
-        loaders: [
+        rules: [
           {
             test: fileExtensions.test.TXT,
             loader: 'raw-loader'

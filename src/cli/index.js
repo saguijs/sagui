@@ -29,7 +29,7 @@ const handleError = (e) => {
 }
 
 const setupAction = (NODE_ENV, actionsToRun, options = {}) => (cliOptions = {}) => {
-  if (!process.env.NODE_ENV || process.env.NODE_ENV && process.env.NODE_ENV.trim().length === 0) {
+  if (!process.env.NODE_ENV || (process.env.NODE_ENV && process.env.NODE_ENV.trim().length === 0)) {
     process.env.NODE_ENV = NODE_ENV
     log(`Setting NODE_ENV=${NODE_ENV}`)
   } else {

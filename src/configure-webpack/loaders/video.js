@@ -5,10 +5,15 @@ export default {
   configure () {
     return {
       module: {
-        loaders: [
+        rules: [
           {
             test: fileExtensions.test.VIDEO,
-            loader: 'file-loader?name=[name]-[hash].[ext]'
+            use: {
+              loader: 'file-loader',
+              options: {
+                name: '[name]-[hash].[ext]'
+              }
+            }
           }
         ]
       }

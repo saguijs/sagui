@@ -1,4 +1,5 @@
 import path from 'path'
+import webpack from 'webpack'
 import postCSSModulesValues from 'postcss-modules-values'
 import ExtractTextPlugin from 'extract-text-webpack-plugin'
 import autoprefixer from 'autoprefixer'
@@ -25,7 +26,7 @@ export default {
     if (action === actions.TEST_UNIT) {
       return {
         module: {
-          loaders: [
+          rules: [
             {
               test: fileExtensions.test.CSS,
               loader: 'null-loader'
@@ -72,17 +73,8 @@ export default {
     ]
 
     return {
-      postcss: [
-        // allow importing values (variables) between css modules
-        // see: https://github.com/css-modules/postcss-modules-values#usage
-        postCSSModulesValues,
-
-        // Support browser prefixes for any browser with greater than 5% markeshare
-        autoprefixer({ browsers: ['> 5%'] })
-      ],
-
       module: {
-        loaders: [
+        rules: [
           {
             test: fileExtensions.test.CSS,
             loader: shouldExtract
@@ -98,7 +90,25 @@ export default {
         ]
       },
 
-      plugins: shouldExtract ? [extractCss, extractSass] : []
+      plugins: [
+        new webpack.LoaderOptionsPlugin({
+          debug: true,
+          options: {
+            postcss: {
+              plugins: () => [
+                // allow importing values (variables) between css modules
+                // see: https://github.com/css-modules/postcss-modules-values#usage
+                postCSSModulesValues,
+
+                // Support browser prefixes for any browser with greater than 5% markeshare
+                autoprefixer({ browsers: ['> 5%'] })
+              ]
+            }
+          }
+        }),
+
+        ...(shouldExtract ? [extractCss, extractSass] : [])
+      ]
     }
   }
 }
