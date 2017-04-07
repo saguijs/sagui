@@ -1,7 +1,6 @@
 import { HotModuleReplacementPlugin } from 'webpack'
+import HappyPack from 'happypack'
 import path from 'path'
-import reactTransform from 'babel-plugin-react-transform'
-import istanbul from 'babel-plugin-istanbul'
 import fileExtensions from '../../file-extensions'
 import actions from '../../actions'
 
@@ -13,7 +12,26 @@ export default {
     ))
 
     return {
-      plugins: action === actions.DEVELOP ? [new HotModuleReplacementPlugin()] : [],
+      plugins: [
+        new HappyPack({
+          id: 'babel',
+          cache: false,
+          verbose: false,
+          loaders: [{
+            path: 'babel-loader',
+            query: {
+              babelrc: false,
+              // Replaces require("babel-polyfill")
+              // with only the polyfills you need
+              // for the target browsers
+              useBuiltIns: true,
+              presets: [require.resolve('babel-preset-env'), require.resolve('babel-preset-react')],
+              plugins: babelPlugins(action, coverage)
+            }
+          }]
+        }),
+        ...(action === actions.DEVELOP ? [new HotModuleReplacementPlugin()] : [])
+      ],
 
       module: {
         rules: [
@@ -32,11 +50,7 @@ export default {
               path.join(projectPath, 'src'),
               ...userPaths
             ],
-            loader: 'babel-loader',
-            options: {
-              babelrc: path.join(projectPath, '.babelrc'),
-              plugins: babelPlugins(action, coverage)
-            }
+            loader: 'happypack/babel'
           }
         ]
       }
@@ -47,7 +61,7 @@ export default {
 const babelPlugins = (action, coverage) => {
   if (action === actions.DEVELOP) {
     return [
-      [reactTransform, {
+      [require.resolve('babel-plugin-react-transform'), {
         transforms: [{
           transform: 'react-transform-hmr',
           imports: ['react'],
@@ -59,7 +73,7 @@ const babelPlugins = (action, coverage) => {
 
   if (action === actions.TEST_UNIT && coverage) {
     return [
-      [istanbul, {
+      [require.resolve('babel-plugin-istanbul'), {
         exclude: [
           '**/*.spec.*',
           '**/node_modules/**/*'
