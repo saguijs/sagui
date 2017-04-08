@@ -43,7 +43,26 @@ export default {
                 require.resolve('babel-preset-react'),
                 require.resolve('babel-preset-stage-3')
               ],
-              plugins: babelPlugins(action, coverage)
+              plugins: [
+                ...(action === actions.DEVELOP ? [
+                  [require.resolve('babel-plugin-react-transform'), {
+                    transforms: [{
+                      transform: 'react-transform-hmr',
+                      imports: ['react'],
+                      locals: ['module']
+                    }]
+                  }]
+                ] : []),
+
+                ...(action === actions.TEST_UNIT && coverage ? [
+                  [require.resolve('babel-plugin-istanbul'), {
+                    exclude: [
+                      '**/*.spec.*',
+                      '**/node_modules/**/*'
+                    ]
+                  }]
+                ] : [])
+              ]
             }
           }]
         }),
@@ -73,31 +92,4 @@ export default {
       }
     }
   }
-}
-
-const babelPlugins = (action, coverage) => {
-  if (action === actions.DEVELOP) {
-    return [
-      [require.resolve('babel-plugin-react-transform'), {
-        transforms: [{
-          transform: 'react-transform-hmr',
-          imports: ['react'],
-          locals: ['module']
-        }]
-      }]
-    ]
-  }
-
-  if (action === actions.TEST_UNIT && coverage) {
-    return [
-      [require.resolve('babel-plugin-istanbul'), {
-        exclude: [
-          '**/*.spec.*',
-          '**/node_modules/**/*'
-        ]
-      }]
-    ]
-  }
-
-  return []
 }
