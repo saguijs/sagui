@@ -101,7 +101,7 @@ export default {
                 postCSSModulesValues,
 
                 // Support browser prefixes for any browser with greater than 5% markeshare
-                autoprefixer({ browsers: ['> 5%'] })
+                autoprefixer
               ]
             }
           }

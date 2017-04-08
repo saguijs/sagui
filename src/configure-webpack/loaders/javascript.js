@@ -1,7 +1,6 @@
 import { HotModuleReplacementPlugin } from 'webpack'
+import HappyPack from 'happypack'
 import path from 'path'
-import reactTransform from 'babel-plugin-react-transform'
-import istanbul from 'babel-plugin-istanbul'
 import fileExtensions from '../../file-extensions'
 import actions from '../../actions'
 
@@ -13,7 +12,43 @@ export default {
     ))
 
     return {
-      plugins: action === actions.DEVELOP ? [new HotModuleReplacementPlugin()] : [],
+      plugins: [
+        new HappyPack({
+          id: 'babel',
+          cache: false,
+          verbose: false,
+          loaders: [{
+            path: 'babel-loader',
+            query: {
+              babelrc: false,
+              presets: [
+                [require.resolve('babel-preset-env'), {
+                  // Replaces require("babel-polyfill")
+                  // with only the polyfills you need
+                  // for the target browsers
+                  useBuiltIns: true,
+
+                  // Disables ES6 module transformation
+                  // which Webpack2 can understand
+                  modules: false,
+
+                  targets: {
+                    // Unfortunately we are bound to what UglifyJS
+                    // currently supports as language features
+                    // https://github.com/babel/babel-preset-env#targetsuglify
+                    uglify: true
+                  }
+                }],
+                require.resolve('babel-preset-flow'),
+                require.resolve('babel-preset-react'),
+                require.resolve('babel-preset-stage-3')
+              ],
+              plugins: babelPlugins(action, coverage)
+            }
+          }]
+        }),
+        ...(action === actions.DEVELOP ? [new HotModuleReplacementPlugin()] : [])
+      ],
 
       module: {
         rules: [
@@ -32,11 +67,7 @@ export default {
               path.join(projectPath, 'src'),
               ...userPaths
             ],
-            loader: 'babel-loader',
-            options: {
-              babelrc: path.join(projectPath, '.babelrc'),
-              plugins: babelPlugins(action, coverage)
-            }
+            loader: 'happypack/loader?id=babel'
           }
         ]
       }
@@ -47,7 +78,7 @@ export default {
 const babelPlugins = (action, coverage) => {
   if (action === actions.DEVELOP) {
     return [
-      [reactTransform, {
+      [require.resolve('babel-plugin-react-transform'), {
         transforms: [{
           transform: 'react-transform-hmr',
           imports: ['react'],
@@ -59,7 +90,7 @@ const babelPlugins = (action, coverage) => {
 
   if (action === actions.TEST_UNIT && coverage) {
     return [
-      [istanbul, {
+      [require.resolve('babel-plugin-istanbul'), {
         exclude: [
           '**/*.spec.*',
           '**/node_modules/**/*'
