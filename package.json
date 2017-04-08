@@ -54,6 +54,7 @@
     "babel-plugin-istanbul": "^4.1.1",
     "babel-plugin-react-transform": "^2.0.2",
     "babel-preset-env": "^1.3.3",
+    "babel-preset-flow": "^6.23.0",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-3": "^6.24.1",
     "chalk": "^1.1.3",
