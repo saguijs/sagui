@@ -86,8 +86,9 @@ const buildSharedWebpackConfig = (saguiConfig) => {
     resolve: {
       extensions: fileExtensions.list.JAVASCRIPT,
       modules: [
-        path.join(projectPath, '/node_modules'),
         projectSourcePath,
+
+        path.join(projectPath, '/node_modules'),
 
         // Sagui node_modules is required in the path to be able
         // to load the `webpack-hot-middleware`
