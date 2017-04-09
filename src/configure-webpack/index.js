@@ -55,13 +55,13 @@ const buildSharedWebpackConfig = (saguiConfig) => {
       ...(optimize ? [
         new webpack.optimize.DedupePlugin(),
         new webpack.optimize.UglifyJsPlugin({
-          compress: {
-            sourceMap: true,
+          sourceMap: true
+        }),
 
-            // signal loaders to minimize
-            // https://webpack.js.org/guides/migrating/#uglifyjsplugin-minimize-loaders
-            minimize: true
-          }
+        // signal loaders to minimize
+        // https://webpack.js.org/guides/migrating/#uglifyjsplugin-minimize-loaders
+        new webpack.LoaderOptionsPlugin({
+          minimize: true
         })
       ] : []),
 
