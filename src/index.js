@@ -5,6 +5,9 @@ import configureKarma from './configure-karma'
 import configureWebpack from './configure-webpack'
 import run from './run'
 
+/* eslint no-duplicate-imports: 0 */
+export { MissingPackageJSON, SaguiPath } from './load-project-sagui-config'
+
 const DEFAULT_SAGUI_CONFIG = {
   port: 3000,
   saguiPath: path.join(__dirname, '../'),
