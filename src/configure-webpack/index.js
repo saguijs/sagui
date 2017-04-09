@@ -83,11 +83,22 @@ const buildSharedWebpackConfig = (saguiConfig) => {
       })
     ],
 
+    // In wepback 2 builtin node.js modules take precedence over the normal modules
+    // So, if a user creates a `constants` module and tries to require it
+    // with `import 'constants'`, the node.js module will be imported instead
+    //
+    // This configuration disables this behavior
+    // More information: https://github.com/webpack/webpack/issues/4666#issuecomment-292700060
+    node: {
+      constants: false
+    },
+
     resolve: {
       extensions: fileExtensions.list.JAVASCRIPT,
       modules: [
-        path.join(projectPath, '/node_modules'),
         projectSourcePath,
+
+        path.join(projectPath, '/node_modules'),
 
         // Sagui node_modules is required in the path to be able
         // to load the `webpack-hot-middleware`
