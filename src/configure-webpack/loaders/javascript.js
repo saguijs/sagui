@@ -17,6 +17,7 @@ export default {
           id: 'babel',
           cache: false,
           verbose: false,
+          tempDir: path.join(projectPath, '.sagui/happypack'),
           loaders: [{
             path: 'babel-loader',
             query: {
