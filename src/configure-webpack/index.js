@@ -1,7 +1,7 @@
 import CleanWebpackPlugin from 'clean-webpack-plugin'
 import merge from 'webpack-merge'
 import path from 'path'
-import webpack, { DefinePlugin, HotModuleReplacementPlugin, NoErrorsPlugin } from 'webpack'
+import webpack, { DefinePlugin, HotModuleReplacementPlugin, NoEmitOnErrorsPlugin } from 'webpack'
 import WebpackMd5Hash from 'webpack-md5-hash'
 
 import actions from '../actions'
@@ -48,7 +48,7 @@ const buildSharedWebpackConfig = (saguiConfig) => {
     plugins: [
       // only throw errors while building if we are not
       // in development or with watch enabled
-      ...(watch || action === actions.DEVELOP ? [] : [new NoErrorsPlugin()]),
+      ...(watch || action === actions.DEVELOP ? [] : [new NoEmitOnErrorsPlugin()]),
 
       // only include the optimization plugins if
       // the flag is enabled
