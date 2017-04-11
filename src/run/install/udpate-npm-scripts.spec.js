@@ -6,7 +6,6 @@ const CURRENT_SCRIPTS = {
   'dist': 'sagui dist',
   'start': 'sagui develop --port 3000',
   'test': 'sagui test',
-  'test:lint': 'sagui test:lint',
   'test:typecheck': 'sagui test:typecheck',
   'test:unit': 'sagui test:unit --coverage',
   'test:unit:watch': 'sagui test:unit --watch'
@@ -51,7 +50,8 @@ describe('updateNpmScripts', function () {
     it('should remove undefined scripts if it matches previous versions', () => {
       const scripts = {
         'develop': 'sagui develop --port 3000',
-        'test:coverage': 'npm run test:unit -- --coverage'
+        'test:coverage': 'npm run test:unit -- --coverage',
+        'test:lint': 'sagui test:lint'
       }
 
       const saguiScripts = updateNpmScripts(scripts)
@@ -61,7 +61,6 @@ describe('updateNpmScripts', function () {
         'dist',
         'start',
         'test',
-        'test:lint',
         'test:typecheck',
         'test:unit',
         'test:unit:watch'
@@ -83,7 +82,6 @@ describe('updateNpmScripts', function () {
         'start',
         'test',
         'test:coverage',
-        'test:lint',
         'test:typecheck',
         'test:unit',
         'test:unit:watch'
@@ -106,7 +104,6 @@ describe('updateNpmScripts', function () {
         'my-weird-script',
         'start',
         'test',
-        'test:lint',
         'test:typecheck',
         'test:unit',
         'test:unit:watch'

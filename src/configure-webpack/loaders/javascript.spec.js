@@ -5,13 +5,12 @@ import loader from './javascript'
 describe('javaScript', () => {
   const projectPath = '/tmp/test-project'
 
-  it('should lint the code by using a project eslintrc file', () => {
+  it('should lint the code by using standard', () => {
     const projectPath = 'a/demo/path'
     const webpack = loader.configure({ projectPath })
 
-    expect(webpack.module.rules[0].loader).to.eql('eslint-loader')
+    expect(webpack.module.rules[0].loader).to.eql('standard-loader')
     expect(webpack.module.rules[0].enforce).to.eql('pre')
-    expect(webpack.module.rules[0].options.configFile).to.eql(path.join(projectPath, '.eslintrc'))
   })
 
   it('should only build files inside the src folder by default', () => {
