@@ -54,10 +54,6 @@ describe('[integration] sagui', function () {
       return sagui({ projectPath, action: actions.TEST_UNIT, coverage: true })
     })
 
-    it('should be possible to lint', () => {
-      return sagui({ projectPath, action: actions.TEST_LINT })
-    })
-
     it('should have an .npmignore file', () => {
       fs.readFileSync(path.join(projectPath, '.npmignore'))
     })

@@ -8,8 +8,6 @@
   },
   "main": "index.js",
   "files": [
-    ".babelrc",
-    ".eslintrc",
     "bin",
     "karma-static-files",
     "flowtype-interfaces",
@@ -20,12 +18,25 @@
   "scripts": {
     "build": "rm -rf lib && babel src --out-dir lib --ignore *.spec.js",
     "test": "npm run test:lint && npm run test:unit && npm run test:integration",
-    "test:lint": "eslint .",
+    "test:lint": "standard | snazzy",
+    "test:lint:fix": "standard --fix",
     "test:integration": "mocha --timeout 0 --compilers js:babel-register --recursive --reporter spec --fgrep [integration] ./src",
     "test:unit": "mocha --timeout 0 --compilers js:babel-register --recursive --reporter spec --fgrep [integration] --invert ./src",
     "test:unit:watch": "npm run test:unit -- --watch",
     "prepublish": "not-in-install && npm prune && npm test && npm run build || in-install",
     "postinstall": "node ./bin/sagui.js update"
+  },
+  "standard": {
+    "parser": "babel-eslint",
+    "env": {
+      "jasmine": true,
+      "node": true
+    },
+    "ignore": [
+      "lib",
+      "flowtype-interfaces",
+      "spec"
+    ]
   },
   "repository": {
     "type": "git",
@@ -43,6 +54,7 @@
     "chai": "^3.5.0",
     "in-publish": "^2.0.0",
     "mocha": "^3.2.0",
+    "snazzy": "^7.0.0",
     "temp": "^0.8.3",
     "tmp": "0.0.31"
   },
@@ -63,16 +75,7 @@
     "clean-webpack-plugin": "^0.1.16",
     "commander": "^2.9.0",
     "css-loader": "^0.28.0",
-    "eslint": "~3.19.0",
-    "eslint-config-sagui": "^6.0.0",
-    "eslint-config-standard": "^10.2.0",
-    "eslint-config-standard-jsx": "4.0.1",
-    "eslint-loader": "^1.7.1",
-    "eslint-plugin-import": "^2.2.0",
-    "eslint-plugin-node": "^4.2.2",
-    "eslint-plugin-promise": "^3.5.0",
-    "eslint-plugin-react": "^6.10.3",
-    "eslint-plugin-standard": "^3.0.1",
+    "eslint-plugin-flowtype": "^2.30.4",
     "extract-text-webpack-plugin": "^2.1.0",
     "file-loader": "^0.11.1",
     "flow-bin": "0.43.1",
@@ -100,6 +103,8 @@
     "react-transform-hmr": "^1.0.4",
     "resolve-url-loader": "^2.0.2",
     "sass-loader": "^6.0.3",
+    "standard": "^10.0.1",
+    "standard-loader": "^6.0.1",
     "style-loader": "^0.16.1",
     "template-directory": "^2.0.0",
     "url-loader": "^0.5.8",

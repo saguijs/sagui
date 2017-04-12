@@ -83,10 +83,16 @@ export default {
           {
             test: fileExtensions.test.JAVASCRIPT,
             enforce: 'pre',
-            loader: 'eslint-loader',
+            loader: 'standard-loader',
             exclude: /node_modules/,
             options: {
-              configFile: path.join(projectPath, '.eslintrc')
+              env: {
+                jasmine: true
+              },
+              error: action !== actions.DEVELOP && action !== actions.TEST_UNIT,
+              parser: 'babel-eslint',
+              plugins: ['flowtype'],
+              snazzy: true
             }
           },
           {

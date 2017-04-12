@@ -108,8 +108,6 @@ const buildSharedWebpackConfig = (saguiConfig) => {
 
     resolveLoader: {
       // Should first try to resolve loaders nested within Sagui.
-      // This fixes an issue in NPM v2 where webpack incorrectly
-      // thinks that the package `eslint` is the `eslint-loader`
       modules: [
         path.join(saguiPath, '/node_modules'),
         path.join(projectPath, '/node_modules')
