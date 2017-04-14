@@ -16,7 +16,7 @@
     "template"
   ],
   "scripts": {
-    "build": "rm -rf lib && babel src --out-dir lib --ignore *.spec.js",
+    "build": "rm -rf lib && babel src --out-dir lib --ignore *.spec.js && cp src/sagui-config-schema.json lib/sagui-config-schema.json",
     "test": "npm run test:lint && npm run test:unit && npm run test:integration",
     "test:lint": "standard | snazzy",
     "test:lint:fix": "standard --fix",
