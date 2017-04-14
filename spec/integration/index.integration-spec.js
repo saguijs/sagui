@@ -1,8 +1,8 @@
 import { expect } from 'chai'
 import fs from 'fs-extra'
 import path from 'path'
-import sagui from '.'
-import actions from './actions'
+import sagui from '../../src'
+import actions from '../../src/actions'
 import temp from 'temp'
 
 // make sure the temp folders are cleaned up
@@ -15,19 +15,19 @@ temp.track()
  * and copies the require Sagui files.
  */
 const npmInstall = (projectPath) => {
-  const nodeModules = path.join(__dirname, '../node_modules')
+  const nodeModules = path.join(__dirname, '../../node_modules')
   const packages = fs.readdirSync(nodeModules)
 
   packages.forEach((name) => fs.ensureSymlinkSync(path.join(nodeModules, name), path.join(projectPath, 'node_modules', name)))
 
   const saguiInNodeModules = path.join(projectPath, 'node_modules/sagui/karma-static-files')
   fs.ensureDirSync(saguiInNodeModules)
-  fs.copySync(path.join(__dirname, '../karma-static-files'), saguiInNodeModules)
+  fs.copySync(path.join(__dirname, '../../karma-static-files'), saguiInNodeModules)
 }
 
 describe('[integration] sagui', function () {
-  const projectFixture = path.join(__dirname, '../spec/fixtures/simple-project')
-  const projectContent = path.join(__dirname, '../spec/fixtures/project-content')
+  const projectFixture = path.join(__dirname, '../fixtures/simple-project')
+  const projectContent = path.join(__dirname, '../fixtures/project-content')
   let projectPath, projectSrcPath
 
   beforeEach(function () {
