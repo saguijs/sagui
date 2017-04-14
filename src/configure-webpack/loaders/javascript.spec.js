@@ -17,11 +17,7 @@ describe('javaScript', () => {
     const webpack = loader.configure({ projectPath })
     const excludeCheck = webpack.module.rules[1].exclude
 
-    const srcFile = path.join(projectPath, 'src/index.js')
-    const nodeModulesFile = path.join(projectPath, 'node_modules/batata/index.js')
-
-    expect(excludeCheck(srcFile)).to.eql(null)
-    expect(excludeCheck(nodeModulesFile)).not.to.eql(null)
+    expect(excludeCheck).to.eql(/node_modules/)
   })
 
   it('should include the user defined dependencies to be built', () => {
@@ -42,8 +38,8 @@ describe('javaScript', () => {
     const nodeModulesFile = path.join(projectPath, 'node_modules/batata/index.js')
     const transpiledDependency = path.join(projectPath, 'node_modules/ui-react-components/index.js')
 
-    expect(excludeCheck(srcFile)).to.eql(null)
-    expect(excludeCheck(transpiledDependency)).to.eql(null)
-    expect(excludeCheck(nodeModulesFile)).not.to.eql(null)
+    expect(excludeCheck(srcFile)).to.eql(false)
+    expect(excludeCheck(transpiledDependency)).to.eql(false)
+    expect(excludeCheck(nodeModulesFile)).to.eql(true)
   })
 })

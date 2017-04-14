@@ -93,7 +93,9 @@ export default {
           },
           {
             test: fileExtensions.test.JAVASCRIPT,
-            exclude: buildExcludeCheck(javaScript.transpileDependencies),
+            exclude: javaScript.transpileDependencies && javaScript.transpileDependencies.length > 0
+              ? buildExcludeCheck(javaScript.transpileDependencies)
+              : /node_modules/,
             loader: 'happypack/loader?id=babel'
           }
         ]
@@ -117,7 +119,7 @@ function buildExcludeCheck (transpileDependencies = []) {
     const shouldTranspile = dependencyChecks
       .reduce((result, check) => result || assetPath.match(check), false)
 
-    if (shouldTranspile) { return null }
-    return assetPath.match(/node_modules/)
+    if (shouldTranspile) { return false }
+    return !!assetPath.match(/node_modules/)
   }
 }
