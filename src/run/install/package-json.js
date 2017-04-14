@@ -8,7 +8,7 @@ export default function (projectPath) {
 
   json.write(packagePath, {
     ...packageJSON,
-    scripts: updateNpmScripts(packageJSON.scripts)
+    scripts: updateNpmScripts(packageJSON.scripts),
     browserslist: packageJSON.browserslist || [
       '> 1%',
       'Last 2 versions',
