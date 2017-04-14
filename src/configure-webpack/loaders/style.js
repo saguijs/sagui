@@ -96,12 +96,11 @@ export default {
           options: {
             postcss: {
               plugins: () => [
+                autoprefixer,
+
                 // allow importing values (variables) between css modules
                 // see: https://github.com/css-modules/postcss-modules-values#usage
-                postCSSModulesValues,
-
-                // Support browser prefixes for any browser with greater than 5% markeshare
-                autoprefixer
+                postCSSModulesValues
               ]
             }
           }

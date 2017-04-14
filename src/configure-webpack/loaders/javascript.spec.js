@@ -15,7 +15,9 @@ describe('javaScript', () => {
 
   it('should only build files inside the src folder by default', () => {
     const webpack = loader.configure({ projectPath })
-    expect(webpack.module.rules[1].include).to.eql([path.join(projectPath, 'src')])
+    const excludeCheck = webpack.module.rules[1].exclude
+
+    expect(excludeCheck).to.eql(/node_modules/)
   })
 
   it('should include the user defined dependencies to be built', () => {
@@ -30,9 +32,14 @@ describe('javaScript', () => {
     }
 
     const webpack = loader.configure(config)
-    expect(webpack.module.rules[1].include).to.eql([
-      path.join(projectPath, 'src'),
-      path.join(projectPath, 'node_modules', 'ui-react-components')
-    ])
+    const excludeCheck = webpack.module.rules[1].exclude
+
+    const srcFile = path.join(projectPath, 'src/index.js')
+    const nodeModulesFile = path.join(projectPath, 'node_modules/batata/index.js')
+    const transpiledDependency = path.join(projectPath, 'node_modules/ui-react-components/index.js')
+
+    expect(excludeCheck(srcFile)).to.eql(false)
+    expect(excludeCheck(transpiledDependency)).to.eql(false)
+    expect(excludeCheck(nodeModulesFile)).to.eql(true)
   })
 })

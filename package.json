@@ -20,8 +20,8 @@
     "test": "npm run test:lint && npm run test:unit && npm run test:integration",
     "test:lint": "standard | snazzy",
     "test:lint:fix": "standard --fix",
-    "test:integration": "mocha --timeout 0 --compilers js:babel-register --recursive --reporter spec --fgrep [integration] ./src",
-    "test:unit": "mocha --timeout 0 --compilers js:babel-register --recursive --reporter spec --fgrep [integration] --invert ./src",
+    "test:integration": "mocha --timeout 0 --compilers js:babel-register --recursive --reporter spec ./spec/integration",
+    "test:unit": "mocha --timeout 0 --compilers js:babel-register --recursive --reporter spec ./src",
     "test:unit:watch": "npm run test:unit -- --watch",
     "prepublish": "not-in-install && npm prune && npm test && npm run build || in-install",
     "postinstall": "node ./bin/sagui.js update"
