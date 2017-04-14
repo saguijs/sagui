@@ -6,7 +6,7 @@ import actions from '../../actions'
 
 export default {
   name: 'javaScript',
-  configure ({ action, projectPath, javaScript = {}, coverage }) {
+  configure ({ action, projectPath, javaScript = {}, coverage, browsers }) {
     return {
       plugins: [
         new HappyPack({
@@ -33,7 +33,9 @@ export default {
                     // Unfortunately we are bound to what UglifyJS
                     // currently supports as language features
                     // https://github.com/babel/babel-preset-env#targetsuglify
-                    uglify: true
+                    uglify: true,
+
+                    browsers
                   }
                 }],
                 require.resolve('babel-preset-flow'),

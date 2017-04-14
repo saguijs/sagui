@@ -20,7 +20,7 @@ const defaultConfig = {
  */
 export default {
   name: 'style',
-  configure ({ action, optimize, pages = [], projectPath, style = {} }) {
+  configure ({ action, optimize, pages = [], projectPath, style = {}, browsers }) {
     // Use null-loader during tests
     // for better performance
     if (action === actions.TEST_UNIT) {
@@ -96,7 +96,7 @@ export default {
           options: {
             postcss: {
               plugins: () => [
-                autoprefixer,
+                autoprefixer({ browsers }),
 
                 // allow importing values (variables) between css modules
                 // see: https://github.com/css-modules/postcss-modules-values#usage

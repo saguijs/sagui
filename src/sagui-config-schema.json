@@ -9,6 +9,10 @@
       "description": "https://github.com/saguijs/sagui#additionalwebpackconfig",
       "type": "object"
     },
+    "browsers": {
+      "description": "https://github.com/saguijs/sagui#browsers",
+      "type": "array"
+    },
     "develop": {
       "description": "https://github.com/saguijs/sagui#developproxy",
       "type": "object"

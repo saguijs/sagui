@@ -8,11 +8,6 @@ export default function (projectPath) {
 
   json.write(packagePath, {
     ...packageJSON,
-    scripts: updateNpmScripts(packageJSON.scripts),
-    browserslist: packageJSON.browserslist || [
-      '> 1%',
-      'Last 2 versions',
-      'IE 10'
-    ]
+    scripts: updateNpmScripts(packageJSON.scripts)
   })
 }

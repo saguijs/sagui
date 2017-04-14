@@ -66,6 +66,12 @@ describe('load-project-sagui-config', () => {
       })
     })
 
+    it('browsers', () => {
+      validateConfig({
+        browsers: ['> 1%']
+      })
+    })
+
     it('develop.proxy', () => {
       validateConfig({
         develop: {
