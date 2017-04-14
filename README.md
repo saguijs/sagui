@@ -37,12 +37,9 @@ npm start
 Done! Sagui is an *auto-bootstraping* library, so during the install process (in a fresh npm project) it automatically creates a basic project scaffolding:
 
 ```bash
-├── .babelrc
 ├── .editorconfig
+├── .flowconfig
 ├── .gitignore
-├── node_modules
-│   └── sagui
-├── package.json
 ├── sagui.config.js
 └── src
     ├── index.html
