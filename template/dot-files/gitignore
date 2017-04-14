@@ -1,6 +1,6 @@
-coverage
-node_modules
-npm-debug.log
-dist
 .DS_Store
 .sagui
+coverage
+dist
+node_modules
+npm-debug.log

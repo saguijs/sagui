@@ -1,3 +1,4 @@
+import { expect } from 'chai'
 import fs from 'fs-extra'
 import path from 'path'
 import sagui from '.'
@@ -54,8 +55,19 @@ describe('[integration] sagui', function () {
       return sagui({ projectPath, action: actions.TEST_UNIT, coverage: true })
     })
 
-    it('should have an .npmignore file', () => {
-      fs.readFileSync(path.join(projectPath, '.npmignore'))
+    it('should have the browserslist configuration in package.json', () => {
+      const packageJSON = JSON.parse(fs.readFileSync(path.join(projectPath, 'package.json')))
+      expect(packageJSON.browserslist).to.eql([
+        '> 1%',
+        'Last 2 versions',
+        'IE 10'
+      ])
+    })
+
+    it('should have an .gitignore, .flowconfig and .editorconfig file', () => {
+      fs.readFileSync(path.join(projectPath, '.gitignore'))
+      fs.readFileSync(path.join(projectPath, '.flowconfig'))
+      fs.readFileSync(path.join(projectPath, '.editorconfig'))
     })
 
     describe('once we add content', () => {
