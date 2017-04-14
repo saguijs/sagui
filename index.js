@@ -4,6 +4,10 @@ try {
    */
   module.exports = require('./lib').default
 } catch (e) {
+  console.log('Unable to load compiled code.')
+  console.log(e)
+  console.log('Attempting to load source.')
+
   /**
    * If the compiled code is not available,
    * load from source.
