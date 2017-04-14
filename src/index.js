@@ -6,7 +6,7 @@ import configureWebpack from './configure-webpack'
 import run from './run'
 
 /* eslint no-duplicate-imports: 0 */
-export { MissingPackageJSON, SaguiPath } from './load-project-sagui-config'
+export { MissingPackageJSON, SaguiPath, InvalidSaguiConfig } from './load-project-sagui-config'
 
 const DEFAULT_SAGUI_CONFIG = {
   port: 3000,
@@ -27,18 +27,23 @@ const DEFAULT_SAGUI_CONFIG = {
  * prepare all the required Webpack / Karma configurations
  * and execute the requested action.
  */
-const sagui = (saguiConfig = {}) => {
-  const finalSaguiConfig = {
-    ...DEFAULT_SAGUI_CONFIG,
-    ...saguiConfig,
-    ...loadProjectSaguiConfig(saguiConfig)
+const sagui = (saguiConfig = {}) => new Promise((resolve, reject) => {
+  try {
+    const finalSaguiConfig = {
+      ...DEFAULT_SAGUI_CONFIG,
+      ...saguiConfig,
+      ...loadProjectSaguiConfig(saguiConfig)
+    }
+
+    const webpackConfig = configureWebpack(finalSaguiConfig)
+    const karmaConfig = configureKarma(finalSaguiConfig, webpackConfig)
+
+    run(finalSaguiConfig, webpackConfig, karmaConfig)
+      .then(resolve, reject)
+  } catch (e) {
+    reject(e)
   }
-
-  const webpackConfig = configureWebpack(finalSaguiConfig)
-  const karmaConfig = configureKarma(finalSaguiConfig, webpackConfig)
-
-  return run(finalSaguiConfig, webpackConfig, karmaConfig)
-}
+})
 
 /**
  * Command Line Interface

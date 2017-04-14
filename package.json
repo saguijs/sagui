@@ -22,7 +22,7 @@
     "test:lint:fix": "standard --fix",
     "test:integration": "mocha --timeout 0 --compilers js:babel-register --recursive --reporter spec ./spec/integration",
     "test:unit": "mocha --timeout 0 --compilers js:babel-register --recursive --reporter spec ./src",
-    "test:unit:watch": "npm run test:unit -- --watch",
+    "test:unit:watch": "npm run test:unit -- --watch --watch-extensions json",
     "prepublish": "not-in-install && npm prune && npm test && npm run build || in-install",
     "postinstall": "node ./bin/sagui.js update"
   },
@@ -59,6 +59,7 @@
     "tmp": "0.0.31"
   },
   "dependencies": {
+    "ajv": "^4.11.6",
     "autoprefixer": "^6.7.7",
     "babel-core": "^6.24.0",
     "babel-eslint": "^7.2.1",

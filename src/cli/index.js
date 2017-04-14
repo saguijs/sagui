@@ -1,6 +1,6 @@
 import path from 'path'
 import program from 'commander'
-import sagui, { MissingPackageJSON, SaguiPath } from '../index'
+import sagui, { MissingPackageJSON, SaguiPath, InvalidSaguiConfig } from '../index'
 import { logError, logWarning, log } from '../util/log'
 import actions from '../actions'
 
@@ -21,7 +21,9 @@ const handleError = (e) => {
     return
   }
 
-  if (e) {
+  if (e instanceof InvalidSaguiConfig) {
+    logError(e.message)
+  } else if (e) {
     logError(e.stack || e)
   }
 

@@ -1,6 +1,13 @@
+import Ajv from 'ajv'
 import path from 'path'
 import json from '../util/json'
 import fileExists from '../util/file-exists'
+import schema from './sagui-config-schema'
+
+const ajv = new Ajv({
+  allErrors: true,
+  verbose: true
+})
 
 export default (saguiConfig) => {
   const { projectPath } = saguiConfig
@@ -10,7 +17,7 @@ export default (saguiConfig) => {
   const configPath = path.join(projectPath, 'sagui.config.js')
 
   if (!fileExists(configPath)) { return {} }
-  return require(configPath)
+  return validateConfig(require(configPath))
 }
 
 function sanityCheck (projectPath) {
@@ -21,9 +28,26 @@ function sanityCheck (projectPath) {
   if (packageJSON.name === 'sagui') throw new SaguiPath()
 }
 
+export function validateConfig (saguiConfig) {
+  const isValid = ajv.validate(schema, saguiConfig)
+  if (!isValid) {
+    throw new InvalidSaguiConfig()
+  }
+
+  return saguiConfig
+}
+
 export function MissingPackageJSON () {
   this.name = 'MissingPackageJSON'
   this.message = 'Must be executed in target project\'s package.json path'
+  this.stack = (new Error()).stack
+}
+MissingPackageJSON.prototype = Object.create(Error.prototype)
+MissingPackageJSON.prototype.constructor = MissingPackageJSON
+
+export function InvalidSaguiConfig () {
+  this.name = 'InvalidSaguiConfig'
+  this.message = 'Invalid configuration. Check documentation at https://github.com/saguijs/sagui#configuration.'
   this.stack = (new Error()).stack
 }
 MissingPackageJSON.prototype = Object.create(Error.prototype)

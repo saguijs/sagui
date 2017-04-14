@@ -1,7 +1,7 @@
 import { expect } from 'chai'
 import fs from 'fs-extra'
 import path from 'path'
-import sagui from '../../src'
+import sagui, { InvalidSaguiConfig } from '../../src'
 import actions from '../../src/actions'
 import temp from 'temp'
 
@@ -101,6 +101,21 @@ describe('[integration] sagui', function () {
 
       it('should be possible to test', () => {
         return sagui({ projectPath, action: actions.TEST_UNIT })
+      })
+    })
+
+    describe('project with invalid configuration', () => {
+      const projectWithInvalidConfig = path.join(__dirname, '../fixtures/project-with-invalid-config')
+      beforeEach(function () {
+        fs.copySync(projectWithInvalidConfig, projectPath, { overwrite: true })
+      })
+
+      it('should not be possible to build', () => {
+        return sagui({ projectPath, action: actions.BUILD })
+          .then(
+            () => new Error('It should have failed'),
+            (error) => expect(error).instanceof(InvalidSaguiConfig)
+          )
       })
     })
 

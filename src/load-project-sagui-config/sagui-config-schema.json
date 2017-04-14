@@ -1,0 +1,89 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "additionalKarmaConfig": {
+      "description": "https://github.com/saguijs/sagui#additionalkarmaconfig",
+      "type": "object"
+    },
+    "additionalWebpackConfig": {
+      "description": "https://github.com/saguijs/sagui#additionalwebpackconfig",
+      "type": "object"
+    },
+    "develop": {
+      "description": "https://github.com/saguijs/sagui#developproxy",
+      "type": "object"
+    },
+    "disableLoaders": {
+      "description": "https://github.com/saguijs/sagui#https://github.com/saguijs/sagui#disableloaders",
+      "items": {
+        "enum": [
+          "font",
+          "image",
+          "javaScript",
+          "style",
+          "txt",
+          "video",
+          "yaml"
+        ]
+      },
+      "type": "array"
+    },
+    "javaScript": {
+      "additionalProperties": false,
+      "properties": {
+        "transpileDependencies": {
+          "description": "https://github.com/saguijs/sagui#javascripttranspiledependencies",
+          "type": "array"
+        },
+        "typeCheckAll": {
+          "description": "https://github.com/saguijs/sagui#javascripttypecheckall",
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    },
+    "libraries": {
+      "anyOf": [
+        {
+          "type": "array"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "main": {
+              "type": "string"
+            },
+            "umdName": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      ],
+      "description": "https://github.com/saguijs/sagui#libraries"
+    },
+    "pages": {
+      "description": "https://github.com/saguijs/sagui#pages",
+      "type": "array"
+    },
+    "style": {
+      "additionalProperties": false,
+      "properties": {
+        "cssModules": {
+          "description": "https://github.com/saguijs/sagui#stylecssmodules",
+          "type": "boolean"
+        },
+        "extract": {
+          "description": "https://github.com/saguijs/sagui#styleextract",
+          "type": "boolean"
+        },
+        "sourceMaps": {
+          "description": "https://github.com/saguijs/sagui#stylesourcemaps",
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "object"
+}
