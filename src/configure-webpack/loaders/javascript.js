@@ -7,17 +7,13 @@ import actions from '../../actions'
 export default {
   name: 'javaScript',
   configure ({ action, projectPath, javaScript = {}, coverage }) {
-    const userPaths = (javaScript.transpileDependencies || []).map((dependency) => (
-      path.join(projectPath, 'node_modules', dependency)
-    ))
-
     return {
       plugins: [
         new HappyPack({
           id: 'babel',
           cache: false,
           verbose: false,
-          tempDir: path.join(projectPath, '.sagui/happypack'),
+          tempDir: path.resolve(projectPath, '.sagui/happypack'),
           loaders: [{
             path: 'babel-loader',
             query: {
@@ -97,14 +93,31 @@ export default {
           },
           {
             test: fileExtensions.test.JAVASCRIPT,
-            include: [
-              path.join(projectPath, 'src'),
-              ...userPaths
-            ],
+            exclude: buildExcludeCheck(javaScript.transpileDependencies),
             loader: 'happypack/loader?id=babel'
           }
         ]
       }
     }
+  }
+}
+
+/**
+ * Take into consideration if the user wants any dependency
+ * to be transpiled with Babel and returns an exclude check
+ * function that can be used by Webpack
+ */
+function buildExcludeCheck (transpileDependencies = []) {
+  const dependencyChecks = transpileDependencies.map((dependency) => (
+    new RegExp(`node_modules/${dependency}`)
+  ))
+
+  // see: https://webpack.js.org/configuration/module/#condition
+  return function (assetPath) {
+    const shouldTranspile = dependencyChecks
+      .reduce((result, check) => result || assetPath.match(check), false)
+
+    if (shouldTranspile) { return null }
+    return assetPath.match(/node_modules/)
   }
 }
