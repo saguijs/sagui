@@ -28,6 +28,7 @@ const npmInstall = (projectPath) => {
 describe('[integration] sagui', function () {
   const projectFixture = path.join(__dirname, '../fixtures/simple-project')
   const projectContent = path.join(__dirname, '../fixtures/project-content')
+  const projectContentWithLintErrors = path.join(__dirname, '../fixtures/project-content-with-lint-errors')
   let projectPath, projectSrcPath
 
   beforeEach(function () {
@@ -72,15 +73,48 @@ describe('[integration] sagui', function () {
 
     describe('once we add content', () => {
       beforeEach(function () {
-        fs.copySync(projectContent, projectSrcPath, { clobber: true })
+        fs.copySync(projectContent, projectSrcPath, { overwrite: true })
       })
 
       it('should be possible to build', () => {
         return sagui({ projectPath, action: actions.BUILD })
       })
 
+      it('should be possible to test more files', () => {
+        return sagui({ projectPath, action: actions.TEST_UNIT })
+      })
+
       it('should be possible to keep updating Sagui', () => {
         return sagui({ projectPath, action: actions.UPDATE })
+      })
+    })
+
+    describe('project with transpile dependencies', () => {
+      const projectWithTranspileDependencies = path.join(__dirname, '../fixtures/project-with-transpile-dependencies')
+      beforeEach(function () {
+        fs.copySync(projectWithTranspileDependencies, projectPath, { overwrite: true })
+      })
+
+      it('should be possible to build', () => {
+        return sagui({ projectPath, action: actions.BUILD })
+      })
+
+      it('should be possible to test', () => {
+        return sagui({ projectPath, action: actions.TEST_UNIT })
+      })
+    })
+
+    describe('once we add content with lint errors', () => {
+      beforeEach(function () {
+        fs.copySync(projectContentWithLintErrors, projectSrcPath, { overwrite: true })
+      })
+
+      it('should break the build build', () => {
+        return sagui({ projectPath, action: actions.BUILD })
+          .then(
+            () => new Error('It should have failed'),
+            (error) => expect(error.message).to.eql('Build failed')
+          )
       })
     })
   })
