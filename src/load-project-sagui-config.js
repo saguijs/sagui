@@ -1,7 +1,7 @@
 import Ajv from 'ajv'
 import path from 'path'
-import json from '../util/json'
-import fileExists from '../util/file-exists'
+import json from './util/json'
+import fileExists from './util/file-exists'
 import schema from './sagui-config-schema'
 
 const ajv = new Ajv({

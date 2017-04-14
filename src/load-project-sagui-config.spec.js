@@ -1,4 +1,4 @@
-import { validateConfig } from '.'
+import { validateConfig } from './load-project-sagui-config'
 
 describe('load-project-sagui-config', () => {
   describe('validateConfig', () => {
