@@ -1,6 +1,6 @@
 import path from 'path'
-import json from './util/json'
-import fileExists from './util/file-exists'
+import json from '../util/json'
+import fileExists from '../util/file-exists'
 
 export default (saguiConfig) => {
   const { projectPath } = saguiConfig
