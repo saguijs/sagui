@@ -19,9 +19,9 @@ const loaders = [
 ]
 
 export default (saguiConfig) => {
-  const disabledLoaders = saguiConfig.disabledLoaders || []
+  const disableLoaders = saguiConfig.disableLoaders || []
 
-  return loaders.filter((loader) => disabledLoaders.indexOf(loader.name) === -1)
+  return loaders.filter((loader) => disableLoaders.indexOf(loader.name) === -1)
     .reduce((webpackConfig, loader) => (
       merge.smart(webpackConfig, loader.configure(saguiConfig))
     ), {})

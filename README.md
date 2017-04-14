@@ -126,6 +126,7 @@ Sagui bundles loose lib [interface declarations](https://flowtype.org/docs/decla
 The Sagui configuration is all performed via the single `sagui.config.js` that is bootstraped in the project root folder once Sagui is first installed. At its simplest it could be just:
 
 ```js
+// sagui.config.js
 module.exports = {
   pages: ['index']
 }
@@ -138,6 +139,7 @@ Then we can add extra configuration on top of it:
 These are static **applications** that can be built around multiple pages. Each page is the combination of an `html` and a `js` file.
 
 ```js
+// sagui.config.js
 module.exports = {
   pages: ['index', 'about']
 }
@@ -157,6 +159,7 @@ Create **reusable libraries** that can be shared across applications. Sagui will
 It works similarly to *pages*, allowing a list of "library entry points" to be built. The only difference here is that each library points to a single JavaScript file. Taking the example of a UI toolkit project, it could have the following libraries:
 
 ```js
+// sagui.config.js
 module.exports = {
   libraries: ['button', 'field', 'select']
 }
@@ -200,6 +203,7 @@ When building the project, `react` won't actually be bundled in the output but `
 If you need to build your library targeting UMD, you can use a slightly different configuration. For UMD you need to provide a _umdName_ for the library, which is going to be the name that it will use to add itself to the `window` object when loaded as a global in the browser.
 
 ```js
+// sagui.config.js
 module.exports = {
   libraries: [
     {
@@ -217,6 +221,7 @@ By default, styles compiled with Sagui will be output as [CSS Modules](https://g
 It is possible to disable this behavior and have regular CSS styles:
 
 ```js
+// sagui.config.js
 module.exports = {
   style: {
     cssModules: false
@@ -229,6 +234,7 @@ module.exports = {
 Source maps are never generated for styles, but it is possible to enable it.
 
 ```js
+// sagui.config.js
 module.exports = {
   style: {
     sourceMaps: true
@@ -241,6 +247,7 @@ module.exports = {
 By default, when building **pages**, Sagui [extracts](https://github.com/webpack/extract-text-webpack-plugin) the CSS definitions into separated `.css` files. It is possible to disable this behavior and have the CSS inlined in the same JavaScript bundle.
 
 ```js
+// sagui.config.js
 module.exports = {
   style: {
     extract: false
@@ -253,6 +260,7 @@ module.exports = {
 Dependencies **installed through npm** are not transpiled with Babel by default. If you have a dependency that needs to be transpiled it is very easy, just add its name to the list:
 
 ```js
+// sagui.config.js
 module.exports = {
   javaScript: {
     transpileDependencies: ['dependency-to-be-transpiled']
@@ -265,6 +273,7 @@ module.exports = {
 By default, Flowtype ignores files that don't start with the `// @flow` comment line. If you want all your files to be statically type checked, you can enable that feature in the sagui config:
 
 ```js
+// sagui.config.js
 module.exports = {
   javaScript: {
     typeCheckAll: true
@@ -277,6 +286,7 @@ module.exports = {
 Allow proxying requests to a separate, possible external, backend server.
 
 ```js
+// sagui.config.js
 module.exports = {
   develop: {
     proxy: {
@@ -291,36 +301,20 @@ module.exports = {
 
 Please check [node-http-proxy documentation](https://github.com/nodejitsu/node-http-proxy#options) for the available configuration options.
 
-### `webpack`
+## Escape hatches
 
-If a build requirement can't be achieved via the previous configuration options, first [open an issue](https://github.com/saguijs/sagui/issues) so that we can add official support, and if you can't wait or is something very specific to your project, there is an **escape hatch** to allow extending the internal Webpack configuration.
+If a build requirement can't be achieved via the previous configuration options, first [open an issue](https://github.com/saguijs/sagui/issues) so that we can add official support, and if you can't wait or is something very specific to your project, there is an **escape hatch** to allow extending the internal configurations.
 
-As an example, let's add an extra loader to load HTML files. In the `sagui.config.js` file:
+**These options are for advanced users that are familiar with how Webpack and Karma work.**
 
-```js
-module.exports = {
-  webpack: {
-    module: {
-      loaders: [{
-        test: /\.html$/,
-        loader: 'html'
-      }]
-    }
-  }
-}
-```
+### `disableLoaders`
 
-For more information about configuring Webpack, check the [Webpack documentation](http://webpack.github.io/docs/configuration.html).
-
-For more information on how the merging of Webpack configurations work, check [webpack-merge](https://github.com/survivejs/webpack-merge).
-
-### `disabledLoaders`
-
-Disable internal Sagui loaders in order to implement custom behavior via the `webpack` configuration.
+Disable internal Sagui Webpack loaders in order to implement custom behavior via the `additionalWebpackConfig`.
 
 ```js
+// sagui.config.js
 module.exports = {
-  disabledLoaders: ['yaml']
+  disableLoaders: ['yaml']
 }
 ```
 
@@ -334,21 +328,44 @@ Possible values:
 - `video`
 - `yaml`
 
-### `karma`
 
-If a test automation requirement can't be achieved via the previous configuration options, first [open an issue](https://github.com/saguijs/sagui/issues) so that we can add official support, and if you can't wait or is something very specific to your project, there is an **escape hatch** to allow extending the internal Karma configuration.
+### `additionalWebpackConfig`
+
+Extend the internal Webpack configuration using [webpack-merge](https://github.com/survivejs/webpack-merge).
+
+For example, It is possible to add additional Webpack plugins, like [git-revision-webpack-plugin](https://github.com/pirelenito/git-revision-webpack-plugin) by:
+
+```js
+// sagui.config.js
+var GitRevisionPlugin = require('git-revision-webpack-plugin')
+
+module.exports = {
+  additionalWebpackConfig: {
+    plugins: [
+      new GitRevisionPlugin()
+    ]
+  }
+}
+```
+
+For more information about configuring Webpack, check the [Webpack documentation](https://webpack.js.org/configuration/).
+
+### `additionalKarmaConfig`
+
+Extend the internal Karma configuration.
 
 As an example, let's change the default browser used to execute the tests from *PhantomJS* to *Chrome*. In the `sagui.config.js` file:
 
 ```js
+// sagui.config.js
 module.exports = {
-  karma: {
+  additionalKarmaConfig: {
     browsers: ['Chrome']
   }
 }
 ```
 
-For more information about configuring Karma, check the [Karma documentation](https://karma-runner.github.io/0.13/config/configuration-file.html).
+For more information about configuring Karma, check the [Karma documentation](https://karma-runner.github.io/1.0/config/configuration-file.html).
 
 ## Gotchas
 
@@ -356,10 +373,13 @@ For more information about configuring Karma, check the [Karma documentation](ht
 
 For [`react-router`](https://github.com/ReactTraining/react-router) to work on the development server, an absolute static path for the output has to be configured on Webpack. You can do that by adding this configuration to `sagui.config.js`:
 
-```javascript
-webpack: {
-  output: {
-    publicPath: '/'
+```js
+// sagui.config.js
+module.exports = {
+  additionalWebpackConfig: {
+    output: {
+      publicPath: '/'
+    }
   }
 }
 ```

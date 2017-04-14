@@ -23,7 +23,7 @@ export default (saguiConfig = {}) => {
   const sharedWebpackConfig = merge.smart(
     buildSharedWebpackConfig(sharedSaguiConfig),
     buildLoadersConfig(sharedSaguiConfig),
-    sharedSaguiConfig.webpack
+    sharedSaguiConfig.additionalWebpackConfig
   )
 
   return [

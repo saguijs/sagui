@@ -17,7 +17,7 @@ describe('webpack', function () {
     it('should allow extending the default configuration', function () {
       const saguiConfig = {
         ...baseSaguiConfig,
-        webpack: {
+        additionalWebpackConfig: {
           target: 'electron'
         }
       }
@@ -33,7 +33,7 @@ describe('webpack', function () {
 
       const saguiConfig = {
         ...baseSaguiConfig,
-        webpack: {
+        additionalWebpackConfig: {
           devtool: 'cheap-source-map'
         }
       }
@@ -46,7 +46,7 @@ describe('webpack', function () {
       // disable the default exclude behavior of Babel
       const saguiConfig = {
         ...baseSaguiConfig,
-        webpack: {
+        additionalWebpackConfig: {
           module: {
             loaders: [
               {

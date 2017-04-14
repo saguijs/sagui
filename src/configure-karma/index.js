@@ -4,7 +4,7 @@ import path from 'path'
 export default (saguiConfig = {}, webpackConfig) => {
   return mergeKarma(
     buildStandardKarmaConfig(saguiConfig, webpackConfig),
-    saguiConfig.karma
+    saguiConfig.additionalKarmaConfig
   )
 }
 
