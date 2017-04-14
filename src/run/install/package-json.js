@@ -12,7 +12,7 @@ export default function (projectPath) {
     browserslist: packageJSON.browserslist || [
       '> 1%',
       'Last 2 versions',
-      'IE 10 # sorry'
+      'IE 10'
     ]
   })
 }
