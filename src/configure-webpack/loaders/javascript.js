@@ -111,7 +111,7 @@ export default {
  */
 function buildExcludeCheck (transpileDependencies = []) {
   const dependencyChecks = transpileDependencies.map((dependency) => (
-    new RegExp(`node_modules${path.sep}${dependency}`)
+    new RegExp(`node_modules.${dependency}`)
   ))
 
   // see: https://webpack.js.org/configuration/module/#condition
