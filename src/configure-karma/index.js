@@ -19,7 +19,15 @@ const buildStandardKarmaConfig = (saguiConfig, webpackConfig) => {
 
     basePath: projectPath,
 
-    browsers: ['PhantomJS'],
+    browsers: ['Chrome_headless'],
+
+    // you can define custom flags
+    customLaunchers: {
+      Chrome_headless: {
+        base: 'ChromeCanary',
+        flags: ['--headless', '--remote-debugging-port=9222', 'http://0.0.0.0:9876/']
+      }
+    },
 
     reporters: [
       'mocha',
