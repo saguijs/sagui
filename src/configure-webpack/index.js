@@ -82,6 +82,15 @@ const buildSharedWebpackConfig = (saguiConfig) => {
 
       new DefinePlugin({
         'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+      }),
+
+      // Fixes an issue with colliding CSS Modules
+      // There is an integration test to validate it
+      // see:
+      //  - https://github.com/saguijs/sagui/issues/338
+      //  - https://github.com/webpack-contrib/css-loader/issues/413#issuecomment-283944881
+      new webpack.LoaderOptionsPlugin({
+        context: projectSourcePath,
       })
     ],
 
