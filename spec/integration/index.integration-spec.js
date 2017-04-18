@@ -145,8 +145,8 @@ describe('[integration] sagui', function () {
         return sagui({ projectPath, action: actions.BUILD, optimize: true }).then(() => {
           const dist = require(path.join(projectPath, '/dist/index')).default
 
-          expect(dist.componentA).to.match(/_.{5}/)
-          expect(dist.componentB).to.match(/_.{5}/)
+          expect(dist.componentA).to.match(/^.{5,6}$/)
+          expect(dist.componentB).to.match(/^.{5,6}$/)
           expect(dist.componentA).not.to.eql(dist.componentB)
         })
       })
