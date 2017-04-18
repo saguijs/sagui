@@ -111,7 +111,7 @@ describe('[integration] sagui', function () {
       })
     })
 
-    describe('project with CSS Modules', () => {
+    describe('style loader', () => {
       const projectWithCSSModules = path.join(__dirname, '../fixtures/project-with-css-modules')
       const htmlFile = path.join(__dirname, '../fixtures/index.html')
 
@@ -131,7 +131,7 @@ describe('[integration] sagui', function () {
         delete global.document
       })
 
-      it('should build with the unique keys', () => {
+      it('should build with the unique CSS Modules keys', () => {
         return sagui({ projectPath, action: actions.BUILD }).then(() => {
           const dist = require(path.join(projectPath, '/dist/index')).default
 
