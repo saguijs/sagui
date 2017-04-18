@@ -43,6 +43,8 @@ const buildSharedWebpackConfig = (saguiConfig) => {
   return {
     context: projectSourcePath,
 
+    target: 'web',
+
     devtool: action === actions.BUILD ? 'source-map' : 'inline-source-map',
 
     plugins: [
