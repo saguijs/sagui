@@ -39,6 +39,8 @@ export default {
       }
     }
 
+    const projectSourcePath = path.join(projectPath, 'src')
+
     const config = {
       ...defaultConfig,
       ...style
@@ -92,6 +94,13 @@ export default {
         new webpack.LoaderOptionsPlugin({
           debug: true,
           options: {
+            // Fixes an issue with colliding CSS Modules
+            // There is an integration test to validate it
+            // see:
+            //  - https://github.com/saguijs/sagui/issues/338
+            //  - https://github.com/webpack-contrib/css-loader/issues/413#issuecomment-283944881
+            context: projectSourcePath,
+
             postcss: [
               autoprefixer({ browsers })
             ]
