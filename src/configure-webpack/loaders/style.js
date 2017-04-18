@@ -1,6 +1,5 @@
 import path from 'path'
 import webpack from 'webpack'
-import postCSSModulesValues from 'postcss-modules-values'
 import ExtractTextPlugin from 'extract-text-webpack-plugin'
 import autoprefixer from 'autoprefixer'
 import fileExtensions from '../../file-extensions'
@@ -95,11 +94,7 @@ export default {
           options: {
             postcss: {
               plugins: () => [
-                autoprefixer({ browsers }),
-
-                // allow importing values (variables) between css modules
-                // see: https://github.com/css-modules/postcss-modules-values#usage
-                postCSSModulesValues
+                autoprefixer({ browsers })
               ]
             }
           }
