@@ -92,11 +92,9 @@ export default {
         new webpack.LoaderOptionsPlugin({
           debug: true,
           options: {
-            postcss: {
-              plugins: () => [
-                autoprefixer({ browsers })
-              ]
-            }
+            postcss: [
+              autoprefixer({ browsers })
+            ]
           }
         }),
 

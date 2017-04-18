@@ -140,6 +140,14 @@ describe('[integration] sagui', function () {
           expect(dist.componentA).not.to.eql(dist.componentB)
         })
       })
+
+      it('should autoprefix CSS rules', () => {
+        return sagui({ projectPath, action: actions.BUILD }).then(() => {
+          const dist = fs.readFileSync(path.join(projectPath, '/dist/index.js'))
+
+          expect(dist).to.match(/-ms-flex/)
+        })
+      })
     })
 
     describe('once we add content with lint errors', () => {
