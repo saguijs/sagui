@@ -141,6 +141,16 @@ describe('[integration] sagui', function () {
         })
       })
 
+      it('should build (optimized) with the unique CSS Modules keys', () => {
+        return sagui({ projectPath, action: actions.BUILD, optimize: true }).then(() => {
+          const dist = require(path.join(projectPath, '/dist/index')).default
+
+          expect(dist.componentA).to.match(/_.{5}/)
+          expect(dist.componentB).to.match(/_.{5}/)
+          expect(dist.componentA).not.to.eql(dist.componentB)
+        })
+      })
+
       it('should autoprefix CSS rules', () => {
         return sagui({ projectPath, action: actions.BUILD }).then(() => {
           const dist = fs.readFileSync(path.join(projectPath, '/dist/index.js'))
