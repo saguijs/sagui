@@ -65,9 +65,8 @@ export default {
     // importLoaders: use the following sass-loader in @import statements
     // modules: enable css-modules
     const sassLoaders = [
-      `css-loader?${cssModules}&${sourceMaps}&importLoaders=3&localIdentName=${localIdentName}`,
+      `css-loader?${cssModules}&${sourceMaps}&importLoaders=2&localIdentName=${localIdentName}`,
       'postcss-loader',
-      'resolve-url-loader', // Fixes loading of relative URLs in nested Sass modules
       `sass-loader?${sourceMaps}&outputStyle=expanded&` +
         'includePaths[]=' + (path.resolve(projectPath, './node_modules'))
     ]
