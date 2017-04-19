@@ -14,6 +14,8 @@ It follows an opinionated convention over configuration approach, providing a so
 
 ## Quick start in 3 steps!
 
+[![Join the chat at https://gitter.im/saguijs/sagui](https://badges.gitter.im/saguijs/sagui.svg)](https://gitter.im/saguijs/sagui?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 Let's create a new front-end project from scratch.
 
 **In a new folder**, create a [new npm project](https://docs.npmjs.com/cli/init):
