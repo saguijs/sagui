@@ -1,6 +1,5 @@
 import path from 'path'
 import webpack from 'webpack'
-import postCSSModulesValues from 'postcss-modules-values'
 import ExtractTextPlugin from 'extract-text-webpack-plugin'
 import autoprefixer from 'autoprefixer'
 import fileExtensions from '../../file-extensions'
@@ -40,6 +39,8 @@ export default {
       }
     }
 
+    const projectSourcePath = path.join(projectPath, 'src')
+
     const config = {
       ...defaultConfig,
       ...style
@@ -65,9 +66,8 @@ export default {
     // importLoaders: use the following sass-loader in @import statements
     // modules: enable css-modules
     const sassLoaders = [
-      `css-loader?${cssModules}&${sourceMaps}&importLoaders=3&localIdentName=${localIdentName}`,
+      `css-loader?${cssModules}&${sourceMaps}&importLoaders=2&localIdentName=${localIdentName}`,
       'postcss-loader',
-      'resolve-url-loader', // Fixes loading of relative URLs in nested Sass modules
       `sass-loader?${sourceMaps}&outputStyle=expanded&` +
         'includePaths[]=' + (path.resolve(projectPath, './node_modules'))
     ]
@@ -94,15 +94,16 @@ export default {
         new webpack.LoaderOptionsPlugin({
           debug: true,
           options: {
-            postcss: {
-              plugins: () => [
-                autoprefixer({ browsers }),
+            // Fixes an issue with colliding CSS Modules
+            // There is an integration test to validate it
+            // see:
+            //  - https://github.com/saguijs/sagui/issues/338
+            //  - https://github.com/webpack-contrib/css-loader/issues/413#issuecomment-283944881
+            context: projectSourcePath,
 
-                // allow importing values (variables) between css modules
-                // see: https://github.com/css-modules/postcss-modules-values#usage
-                postCSSModulesValues
-              ]
-            }
+            postcss: [
+              autoprefixer({ browsers })
+            ]
           }
         }),
 

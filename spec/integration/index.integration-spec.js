@@ -1,6 +1,7 @@
 import { expect } from 'chai'
 import fs from 'fs-extra'
 import path from 'path'
+import jsdom from 'jsdom'
 import sagui, { InvalidSaguiConfig } from '../../src'
 import actions from '../../src/actions'
 import temp from 'temp'
@@ -107,6 +108,55 @@ describe('[integration] sagui', function () {
             () => new Error('It should have failed'),
             (error) => expect(error).instanceof(InvalidSaguiConfig)
           )
+      })
+    })
+
+    describe('style loader', () => {
+      const projectWithCSSModules = path.join(__dirname, '../fixtures/project-with-css-modules')
+      const htmlFile = path.join(__dirname, '../fixtures/index.html')
+
+      beforeEach((done) => {
+        fs.copySync(projectWithCSSModules, projectPath, { overwrite: true })
+
+        jsdom.env(htmlFile, (err, window) => {
+          global.window = window
+          global.document = window.document
+          done()
+        });
+      })
+
+      afterEach(() => {
+        global.window.close()
+        delete global.window
+        delete global.document
+      })
+
+      it('should build with the unique CSS Modules keys', () => {
+        return sagui({ projectPath, action: actions.BUILD }).then(() => {
+          const dist = require(path.join(projectPath, '/dist/index')).default
+
+          expect(dist.componentA).to.match(/content-.{5}/)
+          expect(dist.componentB).to.match(/content-.{5}/)
+          expect(dist.componentA).not.to.eql(dist.componentB)
+        })
+      })
+
+      it('should build (optimized) with the unique CSS Modules keys', () => {
+        return sagui({ projectPath, action: actions.BUILD, optimize: true }).then(() => {
+          const dist = require(path.join(projectPath, '/dist/index')).default
+
+          expect(dist.componentA).to.match(/^.{5,6}$/)
+          expect(dist.componentB).to.match(/^.{5,6}$/)
+          expect(dist.componentA).not.to.eql(dist.componentB)
+        })
+      })
+
+      it('should autoprefix CSS rules', () => {
+        return sagui({ projectPath, action: actions.BUILD }).then(() => {
+          const dist = fs.readFileSync(path.join(projectPath, '/dist/index.js'))
+
+          expect(dist).to.match(/-ms-flex/)
+        })
       })
     })
 
