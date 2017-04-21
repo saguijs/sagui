@@ -1,4 +1,5 @@
 import { HotModuleReplacementPlugin } from 'webpack'
+import HappyPack from 'happypack'
 import path from 'path'
 import reactTransform from 'babel-plugin-react-transform'
 import istanbul from 'babel-plugin-istanbul'
@@ -12,13 +13,28 @@ export default {
       path.join(projectPath, 'node_modules', dependency)
     ))
 
-    return {
-      babel: {
-        babelrc: path.join(projectPath, '.babelrc'),
-        plugins: babelPlugins(action, coverage)
-      },
+    // Enable caching and parallel builds
+    const happypack = new HappyPack({
+      id: 'babel',
+      verbose: false,
+      tempDir: '.sagui/.happypack',
+      cachePath: '.sagui/.happypack/cache--[id].json',
+      loaders: [{
+        path: 'babel',
+        query: {
+          babelrc: false,
+          presets: ['sagui'],
+          plugins: babelPlugins(action, coverage),
+          // enabling compact breaks source maps
+          compact: false
+        }
+      }]
+    })
 
-      plugins: action === actions.DEVELOP ? [new HotModuleReplacementPlugin()] : [],
+    return {
+      plugins: action === actions.DEVELOP
+        ? [happypack, new HotModuleReplacementPlugin()]
+        : [happypack],
 
       resolve: {
         extensions: fileExtensions.list.JAVASCRIPT
@@ -32,11 +48,7 @@ export default {
               path.join(projectPath, 'src'),
               ...userPaths
             ],
-            loader: 'babel',
-            query: {
-              // enabling it breaks source maps
-              compact: false
-            }
+            loaders: [ 'happypack/loader?id=babel' ]
           }
         ]
       }

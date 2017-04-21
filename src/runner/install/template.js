@@ -27,7 +27,6 @@ function copyBase (projectPath) {
 }
 
 function copyDotFiles (projectPath) {
-  safeCopy(join(dotFilesPath, 'babelrc'), join(projectPath, '.babelrc'))
   safeCopy(join(dotFilesPath, 'editorconfig'), join(projectPath, '.editorconfig'))
   safeCopy(join(dotFilesPath, 'eslintignore'), join(projectPath, '.eslintignore'))
   safeCopy(join(dotFilesPath, 'eslintrc'), join(projectPath, '.eslintrc'))
