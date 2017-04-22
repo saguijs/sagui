@@ -1,6 +1,7 @@
 import merge from 'webpack-merge'
 
 import font from './font'
+import html from './html'
 import image from './image'
 import javaScript from './javascript'
 import style from './style'
@@ -10,6 +11,7 @@ import yaml from './yaml'
 
 const loaders = [
   font,
+  html,
   image,
   javaScript,
   style,

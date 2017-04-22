@@ -5,6 +5,7 @@ export default {
   test: {
     CSS: /\.css$/,
     EOT: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
+    HTML: /\.html$/,
     IMAGE: /\.(png|jpg|jpeg|gif|svg)$/,
     JAVASCRIPT: /\.(jsx?|es6)$/,
     JSON: /\.(json)$/,
