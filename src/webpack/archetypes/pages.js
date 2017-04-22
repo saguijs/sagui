@@ -7,7 +7,7 @@ import actions from '../../actions'
 export default {
   name: 'pages',
   configure ({ pages = [], action, projectPath }) {
-    if (pages.length === 0 || action === actions.TEST_UNIT) { return {} }
+    if (pages.length === 0 || action === actions.TEST_UNIT || action === actions.TEST_INTEGRATION) { return {} }
 
     const entry = configureEntry(pages)
     const plugins = configurePlugins(pages, action)

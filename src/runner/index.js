@@ -21,6 +21,7 @@ export default (saguiOptions) => {
       return lint(saguiOptions)
 
     case actions.TEST_UNIT:
+    case actions.TEST_INTEGRATION:
       return test(saguiOptions)
 
     case actions.TEST_TYPECHECK:

@@ -75,6 +75,12 @@ program.command('test:unit')
   .option('-c, --coverage', 'Generate a coverage report')
   .action(setupAction('test', [actions.TEST_UNIT]))
 
+program.command('test:integration')
+  .description('Run integration tests')
+  .option('-w, --watch', 'Run integration tests on any file change')
+  .option('-c, --coverage', 'Generate a coverage report')
+  .action(setupAction('test', [actions.TEST_INTEGRATION]))
+
 program.command('test:lint')
   .description('Lint the code')
   .action(setupAction('test', [actions.TEST_LINT]))
