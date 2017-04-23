@@ -15,7 +15,7 @@ describe('buildLoadersConfig', function () {
   it('should allow disabling all loaders', () => {
     const saguiConfig = {
       ...baseSaguiConfig,
-      disableLoaders: ['font', 'image', 'javaScript', 'json', 'style', 'txt', 'video', 'yaml']
+      disableLoaders: ['font', 'html', 'image', 'javaScript', 'json', 'style', 'txt', 'video', 'yaml']
     }
 
     const config = buildLoadersConfig(saguiConfig)
