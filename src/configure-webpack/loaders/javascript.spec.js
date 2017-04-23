@@ -5,11 +5,11 @@ import loader from './javascript'
 describe('javaScript', () => {
   const projectPath = '/tmp/test-project'
 
-  it('should lint the code by using standard', () => {
+  it('should lint the code by using eslint', () => {
     const projectPath = 'a/demo/path'
     const webpack = loader.configure({ projectPath })
 
-    expect(webpack.module.rules[0].loader).to.eql('standard-loader')
+    expect(webpack.module.rules[0].loader).to.eql('eslint-loader')
     expect(webpack.module.rules[0].enforce).to.eql('pre')
   })
 

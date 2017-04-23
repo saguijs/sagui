@@ -81,16 +81,11 @@ export default {
           {
             test: fileExtensions.test.JAVASCRIPT,
             enforce: 'pre',
-            loader: 'standard-loader',
+            loader: 'eslint-loader',
             exclude: /node_modules/,
             options: {
-              env: {
-                jasmine: true
-              },
-              error: action !== actions.DEVELOP && action !== actions.TEST_UNIT,
-              parser: 'babel-eslint',
-              plugins: ['flowtype'],
-              snazzy: true
+              configFile: path.join(__dirname, 'javascript-eslintrc.json'),
+              useEslintrc: false
             }
           },
           {
