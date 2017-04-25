@@ -1,0 +1,19 @@
+{
+  "extends": [
+    "standard",
+    "standard-jsx",
+    "prettier",
+    "prettier/react"
+  ],
+  "plugins": [
+    "flowtype",
+    "import",
+    "react",
+    "standard"
+  ],
+  "env":{
+    "jasmine": true,
+    "browser": true,
+    "es6": true
+  }
+}
