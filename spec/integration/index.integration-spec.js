@@ -125,7 +125,7 @@ describe('[integration] sagui', function () {
       it('should fail at type check', () => {
         return sagui({ projectPath, action: actions.TEST_TYPECHECK })
           .then(
-            () => new Error('It should have failed'),
+            () => { throw new Error('It should have failed') },
             (error) => expect(error.message).to.eql('Type check failed')
           )
       })
@@ -140,7 +140,7 @@ describe('[integration] sagui', function () {
       it('should not be possible to build', () => {
         return sagui({ projectPath, action: actions.BUILD })
           .then(
-            () => new Error('It should have failed'),
+            () => { throw new Error('It should have failed') },
             (error) => expect(error).instanceof(InvalidSaguiConfig)
           )
       })
