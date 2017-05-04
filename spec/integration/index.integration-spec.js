@@ -208,6 +208,7 @@ describe('[integration] sagui', function () {
       beforeEach(function () {
         fs.copySync(projectContentWithPrettierErrors, projectSrcPath, { overwrite: true })
         console.log('projectSrcPath', projectSrcPath)
+        console.log('content', fs.readFileSync(path.join(projectSrcPath, '/index.js')).toString())
       })
 
       it('should break the build', () => {
