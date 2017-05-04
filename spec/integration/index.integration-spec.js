@@ -96,6 +96,21 @@ describe('[integration] sagui', function () {
       })
     })
 
+    describe('project with type definitions', () => {
+      const projectContentWithTypes = path.join(__dirname, '../fixtures/project-content-with-types')
+      beforeEach(function () {
+        fs.copySync(projectContentWithTypes, projectSrcPath, { overwrite: true })
+      })
+
+      it('should be possible to build', () => {
+        return sagui({ projectPath, action: actions.BUILD })
+      })
+
+      it('should be possible to type check', () => {
+        return sagui({ projectPath, action: actions.TEST_TYPECHECK })
+      })
+    })
+
     describe('project with invalid configuration', () => {
       const projectWithInvalidConfig = path.join(__dirname, '../fixtures/project-with-invalid-config')
       beforeEach(function () {
