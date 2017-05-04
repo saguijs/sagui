@@ -43,6 +43,8 @@ const sagui = (saguiConfig = {}) => new Promise((resolve, reject) => {
     const webpackConfig = configureWebpack(finalSaguiConfig)
     const karmaConfig = configureKarma(finalSaguiConfig, webpackConfig)
 
+    console.log('webpack', JSON.stringify(webpackConfig))
+
     run(finalSaguiConfig, webpackConfig, karmaConfig)
       .then(resolve, reject)
   } catch (e) {
