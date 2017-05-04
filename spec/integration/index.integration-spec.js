@@ -30,6 +30,7 @@ describe('[integration] sagui', function () {
   const projectFixture = path.join(__dirname, '../fixtures/simple-project')
   const projectContent = path.join(__dirname, '../fixtures/project-content')
   const projectContentWithLintErrors = path.join(__dirname, '../fixtures/project-content-with-lint-errors')
+  const projectContentWithPrettierErrors = path.join(__dirname, '../fixtures/project-content-with-prettier-errors')
   let projectPath, projectSrcPath
 
   beforeEach(function () {
@@ -124,7 +125,7 @@ describe('[integration] sagui', function () {
       it('should fail at type check', () => {
         return sagui({ projectPath, action: actions.TEST_TYPECHECK })
           .then(
-            () => new Error('It should have failed'),
+            () => { throw new Error('It should have failed') },
             (error) => expect(error.message).to.eql('Type check failed')
           )
       })
@@ -139,7 +140,7 @@ describe('[integration] sagui', function () {
       it('should not be possible to build', () => {
         return sagui({ projectPath, action: actions.BUILD })
           .then(
-            () => new Error('It should have failed'),
+            () => { throw new Error('It should have failed') },
             (error) => expect(error).instanceof(InvalidSaguiConfig)
           )
       })
@@ -199,10 +200,24 @@ describe('[integration] sagui', function () {
         fs.copySync(projectContentWithLintErrors, projectSrcPath, { overwrite: true })
       })
 
-      it('should break the build build', () => {
+      it('should break the build', () => {
         return sagui({ projectPath, action: actions.BUILD })
           .then(
-            () => new Error('It should have failed'),
+            () => { throw new Error('It should have failed') },
+            (error) => expect(error.message).to.eql('Build failed')
+          )
+      })
+    })
+
+    describe('once we add content with prettier errors', () => {
+      beforeEach(function () {
+        fs.copySync(projectContentWithPrettierErrors, projectSrcPath, { overwrite: true })
+      })
+
+      it('should break the build', () => {
+        return sagui({ projectPath, action: actions.BUILD })
+          .then(
+            () => { throw new Error('It should have failed') },
             (error) => expect(error.message).to.eql('Build failed')
           )
       })
