@@ -16,11 +16,6 @@ temp.track()
  * and copies the require Sagui files.
  */
 const npmInstall = (projectPath) => {
-  const nodeModules = path.join(__dirname, '../../node_modules')
-  const packages = fs.readdirSync(nodeModules)
-
-  packages.forEach((name) => fs.ensureSymlinkSync(path.join(nodeModules, name), path.join(projectPath, 'node_modules', name)))
-
   const saguiInNodeModules = path.join(projectPath, 'node_modules/sagui/karma-static-files')
   fs.ensureDirSync(saguiInNodeModules)
   fs.copySync(path.join(__dirname, '../../karma-static-files'), saguiInNodeModules)
