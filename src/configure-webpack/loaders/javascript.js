@@ -7,6 +7,9 @@ import actions from '../../actions'
 export default {
   name: 'javaScript',
   configure ({ action, projectPath, javaScript = {}, coverage, browsers }) {
+
+    console.log('ESLINT_CONFIG_PATH', path.join(__dirname, 'javascript-eslintrc.json'))
+
     return {
       plugins: [
         new HappyPack({

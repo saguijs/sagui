@@ -209,9 +209,10 @@ describe('[integration] sagui', function () {
       })
     })
 
-    describe('once we add content with prettier errors', () => {
+    describe.only('once we add content with prettier errors', () => {
       beforeEach(function () {
         fs.copySync(projectContentWithPrettierErrors, projectSrcPath, { overwrite: true })
+        console.log('projectSrcPath', projectSrcPath)
       })
 
       it('should break the build', () => {
