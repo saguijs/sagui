@@ -9,12 +9,21 @@
   "plugins": [
     "flowtype",
     "import",
+    "prettify",
     "react",
     "standard"
   ],
-  "env":{
+  "env": {
     "jasmine": true,
     "browser": true,
     "es6": true
+  },
+  "rules": {
+    "prettify/prettier": [ 2, {
+      "singleQuote": true,
+      "parser": "flow",
+      "semi": false,
+      "printWidth": 100
+    } ]
   }
 }

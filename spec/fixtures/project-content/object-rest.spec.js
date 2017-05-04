@@ -1,7 +1,7 @@
 import objectRest from './object-rest'
 
-describe('super test', function () {
-  it('should work', function () {
+describe('super test', function() {
+  it('should work', function() {
     expect(objectRest).toEqual({
       x: 1,
       y: 2,
