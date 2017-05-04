@@ -21,6 +21,7 @@
     "test:lint": "standard | snazzy",
     "test:lint:fix": "standard --fix",
     "test:integration": "mocha --timeout 0 --compilers js:babel-register --recursive --reporter spec ./spec/integration",
+    "test:integration:watch": "npm run test:integration -- --watch",
     "test:unit": "mocha --timeout 0 --compilers js:babel-register --recursive --reporter spec ./src",
     "test:unit:watch": "npm run test:unit -- --watch --watch-extensions json",
     "prepublish": "not-in-install && npm prune && npm test && npm run build || in-install",
