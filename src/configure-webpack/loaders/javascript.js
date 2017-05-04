@@ -87,7 +87,8 @@ export default {
             loader: 'eslint-loader',
             options: {
               configFile: path.join(__dirname, 'javascript-eslintrc.json'),
-              useEslintrc: false
+              useEslintrc: false,
+              cwd: projectPath
             }
           },
           {
