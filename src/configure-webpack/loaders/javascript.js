@@ -7,10 +7,28 @@ import actions from '../../actions'
 export default {
   name: 'javaScript',
   configure ({ action, projectPath, javaScript = {}, coverage, browsers }) {
+    var threadPool = HappyPack.ThreadPool({ size: 3 })
+
     return {
       plugins: [
         new HappyPack({
+          id: 'eslint',
+          threadPool,
+          cache: false,
+          verbose: false,
+          tempDir: path.resolve(projectPath, '.sagui/happypack'),
+          loaders: [{
+            path: 'eslint-loader',
+            query: {
+              configFile: path.join(__dirname, 'javascript-eslintrc.json'),
+              useEslintrc: false,
+              cwd: projectPath
+            }
+          }]
+        }),
+        new HappyPack({
           id: 'babel',
+          threadPool,
           cache: false,
           verbose: false,
           tempDir: path.resolve(projectPath, '.sagui/happypack'),
@@ -81,13 +99,8 @@ export default {
           {
             test: fileExtensions.test.JAVASCRIPT,
             enforce: 'pre',
-            loader: 'eslint-loader',
             exclude: /node_modules/,
-            options: {
-              configFile: path.join(__dirname, 'javascript-eslintrc.json'),
-              useEslintrc: false,
-              cwd: projectPath
-            }
+            loader: 'happypack/loader?id=eslint'
           },
           {
             test: fileExtensions.test.JAVASCRIPT,

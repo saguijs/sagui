@@ -9,7 +9,7 @@ describe('javaScript', () => {
     const projectPath = 'a/demo/path'
     const webpack = loader.configure({ projectPath })
 
-    expect(webpack.module.rules[0].loader).to.eql('eslint-loader')
+    expect(webpack.module.rules[0].loader).to.eql('happypack/loader?id=eslint')
     expect(webpack.module.rules[0].enforce).to.eql('pre')
   })
 
