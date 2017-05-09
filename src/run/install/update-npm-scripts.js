@@ -10,7 +10,7 @@ import uniq from 'lodash.uniq'
  */
 const saguiScripts = {
   'format': [
-    'sagui format',
+    'sagui format'
   ],
   'build': [
     'sagui build'
