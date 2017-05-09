@@ -54,5 +54,5 @@ if (process.env.TEST_TYPE === 'test_create_project_yarn') {
   exec('yarn test', yarnProjectPath)
   exec('yarn run build', yarnProjectPath)
   exec('yarn run dist', yarnProjectPath)
-  exec('yarn run format', npmProjectPath)
+  exec('yarn run format', yarnProjectPath)
 }
