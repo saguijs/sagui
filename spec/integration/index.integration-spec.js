@@ -1,3 +1,4 @@
+import 'babel-polyfill'
 import { expect } from 'chai'
 import fs from 'fs-extra'
 import path from 'path'
@@ -220,6 +221,11 @@ describe('[integration] sagui', function () {
             () => { throw new Error('It should have failed') },
             (error) => expect(error.message).to.eql('Build failed')
           )
+      })
+
+      it('should be possible to format it and remove the errors', async () => {
+        await sagui({ projectPath, action: actions.FORMAT })
+        await sagui({ projectPath, action: actions.BUILD })
       })
     })
   })

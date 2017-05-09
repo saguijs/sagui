@@ -1,4 +1,5 @@
 export default {
+  FORMAT: 'format',
   BUILD: 'build',
   DEVELOP: 'develop',
   UPDATE: 'update',

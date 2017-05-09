@@ -53,6 +53,10 @@ const setupAction = (NODE_ENV, actionsToRun, options = {}) => (cliOptions = {}) 
     .then(() => process.exit(0), handleError)
 }
 
+program.command('format')
+  .description('Format the source code')
+  .action(setupAction('development', [actions.FORMAT]))
+
 program.command('develop')
   .description('Run development environment')
   .option('-p, --port <n>', 'Port the server will listen (default: 3000)', parseInt)

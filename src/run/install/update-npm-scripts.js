@@ -9,6 +9,9 @@ import uniq from 'lodash.uniq'
  * of the list.
  */
 const saguiScripts = {
+  'format': [
+    'sagui format',
+  ],
   'build': [
     'sagui build'
   ],
