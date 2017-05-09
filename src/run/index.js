@@ -4,9 +4,13 @@ import developmentServer from './development-server'
 import install from './install'
 import test from './test'
 import typecheck from './typecheck'
+import format from './format'
 
 export default (saguiConfig, webpackConfig, karmaConfig) => {
   switch (saguiConfig.action) {
+    case actions.FORMAT:
+      return format(saguiConfig)
+
     case actions.BUILD:
       return build(saguiConfig, webpackConfig)
 

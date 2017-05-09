@@ -4,6 +4,7 @@ import updateNpmScripts from './update-npm-scripts'
 const CURRENT_SCRIPTS = {
   'build': 'sagui build',
   'dist': 'sagui dist',
+  'format': 'sagui format',
   'start': 'sagui develop --port 3000',
   'test': 'sagui test',
   'test:typecheck': 'sagui test:typecheck',
@@ -59,6 +60,7 @@ describe('updateNpmScripts', function () {
       const expectedScripts = [
         'build',
         'dist',
+        'format',
         'start',
         'test',
         'test:typecheck',
@@ -79,6 +81,7 @@ describe('updateNpmScripts', function () {
       const expectedScripts = [
         'build',
         'dist',
+        'format',
         'start',
         'test',
         'test:coverage',
@@ -101,6 +104,7 @@ describe('updateNpmScripts', function () {
       const expectedScripts = [
         'build',
         'dist',
+        'format',
         'my-weird-script',
         'start',
         'test',
