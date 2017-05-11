@@ -8,7 +8,7 @@ export default function (projectPath) {
   const packageJSON = json.read(packagePath)
 
   const newScripts = updateNpmScripts(packageJSON.scripts)
-  if (deepEqual(newScripts, packageJSON.scripts)) {
+  if (!deepEqual(newScripts, packageJSON.scripts)) {
     json.write(packagePath, {
       ...packageJSON,
       scripts: newScripts
