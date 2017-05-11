@@ -14,7 +14,7 @@ temp.track()
  * Simulate a complete install of Sagui in a target folder.
  *
  * It symlinks all the dependencies in place
- * and copies the require Sagui files.
+ * and copies the required Sagui files.
  */
 const npmInstall = (projectPath) => {
   const nodeModules = path.join(__dirname, '../../node_modules')
@@ -63,6 +63,16 @@ describe('[integration] sagui', function () {
       fs.readFileSync(path.join(projectPath, '.gitignore'))
       fs.readFileSync(path.join(projectPath, '.flowconfig'))
       fs.readFileSync(path.join(projectPath, '.editorconfig'))
+    })
+
+    it('should add sagui scripts to the project', () => {
+      expect(JSON.parse(fs.readFileSync(path.join(projectPath, 'package.json'))).scripts.build).eql('sagui build')
+    })
+
+    it('should not try to re-write packageJSON on new updates if content is the same', () => {
+      // make the package.json read only
+      fs.chmodSync(path.join(projectPath, 'package.json'), '0444')
+      return sagui({ projectPath, action: actions.UPDATE })
     })
 
     describe('once we add content', () => {
