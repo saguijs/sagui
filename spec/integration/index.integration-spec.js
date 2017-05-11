@@ -70,6 +70,7 @@ describe('[integration] sagui', function () {
     })
 
     it('should not try to re-write packageJSON on new updates if content is the same', () => {
+      // make the package.json read only
       fs.chmodSync(path.join(projectPath, 'package.json'), '0444')
       return sagui({ projectPath, action: actions.UPDATE })
     })
