@@ -6,8 +6,12 @@ export default function (projectPath) {
   const packagePath = path.join(projectPath, 'package.json')
   const packageJSON = json.read(packagePath)
 
-  json.write(packagePath, {
-    ...packageJSON,
-    scripts: updateNpmScripts(packageJSON.scripts)
-  })
+  const newScripts = updateNpmScripts(packageJSON.scripts)
+  const scriptsNeedsToBeUpdated = JSON.stringify(newScripts) !== JSON.stringify(packageJSON.scripts)
+  if (scriptsNeedsToBeUpdated) {
+    json.write(packagePath, {
+      ...packageJSON,
+      scripts: newScripts
+    })
+  }
 }
