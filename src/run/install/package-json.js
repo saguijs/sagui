@@ -1,4 +1,5 @@
 import path from 'path'
+import deepEqual from 'deep-equal'
 import updateNpmScripts from './update-npm-scripts'
 import json from '../../util/json'
 
@@ -7,8 +8,7 @@ export default function (projectPath) {
   const packageJSON = json.read(packagePath)
 
   const newScripts = updateNpmScripts(packageJSON.scripts)
-  const scriptsNeedsToBeUpdated = JSON.stringify(newScripts) !== JSON.stringify(packageJSON.scripts)
-  if (scriptsNeedsToBeUpdated) {
+  if (deepEqual(newScripts, packageJSON.scripts)) {
     json.write(packagePath, {
       ...packageJSON,
       scripts: newScripts
