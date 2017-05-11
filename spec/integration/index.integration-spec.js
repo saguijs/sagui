@@ -65,6 +65,10 @@ describe('[integration] sagui', function () {
       fs.readFileSync(path.join(projectPath, '.editorconfig'))
     })
 
+    it('should add sagui scripts to the project', () => {
+      expect(JSON.parse(fs.readFileSync(path.join(projectPath, 'package.json'))).scripts.build).eql('sagui build')
+    })
+
     it('should not try to re-write packageJSON on new updates if content is the same', () => {
       fs.chmodSync(path.join(projectPath, 'package.json'), '0444')
       return sagui({ projectPath, action: actions.UPDATE })
