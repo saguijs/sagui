@@ -55,6 +55,10 @@ describe('[integration] sagui', function () {
       return sagui({ projectPath, action: actions.TEST_UNIT })
     })
 
+    it('should be possible to lint', () => {
+      return sagui({ projectPath, action: actions.TEST_LINT })
+    })
+
     it('should be possible to test (with coverage)', () => {
       return sagui({ projectPath, action: actions.TEST_UNIT, coverage: true })
     })
@@ -218,6 +222,14 @@ describe('[integration] sagui', function () {
             (error) => expect(error.message).to.eql('Build failed')
           )
       })
+
+      it('should break the linter', () => {
+        return sagui({ projectPath, action: actions.TEST_LINT })
+          .then(
+            () => { throw new Error('It should have failed') },
+            (error) => expect(error.message).to.eql('Lint failed')
+          )
+      })
     })
 
     describe('once we add content with prettier errors', () => {
@@ -230,6 +242,14 @@ describe('[integration] sagui', function () {
           .then(
             () => { throw new Error('It should have failed') },
             (error) => expect(error.message).to.eql('Build failed')
+          )
+      })
+
+      it('should break the linter', () => {
+        return sagui({ projectPath, action: actions.TEST_LINT })
+          .then(
+            () => { throw new Error('It should have failed') },
+            (error) => expect(error.message).to.eql('Lint failed')
           )
       })
 

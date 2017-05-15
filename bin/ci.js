@@ -35,6 +35,7 @@ if (process.env.TEST_TYPE === 'test_create_project_npm') {
 
   // # Run some basic scripts
   exec('npm test', npmProjectPath)
+  exec('npm run test:lint', npmProjectPath)
   exec('npm run build', npmProjectPath)
   exec('npm run dist', npmProjectPath)
   exec('npm run format', npmProjectPath)
@@ -52,6 +53,7 @@ if (process.env.TEST_TYPE === 'test_create_project_yarn') {
 
   // # Run some basic scripts
   exec('yarn test', yarnProjectPath)
+  exec('yarn run test:lint', yarnProjectPath)
   exec('yarn run build', yarnProjectPath)
   exec('yarn run dist', yarnProjectPath)
   exec('yarn run format', yarnProjectPath)

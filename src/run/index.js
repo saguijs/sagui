@@ -2,6 +2,7 @@ import actions from '../actions'
 import build from './build'
 import developmentServer from './development-server'
 import install from './install'
+import lint from './lint'
 import test from './test'
 import typecheck from './typecheck'
 import format from './format'
@@ -19,6 +20,9 @@ export default (saguiConfig, webpackConfig, karmaConfig) => {
 
     case actions.UPDATE:
       return install(saguiConfig)
+
+    case actions.TEST_LINT:
+      return lint(saguiConfig)
 
     case actions.TEST_UNIT:
       return test(karmaConfig)

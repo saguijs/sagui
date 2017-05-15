@@ -42,7 +42,8 @@ const saguiScripts = {
   'test:lint': [
     'sagui lint',
     'sagui test:lint',
-    undefined
+    undefined,
+    'sagui test:lint'
   ],
   'test:typecheck': [
     'sagui typecheck',
