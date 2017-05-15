@@ -114,9 +114,23 @@ By default Sagui uses [PhantomJS](http://phantomjs.org/) to run the tests headle
 
 To open the tests in a browser (or in multiple browsers!), simply follow the link Karma outputs when you start running the script `test:unit:watch`. Running them in a browser allows you to set breakpoints and debug your code properly. Note watch mode is necessary, else tests will stop running when finished.
 
-#### Linting
+#### Code formatting
 
-Static code analysis is also performed on the code following the [JavaScript Standard Style](http://standardjs.com/) convention.
+We expect the code to be formatted using [prettier](https://github.com/prettier/prettier). You can do that by running:
+
+```bash
+npm run format
+```
+
+It is recommended that you install the [prettier plugin](https://atom.io/packages/prettier-atom) in your editor of choice with the configuration:
+
+- singleQuote: `true`
+- parser: `babylon`
+- semi: `false`
+- printWidth: `100`
+- trailingComma: `es5`
+
+Prettier is combined with the [JavaScript Standard Style](http://standardjs.com/) convention to check for common errors in the code.
 
 #### Static type checking
 
