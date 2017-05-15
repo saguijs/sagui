@@ -7,6 +7,7 @@ const CURRENT_SCRIPTS = {
   'format': 'sagui format',
   'start': 'sagui develop --port 3000',
   'test': 'sagui test',
+  'test:lint': 'sagui test:lint',
   'test:typecheck': 'sagui test:typecheck',
   'test:unit': 'sagui test:unit --coverage',
   'test:unit:watch': 'sagui test:unit --watch'
@@ -63,6 +64,7 @@ describe('updateNpmScripts', function () {
         'format',
         'start',
         'test',
+        'test:lint',
         'test:typecheck',
         'test:unit',
         'test:unit:watch'
@@ -85,6 +87,7 @@ describe('updateNpmScripts', function () {
         'start',
         'test',
         'test:coverage',
+        'test:lint',
         'test:typecheck',
         'test:unit',
         'test:unit:watch'
@@ -108,6 +111,7 @@ describe('updateNpmScripts', function () {
         'my-weird-script',
         'start',
         'test',
+        'test:lint',
         'test:typecheck',
         'test:unit',
         'test:unit:watch'

@@ -16,7 +16,7 @@
     "template"
   ],
   "scripts": {
-    "build": "rm -rf lib && babel src --out-dir lib --ignore *.spec.js && cp src/sagui-config-schema.json lib/sagui-config-schema.json && cp src/configure-webpack/loaders/javascript-eslintrc.json lib/configure-webpack/loaders/javascript-eslintrc.json",
+    "build": "rm -rf lib && babel src --out-dir lib --ignore *.spec.js && cp src/sagui-config-schema.json lib/sagui-config-schema.json && cp src/javascript-eslintrc.json lib/javascript-eslintrc.json",
     "test": "npm run test:lint && npm run test:unit && npm run test:integration",
     "test:lint": "standard | snazzy",
     "test:lint:fix": "standard --fix",
