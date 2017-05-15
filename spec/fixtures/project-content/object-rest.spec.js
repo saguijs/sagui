@@ -6,7 +6,7 @@ describe('super test', function() {
       x: 1,
       y: 2,
       z: { a: 3, b: 4 },
-      n: { x: 1, y: 2, a: 3, b: 4 }
+      n: { x: 1, y: 2, a: 3, b: 4 },
     })
   })
 })

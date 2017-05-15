@@ -23,7 +23,8 @@
       "singleQuote": true,
       "parser": "flow",
       "semi": false,
-      "printWidth": 100
+      "printWidth": 100,
+      "trailingComma": "es5"
     } ]
   }
 }
