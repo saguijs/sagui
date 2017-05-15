@@ -56,7 +56,7 @@ Sagui manages the [package.json](https://docs.npmjs.com/files/package.json) scri
 
 - `npm run build`: build a development version of the project;
 - `npm run dist`: build an optimized (ready for deployment) version of the project;
-- `npm run start`: spin up a development server with live-reload and [HMR](http://webpack.github.io/docs/hot-module-replacement.html);
+- `npm run start`: spin up a development server with live-reload and [HMR](https://webpack.js.org/concepts/hot-module-replacement/);
 - `npm run format`: automatically format the code using [prettier](https://github.com/prettier/prettier);
 - `npm run test`: run all test related scripts below;
 - `npm run test:lint`: run static analysis in the code;
@@ -78,7 +78,7 @@ The development server out-of-the-box has live reloading and **hot-module replac
 
 ### Build
 
-Sagui uses [Webpack](http://webpack.github.io/) as its underlying bundling tool. The biggest feature that Webpack provides is that everything is a module. Sagui supports the following module types by default:
+Sagui uses [Webpack](https://webpack.js.org/) as its underlying bundling tool. The biggest feature that Webpack provides is that everything is a module. Sagui supports the following module types by default:
 
 - Fonts (`.woff`, `.woff2`, `.ttf`, `.eot`, `.otf`)
 - HTML (`.html`)
@@ -93,7 +93,7 @@ Sagui uses [Webpack](http://webpack.github.io/) as its underlying bundling tool.
 During build, optimizations and special processing are also performed in the output bundle:
 
 - [Autoprefixer for CSS properties](https://github.com/postcss/autoprefixer) for cross-browser support;
-- [Commons code splitting](https://webpack.github.io/docs/list-of-plugins.html#commonschunkplugin) if there is more than a single entry-point;
+- [Commons code splitting](https://webpack.js.org/plugins/commons-chunk-plugin/) if there is more than a single entry-point;
 - [Extract styles as separated files](https://github.com/webpack/extract-text-webpack-plugin) to style the page before the JavaScript is loaded and parsed;
 - Minification and code dedupication.
 
