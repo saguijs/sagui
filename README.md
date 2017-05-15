@@ -116,13 +116,13 @@ To open the tests in a browser (or in multiple browsers!), simply follow the lin
 
 #### Code formatting
 
-We expect the code to be formatted using [prettier](https://github.com/prettier/prettier). You can do that by running:
+We expect the code to be formatted using [prettier](https://github.com/prettier/prettier). Sagui has a script that can apply the expected code format for you, simply run:
 
 ```bash
 npm run format
 ```
 
-It is recommended that you install the [prettier plugin](https://atom.io/packages/prettier-atom) in your editor of choice with the configuration:
+To get the code formatted automatically for you, it is recommended that you install the [prettier plugin](https://atom.io/packages/prettier-atom) in your editor of choice with the same configuration that is used by Sagui:
 
 - singleQuote: `true`
 - parser: `babylon`
