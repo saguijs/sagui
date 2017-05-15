@@ -2,7 +2,7 @@ import prettier from 'prettier'
 import glob from 'glob'
 import path from 'path'
 import fs from 'fs'
-import eslintConfig from '../configure-webpack/loaders/javascript-eslintrc.json'
+import eslintConfig from '../javascript-eslintrc.json'
 
 const prettierOptions = eslintConfig.rules['prettify/prettier'][1]
 

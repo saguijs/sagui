@@ -7,7 +7,7 @@ export default (saguiConfig) => new Promise((resolve, reject) => {
 
   const cli = new eslint.CLIEngine({
     cwd: projectPath,
-    configFile: path.join(__dirname, '../configure-webpack/loaders/javascript-eslintrc.json'),
+    configFile: path.join(__dirname, '../javascript-eslintrc.json'),
     useEslintrc: false
   })
 
