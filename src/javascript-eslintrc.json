@@ -21,7 +21,7 @@
   "rules": {
     "prettify/prettier": [ 2, {
       "singleQuote": true,
-      "parser": "flow",
+      "parser": "babylon",
       "semi": false,
       "printWidth": 100,
       "trailingComma": "es5"
