@@ -161,6 +161,29 @@ describe('[integration] sagui', function () {
       })
     })
 
+    describe('project with existing gitignore', () => {
+      const projectWithExistingGitignore = path.join(__dirname, '../fixtures/project-with-existing-gitignore')
+      beforeEach(function () {
+        fs.copySync(projectWithExistingGitignore, projectPath, { overwrite: true })
+      })
+
+      it('should update the content of the .gitignore file', () => {
+        return sagui({ projectPath, action: actions.UPDATE })
+          .then(
+            () => {
+              const gitignoreContent = fs.readFileSync(path.join(projectPath, '.gitignore')).toString()
+
+              expect(gitignoreContent).to.eql(`batata
+.DS_Store
+.sagui
+coverage
+dist
+node_modules
+npm-debug.log`)
+            })
+      })
+    })
+
     describe('style loader', () => {
       const projectWithCSSModules = path.join(__dirname, '../fixtures/project-with-css-modules')
       const htmlFile = path.join(__dirname, '../fixtures/index.html')
