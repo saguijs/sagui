@@ -27,8 +27,9 @@ export default saguiConfig =>
           .filter(([file, original, formatted]) => {
             const changed = original.indexOf(formatted)
             const color = changed ? chalk.green : chalk.dim
+            const relativePath = path.relative(saguiConfig.projectPath, file)
 
-            console.log(color(file.replace(`${saguiConfig.projectPath}`, '')))
+            console.log(color(relativePath))
             return changed
           })
 
