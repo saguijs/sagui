@@ -1,6 +1,6 @@
 {
   "name": "sagui",
-  "version": "9.0.0-rc.13",
+  "version": "9.0.0-rc.15",
   "description": "Front-end tooling in a single dependency",
   "preferGlobal": false,
   "bin": {
@@ -16,7 +16,7 @@
     "template"
   ],
   "scripts": {
-    "build": "rm -rf lib && babel src --out-dir lib --ignore *.spec.js && cp src/sagui-config-schema.json lib/sagui-config-schema.json && cp src/configure-webpack/loaders/javascript-eslintrc.json lib/configure-webpack/loaders/javascript-eslintrc.json",
+    "build": "rm -rf lib && babel src --out-dir lib --ignore *.spec.js && cp src/sagui-config-schema.json lib/sagui-config-schema.json && cp src/javascript-eslintrc.json lib/javascript-eslintrc.json",
     "test": "npm run test:lint && npm run test:unit && npm run test:integration",
     "test:lint": "standard | snazzy",
     "test:lint:fix": "standard --fix",
@@ -79,6 +79,7 @@
     "clean-webpack-plugin": "^0.1.16",
     "commander": "^2.9.0",
     "css-loader": "^0.28.0",
+    "deep-equal": "^1.0.1",
     "eslint": "^3.19.0",
     "eslint-config-prettier": "^1.7.0",
     "eslint-loader": "^1.7.1",

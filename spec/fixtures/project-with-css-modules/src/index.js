@@ -3,5 +3,5 @@ import componentB from './component-b'
 
 export default {
   componentA,
-  componentB
+  componentB,
 }

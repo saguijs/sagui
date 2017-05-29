@@ -1,3 +1,5 @@
-const a = 1
+const a = {
+  a: 1
+}
 
 console.log({a})

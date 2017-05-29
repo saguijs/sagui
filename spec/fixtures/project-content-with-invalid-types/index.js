@@ -1,9 +1,9 @@
 // @flow
 
 type FlowType = {
-  value: string
+  value: string,
 }
 
 export default (): FlowType => ({
-  weird: 'test'
+  weird: 'test',
 })
