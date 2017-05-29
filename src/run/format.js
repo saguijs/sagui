@@ -11,7 +11,7 @@ const prettierOptions = eslintConfig.rules['prettify/prettier'][1]
 export default saguiConfig =>
   new Promise((resolve, reject) => {
     log('Formatting files...')
-    glob(path.join(saguiConfig.projectPath, 'src/**/*.js'), (error, files) => {
+    glob(path.join(saguiConfig.projectPath, 'src/**/*.{js,jsx,es6}'), (error, files) => {
       if (error) {
         return reject(error)
       }
