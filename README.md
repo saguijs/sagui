@@ -74,8 +74,6 @@ As stated earlier, Sagui strives to provide all the basic needs to create modern
 
 The development server out-of-the-box has live reloading and **hot-module replacement**.
 
-[ReactJS](http://reactjs.com/) has first-class support via [react-transform](https://github.com/gaearon/babel-plugin-react-transform), so updating components' source reflects instantly (without full refresh) in the browser.
-
 ### Build
 
 Sagui uses [Webpack](https://webpack.js.org/) as its underlying bundling tool. The biggest feature that Webpack provides is that everything is a module. Sagui supports the following module types by default:

@@ -51,16 +51,6 @@ export default {
                   [require.resolve('babel-plugin-transform-react-jsx-self'), {}]
                 ] : []),
 
-                ...(action === actions.DEVELOP ? [
-                  [require.resolve('babel-plugin-react-transform'), {
-                    transforms: [{
-                      transform: 'react-transform-hmr',
-                      imports: ['react'],
-                      locals: ['module']
-                    }]
-                  }]
-                ] : []),
-
                 ...(action === actions.TEST_UNIT && coverage ? [
                   [require.resolve('babel-plugin-istanbul'), {
                     exclude: [
