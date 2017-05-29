@@ -1,5 +1,3 @@
-const a = {
-  a: 1
-}
-
-console.log({a})
+import './es6-extension'
+import './js-extension'
+import './jsx-extension'
