@@ -216,6 +216,25 @@ module.exports = {
 }
 ```
 
+
+### `browsers`
+
+List of browsers using the [browserslist format](https://github.com/ai/browserslist) that the target build must support.
+
+```js
+module.exports = {
+  browsers: [
+    '> 5%'
+  ]
+}
+```
+
+If not provided, the above default will be used instead.
+
+This information is used to decide the CSS prefixes to append.
+
+Internally Sagui uses [autoprefixer](https://github.com/postcss/autoprefixer).
+
 ### `style.cssModules`
 
 By default, styles compiled with Sagui will be output as [CSS Modules](https://github.com/css-modules), meaning they won't be global.

@@ -19,7 +19,7 @@ const defaultConfig = {
  */
 export default {
   name: 'style',
-  configure ({ action, optimize, pages = [], projectPath, style = {} }) {
+  configure ({ action, optimize, pages = [], projectPath, style = {}, browsers }) {
     // Use null-loader during tests
     // for better performance
     if (action === actions.TEST_UNIT) {
@@ -78,7 +78,7 @@ export default {
         postCSSModulesValues,
 
         // Support browser prefixes for any browser with greater than 5% markeshare
-        autoprefixer({ browsers: ['> 5%'] })
+        autoprefixer({ browsers })
       ],
 
       module: {
