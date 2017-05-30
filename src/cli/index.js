@@ -44,7 +44,7 @@ const setupAction = (NODE_ENV, actionsToRun, options = {}) => (cliOptions = {}) 
       projectPath: process.env.SAGUI_LINK
         ? process.cwd()
         : path.join(__dirname, '../../../../')
-    }).run()
+    })
   })
 
   tasks.reduce((previous, next) => previous.then(next), Promise.resolve())
