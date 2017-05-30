@@ -10,6 +10,7 @@ export { MissingPackageJSON, SaguiPath } from './load-project-sagui-config'
 
 const DEFAULT_SAGUI_CONFIG = {
   port: 3000,
+  browsers: ['> 5%'],
   saguiPath: path.join(__dirname, '../'),
   optimize: false,
   coverage: false,
