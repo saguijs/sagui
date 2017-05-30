@@ -53,6 +53,7 @@ export default sagui
 
 const DEFAULT_OPTIONS = {
   port: 3000,
+  browsers: ['> 5%'],
   saguiPath: path.join(__dirname, '../'),
   hotReloading: true,
   optimize: false,
