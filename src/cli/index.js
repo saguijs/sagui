@@ -92,3 +92,8 @@ program.command('test:typecheck')
 program.command('update')
   .description('Update Sagui in the current project')
   .action(setupAction('development', [actions.UPDATE]))
+
+program.action(function () {
+  logError(`This action is not valid. Use --help to learn more about all the valid actions`)
+  process.exit(1)
+})
