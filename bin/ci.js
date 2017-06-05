@@ -34,7 +34,7 @@ if (process.env.TEST_TYPE === 'test_create_project_npm') {
 
   // # Create a new project and install Sagui
   exec('npm init -y .', npmProjectPath)
-  exec(`npm add ${tgzFile}`, npmProjectPath)
+  exec(`npm install --save-dev ${tgzFile}`, npmProjectPath)
 
   // # Run some basic scripts
   exec('npm test', npmProjectPath)
