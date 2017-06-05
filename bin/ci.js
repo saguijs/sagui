@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 var path = require('path')
 var saguiPath = path.join(__dirname, '..')
+var version = require('../package.json').version
+var tgzFile = path.join(saguiPath, `sagui-${version}.tgz`)
 
 console.log('ENVIRONMENT', process.env)
 
@@ -26,12 +28,13 @@ if (process.env.TEST_TYPE === 'integration_test') {
 if (process.env.TEST_TYPE === 'test_create_project_npm') {
   // # builds Sagui before installing
   exec('npm run build', saguiPath)
+  exec('npm pack')
 
   var npmProjectPath = createTempFolder()
 
   // # Create a new project and install Sagui
   exec('npm init -y .', npmProjectPath)
-  exec('npm install --save-dev file://' + saguiPath, npmProjectPath)
+  exec(`npm install --save-dev ${tgzFile}`, npmProjectPath)
 
   // # Run some basic scripts
   exec('npm test', npmProjectPath)
@@ -44,12 +47,13 @@ if (process.env.TEST_TYPE === 'test_create_project_npm') {
 if (process.env.TEST_TYPE === 'test_create_project_yarn') {
   // # builds Sagui before installing
   exec('npm run build', saguiPath)
+  exec('npm pack')
 
   var yarnProjectPath = createTempFolder()
 
   // # Create a new project and install Sagui
   exec('yarn init -y .', yarnProjectPath)
-  exec('yarn add --dev file://' + saguiPath, yarnProjectPath)
+  exec(`yarn add --dev ${tgzFile}`, yarnProjectPath)
 
   // # Run some basic scripts
   exec('yarn test', yarnProjectPath)
