@@ -9,6 +9,7 @@ export default (saguiConfig, webpackConfig) => new Promise((resolve, reject) => 
   const options = {
     hot: true,
     noInfo: true,
+    historyApiFallback: saguiConfig.pages && saguiConfig.pages.length === 1,
     ...saguiConfig.develop
   }
 
