@@ -27,7 +27,9 @@ export default {
 
                   // Disables ES6 module transformation
                   // which Webpack2 can understand
-                  modules: false,
+                  // except while running tests
+                  // to support inject-loader
+                  modules: action === actions.TEST_UNIT ? 'commonjs' : false,
 
                   targets: {
                     // Unfortunately we are bound to what UglifyJS
