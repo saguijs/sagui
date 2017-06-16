@@ -28,6 +28,7 @@ function copyBase (projectPath) {
 
 function copyDotFiles (projectPath) {
   safeCopy(join(dotFilesPath, 'editorconfig'), join(projectPath, '.editorconfig'))
+  safeCopy(join(dotFilesPath, 'eslintrc'), join(projectPath, '.eslintrc'))
   safeCopy(join(dotFilesPath, 'flowconfig'), join(projectPath, '.flowconfig'))
   safeCopy(join(dotFilesPath, 'gitignore'), join(projectPath, '.gitignore'))
 }
