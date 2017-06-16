@@ -36,6 +36,7 @@ describe('[integration] sagui', function () {
   const projectContent = path.join(__dirname, '../fixtures/project-content')
   const projectContentWithLintErrors = path.join(__dirname, '../fixtures/project-content-with-lint-errors')
   const projectContentWithPrettierErrors = path.join(__dirname, '../fixtures/project-content-with-prettier-errors')
+  const projectContentWithPrettierErrorsInSaguiConfig = path.join(__dirname, '../fixtures/project-content-with-prettier-errors-in-sagui-config')
   let projectPath, projectSrcPath
 
   beforeEach(function () {
@@ -247,6 +248,25 @@ describe('[integration] sagui', function () {
             () => { throw new Error('It should have failed') },
             (error) => expect(error.message).to.eql('Build failed')
           )
+      })
+
+      it('should break the linter', () => {
+        return sagui({ projectPath, action: actions.TEST_LINT })
+          .then(
+            () => { throw new Error('It should have failed') },
+            (error) => expect(error.message).to.eql('Lint failed')
+          )
+      })
+
+      it('should be possible to format it and remove the errors', async () => {
+        await sagui({ projectPath, action: actions.FORMAT })
+        await sagui({ projectPath, action: actions.BUILD })
+      })
+    })
+
+    describe('once we a sagui.config.js with prettier errors', () => {
+      beforeEach(function () {
+        fs.copySync(projectContentWithPrettierErrorsInSaguiConfig, projectPath, { overwrite: true })
       })
 
       it('should break the linter', () => {
