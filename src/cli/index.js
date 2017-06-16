@@ -73,13 +73,17 @@ program.command('dist')
 
 program.command('test')
   .description('Run all the test checks (with coverage enabled)')
-  .action(setupAction('test', [actions.TEST_TYPECHECK, actions.TEST_UNIT]), { coverage: true })
+  .action(setupAction('test', [actions.TEST_LINT, actions.TEST_TYPECHECK, actions.TEST_UNIT]), { coverage: true })
 
 program.command('test:unit')
   .description('Run unit tests')
   .option('-w, --watch', 'Run tests on any file change')
   .option('-c, --coverage', 'Generate a coverage report')
   .action(setupAction('test', [actions.TEST_UNIT]))
+
+program.command('test:lint')
+  .description('Lint the code')
+  .action(setupAction('test', [actions.TEST_LINT]))
 
 program.command('test:typecheck')
   .description('Typecheck the code')
@@ -88,3 +92,8 @@ program.command('test:typecheck')
 program.command('update')
   .description('Update Sagui in the current project')
   .action(setupAction('development', [actions.UPDATE]))
+
+program.action(function () {
+  logError(`This action is not valid. Use --help to learn more about all the valid actions`)
+  process.exit(1)
+})

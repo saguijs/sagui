@@ -22,9 +22,13 @@ const npmInstall = (projectPath) => {
 
   packages.forEach((name) => fs.ensureSymlinkSync(path.join(nodeModules, name), path.join(projectPath, 'node_modules', name)))
 
-  const saguiInNodeModules = path.join(projectPath, 'node_modules/sagui/karma-static-files')
-  fs.ensureDirSync(saguiInNodeModules)
-  fs.copySync(path.join(__dirname, '../../karma-static-files'), saguiInNodeModules)
+  const karmaStaticNodeModules = path.join(projectPath, 'node_modules/sagui/karma-static-files')
+  fs.ensureDirSync(karmaStaticNodeModules)
+  fs.copySync(path.join(__dirname, '../../karma-static-files'), karmaStaticNodeModules)
+
+  const libInNodeModules = path.join(projectPath, 'node_modules/sagui/lib')
+  fs.ensureDirSync(libInNodeModules)
+  fs.copySync(path.join(__dirname, '../../src/javascript-eslintrc.json'), path.join(libInNodeModules, 'javascript-eslintrc.json'))
 }
 
 describe('[integration] sagui', function () {
