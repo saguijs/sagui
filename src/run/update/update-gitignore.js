@@ -6,7 +6,7 @@ const gitignoreEntries = [
   'coverage',
   'dist',
   'node_modules',
-  'npm-debug.log',
+  'npm-debug.log'
 ]
 
 export default currentGitignoreContent => {
