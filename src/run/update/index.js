@@ -1,4 +1,5 @@
 import packageJSON from './package-json'
+import gitignore from './gitignore'
 import template from './template'
 import { logError } from '../../util/log'
 
@@ -7,6 +8,7 @@ import { logError } from '../../util/log'
  */
 export default ({ projectPath }) => new Promise((resolve, reject) => {
   try {
+    gitignore(projectPath)
     packageJSON(projectPath)
     template(projectPath)
   } catch (e) {

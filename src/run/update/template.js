@@ -18,9 +18,14 @@ function copyBase (projectPath) {
   if (!fileExists(srcFolder)) {
     const projectName = basename(projectPath)
 
-    template(basePath, projectPath, {
-      projectName: projectName
-    }, { clobber: false })
+    template(
+      basePath,
+      projectPath,
+      {
+        projectName: projectName
+      },
+      { clobber: false }
+    )
   } else {
     logWarning('skipped installing files in src, folder already exists')
   }
@@ -30,7 +35,6 @@ function copyDotFiles (projectPath) {
   safeCopy(join(dotFilesPath, 'editorconfig'), join(projectPath, '.editorconfig'))
   safeCopy(join(dotFilesPath, 'eslintrc'), join(projectPath, '.eslintrc'))
   safeCopy(join(dotFilesPath, 'flowconfig'), join(projectPath, '.flowconfig'))
-  safeCopy(join(dotFilesPath, 'gitignore'), join(projectPath, '.gitignore'))
 }
 
 function safeCopy (source, destination) {
