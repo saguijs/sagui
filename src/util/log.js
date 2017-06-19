@@ -15,6 +15,10 @@ export function log (entry) {
   console.log(sagui(), entry)
 }
 
+export function logContent (entry) {
+  console.log(entry.split('\n').map(line => `${sagui()} ${line}`).join('\n'))
+}
+
 function sagui () {
   return process.platform === 'win32'
     ? 'Sagui -'

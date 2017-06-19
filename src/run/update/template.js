@@ -1,8 +1,10 @@
 import { join, basename } from 'path'
-import { copySync } from 'fs-extra'
+import { copySync, readFileSync } from 'fs-extra'
 import template from 'template-directory'
-import { logWarning } from '../../util/log'
+import deepEqual from 'deep-equal'
+import { logWarning, logContent } from '../../util/log'
 import fileExists from '../../util/file-exists'
+import json from '../../util/json'
 
 const basePath = join(__dirname, '../../../template/base')
 const dotFilesPath = join(__dirname, '../../../template/dot-files')
@@ -27,24 +29,34 @@ function copyBase (projectPath) {
       { clobber: false }
     )
   } else {
-    logWarning('skipped installing files in src, folder already exists')
+    logWarning('Skipped installing files in src, folder already exists')
   }
 }
 
 function copyDotFiles (projectPath) {
-  safeCopy(join(dotFilesPath, 'editorconfig'), join(projectPath, '.editorconfig'))
-  safeCopy(join(dotFilesPath, 'eslintrc'), join(projectPath, '.eslintrc'))
-  safeCopy(join(dotFilesPath, 'flowconfig'), join(projectPath, '.flowconfig'))
+  safeCopy(projectPath, '.editorconfig')
+  safeCopy(projectPath, '.eslintrc', diffCheckESLintrc)
+  safeCopy(projectPath, '.flowconfig')
 }
 
-function safeCopy (source, destination) {
-  try {
-    copySync(source, destination, { clobber: false })
-  } catch (e) {
-    if (e.message === 'EEXIST') {
-      // file exists, don't try to overwrite it
-    } else {
-      throw e
-    }
+function safeCopy (projectPath, filename, diffCheck) {
+  const sourceAbsolutePath = join(dotFilesPath, filename)
+  const destinationAbsolutePath = join(projectPath, filename)
+
+  if (fileExists(destinationAbsolutePath)) {
+    if (diffCheck) diffCheck(sourceAbsolutePath, destinationAbsolutePath)
+  } else {
+    copySync(sourceAbsolutePath, destinationAbsolutePath, { clobber: false })
+  }
+}
+
+function diffCheckESLintrc (sourceAbsolutePath, destinationAbsolutePath) {
+  const rawSourceContent = readFileSync(sourceAbsolutePath).toString()
+  const sourceContent = json.read(sourceAbsolutePath)
+  const destinationContent = json.read(destinationAbsolutePath)
+
+  if (!deepEqual(sourceContent, destinationContent)) {
+    logWarning(`Custom .eslintrc detected: Linting might not work as expected. Expected:`)
+    logContent(rawSourceContent)
   }
 }
