@@ -9,7 +9,7 @@
   "plugins": [
     "flowtype",
     "import",
-    "prettify",
+    "prettier",
     "react",
     "standard"
   ],
@@ -20,7 +20,7 @@
   },
   "rules": {
     "import/no-webpack-loader-syntax": 0,
-    "prettify/prettier": [ 2, {
+    "prettier/prettier": [ 2, {
       "singleQuote": true,
       "parser": "babylon",
       "semi": false,

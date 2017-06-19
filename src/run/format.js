@@ -6,7 +6,7 @@ import fs from 'fs'
 import { log } from '../util/log'
 import eslintConfig from '../javascript-eslintrc.json'
 
-const prettierOptions = eslintConfig.rules['prettify/prettier'][1]
+const prettierOptions = eslintConfig.rules['prettier/prettier'][1]
 
 export default saguiConfig =>
   new Promise((resolve, reject) => {
