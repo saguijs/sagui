@@ -56,6 +56,10 @@ describe('[integration] sagui', function () {
       return sagui({ projectPath, action: actions.BUILD })
     })
 
+    it('should be possible to build for production (dist)', () => {
+      return sagui({ projectPath, action: actions.BUILD, optimize: true })
+    })
+
     it('should be possible to test', () => {
       return sagui({ projectPath, action: actions.TEST_UNIT })
     })

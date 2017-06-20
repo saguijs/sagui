@@ -59,6 +59,7 @@ const buildSharedWebpackConfig = (saguiConfig) => {
         new webpack.optimize.UglifyJsPlugin({
           sourceMap: true
         }),
+        new webpack.optimize.ModuleConcatenationPlugin(),
 
         // signal loaders to minimize
         // https://webpack.js.org/guides/migrating/#uglifyjsplugin-minimize-loaders
