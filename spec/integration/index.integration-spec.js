@@ -117,6 +117,17 @@ describe('[integration] sagui', function () {
       })
     })
 
+    describe('project with custom eslintrc', () => {
+      const projectWithCustomEslintrc = path.join(__dirname, '../fixtures/project-with-custom-eslintrc')
+      beforeEach(function () {
+        fs.copySync(projectWithCustomEslintrc, projectPath, { overwrite: true })
+      })
+
+      it('should log a warning on update', () => {
+        return sagui({ projectPath, action: actions.UPDATE })
+      })
+    })
+
     describe('project with type definitions', () => {
       const projectContentWithTypes = path.join(__dirname, '../fixtures/project-content-with-types')
       beforeEach(function () {
