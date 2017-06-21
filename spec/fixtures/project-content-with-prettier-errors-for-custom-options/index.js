@@ -1,3 +1,8 @@
-import './es6-extension'
-import './js-extension'
-import './jsx-extension'
+const a = {
+  a: '123',
+}
+
+console.log([
+  a,
+  {b: '456'}
+])
