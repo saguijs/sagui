@@ -37,6 +37,7 @@ describe('[integration] sagui', function () {
   const projectContentWithLintErrors = path.join(__dirname, '../fixtures/project-content-with-lint-errors')
   const projectContentWithPrettierErrors = path.join(__dirname, '../fixtures/project-content-with-prettier-errors')
   const projectContentWithPrettierErrorsInSaguiConfig = path.join(__dirname, '../fixtures/project-content-with-prettier-errors-in-sagui-config')
+  const projectContentCustomPrettierOptionsInEslintrc = path.join(__dirname, '../fixtures/project-content-with-prettier-errors-for-custom-options')
   let projectPath, projectSrcPath
 
   beforeEach(function () {
@@ -312,6 +313,23 @@ npm-debug.log`)
       })
 
       it('should be possible to format it and remove the errors', async () => {
+        await sagui({ projectPath, action: actions.FORMAT })
+        await sagui({ projectPath, action: actions.BUILD })
+      })
+    })
+
+    describe('when there are custom prettier options in .eslintrc', () => {
+      beforeEach(function () {
+        fs.copySync(projectContentCustomPrettierOptionsInEslintrc, projectPath, { overwrite: true })
+      })
+      it('`lint` should respect the prettier options from .eslintrc', () => {
+        return sagui({ projectPath, action: actions.TEST_LINT })
+          .then(
+            () => { throw new Error('It should have failed') },
+            (error) => expect(error.message).to.eql('Lint failed')
+          )
+      })
+      it('`format` should respect the prettier options from .eslintrc', async () => {
         await sagui({ projectPath, action: actions.FORMAT })
         await sagui({ projectPath, action: actions.BUILD })
       })
