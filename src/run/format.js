@@ -6,29 +6,29 @@ import fs from 'fs'
 import { log } from '../util/log'
 import eslintConfig from '../javascript-eslintrc.json'
 
-const getPrettierOptions = (config) => {
+const getUserPrettierOptions = (saguiConfig) => {
+  const projectEslintrcPath = path.join(saguiConfig.projectPath, '.eslintrc')
+  const eslintrc = JSON.parse(fs.readFileSync(projectEslintrcPath, 'utf8'))
   const prettierRulesKey = 'prettier/prettier'
+
   if (
-    config.rules &&
-    Array.isArray(config.rules[prettierRulesKey]) &&
-    config.rules[prettierRulesKey][1]
+    eslintrc.rules &&
+    Array.isArray(eslintrc.rules[prettierRulesKey]) &&
+    eslintrc.rules[prettierRulesKey][1]
   ) {
-    return { ...config.rules[prettierRulesKey][1] }
+    return { ...eslintrc.rules[prettierRulesKey][1] }
   } else {
-    return null
+    return {}
   }
 }
 
-let defaultPrettierOptions = getPrettierOptions(eslintConfig)
+const prettierOptions = eslintConfig.rules['prettier/prettier'][1]
 
 export default saguiConfig =>
   new Promise((resolve, reject) => {
     log('Formatting files...')
 
     try {
-      const projectEslintrcPath = path.join(saguiConfig.projectPath, '.eslintrc')
-      const eslintrc = JSON.parse(fs.readFileSync(projectEslintrcPath, 'utf8'))
-
       const files = [
         ...glob.sync(path.join(saguiConfig.projectPath, 'sagui.config.js')),
         ...glob.sync(path.join(saguiConfig.projectPath, 'src/**/*.{js,jsx,es6}'))
@@ -37,7 +37,10 @@ export default saguiConfig =>
       const formatted = files
         .map(file => {
           const original = fs.readFileSync(file).toString()
-          const formatted = prettier.format(original, getPrettierOptions(eslintrc) || defaultPrettierOptions)
+          const formatted = prettier.format(original, {
+            ...prettierOptions,
+            ...getUserPrettierOptions(saguiConfig)
+          })
 
           return [file, original, formatted]
         })
