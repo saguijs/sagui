@@ -1,0 +1,11 @@
+{
+  "extends": "./node_modules/sagui/lib/javascript-eslintrc.json",
+  "rules": {
+    "prettier/prettier": [ 2, {
+      "singleQuote": true,
+      "trailingComma": "all",
+      "bracketSpacing": false,
+      "semi": false
+    } ]
+  }
+}

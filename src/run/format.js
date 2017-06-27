@@ -6,6 +6,22 @@ import fs from 'fs'
 import { log } from '../util/log'
 import eslintConfig from '../javascript-eslintrc.json'
 
+const getUserPrettierOptions = (projectPath) => {
+  const projectEslintrcPath = path.join(projectPath, '.eslintrc')
+  const eslintrc = JSON.parse(fs.readFileSync(projectEslintrcPath, 'utf8'))
+  const prettierRulesKey = 'prettier/prettier'
+
+  if (
+    eslintrc.rules &&
+    Array.isArray(eslintrc.rules[prettierRulesKey]) &&
+    eslintrc.rules[prettierRulesKey][1]
+  ) {
+    return { ...eslintrc.rules[prettierRulesKey][1] }
+  } else {
+    return {}
+  }
+}
+
 const prettierOptions = eslintConfig.rules['prettier/prettier'][1]
 
 export default saguiConfig =>
@@ -21,7 +37,10 @@ export default saguiConfig =>
       const formatted = files
         .map(file => {
           const original = fs.readFileSync(file).toString()
-          const formatted = prettier.format(original, prettierOptions)
+          const formatted = prettier.format(original, {
+            ...prettierOptions,
+            ...getUserPrettierOptions(saguiConfig.projectPath)
+          })
 
           return [file, original, formatted]
         })
