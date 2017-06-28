@@ -4,13 +4,13 @@ describe('load-project-sagui-config', () => {
   describe('validateConfig', () => {
     it('pages', () => {
       validateConfig({
-        pages: ['testing']
+        pages: ['testing'],
       })
     })
 
     it('libraries as strings', () => {
       validateConfig({
-        libraries: ['button']
+        libraries: ['button'],
       })
     })
 
@@ -20,55 +20,55 @@ describe('load-project-sagui-config', () => {
           'button',
           {
             main: 'button',
-            umdName: 'MyUIButton'
-          }
-        ]
+            umdName: 'MyUIButton',
+          },
+        ],
       })
     })
 
     it('style.cssModules', () => {
       validateConfig({
         style: {
-          cssModules: false
-        }
+          cssModules: false,
+        },
       })
     })
 
     it('style.sourceMaps', () => {
       validateConfig({
         style: {
-          sourceMaps: false
-        }
+          sourceMaps: false,
+        },
       })
     })
 
     it('style.extract', () => {
       validateConfig({
         style: {
-          extract: false
-        }
+          extract: false,
+        },
       })
     })
 
     it('javaScript.transpileDependencies', () => {
       validateConfig({
         javaScript: {
-          transpileDependencies: ['ui']
-        }
+          transpileDependencies: ['ui'],
+        },
       })
     })
 
     it('javaScript.typeCheckAll', () => {
       validateConfig({
         javaScript: {
-          typeCheckAll: true
-        }
+          typeCheckAll: true,
+        },
       })
     })
 
     it('browsers', () => {
       validateConfig({
-        browsers: ['> 1%']
+        browsers: ['> 1%'],
       })
     })
 
@@ -78,40 +78,32 @@ describe('load-project-sagui-config', () => {
           proxy: {
             '/some/path*': {
               target: 'https://other-server.example.com',
-              secure: false
-            }
-          }
-        }
+              secure: false,
+            },
+          },
+        },
       })
     })
 
     it('additionalWebpackConfig', () => {
       validateConfig({
         additionalWebpackConfig: {
-          plugins: []
-        }
+          plugins: [],
+        },
       })
     })
 
     it('additionalKarmaConfig', () => {
       validateConfig({
         additionalKarmaConfig: {
-          browsers: ['Chrome']
-        }
+          browsers: ['Chrome'],
+        },
       })
     })
 
     it('disableLoaders', () => {
       validateConfig({
-        disableLoaders: [
-          'font',
-          'image',
-          'javaScript',
-          'style',
-          'txt',
-          'video',
-          'yaml'
-        ]
+        disableLoaders: ['font', 'image', 'javaScript', 'style', 'txt', 'video', 'yaml'],
       })
     })
   })

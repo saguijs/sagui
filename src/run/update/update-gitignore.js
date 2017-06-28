@@ -6,7 +6,7 @@ const gitignoreEntries = [
   'coverage',
   'dist',
   'node_modules',
-  'npm-debug.log'
+  'npm-debug.log',
 ]
 
 export default currentGitignoreContent => {
@@ -17,9 +17,7 @@ export default currentGitignoreContent => {
       ? originalFileEntries.slice(0, -1)
       : originalFileEntries
 
-    return uniq(
-      cleanedEntries.concat(gitignoreEntries).map(entry => entry.trim())
-    ).join('\n')
+    return uniq(cleanedEntries.concat(gitignoreEntries).map(entry => entry.trim())).join('\n')
   } else {
     return gitignoreEntries.join('\n')
   }

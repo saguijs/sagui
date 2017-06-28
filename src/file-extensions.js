@@ -1,6 +1,6 @@
 export default {
   list: {
-    JAVASCRIPT: ['.js', '.jsx', '.es6']
+    JAVASCRIPT: ['.js', '.jsx', '.es6'],
   },
   test: {
     CSS: /\.css$/,
@@ -16,6 +16,6 @@ export default {
     VIDEO: /\.(ogg|mp4)$/,
     WOFF2: /\.woff2(\?v=\d+\.\d+\.\d+)?$/,
     WOFF: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
-    YAML: /\.(yml|yaml)$/
-  }
+    YAML: /\.(yml|yaml)$/,
+  },
 }

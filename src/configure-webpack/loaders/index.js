@@ -9,22 +9,15 @@ import txt from './txt'
 import video from './video'
 import yaml from './yaml'
 
-const loaders = [
-  font,
-  html,
-  image,
-  javaScript,
-  style,
-  txt,
-  video,
-  yaml
-]
+const loaders = [font, html, image, javaScript, style, txt, video, yaml]
 
-export default (saguiConfig) => {
+export default saguiConfig => {
   const disableLoaders = saguiConfig.disableLoaders || []
 
-  return loaders.filter((loader) => disableLoaders.indexOf(loader.name) === -1)
-    .reduce((webpackConfig, loader) => (
-      merge.smart(webpackConfig, loader.configure(saguiConfig))
-    ), {})
+  return loaders
+    .filter(loader => disableLoaders.indexOf(loader.name) === -1)
+    .reduce(
+      (webpackConfig, loader) => merge.smart(webpackConfig, loader.configure(saguiConfig)),
+      {}
+    )
 }

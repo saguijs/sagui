@@ -18,7 +18,8 @@
   "scripts": {
     "build": "rm -rf lib && babel src --out-dir lib --ignore *.spec.js && cp src/sagui-config-schema.json lib/sagui-config-schema.json && cp src/javascript-eslintrc.json lib/javascript-eslintrc.json",
     "test": "npm run test:lint && npm run test:unit && npm run test:integration",
-    "test:lint": "standard | snazzy",
+    "format": "find index.js ./bin ./src ./spec/integration -name \"*js\" | xargs prettier --single-quote --print-width 100 --no-semi --trailing-comma es5 --write",
+    "test:lint": "eslint .",
     "test:lint:fix": "standard --fix",
     "test:integration": "mocha --timeout 0 --compilers js:babel-register --recursive --reporter spec ./spec/integration",
     "test:integration:watch": "npm run test:integration -- --watch",

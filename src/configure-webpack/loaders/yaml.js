@@ -2,16 +2,16 @@ import fileExtensions from '../../file-extensions'
 
 export default {
   name: 'yaml',
-  configure () {
+  configure() {
     return {
       module: {
         rules: [
           {
             test: fileExtensions.test.YAML,
-            use: ['json-loader', 'yaml-loader']
-          }
-        ]
-      }
+            use: ['json-loader', 'yaml-loader'],
+          },
+        ],
+      },
     }
-  }
+  },
 }

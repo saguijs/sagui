@@ -2,7 +2,7 @@ import fileExtensions from '../../file-extensions'
 
 export default {
   name: 'image',
-  configure ({ action }) {
+  configure({ action }) {
     return {
       module: {
         rules: [
@@ -13,13 +13,13 @@ export default {
                 loader: 'url-loader',
                 options: {
                   limit: 8192,
-                  name: '[name]-[hash].[ext]'
-                }
-              }
-            ]
-          }
-        ]
-      }
+                  name: '[name]-[hash].[ext]',
+                },
+              },
+            ],
+          },
+        ],
+      },
     }
-  }
+  },
 }

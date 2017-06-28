@@ -2,7 +2,7 @@ import path from 'path'
 import updateGitignore from './update-gitignore'
 import { readFileSync, writeFileSync, ensureFileSync } from 'fs-extra'
 
-export default function (projectPath) {
+export default function(projectPath) {
   const gitignorePath = path.join(projectPath, '.gitignore')
   ensureFileSync(gitignorePath)
   const gitignoreContent = readFileSync(gitignorePath).toString()

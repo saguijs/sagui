@@ -14,7 +14,7 @@ try {
    */
   try {
     require('babel-register')({
-      only: /(sagui\/src)/
+      only: /(sagui\/src)/,
     })
 
     module.exports = require('./src').default

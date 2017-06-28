@@ -1,14 +1,14 @@
 import { expect } from 'chai'
 import mergeKarma from './merge-karma'
 
-describe('mergeKarma', function () {
+describe('mergeKarma', function() {
   it('should merge the reporters', () => {
     const configA = {
-      reporters: ['mocha']
+      reporters: ['mocha'],
     }
 
     const configB = {
-      reporters: ['junit']
+      reporters: ['junit'],
     }
 
     const mergedConfig = mergeKarma(configA, configB)
@@ -18,11 +18,11 @@ describe('mergeKarma', function () {
 
   it('should not duplicate reporters', () => {
     const configA = {
-      reporters: ['mocha']
+      reporters: ['mocha'],
     }
 
     const configB = {
-      reporters: ['mocha']
+      reporters: ['mocha'],
     }
 
     const mergedConfig = mergeKarma(configA, configB)

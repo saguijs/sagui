@@ -21,10 +21,7 @@ const buildStandardKarmaConfig = (saguiConfig, webpackConfig) => {
 
     browsers: ['PhantomJS'],
 
-    reporters: [
-      'mocha',
-      ...(coverage ? ['coverage'] : [])
-    ],
+    reporters: ['mocha', ...(coverage ? ['coverage'] : [])],
 
     frameworks: ['jasmine'],
 
@@ -32,7 +29,7 @@ const buildStandardKarmaConfig = (saguiConfig, webpackConfig) => {
     // the next runs just output the summary and
     // errors in mocha style
     mochaReporter: {
-      output: 'autowatch'
+      output: 'autowatch',
     },
 
     coverageReporter: {
@@ -41,27 +38,27 @@ const buildStandardKarmaConfig = (saguiConfig, webpackConfig) => {
         { type: 'html', subdir: 'html' },
 
         // outputs the coverage report in the console
-        { type: 'text' }
-      ]
+        { type: 'text' },
+      ],
     },
 
     // we don't watch any of the files here,
     // since that is taken care by the preprocessors
     files: [
       { pattern: 'node_modules/sagui/karma-static-files/test-bundle.js', watched: false },
-      { pattern: 'src/**/*', watched: false, included: false }
+      { pattern: 'src/**/*', watched: false, included: false },
     ],
 
     preprocessors: {
       // add webpack as preprocessor
-      'node_modules/sagui/karma-static-files/test-bundle.js': ['webpack', 'sourcemap']
+      'node_modules/sagui/karma-static-files/test-bundle.js': ['webpack', 'sourcemap'],
     },
 
     webpackServer: {
-      noInfo: true
+      noInfo: true,
     },
 
     singleRun: !watch,
-    autoWatch: watch
+    autoWatch: watch,
   }
 }

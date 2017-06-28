@@ -2,22 +2,22 @@ import { expect } from 'chai'
 import updateNpmScripts from './update-npm-scripts'
 
 const CURRENT_SCRIPTS = {
-  'build': 'sagui build',
-  'dist': 'sagui dist',
-  'format': 'sagui format',
-  'start': 'sagui develop --port 3000',
-  'test': 'sagui test',
+  build: 'sagui build',
+  dist: 'sagui dist',
+  format: 'sagui format',
+  start: 'sagui develop --port 3000',
+  test: 'sagui test',
   'test:lint': 'sagui test:lint',
   'test:typecheck': 'sagui test:typecheck',
   'test:unit': 'sagui test:unit --coverage',
-  'test:unit:watch': 'sagui test:unit --watch'
+  'test:unit:watch': 'sagui test:unit --watch',
 }
 
-describe('updateNpmScripts', function () {
+describe('updateNpmScripts', function() {
   describe('given an new npm project scripts', () => {
     it('should add all the Sagui scripts overwriting the default test script', () => {
       const scripts = {
-        'test': 'echo "Error: no test specified" && exit 1'
+        test: 'echo "Error: no test specified" && exit 1',
       }
 
       const saguiScripts = updateNpmScripts(scripts)
@@ -33,7 +33,7 @@ describe('updateNpmScripts', function () {
   describe('existing projects', () => {
     it('should update old `test:unit` scripts', () => {
       const scripts = {
-        'test:unit': 'NODE_ENV=test sagui test'
+        'test:unit': 'NODE_ENV=test sagui test',
       }
 
       const saguiScripts = updateNpmScripts(scripts)
@@ -42,7 +42,7 @@ describe('updateNpmScripts', function () {
 
     it('should update old `dist` scripts', () => {
       const scripts = {
-        'dist': 'NODE_ENV=production sagui build --optimize'
+        dist: 'NODE_ENV=production sagui build --optimize',
       }
 
       const saguiScripts = updateNpmScripts(scripts)
@@ -51,9 +51,9 @@ describe('updateNpmScripts', function () {
 
     it('should remove undefined scripts if it matches previous versions', () => {
       const scripts = {
-        'develop': 'sagui develop --port 3000',
+        develop: 'sagui develop --port 3000',
         'test:coverage': 'npm run test:unit -- --coverage',
-        'test:lint': 'sagui test:lint'
+        'test:lint': 'sagui test:lint',
       }
 
       const saguiScripts = updateNpmScripts(scripts)
@@ -67,7 +67,7 @@ describe('updateNpmScripts', function () {
         'test:lint',
         'test:typecheck',
         'test:unit',
-        'test:unit:watch'
+        'test:unit:watch',
       ]
 
       expect(Object.keys(saguiScripts)).to.eql(expectedScripts)
@@ -75,7 +75,7 @@ describe('updateNpmScripts', function () {
 
     it('should NOT remove undefined scripts if it was modified by the user', () => {
       const scripts = {
-        'test:coverage': 'npm run test:unit'
+        'test:coverage': 'npm run test:unit',
       }
 
       const saguiScripts = updateNpmScripts(scripts)
@@ -90,7 +90,7 @@ describe('updateNpmScripts', function () {
         'test:lint',
         'test:typecheck',
         'test:unit',
-        'test:unit:watch'
+        'test:unit:watch',
       ]
 
       expect(Object.keys(saguiScripts)).to.eql(expectedScripts)
@@ -99,7 +99,7 @@ describe('updateNpmScripts', function () {
 
     it('should NOT remove or change custom scripts while keeping them SORTED', () => {
       const scripts = {
-        'my-weird-script': 'do whatever'
+        'my-weird-script': 'do whatever',
       }
 
       const saguiScripts = updateNpmScripts(scripts)
@@ -114,7 +114,7 @@ describe('updateNpmScripts', function () {
         'test:lint',
         'test:typecheck',
         'test:unit',
-        'test:unit:watch'
+        'test:unit:watch',
       ]
 
       expect(Object.keys(saguiScripts)).to.eql(expectedScripts)
