@@ -118,6 +118,17 @@ describe('[integration] sagui', function () {
       })
     })
 
+    describe('project with duplicated transient dependencies and colliding node_modules', () => {
+      const projectWithNodeModules = path.join(__dirname, '../fixtures/project-with-node-modules')
+      beforeEach(function () {
+        fs.copySync(projectWithNodeModules, projectPath, { overwrite: true })
+      })
+
+      it('should test that different dependencies get different transient dependencies and node_modules should win when colliding names', () => {
+        return sagui({ projectPath, action: actions.TEST_UNIT })
+      })
+    })
+
     describe('project with custom eslintrc', () => {
       const projectWithCustomEslintrc = path.join(__dirname, '../fixtures/project-with-custom-eslintrc')
       beforeEach(function () {
