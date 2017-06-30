@@ -2,7 +2,7 @@ import { expect } from 'chai'
 import loader from './style'
 import actions from '../../actions'
 
-describe('style', function () {
+describe('style', function() {
   const projectPath = '/tmp/test-project'
 
   it('should have css modules enabled by default', () => {
@@ -51,12 +51,21 @@ describe('style', function () {
     it('should be enabled on building pages', () => {
       const config = loader.configure({ projectPath, action: actions.BUILD, pages: ['index'] })
 
-      expect(config.module.rules[0].loader.find(loaderWithName('extract-text-webpack-plugin'))).to.be.an('object')
-      expect(config.module.rules[1].loader.find(loaderWithName('extract-text-webpack-plugin'))).to.be.an('object')
+      expect(
+        config.module.rules[0].loader.find(loaderWithName('extract-text-webpack-plugin'))
+      ).to.be.an('object')
+      expect(
+        config.module.rules[1].loader.find(loaderWithName('extract-text-webpack-plugin'))
+      ).to.be.an('object')
     })
 
     it('should be possible to disable it even when it should be enabled on building pages', () => {
-      const config = loader.configure({ projectPath, action: actions.BUILD, pages: ['index'], style: { extract: false } })
+      const config = loader.configure({
+        projectPath,
+        action: actions.BUILD,
+        pages: ['index'],
+        style: { extract: false },
+      })
 
       expect(config.module.rules[0].loader.includes('css-loader')).to.eql(true)
       expect(config.module.rules[1].loader.includes('css-loader')).to.eql(true)
@@ -73,4 +82,4 @@ describe('style', function () {
   })
 })
 
-const loaderWithName = (name) => (loader) => loader.loader.indexOf(name) !== -1
+const loaderWithName = name => loader => loader.loader.indexOf(name) !== -1

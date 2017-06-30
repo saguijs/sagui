@@ -6,13 +6,13 @@ var tgzFile = path.join(saguiPath, `sagui-${version}.tgz`)
 
 console.log('ENVIRONMENT', process.env)
 
-function exec (command, cwd) {
+function exec(command, cwd) {
   // pass the parent´s stdio to the child process
   // http://stackoverflow.com/a/31104898
   require('child_process').execSync(command, { cwd: cwd, stdio: [0, 1, 2] })
 }
 
-function createTempFolder () {
+function createTempFolder() {
   return require('tmp').dirSync().name
 }
 

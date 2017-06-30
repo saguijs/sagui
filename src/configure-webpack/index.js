@@ -28,14 +28,11 @@ export default (saguiConfig = {}) => {
 
   return [
     ...(pages.length > 0 ? [buildPagesConfig(pages, sharedSaguiConfig)] : []),
-    ...libraries.map((libraryConfig) => buildLibraryConfig(libraryConfig, sharedSaguiConfig))
-  ].map((entryPointWebpackConfig) => merge.smart(
-    sharedWebpackConfig,
-    entryPointWebpackConfig
-  ))
+    ...libraries.map(libraryConfig => buildLibraryConfig(libraryConfig, sharedSaguiConfig)),
+  ].map(entryPointWebpackConfig => merge.smart(sharedWebpackConfig, entryPointWebpackConfig))
 }
 
-const buildSharedWebpackConfig = (saguiConfig) => {
+const buildSharedWebpackConfig = saguiConfig => {
   const { action, projectPath, saguiPath, watch, optimize } = saguiConfig
 
   const projectSourcePath = path.join(projectPath, 'src')
@@ -54,18 +51,20 @@ const buildSharedWebpackConfig = (saguiConfig) => {
 
       // only include the optimization plugins if
       // the flag is enabled
-      ...(optimize ? [
-        new webpack.optimize.DedupePlugin(),
-        new webpack.optimize.UglifyJsPlugin({
-          sourceMap: true
-        }),
+      ...(optimize
+        ? [
+            new webpack.optimize.DedupePlugin(),
+            new webpack.optimize.UglifyJsPlugin({
+              sourceMap: true,
+            }),
 
-        // signal loaders to minimize
-        // https://webpack.js.org/guides/migrating/#uglifyjsplugin-minimize-loaders
-        new webpack.LoaderOptionsPlugin({
-          minimize: true
-        })
-      ] : []),
+            // signal loaders to minimize
+            // https://webpack.js.org/guides/migrating/#uglifyjsplugin-minimize-loaders
+            new webpack.LoaderOptionsPlugin({
+              minimize: true,
+            }),
+          ]
+        : []),
 
       // only enable hot module replacement in development
       ...(action === actions.DEVELOP ? [new HotModuleReplacementPlugin()] : []),
@@ -75,14 +74,18 @@ const buildSharedWebpackConfig = (saguiConfig) => {
       ...(action === actions.BUILD ? [new WebpackMd5Hash()] : []),
 
       // We should not clean on any other action
-      ...(action === actions.BUILD ? [new CleanWebpackPlugin(['dist'], {
-        root: projectPath,
-        verbose: false
-      })] : []),
+      ...(action === actions.BUILD
+        ? [
+            new CleanWebpackPlugin(['dist'], {
+              root: projectPath,
+              verbose: false,
+            }),
+          ]
+        : []),
 
       new DefinePlugin({
-        'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
-      })
+        'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+      }),
     ],
 
     // In wepback 2 builtin node.js modules take precedence over the normal modules
@@ -92,7 +95,7 @@ const buildSharedWebpackConfig = (saguiConfig) => {
     // This configuration disables this behavior
     // More information: https://github.com/webpack/webpack/issues/4666#issuecomment-292700060
     node: {
-      constants: false
+      constants: false,
     },
 
     resolve: {
@@ -107,16 +110,13 @@ const buildSharedWebpackConfig = (saguiConfig) => {
 
         // Sagui node_modules is required in the path to be able
         // to load the `webpack-hot-middleware`
-        path.join(saguiPath, '/node_modules')
-      ]
+        path.join(saguiPath, '/node_modules'),
+      ],
     },
 
     resolveLoader: {
       // Should first try to resolve loaders nested within Sagui.
-      modules: [
-        path.join(saguiPath, '/node_modules'),
-        path.join(projectPath, '/node_modules')
-      ]
-    }
+      modules: [path.join(saguiPath, '/node_modules'), path.join(projectPath, '/node_modules')],
+    },
   }
 }

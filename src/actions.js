@@ -5,5 +5,5 @@ export default {
   UPDATE: 'update',
   TEST_LINT: 'test:lint',
   TEST_UNIT: 'test:unit',
-  TEST_TYPECHECK: 'test:typecheck'
+  TEST_TYPECHECK: 'test:typecheck',
 }

@@ -2,16 +2,16 @@ import fileExtensions from '../../file-extensions'
 
 export default {
   name: 'txt',
-  configure () {
+  configure() {
     return {
       module: {
         rules: [
           {
             test: fileExtensions.test.TXT,
-            loader: 'raw-loader'
-          }
-        ]
-      }
+            loader: 'raw-loader',
+          },
+        ],
+      },
     }
-  }
+  },
 }

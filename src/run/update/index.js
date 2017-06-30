@@ -6,15 +6,16 @@ import { logError } from '../../util/log'
 /**
  * Bootstrap and updates project structures
  */
-export default ({ projectPath }) => new Promise((resolve, reject) => {
-  try {
-    gitignore(projectPath)
-    packageJSON(projectPath)
-    template(projectPath)
-  } catch (e) {
-    logError('Failed to install Sagui files in the project.')
-    reject(e)
-  }
+export default ({ projectPath }) =>
+  new Promise((resolve, reject) => {
+    try {
+      gitignore(projectPath)
+      packageJSON(projectPath)
+      template(projectPath)
+    } catch (e) {
+      logError('Failed to install Sagui files in the project.')
+      reject(e)
+    }
 
-  resolve()
-})
+    resolve()
+  })

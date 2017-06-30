@@ -2,7 +2,7 @@ import fileExtensions from '../../file-extensions'
 
 export default {
   name: 'font',
-  configure () {
+  configure() {
     return {
       module: {
         rules: [
@@ -13,10 +13,10 @@ export default {
                 loader: 'file-loader',
                 options: {
                   name: '[name]-[hash].[ext]',
-                  mimetype: 'application/font-woff'
-                }
-              }
-            ]
+                  mimetype: 'application/font-woff',
+                },
+              },
+            ],
           },
           {
             test: fileExtensions.test.WOFF2,
@@ -25,10 +25,10 @@ export default {
                 loader: 'file-loader',
                 options: {
                   name: '[name]-[hash].[ext]',
-                  mimetype: 'application/font-woff'
-                }
-              }
-            ]
+                  mimetype: 'application/font-woff',
+                },
+              },
+            ],
           },
           {
             test: fileExtensions.test.EOT,
@@ -36,10 +36,10 @@ export default {
               {
                 loader: 'file-loader',
                 options: {
-                  name: '[name]-[hash].[ext]'
-                }
-              }
-            ]
+                  name: '[name]-[hash].[ext]',
+                },
+              },
+            ],
           },
           {
             test: fileExtensions.test.TTF,
@@ -48,10 +48,10 @@ export default {
                 loader: 'file-loader',
                 options: {
                   name: '[name]-[hash].[ext]',
-                  mimetype: 'application/octet-stream'
-                }
-              }
-            ]
+                  mimetype: 'application/octet-stream',
+                },
+              },
+            ],
           },
           {
             test: fileExtensions.test.OTF,
@@ -59,13 +59,13 @@ export default {
               {
                 loader: 'file-loader',
                 options: {
-                  name: '[name]-[hash].[ext]'
-                }
-              }
-            ]
-          }
-        ]
-      }
+                  name: '[name]-[hash].[ext]',
+                },
+              },
+            ],
+          },
+        ],
+      },
     }
-  }
+  },
 }

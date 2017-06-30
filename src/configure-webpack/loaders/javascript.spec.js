@@ -26,9 +26,9 @@ describe('javaScript', () => {
       javaScript: {
         transpileDependencies: [
           // an example project
-          'ui-react-components'
-        ]
-      }
+          'ui-react-components',
+        ],
+      },
     }
 
     const webpack = loader.configure(config)

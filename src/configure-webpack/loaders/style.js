@@ -8,7 +8,7 @@ import actions from '../../actions'
 const defaultConfig = {
   cssModules: true,
   sourceMaps: false,
-  extract: true
+  extract: true,
 }
 
 /**
@@ -19,7 +19,7 @@ const defaultConfig = {
  */
 export default {
   name: 'style',
-  configure ({ action, optimize, pages = [], projectPath, style = {}, browsers }) {
+  configure({ action, optimize, pages = [], projectPath, style = {}, browsers }) {
     // Use null-loader during tests
     // for better performance
     if (action === actions.TEST_UNIT) {
@@ -28,14 +28,14 @@ export default {
           rules: [
             {
               test: fileExtensions.test.CSS,
-              loader: 'null-loader'
+              loader: 'null-loader',
             },
             {
               test: fileExtensions.test.SCSS,
-              loader: 'null-loader'
-            }
-          ]
-        }
+              loader: 'null-loader',
+            },
+          ],
+        },
       }
     }
 
@@ -43,7 +43,7 @@ export default {
 
     const config = {
       ...defaultConfig,
-      ...style
+      ...style,
     }
 
     const shouldExtract = config.extract && pages.length > 0 && action === actions.BUILD
@@ -60,7 +60,7 @@ export default {
     // modules: enable css-modules
     const cssLoaders = [
       `css-loader?${cssModules}&${sourceMaps}&importLoaders=1&localIdentName=${localIdentName}`,
-      'postcss-loader'
+      'postcss-loader',
     ]
 
     // importLoaders: use the following sass-loader in @import statements
@@ -69,7 +69,8 @@ export default {
       `css-loader?${cssModules}&${sourceMaps}&importLoaders=2&localIdentName=${localIdentName}`,
       'postcss-loader',
       `sass-loader?${sourceMaps}&outputStyle=expanded&` +
-        'includePaths[]=' + (path.resolve(projectPath, './node_modules'))
+        'includePaths[]=' +
+        path.resolve(projectPath, './node_modules'),
     ]
 
     return {
@@ -79,15 +80,15 @@ export default {
             test: fileExtensions.test.CSS,
             loader: shouldExtract
               ? extractCss.extract(cssLoaders)
-              : ['style-loader', ...cssLoaders].join('!')
+              : ['style-loader', ...cssLoaders].join('!'),
           },
           {
             test: fileExtensions.test.SCSS,
             loader: shouldExtract
               ? extractSass.extract(sassLoaders)
-              : ['style-loader', ...sassLoaders].join('!')
-          }
-        ]
+              : ['style-loader', ...sassLoaders].join('!'),
+          },
+        ],
       },
 
       plugins: [
@@ -101,14 +102,12 @@ export default {
             //  - https://github.com/webpack-contrib/css-loader/issues/413#issuecomment-283944881
             context: projectSourcePath,
 
-            postcss: [
-              autoprefixer({ browsers })
-            ]
-          }
+            postcss: [autoprefixer({ browsers })],
+          },
         }),
 
-        ...(shouldExtract ? [extractCss, extractSass] : [])
-      ]
+        ...(shouldExtract ? [extractCss, extractSass] : []),
+      ],
     }
-  }
+  },
 }

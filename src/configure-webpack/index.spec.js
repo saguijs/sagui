@@ -9,17 +9,17 @@ const projectPath = join(saguiPath, 'spec/fixtures/simple-project')
 const baseSaguiConfig = {
   saguiPath,
   projectPath,
-  pages: ['index']
+  pages: ['index'],
 }
 
-describe('webpack', function () {
-  describe('webpackConfig extension', function () {
-    it('should allow extending the default configuration', function () {
+describe('webpack', function() {
+  describe('webpackConfig extension', function() {
+    it('should allow extending the default configuration', function() {
       const saguiConfig = {
         ...baseSaguiConfig,
         additionalWebpackConfig: {
-          target: 'electron'
-        }
+          target: 'electron',
+        },
       }
 
       const config = webpack(saguiConfig)[0]
@@ -27,22 +27,22 @@ describe('webpack', function () {
       expect(config.target).equal('electron')
     })
 
-    it('should allow overwriting the default configuration', function () {
+    it('should allow overwriting the default configuration', function() {
       const defaultConfig = webpack(baseSaguiConfig)[0]
       expect(defaultConfig.devtool).equal('inline-source-map')
 
       const saguiConfig = {
         ...baseSaguiConfig,
         additionalWebpackConfig: {
-          devtool: 'cheap-source-map'
-        }
+          devtool: 'cheap-source-map',
+        },
       }
 
       const config = webpack(saguiConfig)[0]
       expect(config.devtool).equal('cheap-source-map')
     })
 
-    it('should allow changing a loader based on the test (webpack-merge feature)', function () {
+    it('should allow changing a loader based on the test (webpack-merge feature)', function() {
       // disable the default exclude behavior of Babel
       const saguiConfig = {
         ...baseSaguiConfig,
@@ -51,15 +51,15 @@ describe('webpack', function () {
             loaders: [
               {
                 test: fileExtensions.test.JAVASCRIPT,
-                loader: 'babel'
-              }
-            ]
-          }
-        }
+                loader: 'babel',
+              },
+            ],
+          },
+        },
       }
 
       const config = webpack(saguiConfig)[0]
-      const loaders = config.module.loaders.filter((loader) => loader.loader === 'babel')
+      const loaders = config.module.loaders.filter(loader => loader.loader === 'babel')
 
       // should change the existing loader, not add another
       expect(loaders.length).equal(1)

@@ -6,21 +6,23 @@ import schema from './sagui-config-schema'
 
 const ajv = new Ajv({
   allErrors: true,
-  verbose: true
+  verbose: true,
 })
 
-export default (saguiConfig) => {
+export default saguiConfig => {
   const { projectPath } = saguiConfig
 
   sanityCheck(projectPath)
 
   const configPath = path.join(projectPath, 'sagui.config.js')
 
-  if (!fileExists(configPath)) { return {} }
+  if (!fileExists(configPath)) {
+    return {}
+  }
   return validateConfig(require(configPath))
 }
 
-function sanityCheck (projectPath) {
+function sanityCheck(projectPath) {
   const packagePath = path.join(projectPath, 'package.json')
   if (!fileExists(packagePath)) throw new MissingPackageJSON()
 
@@ -28,7 +30,7 @@ function sanityCheck (projectPath) {
   if (packageJSON.name === 'sagui') throw new SaguiPath()
 }
 
-export function validateConfig (saguiConfig) {
+export function validateConfig(saguiConfig) {
   const isValid = ajv.validate(schema, saguiConfig)
   if (!isValid) {
     throw new InvalidSaguiConfig()
@@ -37,26 +39,27 @@ export function validateConfig (saguiConfig) {
   return saguiConfig
 }
 
-export function MissingPackageJSON () {
+export function MissingPackageJSON() {
   this.name = 'MissingPackageJSON'
-  this.message = 'Must be executed in target project\'s package.json path'
-  this.stack = (new Error()).stack
+  this.message = "Must be executed in target project's package.json path"
+  this.stack = new Error().stack
 }
 MissingPackageJSON.prototype = Object.create(Error.prototype)
 MissingPackageJSON.prototype.constructor = MissingPackageJSON
 
-export function InvalidSaguiConfig () {
+export function InvalidSaguiConfig() {
   this.name = 'InvalidSaguiConfig'
-  this.message = 'Invalid configuration. Check documentation at https://github.com/saguijs/sagui#configuration.'
-  this.stack = (new Error()).stack
+  this.message =
+    'Invalid configuration. Check documentation at https://github.com/saguijs/sagui#configuration.'
+  this.stack = new Error().stack
 }
 MissingPackageJSON.prototype = Object.create(Error.prototype)
 MissingPackageJSON.prototype.constructor = MissingPackageJSON
 
-export function SaguiPath () {
+export function SaguiPath() {
   this.name = 'SaguiPath'
-  this.message = 'Sagui CLI must not be run in Sagui\'s path'
-  this.stack = (new Error()).stack
+  this.message = "Sagui CLI must not be run in Sagui's path"
+  this.stack = new Error().stack
 }
 SaguiPath.prototype = Object.create(Error.prototype)
 SaguiPath.prototype.constructor = SaguiPath

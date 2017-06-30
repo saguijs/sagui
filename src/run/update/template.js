@@ -9,12 +9,12 @@ import json from '../../util/json'
 const basePath = join(__dirname, '../../../template/base')
 const dotFilesPath = join(__dirname, '../../../template/dot-files')
 
-export default function (projectPath) {
+export default function(projectPath) {
   copyBase(projectPath)
   copyDotFiles(projectPath)
 }
 
-function copyBase (projectPath) {
+function copyBase(projectPath) {
   const srcFolder = join(projectPath, 'src')
 
   if (!fileExists(srcFolder)) {
@@ -24,7 +24,7 @@ function copyBase (projectPath) {
       basePath,
       projectPath,
       {
-        projectName: projectName
+        projectName: projectName,
       },
       { clobber: false }
     )
@@ -33,13 +33,13 @@ function copyBase (projectPath) {
   }
 }
 
-function copyDotFiles (projectPath) {
+function copyDotFiles(projectPath) {
   safeCopy(projectPath, '.editorconfig')
   safeCopy(projectPath, '.eslintrc', diffCheckESLintrc)
   safeCopy(projectPath, '.flowconfig')
 }
 
-function safeCopy (projectPath, filename, diffCheck) {
+function safeCopy(projectPath, filename, diffCheck) {
   const sourceAbsolutePath = join(dotFilesPath, filename)
   const destinationAbsolutePath = join(projectPath, filename)
 
@@ -50,7 +50,7 @@ function safeCopy (projectPath, filename, diffCheck) {
   }
 }
 
-function diffCheckESLintrc (sourceAbsolutePath, destinationAbsolutePath) {
+function diffCheckESLintrc(sourceAbsolutePath, destinationAbsolutePath) {
   const rawSourceContent = readFileSync(sourceAbsolutePath).toString()
   const sourceContent = json.read(sourceAbsolutePath)
   const destinationContent = json.read(destinationAbsolutePath)

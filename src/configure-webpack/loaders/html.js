@@ -2,7 +2,7 @@ import fileExtensions from '../../file-extensions'
 
 export default {
   name: 'html',
-  configure ({ optimize }) {
+  configure({ optimize }) {
     return {
       module: {
         rules: [
@@ -10,11 +10,11 @@ export default {
             test: fileExtensions.test.HTML,
             loader: 'html-loader',
             options: {
-              minimize: optimize
-            }
-          }
-        ]
-      }
+              minimize: optimize,
+            },
+          },
+        ],
+      },
     }
-  }
+  },
 }

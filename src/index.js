@@ -10,11 +10,7 @@ export { MissingPackageJSON, SaguiPath, InvalidSaguiConfig } from './load-projec
 
 const DEFAULT_SAGUI_CONFIG = {
   port: 3000,
-  browsers: [
-    '> 1%',
-    'Last 2 versions',
-    'IE 10'
-  ],
+  browsers: ['> 1%', 'Last 2 versions', 'IE 10'],
   saguiPath: path.join(__dirname, '../'),
   optimize: false,
   coverage: false,
@@ -22,7 +18,7 @@ const DEFAULT_SAGUI_CONFIG = {
   disableLoaders: [],
   javaScript: {},
   additionalWebpackConfig: {},
-  additionalKarmaConfig: {}
+  additionalKarmaConfig: {},
 }
 
 /**
@@ -32,23 +28,23 @@ const DEFAULT_SAGUI_CONFIG = {
  * prepare all the required Webpack / Karma configurations
  * and execute the requested action.
  */
-const sagui = (saguiConfig = {}) => new Promise((resolve, reject) => {
-  try {
-    const finalSaguiConfig = {
-      ...DEFAULT_SAGUI_CONFIG,
-      ...saguiConfig,
-      ...loadProjectSaguiConfig(saguiConfig)
+const sagui = (saguiConfig = {}) =>
+  new Promise((resolve, reject) => {
+    try {
+      const finalSaguiConfig = {
+        ...DEFAULT_SAGUI_CONFIG,
+        ...saguiConfig,
+        ...loadProjectSaguiConfig(saguiConfig),
+      }
+
+      const webpackConfig = configureWebpack(finalSaguiConfig)
+      const karmaConfig = configureKarma(finalSaguiConfig, webpackConfig)
+
+      run(finalSaguiConfig, webpackConfig, karmaConfig).then(resolve, reject)
+    } catch (e) {
+      reject(e)
     }
-
-    const webpackConfig = configureWebpack(finalSaguiConfig)
-    const karmaConfig = configureKarma(finalSaguiConfig, webpackConfig)
-
-    run(finalSaguiConfig, webpackConfig, karmaConfig)
-      .then(resolve, reject)
-  } catch (e) {
-    reject(e)
-  }
-})
+  })
 
 /**
  * Command Line Interface

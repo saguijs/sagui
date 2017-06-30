@@ -9,13 +9,13 @@ import actions from '../actions'
  * artefact.
  */
 export default (library, { projectPath, action }) => {
-  if (!library || action === actions.TEST_UNIT) { return {} }
+  if (!library || action === actions.TEST_UNIT) {
+    return {}
+  }
 
   const externals = probeExternals(projectPath)
 
-  const libraryConfig = typeof library === 'string'
-    ? { main: library }
-    : library
+  const libraryConfig = typeof library === 'string' ? { main: library } : library
 
   const target = libraryConfig.umdName ? 'umd' : 'commonjs2'
 
@@ -25,13 +25,13 @@ export default (library, { projectPath, action }) => {
       path: join(projectPath, 'dist'),
       filename: `${libraryConfig.main}.js`,
       libraryTarget: target,
-      library: libraryConfig.umdName
+      library: libraryConfig.umdName,
     },
-    externals: externals
+    externals: externals,
   }
 }
 
-function probeExternals (projectPath) {
+function probeExternals(projectPath) {
   const projectPackageJSON = require(join(projectPath, 'package.json'))
   return Object.keys(projectPackageJSON.peerDependencies || {})
 }

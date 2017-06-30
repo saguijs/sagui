@@ -4,9 +4,6 @@ export default (configA, configB = {}) => {
   return {
     ...configA,
     ...configB,
-    reporters: uniq([
-      ...configA.reporters || [],
-      ...configB.reporters || []
-    ])
+    reporters: uniq([...(configA.reporters || []), ...(configB.reporters || [])]),
   }
 }

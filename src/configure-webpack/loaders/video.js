@@ -2,7 +2,7 @@ import fileExtensions from '../../file-extensions'
 
 export default {
   name: 'video',
-  configure () {
+  configure() {
     return {
       module: {
         rules: [
@@ -11,12 +11,12 @@ export default {
             use: {
               loader: 'file-loader',
               options: {
-                name: '[name]-[hash].[ext]'
-              }
-            }
-          }
-        ]
-      }
+                name: '[name]-[hash].[ext]',
+              },
+            },
+          },
+        ],
+      },
     }
-  }
+  },
 }

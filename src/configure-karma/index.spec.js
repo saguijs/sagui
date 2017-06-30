@@ -8,20 +8,25 @@ const projectPath = join(saguiPath, 'spec/fixtures/simple-project')
 const baseSaguiConfig = {
   saguiPath,
   projectPath,
-  pages: ['index']
+  pages: ['index'],
 }
 
 const webpackConfig = ['first', 'seccond']
 
-describe('karma', function () {
-  it('should the first availbale webpackConfig from the webpackConfig array to prevent double test execution', function () {
+describe('karma', function() {
+  it('should the first availbale webpackConfig from the webpackConfig array to prevent double test execution', function() {
     expect(karma(baseSaguiConfig, webpackConfig).webpack).equal('first')
   })
 
-  describe('extension', function () {
-    it('should allow overwriting the default configuration', function () {
+  describe('extension', function() {
+    it('should allow overwriting the default configuration', function() {
       expect(karma(baseSaguiConfig, webpackConfig).browsers).eql(['PhantomJS'])
-      expect(karma({ ...baseSaguiConfig, additionalKarmaConfig: { browsers: ['Chrome'] } }, webpackConfig).browsers).eql(['Chrome'])
+      expect(
+        karma(
+          { ...baseSaguiConfig, additionalKarmaConfig: { browsers: ['Chrome'] } },
+          webpackConfig
+        ).browsers
+      ).eql(['Chrome'])
     })
   })
 })

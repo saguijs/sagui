@@ -1,5 +1,3 @@
 {
-  "extends": [
-    "eslint-config-sagui"
-  ]
+  "extends": "./src/javascript-eslintrc.json"
 }
