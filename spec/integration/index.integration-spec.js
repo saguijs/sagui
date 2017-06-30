@@ -127,6 +127,10 @@ describe('[integration] sagui', function () {
       it('should test that different dependencies get different transient dependencies and node_modules should win when colliding names', () => {
         return sagui({ projectPath, action: actions.TEST_UNIT })
       })
+
+      it('should warn about the duplicated packages', () => {
+        return sagui({ projectPath, action: actions.BUILD, optimize: true })
+      })
     })
 
     describe('project with custom eslintrc', () => {

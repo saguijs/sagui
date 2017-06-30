@@ -79,6 +79,7 @@
     "commander": "^2.9.0",
     "css-loader": "^0.28.0",
     "deep-equal": "^1.0.1",
+    "duplicate-package-checker-webpack-plugin": "^1.2.4",
     "eslint": "^3.19.0",
     "eslint-config-prettier": "^1.7.0",
     "eslint-loader": "^1.7.1",

@@ -3,6 +3,7 @@ import merge from 'webpack-merge'
 import path from 'path'
 import webpack, { DefinePlugin, HotModuleReplacementPlugin, NoEmitOnErrorsPlugin } from 'webpack'
 import WebpackMd5Hash from 'webpack-md5-hash'
+import DuplicatePackageCheckerPlugin from 'duplicate-package-checker-webpack-plugin'
 
 import actions from '../actions'
 import fileExtensions from '../file-extensions'
@@ -55,6 +56,12 @@ const buildSharedWebpackConfig = (saguiConfig) => {
       // only include the optimization plugins if
       // the flag is enabled
       ...(optimize ? [
+        // check for duplicated packages only while optimizing
+        new DuplicatePackageCheckerPlugin({
+          // Also show module that is requiring each duplicate package
+           verbose: true
+        }),
+
         new webpack.optimize.DedupePlugin(),
         new webpack.optimize.UglifyJsPlugin({
           sourceMap: true
