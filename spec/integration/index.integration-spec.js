@@ -1,5 +1,6 @@
 import 'babel-polyfill'
 import { expect } from 'chai'
+import glob from 'glob'
 import fs from 'fs-extra'
 import path from 'path'
 import jsdom from 'jsdom'
@@ -55,6 +56,13 @@ describe('[integration] sagui', function () {
 
     it('should be possible to build', () => {
       return sagui({ projectPath, action: actions.BUILD })
+    })
+
+    it('should extract the styles in a separated file by default', () => {
+      return sagui({ projectPath, action: actions.BUILD }).then(() => {
+        const cssFiles = glob.sync(path.join(projectPath, 'dist/*.css'))
+        expect(cssFiles.length).to.eql(1)
+      })
     })
 
     it('should be possible to test', () => {
