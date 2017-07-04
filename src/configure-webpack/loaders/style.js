@@ -19,7 +19,7 @@ const defaultConfig = {
  */
 export default {
   name: 'style',
-  configure ({ action, optimize, pages = [], projectPath, style = {}, browsers }) {
+  configure ({ action, optimize, pages, projectPath, style = {}, browsers }) {
     // Use null-loader during tests
     // for better performance
     if (action === actions.TEST_UNIT) {
