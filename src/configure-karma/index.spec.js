@@ -20,7 +20,7 @@ describe('karma', function () {
 
   describe('extension', function () {
     it('should allow overwriting the default configuration', function () {
-      expect(karma(baseSaguiConfig, webpackConfig).browsers).eql(['PhantomJS'])
+      expect(karma(baseSaguiConfig, webpackConfig).browsers).eql(['Chrome_headless'])
       expect(karma({ ...baseSaguiConfig, additionalKarmaConfig: { browsers: ['Chrome'] } }, webpackConfig).browsers).eql(['Chrome'])
     })
   })
