@@ -21,8 +21,8 @@ export default (saguiConfig = {}) => {
   const { pages = [], libraries = [], ...sharedSaguiConfig } = saguiConfig
 
   const sharedWebpackConfig = merge.smart(
-    buildSharedWebpackConfig(sharedSaguiConfig),
-    buildLoadersConfig(sharedSaguiConfig),
+    buildSharedWebpackConfig(saguiConfig),
+    buildLoadersConfig(saguiConfig),
     sharedSaguiConfig.additionalWebpackConfig
   )
 
@@ -99,9 +99,12 @@ const buildSharedWebpackConfig = (saguiConfig) => {
     resolve: {
       extensions: fileExtensions.list.JAVASCRIPT,
       modules: [
-        projectSourcePath,
+        // Keep same behavior as Node.js module resolution:
+        // - Precedence: `node_modules` win over `src`;
+        // - Scan modules by looking through the current directory and its ancestors.
+        'node_modules',
 
-        path.join(projectPath, '/node_modules'),
+        projectSourcePath,
 
         // Sagui node_modules is required in the path to be able
         // to load the `webpack-hot-middleware`

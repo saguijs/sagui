@@ -1,5 +1,6 @@
 import 'babel-polyfill'
 import { expect } from 'chai'
+import glob from 'glob'
 import fs from 'fs-extra'
 import path from 'path'
 import jsdom from 'jsdom'
@@ -37,6 +38,7 @@ describe('[integration] sagui', function () {
   const projectContentWithLintErrors = path.join(__dirname, '../fixtures/project-content-with-lint-errors')
   const projectContentWithPrettierErrors = path.join(__dirname, '../fixtures/project-content-with-prettier-errors')
   const projectContentWithPrettierErrorsInSaguiConfig = path.join(__dirname, '../fixtures/project-content-with-prettier-errors-in-sagui-config')
+  const projectContentCustomPrettierOptionsInEslintrc = path.join(__dirname, '../fixtures/project-content-with-custom-prettier-options-in-eslintrc')
   let projectPath, projectSrcPath
 
   beforeEach(function () {
@@ -58,6 +60,13 @@ describe('[integration] sagui', function () {
 
     it('should be possible to build for production (dist)', () => {
       return sagui({ projectPath, action: actions.BUILD, optimize: true })
+    })
+
+    it('should extract the styles in a separated file by default', () => {
+      return sagui({ projectPath, action: actions.BUILD }).then(() => {
+        const cssFiles = glob.sync(path.join(projectPath, 'dist/*.css'))
+        expect(cssFiles.length).to.eql(1)
+      })
     })
 
     it('should be possible to test', () => {
@@ -117,6 +126,17 @@ describe('[integration] sagui', function () {
       })
 
       it('should be possible to test', () => {
+        return sagui({ projectPath, action: actions.TEST_UNIT })
+      })
+    })
+
+    describe('project with duplicated transient dependencies and colliding node_modules', () => {
+      const projectWithNodeModules = path.join(__dirname, '../fixtures/project-with-node-modules')
+      beforeEach(function () {
+        fs.copySync(projectWithNodeModules, projectPath, { overwrite: true })
+      })
+
+      it('should test that different dependencies get different transient dependencies and node_modules should win when colliding names', () => {
         return sagui({ projectPath, action: actions.TEST_UNIT })
       })
     })
@@ -318,6 +338,23 @@ npm-debug.log`)
       it('should be possible to format it and remove the errors', async () => {
         await sagui({ projectPath, action: actions.FORMAT })
         await sagui({ projectPath, action: actions.BUILD })
+      })
+    })
+
+    describe('when there are custom prettier options in .eslintrc', () => {
+      beforeEach(function () {
+        fs.copySync(projectContentCustomPrettierOptionsInEslintrc, projectPath, { overwrite: true })
+      })
+      it('`lint` should respect the prettier options from .eslintrc', () => {
+        return sagui({ projectPath, action: actions.TEST_LINT })
+          .then(
+            () => { throw new Error('It should have failed') },
+            (error) => expect(error.message).to.eql('Lint failed')
+          )
+      })
+      it('`format` should respect the prettier options from .eslintrc', async () => {
+        await sagui({ projectPath, action: actions.FORMAT })
+        await sagui({ projectPath, action: actions.TEST_LINT })
       })
     })
   })
