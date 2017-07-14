@@ -58,6 +58,10 @@ describe('[integration] sagui', function () {
       return sagui({ projectPath, action: actions.BUILD })
     })
 
+    it('should be possible to build for production (dist)', () => {
+      return sagui({ projectPath, action: actions.BUILD, optimize: true })
+    })
+
     it('should extract the styles in a separated file by default', () => {
       return sagui({ projectPath, action: actions.BUILD }).then(() => {
         const cssFiles = glob.sync(path.join(projectPath, 'dist/*.css'))
