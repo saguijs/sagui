@@ -9,7 +9,7 @@ export default (saguiConfig = {}, webpackConfig) => {
 }
 
 const buildStandardKarmaConfig = (saguiConfig, webpackConfig) => {
-  const { projectPath, watch, coverage } = saguiConfig
+  const { projectPath, watch, coverage, additionalKarmaConfig = {} } = saguiConfig
 
   return {
     // Webpack itself supports an array of configurations
@@ -26,7 +26,20 @@ const buildStandardKarmaConfig = (saguiConfig, webpackConfig) => {
       ...(coverage ? ['coverage'] : [])
     ],
 
-    frameworks: ['jasmine'],
+    frameworks: ['jasmine', 'detectBrowsers'],
+
+    detectBrowsers: {
+      enabled: additionalKarmaConfig.browsers && additionalKarmaConfig.browsers > 0,
+      usePhantomJS: true,
+
+      postDetection: function (availableBrowser) {
+        if (availableBrowser.indexOf('Chrome') > -1) {
+          return ['ChromeHeadless']
+        }
+
+        return ['PhantomJS']
+      }
+    },
 
     // first run will have the full output and
     // the next runs just output the summary and
