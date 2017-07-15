@@ -34,10 +34,20 @@ const buildStandardKarmaConfig = (saguiConfig, webpackConfig) => {
 
       postDetection: function (availableBrowser) {
         if (availableBrowser.indexOf('Chrome') > -1) {
-          return ['ChromeHeadless']
+          return ['ChromeHeadlessLauncher']
         }
 
         return ['PhantomJS']
+      }
+    },
+
+    customLaunchers: {
+      'ChromeHeadlessLauncher': {
+        base: 'Chrome',
+        chromeFlags: [
+          '--disable-gpu',
+          '--headless'
+        ]
       }
     },
 
