@@ -28,7 +28,7 @@ if (process.env.TEST_TYPE === 'integration_test') {
 if (process.env.TEST_TYPE === 'test_create_project_npm') {
   // # builds Sagui before installing
   exec('npm run build', saguiPath)
-  exec('npm pack')
+  exec('npm pack --ignore-scripts')
 
   var npmProjectPath = createTempFolder()
 
@@ -47,7 +47,7 @@ if (process.env.TEST_TYPE === 'test_create_project_npm') {
 if (process.env.TEST_TYPE === 'test_create_project_yarn') {
   // # builds Sagui before installing
   exec('npm run build', saguiPath)
-  exec('npm pack')
+  exec('npm pack --ignore-scripts')
 
   var yarnProjectPath = createTempFolder()
 
