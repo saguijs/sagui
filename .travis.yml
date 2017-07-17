@@ -26,12 +26,16 @@ matrix:
       addons:
         chrome: stable
       sudo: false
-      env: TEST_TYPE=integration_test
+      env:
+        - TEST_TYPE=integration_test
+        - BROWSER=Chrome
       node_js: 6.11.1
 
     # Test with PhantomJS available
     - sudo: false
-      env: TEST_TYPE=integration_test
+      env:
+        - TEST_TYPE=integration_test
+        - BROWSER=PhantomJS
       node_js: 6.11.1
 
 cache:
