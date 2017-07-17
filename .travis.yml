@@ -1,9 +1,5 @@
 language: node_js
 
-node_js:
-  - 6.11.1
-  - 8.1.4
-
 before_install:
   - curl -o- -L https://yarnpkg.com/install.sh | bash # until yarn is
   - export PATH=$HOME/.yarn/bin:$PATH                 # pre-installed
@@ -15,12 +11,15 @@ matrix:
   include:
     - sudo: false
       env: TEST_TYPE=lint_and_test_unit
+      node_js: 6.11.1
 
     - sudo: false
       env: TEST_TYPE=test_create_project_npm
+      node_js: 6.11.1
 
     - sudo: false
       env: TEST_TYPE=test_create_project_yarn
+      node_js: 6.11.1
 
     # Test with Chrome available
     - dist: trusty
@@ -28,10 +27,12 @@ matrix:
         chrome: stable
       sudo: false
       env: TEST_TYPE=integration_test
+      node_js: 6.11.1
 
     # Test with PhantomJS available
     - sudo: false
       env: TEST_TYPE=integration_test
+      node_js: 6.11.1
 
 cache:
   directories:
