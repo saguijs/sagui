@@ -2,7 +2,10 @@ language: node_js
 node_js:
 - 6.11.1
 - 8.1.4
-sudo: false
+dist: trusty # needs Ubuntu Trusty to install Chrome
+sudo: false  # no need for virtualization.
+addons:
+  chrome: stable
 before_install:
 - curl -o- -L https://yarnpkg.com/install.sh | bash # until yarn is
 - export PATH=$HOME/.yarn/bin:$PATH                 # pre-installed
