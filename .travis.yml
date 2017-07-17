@@ -1,25 +1,42 @@
 language: node_js
+
 node_js:
-- 6.11.1
-- 8.1.4
-dist: trusty # needs Ubuntu Trusty to install Chrome
-sudo: false  # no need for virtualization.
-addons:
-  chrome: stable
+  - 6.11.1
+  - 8.1.4
+
 before_install:
-- curl -o- -L https://yarnpkg.com/install.sh | bash # until yarn is
-- export PATH=$HOME/.yarn/bin:$PATH                 # pre-installed
+  - curl -o- -L https://yarnpkg.com/install.sh | bash # until yarn is
+  - export PATH=$HOME/.yarn/bin:$PATH                 # pre-installed
+
 script:
-- node bin/ci.js
-env:
-  matrix:
-  - TEST_TYPE=lint_and_test_unit
-  - TEST_TYPE=integration_test
-  - TEST_TYPE=test_create_project_npm
-  - TEST_TYPE=test_create_project_yarn
+  - node bin/ci.js
+
+matrix:
+  include:
+    - sudo: false
+      env: TEST_TYPE=lint_and_test_unit
+
+    - sudo: false
+      env: TEST_TYPE=test_create_project_npm
+
+    - sudo: false
+      env: TEST_TYPE=test_create_project_yarn
+
+    # Test with Chrome available
+    - dist: trusty
+      addons:
+        chrome: stable
+      sudo: false
+      env: TEST_TYPE=integration_test
+
+    # Test with PhantomJS available
+    - sudo: false
+      env: TEST_TYPE=integration_test
+
 cache:
   directories:
-  - node_modules
+    - node_modules
+
 deploy:
   provider: npm
   email: paulo@ragonha.me
