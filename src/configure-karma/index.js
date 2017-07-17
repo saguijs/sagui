@@ -33,7 +33,7 @@ const buildStandardKarmaConfig = (saguiConfig, webpackConfig) => {
       usePhantomJS: true,
 
       postDetection: function (availableBrowser) {
-        if (availableBrowser.indexOf('Chrome') > -1) {
+        if (availableBrowser.indexOf('Chrome') > -1 && process.env['CHROME_BIN']) {
           return ['ChromeHeadless']
         }
 
