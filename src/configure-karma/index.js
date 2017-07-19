@@ -33,7 +33,11 @@ const buildStandardKarmaConfig = (saguiConfig, webpackConfig) => {
       usePhantomJS: true,
 
       postDetection: function (availableBrowser) {
-        if (availableBrowser.indexOf('Chrome') > -1 && process.env['CHROME_BIN']) {
+        const isTravis = process.env['TRAVIS'] === 'true'
+        const isChromeAvailable = availableBrowser.indexOf('Chrome') > -1
+        const isTravisChromeAvailable = (process.env['TRAVIS_STACK_FEATURES'] || '').indexOf('google-chrome') !== -1
+
+        if (isChromeAvailable && (!isTravis || (isTravis && isTravisChromeAvailable))) {
           return ['ChromeHeadless']
         }
 
