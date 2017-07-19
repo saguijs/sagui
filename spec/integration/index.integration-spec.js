@@ -3,7 +3,7 @@ import { expect } from 'chai'
 import glob from 'glob'
 import fs from 'fs-extra'
 import path from 'path'
-import jsdom from 'jsdom'
+import { JSDOM } from 'jsdom'
 import sagui, { InvalidSaguiConfig } from '../../src'
 import actions from '../../src/actions'
 import temp from 'temp'
@@ -226,16 +226,14 @@ npm-debug.log`)
 
     describe('style loader', () => {
       const projectWithCSSModules = path.join(__dirname, '../fixtures/project-with-css-modules')
-      const htmlFile = path.join(__dirname, '../fixtures/index.html')
+      const htmlContent = fs.readFileSync(path.join(__dirname, '../fixtures/index.html'))
 
-      beforeEach((done) => {
+      beforeEach(() => {
         fs.copySync(projectWithCSSModules, projectPath, { overwrite: true })
 
-        jsdom.env(htmlFile, (err, window) => {
-          global.window = window
-          global.document = window.document
-          done()
-        });
+        const jsdom = new JSDOM(htmlContent)
+        global.window = jsdom.window
+        global.document = jsdom.window.document
       })
 
       afterEach(() => {
