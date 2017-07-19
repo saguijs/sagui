@@ -108,7 +108,12 @@ Sagui will automatically run every test file that follows this convention.
 
 Under the hood it uses [Karma test runner](http://karma-runner.github.io/) to allow running the tests in the most diverse browsers and even through [Selenium](http://docs.seleniumhq.org/) (not natively).
 
-By default Sagui uses [PhantomJS](http://phantomjs.org/) to run the tests headlessly. To **speed up installing the dependencies** (`npm install`) it is advisable to have PhantomJS [installed globally](https://github.com/Medium/phantomjs#using-phantomjs-from-disk) in the machine.
+To run the tests Sagui uses [Chrome Headless](https://chromium.googlesource.com/chromium/src/+/lkgr/headless/README.md), but it fallbacks to [PhantomJS](http://phantomjs.org/) if Chrome is not installed on the machine.
+
+Make sure either of these browsers is installed to be able to run the tests:
+
+- [Chrome](https://www.google.com/chrome/browser/desktop/index.html)
+- [PhantomJS](https://github.com/Medium/phantomjs#using-phantomjs-from-disk)
 
 To open the tests in a browser (or in multiple browsers!), simply follow the link Karma outputs when you start running the script `test:unit:watch`. Running them in a browser allows you to set breakpoints and debug your code properly. Note watch mode is necessary, else tests will stop running when finished.
 
