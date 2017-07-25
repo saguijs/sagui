@@ -109,7 +109,14 @@ const buildSharedWebpackConfig = (saguiConfig) => {
         // Sagui node_modules is required in the path to be able
         // to load the `webpack-hot-middleware`
         path.join(saguiPath, '/node_modules')
-      ]
+      ],
+
+      // In order for `npm link` and `yarn link` to work, Webpack should not
+      // resolve symlinks inside the `node_modules` folder: otherwise, it will
+      // try to load the linked dependencies as if they were part of the
+      // project code, even if they have a different babel/eslint/etc
+      // configuration.
+      symlinks: false
     },
 
     resolveLoader: {
