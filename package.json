@@ -7,14 +7,7 @@
     "sagui": "./bin/sagui.js"
   },
   "main": "index.js",
-  "files": [
-    "bin",
-    "karma-static-files",
-    "flowtype-interfaces",
-    "lib",
-    "src",
-    "template"
-  ],
+  "files": ["bin", "karma-static-files", "flowtype-interfaces", "lib", "src", "template"],
   "scripts": {
     "build": "rm -rf lib && babel src --out-dir lib --ignore *.spec.js && cp src/sagui-config-schema.json lib/sagui-config-schema.json && cp src/javascript-eslintrc.json lib/javascript-eslintrc.json",
     "test": "npm run test:lint && npm run test:unit && npm run test:integration",
@@ -33,12 +26,7 @@
       "jasmine": true,
       "node": true
     },
-    "ignore": [
-      "lib",
-      "flowtype-interfaces",
-      "spec",
-      "template"
-    ]
+    "ignore": ["lib", "flowtype-interfaces", "spec", "template"]
   },
   "repository": {
     "type": "git",

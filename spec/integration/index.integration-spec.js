@@ -77,6 +77,11 @@ describe('[integration] sagui', function () {
       return sagui({ projectPath, action: actions.TEST_LINT })
     })
 
+    it('should not lint the dist folder', () => {
+      return sagui({ projectPath, action: actions.BUILD })
+        .then(() => sagui({ projectPath, action: actions.TEST_LINT }))
+    })
+
     it('should be possible to test (with coverage)', () => {
       return sagui({ projectPath, action: actions.TEST_UNIT, coverage: true })
     })
