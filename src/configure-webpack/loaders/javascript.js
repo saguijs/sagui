@@ -18,6 +18,7 @@ export default {
             path: 'babel-loader',
             query: {
               babelrc: false,
+              cacheDirectory: path.resolve(projectPath, '.sagui/babel'),
               presets: [
                 [require.resolve('babel-preset-env'), {
                   // Replaces require("babel-polyfill")
