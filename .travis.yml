@@ -32,7 +32,8 @@ matrix:
       node_js: 6.11.1
 
     # Test with PhantomJS available
-    - sudo: false
+    - dist: precise
+      sudo: false
       env:
         - TEST_TYPE=integration_test
         - BROWSER=PhantomJS
