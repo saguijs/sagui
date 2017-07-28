@@ -39,6 +39,7 @@ describe('[integration] sagui', function () {
   const projectContentWithPrettierErrors = path.join(__dirname, '../fixtures/project-content-with-prettier-errors')
   const projectContentWithPrettierErrorsInSaguiConfig = path.join(__dirname, '../fixtures/project-content-with-prettier-errors-in-sagui-config')
   const projectContentCustomPrettierOptionsInEslintrc = path.join(__dirname, '../fixtures/project-content-with-custom-prettier-options-in-eslintrc')
+  const projectContentWithDynamicImports = path.join(__dirname, '../fixtures/project-content-with-dynamic-import')
   let projectPath, projectSrcPath
 
   beforeEach(function () {
@@ -360,6 +361,14 @@ npm-debug.log`)
       it('`format` should respect the prettier options from .eslintrc', async () => {
         await sagui({ projectPath, action: actions.FORMAT })
         await sagui({ projectPath, action: actions.TEST_LINT })
+      })
+    })
+
+    describe('when there are dynamic imports', () => {
+      it('`build` should not break', async () => {
+        fs.copySync(projectContentWithDynamicImports, projectPath, { overwrite: true })
+
+        await sagui({ projectPath, action: actions.BUILD })
       })
     })
   })

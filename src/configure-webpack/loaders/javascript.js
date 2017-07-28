@@ -46,6 +46,8 @@ export default {
                 require.resolve('babel-preset-stage-3')
               ],
               plugins: [
+                [require.resolve('babel-plugin-syntax-dynamic-import'), {}],
+
                 // Better React warnings and stack traces in development and testing
                 // Might no longer be needed in the future
                 // see: https://github.com/babel/babel/issues/4702
