@@ -81,7 +81,11 @@ export default {
             options: {
               configFile: path.join(projectPath, '.eslintrc'),
               useEslintrc: false,
-              cwd: projectPath
+              cwd: projectPath,
+
+              // While in development make the eslint messages non-intrusive
+              // by turning them all into warnings
+              emitWarning: action === actions.DEVELOP
             }
           },
           {
