@@ -55,7 +55,6 @@ const buildSharedWebpackConfig = (saguiConfig) => {
       // only include the optimization plugins if
       // the flag is enabled
       ...(optimize ? [
-        new webpack.optimize.DedupePlugin(),
         new webpack.optimize.UglifyJsPlugin({
           sourceMap: true
         }),
