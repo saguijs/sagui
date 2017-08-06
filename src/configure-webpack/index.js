@@ -1,3 +1,4 @@
+import CaseSensitivePathsPlugin from 'case-sensitive-paths-webpack-plugin'
 import CleanWebpackPlugin from 'clean-webpack-plugin'
 import merge from 'webpack-merge'
 import path from 'path'
@@ -79,6 +80,7 @@ const buildSharedWebpackConfig = (saguiConfig) => {
         verbose: false
       })] : []),
 
+      new CaseSensitivePathsPlugin(),
       new DefinePlugin({
         'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
       })
