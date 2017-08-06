@@ -40,6 +40,7 @@ describe('[integration] sagui', function () {
   const projectContentWithPrettierErrorsInSaguiConfig = path.join(__dirname, '../fixtures/project-content-with-prettier-errors-in-sagui-config')
   const projectContentCustomPrettierOptionsInEslintrc = path.join(__dirname, '../fixtures/project-content-with-custom-prettier-options-in-eslintrc')
   const projectContentWithDynamicImports = path.join(__dirname, '../fixtures/project-content-with-dynamic-import')
+  const projectContentWithCaseMismatchInModulePath = path.join(__dirname, '../fixtures/project-with-case-mismatch-in-module-paths')
   let projectPath, projectSrcPath
 
   beforeEach(function () {
@@ -367,6 +368,18 @@ npm-debug.log`)
         fs.copySync(projectContentWithDynamicImports, projectPath, { overwrite: true })
 
         await sagui({ projectPath, action: actions.BUILD })
+      })
+    })
+
+    describe('when there is case mismatch in module paths', () => {
+      it('`build` should break', async () => {
+        fs.copySync(projectContentWithCaseMismatchInModulePath, projectPath, { overwrite: true })
+
+        await sagui({ projectPath, action: actions.BUILD })
+          .then(
+            () => { throw new Error('It should have failed because of case mismatch in module path')},
+            (error) => expect(error.message).to.eql('Build failed')
+          )
       })
     })
   })

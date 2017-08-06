@@ -75,6 +75,7 @@
     "babel-preset-flow": "^6.23.0",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-3": "^6.24.1",
+    "case-sensitive-paths-webpack-plugin": "^2.1.1",
     "chalk": "^2.0.1",
     "clean-webpack-plugin": "^0.1.16",
     "commander": "^2.9.0",
