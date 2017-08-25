@@ -414,7 +414,7 @@ For more information about configuring Karma, check the [Karma documentation](ht
 
 ## Gotchas
 
-### Accessing dev server from outside `localhost`
+### `Invalid Host header` - Accessing dev server from outside `localhost`
 
 By default, Webpack disables access to the development server for hosts other than `localhost`, which means the development server will not be accessible from outside. If you want to give external access to the development server, you can set the `develop.disableHostCheck` to `true`:
 
