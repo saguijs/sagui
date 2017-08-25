@@ -414,6 +414,19 @@ For more information about configuring Karma, check the [Karma documentation](ht
 
 ## Gotchas
 
+### `Invalid Host header` - Accessing dev server from outside `localhost`
+
+By default, Webpack disables access to the development server for hosts other than `localhost`, which means the development server will not be accessible from outside. If you want to give external access to the development server, you can set the `develop.disableHostCheck` to `true`:
+
+```js
+// sagui.config.js
+module.exports = {
+  develop: {
+    disableHostCheck: true
+  }
+}
+```
+
 ### React Router
 
 For [`react-router`](https://github.com/ReactTraining/react-router) to work on the development server, an absolute static path for the output has to be configured on Webpack. You can do that by adding this configuration to `sagui.config.js`:
