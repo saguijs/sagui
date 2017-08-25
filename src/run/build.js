@@ -24,7 +24,7 @@ export default (saguiConfig, webpackConfig) => new Promise((resolve, reject) => 
 
       reject(new Error('Build failed'))
     } else {
-      log('Built successfull.')
+      log('Built successful.')
       resolve()
     }
   })
