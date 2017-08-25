@@ -24,7 +24,7 @@
     "test:integration:watch": "npm run test:integration -- --watch",
     "test:unit": "mocha --timeout 0 --compilers js:babel-register --recursive --reporter spec ./src",
     "test:unit:watch": "npm run test:unit -- --watch --watch-extensions json",
-    "prepublish": "not-in-install && npm prune && npm test && npm run build || in-install",
+    "prepare": "npm prune && npm test && npm run build",
     "postinstall": "node ./bin/sagui.js update"
   },
   "standard": {
@@ -54,7 +54,6 @@
     "babel-cli": "^6.24.0",
     "babel-register": "^6.24.0",
     "chai": "^4.1.0",
-    "in-publish": "^2.0.0",
     "jsdom": "^11.1.0",
     "mocha": "^3.2.0",
     "snazzy": "^7.0.0",
