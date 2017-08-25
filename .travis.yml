@@ -13,9 +13,15 @@ matrix:
       env: TEST_TYPE=lint_and_test_unit
       node_js: 6.11.1
 
+    # test creating a new project with the LTS version
     - sudo: false
       env: TEST_TYPE=test_create_project_npm
       node_js: 6.11.1
+
+    # test creating a new project with the latest version
+    - sudo: false
+      env: TEST_TYPE=test_create_project_npm
+      node_js: 8.4.0
 
     - sudo: false
       env: TEST_TYPE=test_create_project_yarn
