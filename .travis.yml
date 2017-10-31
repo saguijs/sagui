@@ -37,14 +37,6 @@ matrix:
         - BROWSER=Chrome
       node_js: 6.11.1
 
-    # Test with PhantomJS available
-    - dist: precise
-      sudo: false
-      env:
-        - TEST_TYPE=integration_test
-        - BROWSER=PhantomJS
-      node_js: 6.11.1
-
 cache:
   directories:
     - node_modules
