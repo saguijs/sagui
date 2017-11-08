@@ -46,6 +46,7 @@ before_deploy:
   - npm run build
 
 deploy:
+  skip_cleanup: true
   provider: npm
   email: paulo@ragonha.me
   api_key:
