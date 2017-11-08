@@ -96,6 +96,13 @@ describe('pages webpack preset', function () {
       const commons = webpackConfig.plugins.filter((plugin) => plugin instanceof optimize.CommonsChunkPlugin)
       expect(commons.length).equal(1)
     })
+
+    it('should set minChunks to 2 in the CommonsChunkPlugin', function () {
+      const webpackConfig = buildPagesConfig(['index', 'demo'], baseConfig)
+
+      const commons = webpackConfig.plugins.filter((plugin) => plugin instanceof optimize.CommonsChunkPlugin)
+      expect(commons[0].minChunks).equal(2)
+    })
   })
 
   describe(`when action is "${actions.BUILD}"`, () => {
