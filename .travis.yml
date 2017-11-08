@@ -41,6 +41,10 @@ cache:
   directories:
     - node_modules
 
+before_deploy:
+  - npm prune
+  - npm run build
+
 deploy:
   provider: npm
   email: paulo@ragonha.me

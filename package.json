@@ -24,7 +24,6 @@
     "test:integration:watch": "npm run test:integration -- --watch",
     "test:unit": "mocha --timeout 0 --compilers js:babel-register --recursive --reporter spec ./src",
     "test:unit:watch": "npm run test:unit -- --watch --watch-extensions json",
-    "prepare": "npm prune && npm test && npm run build",
     "postinstall": "node ./bin/sagui.js update"
   },
   "standard": {
