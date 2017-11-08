@@ -43,7 +43,7 @@ function configurePlugins (pages, action) {
   })
 
   if (pages.length > 1) {
-    plugins.push(new optimize.CommonsChunkPlugin({ name: 'common' }))
+    plugins.push(new optimize.CommonsChunkPlugin({ name: 'common', minChunks: 2 }))
   }
 
   return plugins
