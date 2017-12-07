@@ -125,7 +125,7 @@
     "url-loader": "^0.5.8",
     "webpack": "^3.2.0",
     "webpack-dev-server": "^2.5.1",
-    "webpack-md5-hash": "0.0.5",
+    "webpack-md5-hash": "0.0.6",
     "webpack-merge": "^4.1.0",
     "yaml-loader": "^0.5.0"
   }
