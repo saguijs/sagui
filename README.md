@@ -174,7 +174,7 @@ The previous configuration will expect and build the files:
 
 #### Excluding a page from chunks
 
-If you want a page to be excluded from either the [vendor](#vendor) or [common](#common) chunk, then you can do so by providing an object with a `name` and `independent` flag (set to `true`) instead of just the name of the page.
+If you want a page to be excluded from either the [vendor](#chunksvendor) or [common](#chunkscommon) chunk, then you can do so by providing an object with a `name` and `independent` flag (set to `true`) instead of just the name of the page.
 
 ```js
 // sagui.config.js
@@ -183,11 +183,7 @@ module.exports = {
 }
 ```
 
-### `chunks`
-
-When multiple pages are configured, it's a good practice to bundle external (`node_modules`) or common dependencies of your pages into their own chunks in order to reduce the size of the built pages. This can be done with the following flags:
-
-#### `vendor`
+### `chunks.vendor`
 
 If you want all your external dependencies (`node_modules`) in your [pages](#pages) to be bundled together in a "vendor" chunk, then set this flag to `true`. By default it is set to `false`.
 
@@ -200,7 +196,7 @@ module.exports = {
 }
 ```
 
-#### `common`
+### `chunks.common`
 
 If you do not want all the common dependencies of your [pages](#pages) to be bundled together in a "common" chunk, then set this flag to `false`. By default it is set to `true`.
 
