@@ -19,6 +19,10 @@ const DEFAULT_SAGUI_CONFIG = {
   optimize: false,
   coverage: false,
   pages: [],
+  chunks: {
+    vendor: false,
+    common: true
+  },
   disableLoaders: [],
   javaScript: {},
   additionalWebpackConfig: {},
