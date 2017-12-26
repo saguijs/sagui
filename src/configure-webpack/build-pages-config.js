@@ -3,11 +3,11 @@ import { join } from 'path'
 import { optimize } from 'webpack'
 import actions from '../actions'
 
-export default (pages = [], { action, projectPath }) => {
+export default (pages = [], chunksConfig, { action, projectPath }) => {
   if (pages.length === 0 || action === actions.TEST_UNIT) { return {} }
 
   const entry = configureEntry(pages)
-  const plugins = configurePlugins(pages, action)
+  const plugins = configurePlugins(pages, chunksConfig)
   const filenamePattern = action === actions.BUILD
     ? '[name]-[chunkhash]'
     : '[name]' // For better performance during development
@@ -33,17 +33,50 @@ function configureEntry (pages) {
   return entry
 }
 
-function configurePlugins (pages, action) {
+function configurePlugins (pages, chunksConfig) {
   const plugins = pages.map((page) => {
+    const chunks = Object.keys(chunksConfig)
+      .reduce((chunks, key) => {
+        if (chunksConfig[key]) {
+          chunks.unshift(key)
+        }
+        return chunks
+      }, [page])
+
     return new HtmlWebpackPlugin({
       template: `${page}.html`,
       filename: `${page}.html`,
-      chunks: ['common', page]
+      chunks
     })
   })
 
   if (pages.length > 1) {
-    plugins.push(new optimize.CommonsChunkPlugin({ name: 'common', minChunks: 2 }))
+    const chunks = pages.reduce((chunks, page) => {
+      if (typeof page === 'string') {
+        chunks.push(page)
+      }
+      if (page.independent !== true) {
+        chunks.push(page.name)
+      }
+      return chunks
+    }, [])
+
+    if (chunksConfig.vendor) {
+      plugins.push(new optimize.CommonsChunkPlugin({
+        name: 'vendor',
+        minChunks: (module, context) => {
+          return /node_modules/.test(context)
+        },
+        chunks
+      }))
+    }
+    if (chunksConfig.common) {
+      plugins.push(new optimize.CommonsChunkPlugin({
+        name: 'common',
+        minChunks: 2,
+        chunks
+      }))
+    }
   }
 
   return plugins
