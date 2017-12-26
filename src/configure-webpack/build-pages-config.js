@@ -3,11 +3,11 @@ import { join } from 'path'
 import { optimize } from 'webpack'
 import actions from '../actions'
 
-export default (pages = [], chunksConfig, { action, projectPath }) => {
+export default (pages = [], { action, chunks = {}, projectPath }) => {
   if (pages.length === 0 || action === actions.TEST_UNIT) { return {} }
 
   const entry = configureEntry(pages)
-  const plugins = configurePlugins(pages, chunksConfig)
+  const plugins = configurePlugins(pages, chunks)
   const filenamePattern = action === actions.BUILD
     ? '[name]-[chunkhash]'
     : '[name]' // For better performance during development

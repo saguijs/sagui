@@ -19,7 +19,7 @@ import buildLoadersConfig from './loaders'
  * @return ready to use webpack configuration as an array
  */
 export default (saguiConfig = {}) => {
-  const { pages = [], libraries = [], chunks = {}, ...sharedSaguiConfig } = saguiConfig
+  const { pages = [], libraries = [], ...sharedSaguiConfig } = saguiConfig
 
   const sharedWebpackConfig = merge.smart(
     buildSharedWebpackConfig(saguiConfig),
@@ -28,7 +28,7 @@ export default (saguiConfig = {}) => {
   )
 
   return [
-    ...(pages.length > 0 ? [buildPagesConfig(pages, chunks, sharedSaguiConfig)] : []),
+    ...(pages.length > 0 ? [buildPagesConfig(pages, sharedSaguiConfig)] : []),
     ...libraries.map((libraryConfig) => buildLibraryConfig(libraryConfig, sharedSaguiConfig))
   ].map((entryPointWebpackConfig) => merge.smart(
     sharedWebpackConfig,
