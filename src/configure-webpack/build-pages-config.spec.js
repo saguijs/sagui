@@ -9,7 +9,7 @@ import buildPagesConfig from './build-pages-config'
 
 const projectPath = '/tmp/projec-path'
 
-describe.only('pages webpack preset', function () {
+describe('pages webpack preset', function () {
   describe('empty pages', function () {
     it('should return an empty configuration', function () {
       const webpackConfig = buildPagesConfig([], { }, { })
