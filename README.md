@@ -185,11 +185,11 @@ module.exports = {
 
 ### `chunks`
 
-When multiple pages are configured, it's a good practice to bundle external or common dependencies of your pages into their own chunks in order to reduce the size of the built pages. This can be done with the following flags:
+When multiple pages are configured, it's a good practice to bundle external (`node_modules`) or common dependencies of your pages into their own chunks in order to reduce the size of the built pages. This can be done with the following flags:
 
 #### `vendor`
 
-If you want all your external dependencies in your [pages](#pages) to be bundled together in a "vendor" chunk, then set this flag to `true`. By default it is set to `false`.
+If you want all your external dependencies (`node_modules`) in your [pages](#pages) to be bundled together in a "vendor" chunk, then set this flag to `true`. By default it is set to `false`.
 
 ```js
 // sagui.config.js
