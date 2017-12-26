@@ -179,7 +179,7 @@ If you want a page to be excluded from either the [vendor](#vendor) or [common](
 ```js
 // sagui.config.js
 module.exports = {
-  pages: ['index', { name: 'about', independent: true }]
+  pages: ['index', 'about', { name: 'demo', independent: true }]
 }
 ```
 
