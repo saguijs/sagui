@@ -1,6 +1,6 @@
 {
   "name": "sagui",
-  "version": "11.4.2",
+  "version": "11.5.0",
   "description": "Front-end tooling in a single dependency",
   "preferGlobal": false,
   "bin": {
@@ -111,6 +111,7 @@
     "karma-phantomjs-launcher": "^1.0.4",
     "karma-sourcemap-loader": "^0.3.7",
     "karma-webpack": "^2.0.3",
+    "lodash.merge": "^4.6.0",
     "lodash.uniq": "^4.5.0",
     "node-sass": "^4.5.2",
     "null-loader": "^0.1.1",
@@ -125,7 +126,7 @@
     "url-loader": "^0.5.8",
     "webpack": "^3.2.0",
     "webpack-dev-server": "^2.5.1",
-    "webpack-md5-hash": "0.0.5",
+    "webpack-md5-hash": "0.0.6",
     "webpack-merge": "^4.1.0",
     "yaml-loader": "^0.5.0"
   }

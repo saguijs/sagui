@@ -67,8 +67,38 @@
       "description": "https://github.com/saguijs/sagui#libraries"
     },
     "pages": {
-      "description": "https://github.com/saguijs/sagui#pages",
-      "type": "array"
+      "anyOf": [
+        {
+          "type": "array"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "independent": {
+              "type": "boolean"
+            }
+          },
+          "type": "object"
+        }
+      ],
+      "description": "https://github.com/saguijs/sagui#pages"
+    },
+    "chunks": {
+      "additionalProperties": false,
+      "properties": {
+        "common": {
+          "description": "https://github.com/saguijs/sagui#chunkscommon",
+          "type": "boolean"
+        },
+        "vendor": {
+          "description": "https://github.com/saguijs/sagui#chunksvendor",
+          "type": "boolean"
+        }
+      },
+      "type": "object"
     },
     "style": {
       "additionalProperties": false,
