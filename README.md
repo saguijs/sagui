@@ -108,7 +108,12 @@ Sagui will automatically run every test file that follows this convention.
 
 Under the hood it uses [Karma test runner](http://karma-runner.github.io/) to allow running the tests in the most diverse browsers and even through [Selenium](http://docs.seleniumhq.org/) (not natively).
 
-By default Sagui uses [PhantomJS](http://phantomjs.org/) to run the tests headlessly. To **speed up installing the dependencies** (`npm install`) it is advisable to have PhantomJS [installed globally](https://github.com/Medium/phantomjs#using-phantomjs-from-disk) in the machine.
+To run the tests Sagui uses [Chrome Headless](https://chromium.googlesource.com/chromium/src/+/lkgr/headless/README.md), but it fallbacks to [PhantomJS](http://phantomjs.org/) if Chrome is not installed on the machine.
+
+Make sure either of these browsers is installed to be able to run the tests:
+
+- [Chrome](https://www.google.com/chrome/browser/desktop/index.html)
+- [PhantomJS](https://github.com/Medium/phantomjs#using-phantomjs-from-disk)
 
 To open the tests in a browser (or in multiple browsers!), simply follow the link Karma outputs when you start running the script `test:unit:watch`. Running them in a browser allows you to set breakpoints and debug your code properly. Note watch mode is necessary, else tests will stop running when finished.
 
@@ -166,6 +171,43 @@ The previous configuration will expect and build the files:
 - `src/about.js` => `dist/about.js`
 - `src/index.html` => `dist/index.html`
 - `src/index.js` => `dist/index.js`
+
+#### Excluding a page from chunks
+
+If you want a page to be excluded from either the [vendor](#chunksvendor) or [common](#chunkscommon) chunk, then you can do so by providing an object with a `name` and `independent` flag (set to `true`) instead of just the name of the page.
+
+```js
+// sagui.config.js
+module.exports = {
+  pages: ['index', 'about', { name: 'demo', independent: true }]
+}
+```
+
+### `chunks.vendor`
+
+If you want all your external dependencies (`node_modules`) in your [pages](#pages) to be bundled together in a "vendor" chunk, then set this flag to `true`. By default it is set to `false`.
+
+```js
+// sagui.config.js
+module.exports = {
+  chunks: {
+    vendor: true
+  }
+}
+```
+
+### `chunks.common`
+
+If you do not want all the common dependencies of your [pages](#pages) to be bundled together in a "common" chunk, then set this flag to `false`. By default it is set to `true`.
+
+```js
+// sagui.config.js
+module.exports = {
+  chunks: {
+    common: false
+  }
+}
+```
 
 ### `libraries`
 
@@ -408,6 +450,19 @@ module.exports = {
 For more information about configuring Karma, check the [Karma documentation](https://karma-runner.github.io/1.0/config/configuration-file.html).
 
 ## Gotchas
+
+### `Invalid Host header` - Accessing dev server from outside `localhost`
+
+By default, Webpack disables access to the development server for hosts other than `localhost`, which means the development server will not be accessible from outside. If you want to give external access to the development server, you can set the `develop.disableHostCheck` to `true`:
+
+```js
+// sagui.config.js
+module.exports = {
+  develop: {
+    disableHostCheck: true
+  }
+}
+```
 
 ### React Router
 

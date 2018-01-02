@@ -35,6 +35,7 @@ function copyBase (projectPath) {
 
 function copyDotFiles (projectPath) {
   safeCopy(projectPath, '.editorconfig')
+  safeCopy(projectPath, '.eslintignore')
   safeCopy(projectPath, '.eslintrc', diffCheckESLintrc)
   safeCopy(projectPath, '.flowconfig')
 }

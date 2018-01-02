@@ -1,23 +1,52 @@
 language: node_js
-node_js:
-- 6.10.3
-- 8.0.0
-sudo: false
+
 before_install:
-- curl -o- -L https://yarnpkg.com/install.sh | bash # until yarn is
-- export PATH=$HOME/.yarn/bin:$PATH                 # pre-installed
+  - curl -o- -L https://yarnpkg.com/install.sh | bash # until yarn is
+  - export PATH=$HOME/.yarn/bin:$PATH                 # pre-installed
+
 script:
-- node bin/ci.js
-env:
-  matrix:
-  - TEST_TYPE=lint_and_test_unit
-  - TEST_TYPE=integration_test
-  - TEST_TYPE=test_create_project_npm
-  - TEST_TYPE=test_create_project_yarn
+  - node bin/ci.js
+
+matrix:
+  include:
+    - sudo: false
+      env: TEST_TYPE=lint_and_test_unit
+      node_js: 6.11.1
+
+    # test creating a new project with the LTS version
+    - sudo: false
+      env: TEST_TYPE=test_create_project_npm
+      node_js: 6.11.1
+
+    # test creating a new project with the latest version
+    - sudo: false
+      env: TEST_TYPE=test_create_project_npm
+      node_js: 8.4.0
+
+    - sudo: false
+      env: TEST_TYPE=test_create_project_yarn
+      node_js: 6.11.1
+
+    # Test with Chrome available
+    - dist: trusty
+      addons:
+        chrome: stable
+      sudo: false
+      env:
+        - TEST_TYPE=integration_test
+        - BROWSER=Chrome
+      node_js: 6.11.1
+
 cache:
   directories:
-  - node_modules
+    - node_modules
+
+before_deploy:
+  - npm prune
+  - npm run build
+
 deploy:
+  skip_cleanup: true
   provider: npm
   email: paulo@ragonha.me
   api_key:

@@ -1,6 +1,7 @@
 import webpack from 'webpack'
 import { logError, log } from '../util/log'
 import Server from 'webpack-dev-server'
+import ip from 'ip'
 
 /**
  * Development server
@@ -14,7 +15,7 @@ export default (saguiConfig, webpackConfig) => new Promise((resolve, reject) => 
   }
 
   try {
-    const server = new Server(webpack(setupHMR(webpackConfig)), options)
+    const server = new Server(webpack(setupHMR(webpackConfig, saguiConfig.port)), options)
 
     server.listeningApp.on('error', function (e) {
       if (e.code === 'EADDRINUSE') {
@@ -42,16 +43,16 @@ export default (saguiConfig, webpackConfig) => new Promise((resolve, reject) => 
  * HMR bundle setup based on code from
  * https://github.com/webpack/webpack-dev-server/blob/master/bin/webpack-dev-server.js
  */
-function setupHMR (webpackConfig) {
+function setupHMR (webpackConfig, port) {
   return webpackConfig.map((webpack) => ({
     ...webpack,
-    entry: concatHMRBundle(webpack.entry)
+    entry: concatHMRBundle(webpack.entry, port)
   }))
 }
 
-function concatHMRBundle (entry) {
+function concatHMRBundle (entry, port) {
   const devClient = [
-    require.resolve('webpack-dev-server/client/') + '?/',
+    require.resolve('webpack-dev-server/client/') + `?http://${ip.address()}:${port}`,
     'webpack/hot/dev-server'
   ]
 

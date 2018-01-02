@@ -1,6 +1,7 @@
 import path from 'path'
 import { expect } from 'chai'
 import loader from './javascript'
+import actions from '../../actions'
 
 describe('javaScript', () => {
   const projectPath = '/tmp/test-project'
@@ -11,6 +12,20 @@ describe('javaScript', () => {
 
     expect(webpack.module.rules[0].loader).to.eql('eslint-loader')
     expect(webpack.module.rules[0].enforce).to.eql('pre')
+  })
+
+  it('should emit all eslint warning/errors as warnings while in developmment', () => {
+    const projectPath = 'a/demo/path'
+    const webpack = loader.configure({ projectPath, action: actions.DEVELOP })
+
+    expect(webpack.module.rules[0].options.emitWarning).to.eql(true)
+  })
+
+  it('should emit normal eslint errors if not in development', () => {
+    const projectPath = 'a/demo/path'
+    const webpack = loader.configure({ projectPath, action: actions.BUILD })
+
+    expect(webpack.module.rules[0].options.emitWarning).to.eql(false)
   })
 
   it('should only build files inside the src folder by default', () => {

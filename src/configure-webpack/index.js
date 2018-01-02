@@ -1,3 +1,4 @@
+import CaseSensitivePathsPlugin from 'case-sensitive-paths-webpack-plugin'
 import CleanWebpackPlugin from 'clean-webpack-plugin'
 import merge from 'webpack-merge'
 import path from 'path'
@@ -22,8 +23,8 @@ export default (saguiConfig = {}) => {
   const { pages = [], libraries = [], ...sharedSaguiConfig } = saguiConfig
 
   const sharedWebpackConfig = merge.smart(
-    buildSharedWebpackConfig(sharedSaguiConfig),
-    buildLoadersConfig(sharedSaguiConfig),
+    buildSharedWebpackConfig(saguiConfig),
+    buildLoadersConfig(saguiConfig),
     sharedSaguiConfig.additionalWebpackConfig
   )
 
@@ -59,10 +60,9 @@ const buildSharedWebpackConfig = (saguiConfig) => {
         // check for duplicated packages only while optimizing
         new DuplicatePackageCheckerPlugin({
           // Also show module that is requiring each duplicate package
-           verbose: true
+          verbose: true
         }),
 
-        new webpack.optimize.DedupePlugin(),
         new webpack.optimize.UglifyJsPlugin({
           sourceMap: true
         }),
@@ -87,6 +87,7 @@ const buildSharedWebpackConfig = (saguiConfig) => {
         verbose: false
       })] : []),
 
+      new CaseSensitivePathsPlugin(),
       new DefinePlugin({
         'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
       })
@@ -115,7 +116,14 @@ const buildSharedWebpackConfig = (saguiConfig) => {
         // Sagui node_modules is required in the path to be able
         // to load the `webpack-hot-middleware`
         path.join(saguiPath, '/node_modules')
-      ]
+      ],
+
+      // In order for `npm link` and `yarn link` to work, Webpack should not
+      // resolve symlinks inside the `node_modules` folder: otherwise, it will
+      // try to load the linked dependencies as if they were part of the
+      // project code, even if they have a different babel/eslint/etc
+      // configuration.
+      symlinks: false
     },
 
     resolveLoader: {

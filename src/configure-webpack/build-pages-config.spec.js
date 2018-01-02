@@ -41,7 +41,7 @@ describe('pages webpack preset', function () {
     })
 
     it('should have a plugin setting up the HTML template', function () {
-      const webpackConfig = buildPagesConfig(['index'], baseConfig)
+      const webpackConfig = buildPagesConfig(['index'], { chunks: { common: true }, ...baseConfig })
 
       const html = webpackConfig.plugins.filter((plugin) => plugin instanceof HtmlWebpackPlugin)
       expect(html.length).equal(1)
@@ -73,28 +73,127 @@ describe('pages webpack preset', function () {
       })
     })
 
-    it('should have a plugin setting up the HTML template for each chunk', function () {
-      const webpackConfig = buildPagesConfig(['index', 'demo'], baseConfig)
+    describe('when chunks.common is "true"', function () {
+      it('should have a plugin setting up the HTML template for each chunk', function () {
+        const webpackConfig = buildPagesConfig(['index', 'demo'], { chunks: { common: true }, ...baseConfig })
 
-      const html = webpackConfig.plugins.filter((plugin) => plugin instanceof HtmlWebpackPlugin)
-      expect(html.length).equal(2)
+        const html = webpackConfig.plugins.filter((plugin) => plugin instanceof HtmlWebpackPlugin)
+        expect(html.length).equal(2)
 
-      const firstOptions = html[0].options
-      expect(firstOptions.chunks).deep.eql([ 'common', 'index' ])
-      expect(firstOptions.filename).deep.eql('index.html')
-      expect(firstOptions.template).deep.eql('index.html')
+        const firstOptions = html[0].options
+        expect(firstOptions.chunks).deep.eql([ 'common', 'index' ])
+        expect(firstOptions.filename).deep.eql('index.html')
+        expect(firstOptions.template).deep.eql('index.html')
 
-      const secondOptions = html[1].options
-      expect(secondOptions.chunks).deep.eql([ 'common', 'demo' ])
-      expect(secondOptions.filename).deep.eql('demo.html')
-      expect(secondOptions.template).deep.eql('demo.html')
+        const secondOptions = html[1].options
+        expect(secondOptions.chunks).deep.eql([ 'common', 'demo' ])
+        expect(secondOptions.filename).deep.eql('demo.html')
+        expect(secondOptions.template).deep.eql('demo.html')
+      })
+
+      it('should have the CommonsChunkPlugin enabled', function () {
+        const webpackConfig = buildPagesConfig(['index', 'demo'], { chunks: { common: true }, ...baseConfig })
+
+        const commons = webpackConfig.plugins.filter((plugin) => plugin instanceof optimize.CommonsChunkPlugin)
+        expect(commons.length).equal(1)
+      })
+
+      it('should set name to "common" in the CommonsChunkPlugin', function () {
+        const webpackConfig = buildPagesConfig(['index', 'demo'], { chunks: { common: true }, ...baseConfig })
+
+        const commons = webpackConfig.plugins.filter((plugin) => plugin instanceof optimize.CommonsChunkPlugin)
+        expect(commons[0].chunkNames[0]).equal('common')
+      })
+
+      it('should set minChunks to 2 in the CommonsChunkPlugin', function () {
+        const webpackConfig = buildPagesConfig(['index', 'demo'], { chunks: { common: true }, ...baseConfig })
+
+        const commons = webpackConfig.plugins.filter((plugin) => plugin instanceof optimize.CommonsChunkPlugin)
+        expect(commons[0].minChunks).equal(2)
+      })
+
+      it('should set pages as chunks in the CommonsChunkPlugin', function () {
+        const webpackConfig = buildPagesConfig(['index', 'demo'], { chunks: { common: true }, ...baseConfig })
+
+        const commons = webpackConfig.plugins.filter((plugin) => plugin instanceof optimize.CommonsChunkPlugin)
+        expect(commons[0].selectedChunks[0]).equal('index')
+        expect(commons[0].selectedChunks[2]).equal('demo')
+      })
     })
 
-    it('should have the CommonsChunkPlugin enabled', function () {
-      const webpackConfig = buildPagesConfig(['index', 'demo'], baseConfig)
+    describe('when chunks.vendor is "true"', function () {
+      it('should have a plugin setting up the HTML template for each chunk', function () {
+        const webpackConfig = buildPagesConfig(['index', 'demo'], { chunks: { vendor: true }, ...baseConfig })
 
-      const commons = webpackConfig.plugins.filter((plugin) => plugin instanceof optimize.CommonsChunkPlugin)
-      expect(commons.length).equal(1)
+        const html = webpackConfig.plugins.filter((plugin) => plugin instanceof HtmlWebpackPlugin)
+        expect(html.length).equal(2)
+
+        const firstOptions = html[0].options
+        expect(firstOptions.chunks).deep.eql([ 'vendor', 'index' ])
+        expect(firstOptions.filename).deep.eql('index.html')
+        expect(firstOptions.template).deep.eql('index.html')
+
+        const secondOptions = html[1].options
+        expect(secondOptions.chunks).deep.eql([ 'vendor', 'demo' ])
+        expect(secondOptions.filename).deep.eql('demo.html')
+        expect(secondOptions.template).deep.eql('demo.html')
+      })
+
+      it('should have the CommonsChunkPlugin enabled', function () {
+        const webpackConfig = buildPagesConfig(['index', 'demo'], { chunks: { vendor: true }, ...baseConfig })
+
+        const vendor = webpackConfig.plugins.filter((plugin) => plugin instanceof optimize.CommonsChunkPlugin)
+        expect(vendor.length).equal(1)
+      })
+
+      it('should set name to "vendor" in the CommonsChunkPlugin', function () {
+        const webpackConfig = buildPagesConfig(['index', 'demo'], { chunks: { vendor: true }, ...baseConfig })
+
+        const vendor = webpackConfig.plugins.filter((plugin) => plugin instanceof optimize.CommonsChunkPlugin)
+        expect(vendor[0].chunkNames[0]).equal('vendor')
+      })
+
+      it('should set minChunks to a function in the CommonsChunkPlugin', function () {
+        const webpackConfig = buildPagesConfig(['index', 'demo'], { chunks: { vendor: true }, ...baseConfig })
+
+        const vendor = webpackConfig.plugins.filter((plugin) => plugin instanceof optimize.CommonsChunkPlugin)
+        expect(vendor[0].minChunks).to.be.a('function')
+      })
+
+      it('should set pages as chunks in the CommonsChunkPlugin', function () {
+        const webpackConfig = buildPagesConfig(['index', 'demo'], { chunks: { vendor: true }, ...baseConfig })
+
+        const vendor = webpackConfig.plugins.filter((plugin) => plugin instanceof optimize.CommonsChunkPlugin)
+        expect(vendor[0].selectedChunks[0]).equal('index')
+        expect(vendor[0].selectedChunks[2]).equal('demo')
+      })
+    })
+
+    describe('when a page is flagged as independent', function () {
+      it('should be excluded from both the vendor and common chunks', function () {
+        const webpackConfig = buildPagesConfig([
+          'index',
+          { name: 'demo', independent: true }
+        ], {
+          chunks: {
+            vendor: true,
+            common: true
+          },
+          ...baseConfig
+        })
+
+        const plugins = webpackConfig.plugins.filter((plugin) => plugin instanceof optimize.CommonsChunkPlugin)
+        const vendor = plugins[0]
+        const common = plugins[1]
+
+        expect(vendor.selectedChunks.length).equal(2)
+        expect(vendor.selectedChunks[0]).equal('index')
+        expect(vendor.selectedChunks[2]).equal(undefined)
+
+        expect(common.selectedChunks.length).equal(2)
+        expect(common.selectedChunks[0]).equal('index')
+        expect(common.selectedChunks[2]).equal(undefined)
+      })
     })
   })
 

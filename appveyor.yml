@@ -3,15 +3,15 @@ version: "{build}"
 
 environment:
   matrix:
-    - nodejs_version: "8.0.0"
+    - nodejs_version: "8.1.4"
       platform: x64
       TEST_TYPE: lint_and_test_unit
 
-    - nodejs_version: "8.0.0"
+    - nodejs_version: "8.1.4"
       platform: x64
       TEST_TYPE: integration_test
 
-    - nodejs_version: "8.0.0"
+    - nodejs_version: "8.1.4"
       platform: x64
       TEST_TYPE: test_create_project_npm
 
