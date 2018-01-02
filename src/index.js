@@ -1,4 +1,5 @@
 import path from 'path'
+import merge from 'lodash.merge'
 import cli from './cli'
 import loadProjectSaguiConfig from './load-project-sagui-config'
 import configureKarma from './configure-karma'
@@ -19,6 +20,10 @@ const DEFAULT_SAGUI_CONFIG = {
   optimize: false,
   coverage: false,
   pages: [],
+  chunks: {
+    vendor: false,
+    common: true
+  },
   disableLoaders: [],
   javaScript: {},
   additionalWebpackConfig: {},
@@ -34,12 +39,7 @@ const DEFAULT_SAGUI_CONFIG = {
  */
 const sagui = (saguiConfig = {}) => new Promise((resolve, reject) => {
   try {
-    const finalSaguiConfig = {
-      ...DEFAULT_SAGUI_CONFIG,
-      ...saguiConfig,
-      ...loadProjectSaguiConfig(saguiConfig)
-    }
-
+    const finalSaguiConfig = merge({}, DEFAULT_SAGUI_CONFIG, saguiConfig, loadProjectSaguiConfig(saguiConfig))
     const webpackConfig = configureWebpack(finalSaguiConfig)
     const karmaConfig = configureKarma(finalSaguiConfig, webpackConfig)
 

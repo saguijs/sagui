@@ -3,7 +3,7 @@ import { expect } from 'chai'
 import glob from 'glob'
 import fs from 'fs-extra'
 import path from 'path'
-import jsdom from 'jsdom'
+import { JSDOM } from 'jsdom'
 import sagui, { InvalidSaguiConfig } from '../../src'
 import actions from '../../src/actions'
 import temp from 'temp'
@@ -39,6 +39,8 @@ describe('[integration] sagui', function () {
   const projectContentWithPrettierErrors = path.join(__dirname, '../fixtures/project-content-with-prettier-errors')
   const projectContentWithPrettierErrorsInSaguiConfig = path.join(__dirname, '../fixtures/project-content-with-prettier-errors-in-sagui-config')
   const projectContentCustomPrettierOptionsInEslintrc = path.join(__dirname, '../fixtures/project-content-with-custom-prettier-options-in-eslintrc')
+  const projectContentWithDynamicImports = path.join(__dirname, '../fixtures/project-content-with-dynamic-import')
+  const projectContentWithCaseMismatchInModulePath = path.join(__dirname, '../fixtures/project-with-case-mismatch-in-module-paths')
   let projectPath, projectSrcPath
 
   beforeEach(function () {
@@ -56,6 +58,10 @@ describe('[integration] sagui', function () {
 
     it('should be possible to build', () => {
       return sagui({ projectPath, action: actions.BUILD })
+    })
+
+    it('should be possible to build for production (dist)', () => {
+      return sagui({ projectPath, action: actions.BUILD, optimize: true })
     })
 
     it('should extract the styles in a separated file by default', () => {
@@ -131,6 +137,106 @@ describe('[integration] sagui', function () {
       })
     })
 
+    describe('chunks', () => {
+      describe('project with two pages on build', () => {
+        const projectFixture = path.join(__dirname, '../fixtures/project-with-two-pages')
+        beforeEach(function () {
+          fs.copySync(projectFixture, projectPath, { overwrite: true })
+          return sagui({ projectPath, action: actions.BUILD })
+        })
+
+        it('should have created a common.js file', () => {
+          const files = fs.readdirSync(path.join(projectPath, 'dist'))
+          expect(files.filter((file) => file.match(/common.+\.js$/))).not.to.be.empty
+        })
+
+        it('should NOT have created a vendor.js file', () => {
+          const files = fs.readdirSync(path.join(projectPath, 'dist'))
+          expect(files.filter((file) => file.match(/vendor.+\.js$/))).to.be.empty
+        })
+      })
+
+      describe('project with two pages and disabled common chunks on build', () => {
+        const projectFixture = path.join(__dirname, '../fixtures/project-with-two-pages-disabled-common')
+        beforeEach(function () {
+          fs.copySync(projectFixture, projectPath, { overwrite: true })
+          return sagui({ projectPath, action: actions.BUILD })
+        })
+
+        it('should not have created a common.js file', () => {
+          const files = fs.readdirSync(path.join(projectPath, 'dist'))
+          expect(files.filter((file) => file.match(/common.+\.js$/))).to.be.empty
+        })
+
+        it('should NOT have created a vendor.js file', () => {
+          const files = fs.readdirSync(path.join(projectPath, 'dist'))
+          expect(files.filter((file) => file.match(/vendor.+\.js$/))).to.be.empty
+        })
+      })
+
+      describe('project with two pages and enabled vendor chunks on build', () => {
+        const projectFixture = path.join(__dirname, '../fixtures/project-with-two-pages-enabled-vendor')
+        beforeEach(function () {
+          fs.copySync(projectFixture, projectPath, { overwrite: true })
+          return sagui({ projectPath, action: actions.BUILD })
+        })
+
+        it('should have created a common.js file without the content of the node_modules dependencies', () => {
+          const files = fs.readdirSync(path.join(projectPath, 'dist'))
+          const commonFiles = files.filter((file) => file.match(/common.+\.js$/))
+          const commonContent = fs.readFileSync(path.join(projectPath, 'dist', commonFiles[0])).toString()
+          expect(commonFiles).not.to.be.empty
+          expect(commonContent).not.to.have.string('dependencyA')
+          expect(commonContent).not.to.have.string('dependencyB')
+        })
+
+        it('should have created a vendor.js file with the content of the node_modules dependencies', () => {
+          const files = fs.readdirSync(path.join(projectPath, 'dist'))
+          const vendorFiles = files.filter((file) => file.match(/vendor.+\.js$/))
+          const vendorContent = fs.readFileSync(path.join(projectPath, 'dist', vendorFiles[0])).toString()
+          expect(vendorFiles).not.to.be.empty
+          expect(vendorContent).to.have.string('dependencyA')
+          expect(vendorContent).to.have.string('dependencyB')
+        })
+      })
+
+      describe('project with two pages but one that is independent with vendor and common chunks enabled', () => {
+        const projectFixture = path.join(__dirname, '../fixtures/project-with-independent-page')
+        beforeEach(function () {
+          fs.copySync(projectFixture, projectPath, { overwrite: true })
+          return sagui({ projectPath, action: actions.BUILD })
+        })
+
+        it('should have created a common.js file without the content of the node_modules dependencies, but with the shared content', () => {
+          const files = fs.readdirSync(path.join(projectPath, 'dist'))
+          const commonFiles = files.filter((file) => file.match(/common.+\.js$/))
+          const commonContent = fs.readFileSync(path.join(projectPath, 'dist', commonFiles[0])).toString()
+          expect(commonFiles).not.to.be.empty
+          expect(commonContent).not.to.have.string('dependencyA')
+          expect(commonContent).not.to.have.string('dependencyB')
+          expect(commonContent).to.have.string('shared')
+        })
+
+        it('should have created a vendor.js file with the content of the node_modules dependencies', () => {
+          const files = fs.readdirSync(path.join(projectPath, 'dist'))
+          const vendorFiles = files.filter((file) => file.match(/vendor.+\.js$/))
+          const vendorContent = fs.readFileSync(path.join(projectPath, 'dist', vendorFiles[0])).toString()
+          expect(vendorFiles).not.to.be.empty
+          expect(vendorContent).to.have.string('dependencyA')
+          expect(vendorContent).to.have.string('dependencyB')
+        })
+
+        it('should include all dependencies and shared code in the independent page', () => {
+          const files = fs.readdirSync(path.join(projectPath, 'dist'))
+          const aboutFiles = files.filter((file) => file.match(/demo.+\.js$/))
+          const aboutContent = fs.readFileSync(path.join(projectPath, 'dist', aboutFiles[0])).toString()
+          expect(aboutContent).to.have.string('dependencyA')
+          expect(aboutContent).to.have.string('dependencyB')
+          expect(aboutContent).to.have.string('shared')
+        })
+      })
+    })
+
     describe('project with duplicated transient dependencies and colliding node_modules', () => {
       const projectWithNodeModules = path.join(__dirname, '../fixtures/project-with-node-modules')
       beforeEach(function () {
@@ -139,6 +245,10 @@ describe('[integration] sagui', function () {
 
       it('should test that different dependencies get different transient dependencies and node_modules should win when colliding names', () => {
         return sagui({ projectPath, action: actions.TEST_UNIT })
+      })
+
+      it('should warn about the duplicated packages', () => {
+        return sagui({ projectPath, action: actions.BUILD, optimize: true })
       })
     })
 
@@ -227,16 +337,14 @@ npm-debug.log`)
 
     describe('style loader', () => {
       const projectWithCSSModules = path.join(__dirname, '../fixtures/project-with-css-modules')
-      const htmlFile = path.join(__dirname, '../fixtures/index.html')
+      const htmlContent = fs.readFileSync(path.join(__dirname, '../fixtures/index.html'))
 
-      beforeEach((done) => {
+      beforeEach(() => {
         fs.copySync(projectWithCSSModules, projectPath, { overwrite: true })
 
-        jsdom.env(htmlFile, (err, window) => {
-          global.window = window
-          global.document = window.document
-          done()
-        });
+        const jsdom = new JSDOM(htmlContent)
+        global.window = jsdom.window
+        global.document = jsdom.window.document
       })
 
       afterEach(() => {
@@ -356,6 +464,26 @@ npm-debug.log`)
       it('`format` should respect the prettier options from .eslintrc', async () => {
         await sagui({ projectPath, action: actions.FORMAT })
         await sagui({ projectPath, action: actions.TEST_LINT })
+      })
+    })
+
+    describe('when there are dynamic imports', () => {
+      it('`build` should not break', async () => {
+        fs.copySync(projectContentWithDynamicImports, projectPath, { overwrite: true })
+
+        await sagui({ projectPath, action: actions.BUILD })
+      })
+    })
+
+    describe('when there is case mismatch in module paths', () => {
+      it('`build` should break', async () => {
+        fs.copySync(projectContentWithCaseMismatchInModulePath, projectPath, { overwrite: true })
+
+        await sagui({ projectPath, action: actions.BUILD })
+          .then(
+            () => { throw new Error('It should have failed because of case mismatch in module path')},
+            (error) => expect(error.message).to.eql('Build failed')
+          )
       })
     })
   })

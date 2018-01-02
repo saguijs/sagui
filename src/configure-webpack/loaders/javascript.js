@@ -18,6 +18,7 @@ export default {
             path: 'babel-loader',
             query: {
               babelrc: false,
+              cacheDirectory: path.resolve(projectPath, '.sagui/babel'),
               presets: [
                 [require.resolve('babel-preset-env'), {
                   // Replaces require("babel-polyfill")
@@ -45,6 +46,8 @@ export default {
                 require.resolve('babel-preset-stage-3')
               ],
               plugins: [
+                [require.resolve('babel-plugin-syntax-dynamic-import'), {}],
+
                 // Better React warnings and stack traces in development and testing
                 // Might no longer be needed in the future
                 // see: https://github.com/babel/babel/issues/4702
@@ -78,7 +81,11 @@ export default {
             options: {
               configFile: path.join(projectPath, '.eslintrc'),
               useEslintrc: false,
-              cwd: projectPath
+              cwd: projectPath,
+
+              // While in development make the eslint messages non-intrusive
+              // by turning them all into warnings
+              emitWarning: action === actions.DEVELOP
             }
           },
           {
