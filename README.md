@@ -172,6 +172,43 @@ The previous configuration will expect and build the files:
 - `src/index.html` => `dist/index.html`
 - `src/index.js` => `dist/index.js`
 
+#### Excluding a page from chunks
+
+If you want a page to be excluded from either the [vendor](#chunksvendor) or [common](#chunkscommon) chunk, then you can do so by providing an object with a `name` and `independent` flag (set to `true`) instead of just the name of the page.
+
+```js
+// sagui.config.js
+module.exports = {
+  pages: ['index', 'about', { name: 'demo', independent: true }]
+}
+```
+
+### `chunks.vendor`
+
+If you want all your external dependencies (`node_modules`) in your [pages](#pages) to be bundled together in a "vendor" chunk, then set this flag to `true`. By default it is set to `false`.
+
+```js
+// sagui.config.js
+module.exports = {
+  chunks: {
+    vendor: true
+  }
+}
+```
+
+### `chunks.common`
+
+If you do not want all the common dependencies of your [pages](#pages) to be bundled together in a "common" chunk, then set this flag to `false`. By default it is set to `true`.
+
+```js
+// sagui.config.js
+module.exports = {
+  chunks: {
+    common: false
+  }
+}
+```
+
 ### `libraries`
 
 Create **reusable libraries** that can be shared across applications. Sagui will take care of the build process so that external libraries are not bundled and that you have a CommonJS module as the output.

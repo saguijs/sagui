@@ -111,6 +111,7 @@
     "karma-phantomjs-launcher": "^1.0.4",
     "karma-sourcemap-loader": "^0.3.7",
     "karma-webpack": "^2.0.3",
+    "lodash.merge": "^4.6.0",
     "lodash.uniq": "^4.5.0",
     "node-sass": "^4.5.2",
     "null-loader": "^0.1.1",
