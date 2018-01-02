@@ -35,17 +35,18 @@ function configureEntry (pages) {
 
 function configurePlugins (pages, chunksConfig) {
   const plugins = pages.map((page) => {
+    const pageName = typeof page === 'string' ? page : page.name
     const chunks = Object.keys(chunksConfig)
       .reduce((chunks, key) => {
         if (chunksConfig[key]) {
           chunks.unshift(key)
         }
         return chunks
-      }, [page])
+      }, [pageName])
 
     return new HtmlWebpackPlugin({
-      template: `${page}.html`,
-      filename: `${page}.html`,
+      template: `${pageName}.html`,
+      filename: `${pageName}.html`,
       chunks
     })
   })
@@ -64,8 +65,8 @@ function configurePlugins (pages, chunksConfig) {
     if (chunksConfig.vendor) {
       plugins.push(new optimize.CommonsChunkPlugin({
         name: 'vendor',
-        minChunks: (module, context) => {
-          return /node_modules/.test(context)
+        minChunks: (module) => {
+          return /node_modules/.test(module.context)
         },
         chunks
       }))
