@@ -27,7 +27,8 @@ function configureEntry (pages) {
   let entry = {}
 
   pages.forEach((page) => {
-    entry[page] = [`./${page}`]
+    const pageName = getPageName(page)
+    entry[pageName] = [`./${pageName}`]
   })
 
   return entry
@@ -35,7 +36,7 @@ function configureEntry (pages) {
 
 function configurePlugins (pages, chunksConfig) {
   const plugins = pages.map((page) => {
-    const pageName = typeof page === 'string' ? page : page.name
+    const pageName = getPageName(page)
     const chunks = Object.keys(chunksConfig)
       .reduce((chunks, key) => {
         if (chunksConfig[key]) {
@@ -81,4 +82,8 @@ function configurePlugins (pages, chunksConfig) {
   }
 
   return plugins
+}
+
+function getPageName (page) {
+  return (typeof page === 'string' ? page : page.name)
 }
