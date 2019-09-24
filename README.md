@@ -1,3 +1,11 @@
+## Deprecated
+
+When Sagui was created, the frontend landscape was in a much different situation than it is today. Creating projects was a hell and we all faced the now infamous "JavaScript fatigue". Fast-forward to 2019 and we now have established solutions such as [create-react-app](https://github.com/facebook/create-react-app) that have a large community behind and is being well maintained. Therefore there is no longer a need for Sagui to exist.
+
+This was a fantastic ride and I've learned a lot while building this little tool.
+
+Thanks to all the community who help me along the way! ❤️🐒
+
 ![Sagui](https://raw.githubusercontent.com/saguijs/sagui/master/banner.jpg)
 
 [![Build Status](https://travis-ci.org/saguijs/sagui.svg)](https://travis-ci.org/saguijs/sagui)
