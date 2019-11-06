@@ -7,6 +7,7 @@ This was a fantastic ride and I've learned a lot while building this little tool
 Thanks to all the community who help me along the way! ❤️🐒
 
 ![Sagui](https://raw.githubusercontent.com/saguijs/sagui/master/banner.jpg)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fsaguijs%2Fsagui.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fsaguijs%2Fsagui?ref=badge_shield)
 
 [![Build Status](https://travis-ci.org/saguijs/sagui.svg)](https://travis-ci.org/saguijs/sagui)
 [![Windows Tests](https://img.shields.io/appveyor/ci/pirelenito/sagui.svg?label=Windows%20Tests)](https://ci.appveyor.com/project/pirelenito/sagui)
@@ -514,3 +515,7 @@ Now, the project is set to use your development copy of Sagui. Unfortunately, yo
 ```bash
 SAGUI_LINK=true npm start
 ```
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fsaguijs%2Fsagui.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fsaguijs%2Fsagui?ref=badge_large)
